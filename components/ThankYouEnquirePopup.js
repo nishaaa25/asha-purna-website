@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
-export default function ThankYouEnquirePopup({ isOpen, onClose, buttonText = "Close", buttonLink = null }) {
+export default function ThankYouEnquirePopup({ isOpen, onClose, buttonText = "Explore Projects", buttonLink = "/projects" }) {
   useEffect(() => {
     if (isOpen) {
       // Store the current scroll position

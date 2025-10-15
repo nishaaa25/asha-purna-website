@@ -46,13 +46,10 @@ export default function PlanCard({ data, imgPath, project }) {
       if (result._status) {
         toast.success(result._message || "Form submitted successfully!");
         if (data?.project_floor_plan_gallery[0]?.image) {
-          window.open(imgPath + data?.project_floor_plan_gallery[1]?.image, "_blank");
+          window.location.href = imgPath + data?.project_floor_plan_gallery[1]?.image;
           console.log(imgPath+ data?.project_floor_plan_gallery[1]?.image + "floorpath");
         } else if (data?.project_floor_plan_gallery[1]?.image) {
-          window.open(
-            imgPath + data?.project_floor_plan_gallery[1]?.image,
-            "_blank"
-          );
+          window.location.href = imgPath + data?.project_floor_plan_gallery[1]?.image;
         } else {
           toast.error("Master Plan not available");
         }

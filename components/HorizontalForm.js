@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ThankYouEnquirePopup from "./ThankYouEnquirePopup";
+import CustomDropdown from "./CustomDropdown";
 import { useAPI } from "@/lib/hooks/useAPI";
 import { isValidEmail, isValidPhone, isValidName } from "@/lib/helpers/regex";
 import { showErrorToast, showSuccessToast } from "@/lib/helpers/toastConfig";
@@ -213,24 +214,14 @@ export default function HorizontalForm() {
             {errors.phone && <p className="text-red-500 text-[10px] absolute -bottom-4 left-0 whitespace-nowrap">{errors.phone}</p>}
           </div>
           <div className="relative flex-1 min-w-[80px] max-w-[180px]">
-            <select
-              name="project_id"
-              id="project_id"
+            <CustomDropdown
+              options={propertyOptions}
               value={formData.project_id}
               onChange={handleInputChange}
-              className={`text-white text-sm xl:text-[15px] placeholder:text-white/80 w-full border-b ${errors.project_id ? 'border-red-500' : 'border-b-white'} pt-1 pb-1.5 outline-none bg-transparent cursor-pointer`}
-            >
-              <option value="" className="bg-black-400">
-                {propertyOptions.length === 0 ? "Loading..." : "Property"}
-              </option>
-              {propertyOptions.length > 0 ? (
-                propertyOptions.map((property) => (
-                  <option key={property.id} value={property.id} className="bg-black-400">
-                    {property.name}
-                  </option>
-                ))
-              ) : null}
-            </select>
+              placeholder={propertyOptions.length === 0 ? "Loading..." : "Property"}
+              error={!!errors.project_id}
+              disabled={loading}
+            />
             {errors.project_id && <p className="text-red-500 text-[10px] absolute -bottom-4 left-0 whitespace-nowrap">{errors.project_id}</p>}
           </div>
           <div className="relative flex-1 min-w-[80px] max-w-[180px]">

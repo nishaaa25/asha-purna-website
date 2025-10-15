@@ -15,7 +15,7 @@ export default function RecentProjectsCarousel({data, imagePath}) {
   
 
   return (
-    <div className="w-full relative pb-10 lg:pb-[100px]">
+    <div className="w-full relative">
       <Swiper
         modules={[Navigation]}
         centeredSlides={false}

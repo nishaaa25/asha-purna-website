@@ -16,13 +16,13 @@ export default function TestimonialsCarousel() {
     // Handle youtu.be format
     if (url.includes("youtu.be/")) {
       const videoId = url.split("youtu.be/")[1].split("?")[0];
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0`;
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&modestbranding=1&rel=0`;
     }
 
     // Handle youtube.com format
     if (url.includes("youtube.com/watch")) {
       const videoId = url.split("v=")[1].split("&")[0];
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0`;
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&modestbranding=1&rel=0`;
     }
 
     return url;
@@ -36,6 +36,15 @@ export default function TestimonialsCarousel() {
         slidesPerView={1.5}
         spaceBetween={15}
         watchSlidesProgress
+        touchRatio={1}
+        touchAngle={45}
+        threshold={5}
+        longSwipesRatio={0.5}
+        longSwipesMs={300}
+        shortSwipes={true}
+        followFinger={true}
+        allowTouchMove={true}
+        touchStartPreventDefault={false}
         navigation={{
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",
@@ -47,21 +56,33 @@ export default function TestimonialsCarousel() {
             slidesPerView: 1.2,
             slidesOffsetBefore: 26,
             slidesOffsetAfter: 26,
+            touchRatio: 1,
+            touchAngle: 45,
+            threshold: 5,
           },
           640: {
             slidesPerView: 1.3,
             slidesOffsetBefore: 26,
             slidesOffsetAfter: 26,
+            touchRatio: 1,
+            touchAngle: 45,
+            threshold: 5,
           },
           768: {
             slidesPerView: 1.5,
             slidesOffsetBefore: 26,
             slidesOffsetAfter: 26,
+            touchRatio: 1,
+            touchAngle: 45,
+            threshold: 5,
           },
           1024: {
             slidesPerView: 3,
             slidesOffsetBefore: 30,
             slidesOffsetAfter: 30,
+            touchRatio: 1,
+            touchAngle: 45,
+            threshold: 5,
           },
         }}
       >
@@ -79,7 +100,7 @@ export default function TestimonialsCarousel() {
                   src={getYouTubeEmbedUrl(item.videoUrl)}
                   allow="autoplay; encrypted-media"
                   allowFullScreen
-                  className="object-cover w-full h-full pointer-events-none rounded-t-md overflow-hidden "
+                  className="object-cover w-full h-full rounded-t-md overflow-hidden "
                   title={`Testimonial from ${item.name}`}
                 />
                 {/* <div className="bg-white/10 backdrop-blur-lg absolute bottom-0 m-2 text-white p-4 rounded-md z-10">

@@ -49,9 +49,9 @@ export default function MasterPlan({ project, masterImagePath }) {
       if (result._status) {
         toast.success(result._message || "Form submitted successfully!");
          if(project?.master_plan_image){
-      window.open(masterImagePath+project?.master_plan_image, '_blank');
+      window.location.href = masterImagePath+project?.master_plan_image;
     }else if(project?.project_master_plans?.[0]?.image){
-      window.open(masterImagePath+project?.project_master_plans?.[0]?.image, '_blank');
+      window.location.href = masterImagePath+project?.project_master_plans?.[0]?.image;
     }else{
       toast.error("Master Plan not available");
     }

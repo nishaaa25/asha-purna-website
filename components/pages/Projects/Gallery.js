@@ -19,7 +19,7 @@ export default function Gallery({
   projectGalleryData,
   galleryImagePath
 }) {
-  // Build gallery tabs based on available data
+  // Build gallery tabs based on available API data only
   const tabs = [];
   
   // Check for gallery categories from API
@@ -30,12 +30,12 @@ export default function Gallery({
     });
   }
   
-  // Add other gallery types
+  // Add other gallery types only if API data exists
   if (project360Data?.length > 0) tabs.push("360 views");
   if (projectVideoGalleryData?.length > 0) tabs.push("video");
   
-  // Use API tabs if available, otherwise fallback
-  const availableTabs = tabs.length > 0 ? tabs : galleryTabs;
+  // Only use API tabs, no fallback to static content
+  const availableTabs = tabs;
   
   const [activeTab, setActiveTab] = useState(availableTabs[0]);
   const [tabContent, setTabContent] = useState([]);
@@ -75,28 +75,32 @@ export default function Gallery({
         title: video.title || video.name || "",
         isVideo: true,
       }));
-    } else {
-      // Fallback to static content
-      filteredContent = galleryImages.filter(
-        (el) => el.type.toLowerCase() === activeTab.toLowerCase()
-      );
     }
     
+    // Only set content if we have API data, no fallback to static content
     setTabContent(filteredContent);
   }, [activeTab, project, project360Data, viewsImagePath, projectVideoGalleryData, projectVideoGalleryImagePath, projectGalleryData, galleryImagePath]);
+
+  // Only render gallery if there are tabs and content available
+  if (availableTabs.length === 0 || tabContent.length === 0) {
+    return null;
+  }
 
   return (
     <div className="relative w-full text-center">
       <h5 className="text-orange-600 uppercase text-xs font-medium leading-[110%] pt-4">
         Project images
       </h5>
-      <div className="w-full  px-[22px] md:w-1/2 lg:mx-auto relative mt-8 mb-1">
-        <DropdownSelector
-          tabs={availableTabs}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-      </div>
+      {/* Only show dropdown if there are multiple tabs */}
+      {availableTabs.length > 1 && (
+        <div className="w-full  px-[22px] md:w-1/2 lg:mx-auto relative mt-8 mb-1">
+          <DropdownSelector
+            tabs={availableTabs}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+          />
+        </div>
+      )}
       <div className="relative">
         <ImageCarousel images={tabContent} />
       </div>

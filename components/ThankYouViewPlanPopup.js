@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function ThankYouViewPlanPopup({ isOpen, onClose }) {
@@ -67,13 +68,15 @@ export default function ThankYouViewPlanPopup({ isOpen, onClose }) {
               Your request has been received successfully. We will share the plan details with you soon!
             </p>
 
-            <button
-              type="button"
-              onClick={onClose}
-              className="bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200"
-            >
-              Close
-            </button>
+            <Link href="/projects">
+              <button
+                type="button"
+                onClick={onClose}
+                className="bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200"
+              >
+                Explore Projects
+              </button>
+            </Link>
           </div>
         </div>
       </div>

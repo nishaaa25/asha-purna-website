@@ -36,7 +36,7 @@ export default function StayUpdated() {
               className="bg-transparent scale-[1.4] lg:scale-[1.7] mr-2"
             />
             <span className="text-sm lg:text-sm leading-7 text-black-400/70">
-              Keep me update on news.
+              Keep me updated on news.
             </span>
           </div>
           <p className="text-sm md:text-base lg:text-base leading-[130%] text-black-400/50 text-start pb-2">

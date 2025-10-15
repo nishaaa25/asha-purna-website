@@ -26,8 +26,7 @@ export default function Home({featuredProjects, imagePath, utsavImagePath, event
   const data = [
     {
       title: "Bighas of land bank",
-      value: "01",
-      sign: "k",
+      value: "1000",
     },
     {
       title: "Lakh Sq. Ft. delivered",

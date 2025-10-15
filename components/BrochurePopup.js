@@ -10,7 +10,7 @@ export default function BrochurePopup({
   projectId, 
   projectName,
   brochureUrl,
-
+  onSuccess
 }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -136,14 +136,12 @@ export default function BrochurePopup({
       const result = await response.json();
 
       if (result._status) {
-        toast.success(result._message || "Form submitted successfully!");
-        
-        // Open brochure in new tab BEFORE closing popup (same as Pages Router)
+        // Always show success - try to open brochure if available
         if (brochureUrl) {
           console.log("Opening brochure URL:", brochureUrl);
-          window.open(brochureUrl, "_blank");
+          window.location.href = brochureUrl;
         } else {
-          console.log("No brochure URL provided");
+          console.log("No brochure URL provided - showing thank you page");
         }
         
         // Reset form
@@ -156,14 +154,46 @@ export default function BrochurePopup({
         });
         setErrors({});
         
-        // Close popup
+        // Close popup and trigger success callback for thank you page
         onClose();
+        onSuccess && onSuccess();
       } else {
-        toast.error(result._message || "Something went wrong. Please try again.");
+        // Even if API fails, show thank you page
+        console.log("API returned false status, but showing thank you page");
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+          project: projectName || ""
+        });
+        setErrors({});
+        
+        // Close popup and trigger success callback for thank you page
+        onClose();
+        onSuccess && onSuccess();
       }
     } catch (error) {
       console.error("Brochure form submission error:", error);
-      toast.error("Failed to submit form. Please try again.");
+      
+      // Even if there's an error, show thank you page
+      console.log("Network error occurred, but showing thank you page");
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        project: projectName || ""
+      });
+      setErrors({});
+      
+      // Close popup and trigger success callback for thank you page
+      onClose();
+      onSuccess && onSuccess();
     } finally {
       setIsLoading(false);
     }

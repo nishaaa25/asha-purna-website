@@ -4,7 +4,7 @@ import Amenties from "@/components/pages/Projects/Amenties";
 import FaqSection from "@/components/FaqSection";
 import GetInTouch from "@/components/pages/GetInTouch";
 import Testimoials from "@/components/Testimoials";
-import { faqs } from "@/lib/content";
+import { faqs, testimonials } from "@/lib/content";
 import SlugHeroSection from "@/components/pages/Projects/SlugHeroSection";
 import DetailsTabSection from "@/components/pages/Projects/DetailsTabSection";
 import Location from "@/components/pages/Projects/Location";
@@ -48,34 +48,64 @@ export default function ProjectDetailClient({
         glossySliderPath={glossySliderPath}
         brochureImagePath={brochureImagePath}
       />
-      <DetailsTabSection
-        project={project}
-        masterImagePath={masterImagePath}
-        floorImagePath={floorImagePath}
-        project360Data={project360Data}
-        viewsImagePath={viewsImagePath}
-        projectVideoGalleryData={projectVideoGalleryData}
-        projectVideoGalleryImagePath={projectVideoGalleryImagePath}
-        projectFloorsData={projectFloorsData}
-        projectGalleryData={projectGalleryData}
-        galleryImagePath={galleryImagePath}
-      />
-      <Amenties
-        project={project}
-        projectAmenityData={projectAmenityData}
-        projectAmenityImagePath={projectAmenityImagePath}
-      />
-      <Location
-        project={project}
-        projectLocationsData={projectLocationsData}
-        projectLocationsImagePath={projectLocationsImagePath}
-      />
-      {projectConstructionsData?.project_constructions.length > 0 && <Construction
-        project={project}
-        projectConstructionsData={projectConstructionsData}
-        constructionImagePath={constructionImagePath}
-      />}
-      <Testimoials />
+      {/* Only show DetailsTabSection if there's meaningful content to display */}
+      {(() => {
+        // Check if there are actual gallery images
+        const hasGalleryImages = (project360Data && project360Data.length > 0) || 
+          (projectVideoGalleryData && projectVideoGalleryData.length > 0) ||
+          (projectGalleryData?.gallery_names?.length > 0 && 
+           projectGalleryData.gallery_names.some(category => 
+             category.project_gallery && category.project_gallery.length > 0
+           ));
+        
+        // Check if there are floor plans
+        const hasFloorPlans = projectFloorsData?.project_floor_plans && 
+          projectFloorsData.project_floor_plans.length > 0;
+        
+        // Check if there's project description
+        const hasDescription = project?.description || project?.overview;
+        
+        return hasGalleryImages || hasFloorPlans || hasDescription;
+      })() && (
+        <DetailsTabSection
+          project={project}
+          masterImagePath={masterImagePath}
+          floorImagePath={floorImagePath}
+          project360Data={project360Data}
+          viewsImagePath={viewsImagePath}
+          projectVideoGalleryData={projectVideoGalleryData}
+          projectVideoGalleryImagePath={projectVideoGalleryImagePath}
+          projectFloorsData={projectFloorsData}
+          projectGalleryData={projectGalleryData}
+          galleryImagePath={galleryImagePath}
+        />
+      )}
+      {/* Only show Amenities section if data is available */}
+      {(projectAmenityData && projectAmenityData.length > 0) && (
+        <Amenties
+          project={project}
+          projectAmenityData={projectAmenityData}
+          projectAmenityImagePath={projectAmenityImagePath}
+        />
+      )}
+      {/* Only show Location section if data is available */}
+      {(projectLocationsData && projectLocationsData.length > 0) && (
+        <Location
+          project={project}
+          projectLocationsData={projectLocationsData}
+          projectLocationsImagePath={projectLocationsImagePath}
+        />
+      )}
+      {/* Only show Construction section if data is available */}
+      {projectConstructionsData?.project_constructions && projectConstructionsData.project_constructions.length > 0 && (
+        <Construction
+          project={project}
+          projectConstructionsData={projectConstructionsData}
+          constructionImagePath={constructionImagePath}
+        />
+      )}
+      {/* Only show Testimonials section if data is available */}
+      {testimonials && testimonials.length > 0 && <Testimoials />}
       <div className="w-full relative bg-cream-600">
         <GetInTouch
           heading="get in touch"
@@ -83,7 +113,8 @@ export default function ProjectDetailClient({
           projectName={project?.name}
         />
       </div>
-      <FaqSection faq={faqs} />
+      {/* Only show FAQ section if data is available */}
+      {faqs && faqs.length > 0 && <FaqSection faq={faqs} />}
     </div>
   );
 }

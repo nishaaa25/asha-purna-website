@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function ThankYouPopup({ isOpen, onClose, onDownload }) {
@@ -67,12 +68,14 @@ export default function ThankYouPopup({ isOpen, onClose, onDownload }) {
               and contact you soon!
             </p>
 
-            <button
-              onClick={onDownload}
-              className=" bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200"
-            >
-              Download Brochure
-            </button>
+            <Link href="/projects">
+              <button
+                onClick={onClose}
+                className="bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200"
+              >
+                Explore Projects
+              </button>
+            </Link>
           </div>
         </div>
       </div>

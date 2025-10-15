@@ -10,6 +10,11 @@ import { recentProjects, testimonials } from "@/lib/content";
 export default function ImageCarousel({images}) {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Don't render if no images
+  if (!images || images.length === 0) {
+    return null;
+  }
+
   return (
     <div className="w-full relative">
       <Swiper

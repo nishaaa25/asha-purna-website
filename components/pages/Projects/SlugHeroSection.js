@@ -4,10 +4,12 @@ import BottomBar from "./BottomBar";
 import Image from "next/image";
 import { useState } from "react";
 import BrochurePopup from "@/components/BrochurePopup";
+import ThankYouPopup from "@/components/ThankYouPopup";
 import { toast } from "react-toastify";
 
 export default function SlugHeroSection({ project, projectImagePath, sliderImagePath, glossySliderPath, brochureImagePath }) {
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
+  const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
   // Get the main image - prefer featured image or glossy slider, then first slider image
   const getMainImage = () => {
     // Priority 1: Glossy slider images
@@ -49,10 +51,6 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
   const phoneNumber = project?.mobile_number || project?.ivr_number || "9314041747";
 
   const handleBrochureClick = () => {
-    if(project?.brochure_file=== null || project?.brochure_file=== ""){
-      toast.error("Brochure not available for this project.");
-      return;
-    }
     console.log("=== Brochure Download Debug ===");
     console.log("Project ID:", project?.id);
     console.log("Project Name:", project?.name || project?.project_name);
@@ -62,8 +60,9 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
     console.log("Brochure image path (for slider):", brochureImagePath);
     console.log("Final Brochure URL:", brochureUrl);
     console.log("================================");
-    setIsBrochurePopupOpen(true);
     
+    // Always show the brochure popup - it will handle whether brochure exists or not
+    setIsBrochurePopupOpen(true);
   };
 
   return (
@@ -105,12 +104,25 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
     <BrochurePopup
         isOpen={isBrochurePopupOpen}
         onClose={() => setIsBrochurePopupOpen(false)}
+        onSuccess={() => setIsBrochureThankYouOpen(true)}
         projectId={project?.id}
         projectName={project?.name || project?.project_name}
         brochureUrl={brochureUrl}
-
-
       />
+
+      {/* Thank You Popup for Brochure Download */}
+      <ThankYouPopup
+        isOpen={isBrochureThankYouOpen}
+        onClose={() => setIsBrochureThankYouOpen(false)}
+        onDownload={() => {
+          // Try to download brochure if available
+          if (brochureUrl) {
+            window.open(brochureUrl, "_blank");
+          }
+          setIsBrochureThankYouOpen(false);
+        }}
+      />
+
     </section>
   );
 }

@@ -8,6 +8,8 @@ export default function Amenties({ project, projectAmenityData, projectAmenityIm
     ? projectAmenityData 
     : amenities;
 
+    console.log('Amenities Data:', amenitiesData);
+
   return (
     <div className="w-full relative">
       <SectionHeader
@@ -24,14 +26,39 @@ export default function Amenties({ project, projectAmenityData, projectAmenityIm
             <div className="relative w-10 h-10 md:w-13 md:h-13 lg:w-15 lg:h-15">
               <Image
                 src={item.image ? (projectAmenityImagePath + item.image) : item.imgUrl}
-                alt={item.amenity || item.title}
+                alt={item.amenity || item.title || item.name || item.text1 || item.text2 || item.text3}
                 fill
                 className="relative object-contain"
               />
             </div>
-            <h5 className="text-sm md:text-base lg:text-base text-center text-gray-800 leading-[120%] tracking-[-1.4%] font-medium">
-              {item.amenity || item.title}
-            </h5>
+            <div className="flex flex-col gap-1 text-center">
+              {/* Display primary text */}
+              <h5 className="text-sm md:text-base lg:text-base text-black-500 leading-[120%] tracking-[-1.4%] font-medium">
+                {item.amenity || item.title || item.name || item.text1}
+              </h5>
+              {/* Display additional text fields if available */}
+              {item.sub_title && (
+                <p className="text-xs md:text-xs text-gray-600 leading-[120%] tracking-[-1.4%]">
+                  {item.sub_title}
+                </p>
+              )}
+              {item.text3 && (
+                <p className="text-xs md:text-sm text-gray-600 leading-[120%] tracking-[-1.4%]">
+                  {item.text3}
+                </p>
+              )}
+              {/* Display other possible text fields */}
+              {item.description && (
+                <p className="text-xs md:text-sm text-gray-600 leading-[120%] tracking-[-1.4%]">
+                  {item.description}
+                </p>
+              )}
+              {item.subtitle && (
+                <p className="text-xs md:text-sm text-gray-600 leading-[120%] tracking-[-1.4%]">
+                  {item.subtitle}
+                </p>
+              )}
+            </div>
           </div>
         ))}
       </div>

@@ -9,9 +9,7 @@ import Link from "next/link";
 
 export default function EventsCarousel({ imagePath, events }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleReadMore = () => setIsExpanded((prev) => !prev);
+  const [isExpanded] = useState(false);
 
   return (
     <div className="w-full relative -top-4">
@@ -63,24 +61,22 @@ export default function EventsCarousel({ imagePath, events }) {
                       {event.title}
                     </h3>
                     <p
-                      className={`text-sm md:text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2 transition-all duration-300 ${
-                        isExpanded ? "line-clamp-none" : "line-clamp-3"
-                      }`}
+                      className={"text-sm md:text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2"}
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 4,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
                     >
                       {event?.short_description}
                     </p>
-
-                    {event?.short_description?.length > 100 && (
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          toggleReadMore();
-                        }}
-                        className="text-orange-600 text-sm font-medium mt-1 hover:underline focus:outline-none"
-                      >
-                        {isExpanded ? "Read less" : "Read more"}
-                      </button>
-                    )}
+                    <button
+                      className="mt-2 text-orange-600 text-sm font-semibold underline"
+                      aria-label="Read more about this event"
+                    >
+                      Read more
+                    </button>
                   </div>
                 </div>
               </Link>
