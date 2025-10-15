@@ -57,13 +57,10 @@ export default function LenisProvider({ children }) {
     };
   }, []);
 
-  // Scroll to top on route change
+  // Preserve scroll position on route change to avoid unexpected jumps
   useEffect(() => {
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { immediate: true });
-    }
-    // Also use native scroll as fallback
-    window.scrollTo(0, 0);
+    // Intentionally do nothing here so route changes don't force scroll-to-top
+    // If a page needs scroll-to-top, handle it locally where appropriate
   }, [pathname]);
 
   return <>{children}</>;
