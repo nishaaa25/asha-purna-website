@@ -115,16 +115,16 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
         {!hideActions && (
           <>
             <div className="w-8/12 mx-auto h-[0.5px] bg-[#272727]/10 mt-3 mb-2" />
-            <div className="flex-between w-full gap-4">
+            <div className="grid gri-cols-2 relative w-full gap-4">
               <Link
                 href={`/projects/${data?.slug}`}
-                className="border-[0.5px] border-[#cccccc] bg-black-400 text-white whitespace-nowrap font-medium text-sm md:text-base lg:text-base py-[7px] flex-1 w-full rounded-md mt-2 text-center"
+                className="border-[0.5px] border-[#cccccc] bg-black-400 text-white whitespace-nowrap font-medium text-sm md:text-base lg:text-base py-[7px] w-full rounded-md mt-2 text-center relative"
               >
                 View Details
               </Link>
               <button
                 onClick={handleEnquireClick}
-                className="border-[0.5px] border-black text-black-400 font-medium whitespace-nowrap text-sm md:text-base lg:text-base py-[7px] flex-1 w-full rounded-md mt-2"
+                className="border-[0.5px] border-black text-black-400 font-medium whitespace-nowrap text-sm md:text-base lg:text-base py-[7px]  w-full rounded-md mt-2 relative"
               >
                 Enquire Now
               </button>
