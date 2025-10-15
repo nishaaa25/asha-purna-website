@@ -11,9 +11,12 @@ export default function FloorPlan({ project, floorImagePath, projectFloorsData }
 
   console.log(projectFloorsData?.project_floor_plans)
   
-  // Extract unique floor types/names for tabs using the title field
+  // Build safe tab labels with index fallback to avoid duplicates/empties
   const floorPlanTabs = apiFloorPlans.length > 0
-    ? apiFloorPlans.map(plan => plan.title).filter(Boolean)
+    ? apiFloorPlans.map((plan, idx) => {
+        const title = (plan && typeof plan.title === 'string' && plan.title.trim()) ? plan.title.trim() : `Plan ${idx + 1}`;
+        return title;
+      })
     : planTabs;
 
   const [activeTab, setActiveTab] = useState(floorPlanTabs[0] || planTabs[0]);
@@ -21,18 +24,15 @@ export default function FloorPlan({ project, floorImagePath, projectFloorsData }
 
   useEffect(() => {
     if (apiFloorPlans.length > 0) {
-      // Find floor plan from API data by title
-      const filteredContent = apiFloorPlans.find(
-        (el) => el.title === activeTab
-      );
-      
-      // Transform to match PlanCard format
-      if (filteredContent) {
+      // Resolve by index if titles are duplicate/empty
+      const index = floorPlanTabs.indexOf(activeTab);
+      const plan = index >= 0 ? apiFloorPlans[index] : apiFloorPlans[0];
+      if (plan) {
         setTabContent({
-          ...filteredContent,
-          imgUrl: floorImagePath ? (floorImagePath + filteredContent.image) : filteredContent.image,
-          floor: filteredContent.title,
-          gallery: filteredContent.project_floor_plan_gallery || [],
+          ...plan,
+          imgUrl: floorImagePath ? (floorImagePath + plan.image) : plan.image,
+          floor: plan.title || activeTab,
+          gallery: Array.isArray(plan.project_floor_plan_gallery) ? plan.project_floor_plan_gallery : [],
         });
       }
     } else {

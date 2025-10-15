@@ -149,10 +149,17 @@ export default function ProjectsPage() {
                 text={isExpanded ? "Less projects" : "More projects"}
                 onClick={(e) => {
                   e.preventDefault();
+                  const currentScrollY = typeof window !== "undefined" ? window.scrollY : 0;
                   if (isExpanded) {
                     setVisibleCount(9);
                   } else {
                     setVisibleCount((c) => Math.min(c + 9, projects.length));
+                  }
+                  // Restore scroll immediately after DOM updates paint
+                  if (typeof window !== "undefined") {
+                    requestAnimationFrame(() => {
+                      window.scrollTo({ top: currentScrollY });
+                    });
                   }
                 }}
               />

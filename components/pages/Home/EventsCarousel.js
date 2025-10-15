@@ -41,9 +41,7 @@ export default function EventsCarousel({ imagePath, events }) {
               className={`relative transition-transform duration-300 ease-in-out ${
                 isActive ? "z-[70]" : "z-[10]"
               }`}
-            >
-              <Link href={`/news&events/${eventSlug}`}>
-                <div className="relative rounded-t-lg overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300">
+            >                <div className="relative rounded-t-lg overflow-hidden transition-shadow duration-300">
                   <div className="w-full h-[222px] relative">
                     <Image
                       src={imagePath + event?.image}
@@ -61,7 +59,9 @@ export default function EventsCarousel({ imagePath, events }) {
                       {event.title}
                     </h3>
                     <p
-                      className={"text-sm md:text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2"}
+                      className={
+                        "text-sm md:text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2"
+                      }
                       style={{
                         display: "-webkit-box",
                         WebkitLineClamp: 4,
@@ -71,15 +71,15 @@ export default function EventsCarousel({ imagePath, events }) {
                     >
                       {event?.short_description}
                     </p>
-                    <button
-                      className="mt-2 text-orange-600 text-sm font-semibold underline"
+                    <Link
+                      href={`/news&events/${eventSlug}`}
+                      className="mt-2 text-orange-600 text-sm font-semibold underline cursor-pointer "
                       aria-label="Read more about this event"
                     >
                       Read more
-                    </button>
+                    </Link>
                   </div>
                 </div>
-              </Link>
             </SwiperSlide>
           );
         })}

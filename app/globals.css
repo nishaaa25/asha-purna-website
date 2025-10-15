@@ -461,3 +461,20 @@ body {
 .media-dropdown-icon.open {
   transform: rotate(180deg);
 }
+
+/* React-Toastify progress bar: make it fill left-to-right (instead of shrinking) */
+.Toastify__progress-bar {
+  animation-direction: reverse; /* progress grows forward */
+  transform-origin: left; /* anchor to left for LTR */
+}
+
+/* Keep RTL behavior correct if ever enabled */
+.Toastify__progress-bar--rtl {
+  transform-origin: right;
+}
+
+/* Ensure green progress color to match design */
+.Toastify__progress-bar-theme--light,
+.Toastify__progress-bar-theme--dark {
+  background: #229b3d;
+}

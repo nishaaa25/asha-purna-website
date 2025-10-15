@@ -38,14 +38,14 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
         desc={headerData?.desc}
       />
 
-      <div className="w-full relative py-15 lg:py-[100px] bg-cream-600 flex-center flex-col gap-10">
+      {initialProjects.length > 0 && <div className="w-full relative py-15 lg:py-[100px] bg-cream-600 flex-center flex-col gap-10">
         <h2 className="text-[22px] md:text-[38px] lg:text-[54px] leading-[130%] tracking-[-1.1px] mb-5 text-black-400 font-medium uppercase">
           {headerData?.type || slug} Projects
         </h2>
 
         {/* Initial Projects Grid */}
         <div className="w-full px-[22px] lg:px-[100px] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10">
-          {initialProjects.length > 0 ? (
+          {initialProjects.length > 0 && (
             initialProjects.map((project) => {
               const projectSlug =
                 project.slug ||
@@ -61,8 +61,6 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
                 </Link>
               );
             })
-          ) : (
-            <p className="text-center col-span-full">No projects found</p>
           )}
         </div>
 
@@ -70,7 +68,15 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
         {canToggle && (
           <button
             className="border border-[#cccccc] bg-black-400 text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-2 capitalize"
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => {
+              const currentScrollY = typeof window !== "undefined" ? window.scrollY : 0;
+              setIsExpanded(!isExpanded);
+              if (typeof window !== "undefined") {
+                requestAnimationFrame(() => {
+                  window.scrollTo({ top: currentScrollY });
+                });
+              }
+            }}
           >
             {isExpanded ? "Less Projects" : "More Projects"}
           </button>
@@ -96,7 +102,7 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
             })}
           </div>
         )}
-      </div>
+      </div>}
     </div>
   );
 }

@@ -92,7 +92,7 @@ export default function MasterPlan({ project, masterImagePath }) {
         <div className="absolute z-40">
             <Button text="View plan" onClick={handleViewPlanClick} />
         </div>
-        <div className="bg-[#ffffffcc] w-full h-full absolute top-0 left-0 z-10 backdrop-blur-[4px]">
+        <div className="bg-[#ffffff84] w-full h-full absolute top-0 left-0 z-10 backdrop-blur-[4px]">
         </div>
       </div>
       <div className="flex flex-col items-start gap-[10px] md:gap-3 lg:gap-4 w-full">

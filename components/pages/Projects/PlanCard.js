@@ -45,13 +45,22 @@ export default function PlanCard({ data, imgPath, project }) {
 
       if (result._status) {
         toast.success(result._message || "Form submitted successfully!");
-        if (data?.project_floor_plan_gallery[0]?.image) {
-          window.location.href = imgPath + data?.project_floor_plan_gallery[1]?.image;
-          console.log(imgPath+ data?.project_floor_plan_gallery[1]?.image + "floorpath");
-        } else if (data?.project_floor_plan_gallery[1]?.image) {
-          window.location.href = imgPath + data?.project_floor_plan_gallery[1]?.image;
+        const gallery = Array.isArray(data?.gallery)
+          ? data.gallery
+          : Array.isArray(data?.project_floor_plan_gallery)
+          ? data.project_floor_plan_gallery
+          : [];
+
+        const firstImage = gallery.find((g) => g && g.image && typeof g.image === "string");
+        if (firstImage?.image) {
+          const href = (imgPath || "") + firstImage.image;
+          window.location.href = href;
+          console.log(href + " floorpath");
+        } else if (data?.imgUrl) {
+          // Fallback to main image if gallery missing
+          window.location.href = data.imgUrl;
         } else {
-          toast.error("Master Plan not available");
+          toast.error("Floor plan not available");
         }
 
         setIsViewPlanPopupOpen(false);
@@ -84,7 +93,7 @@ export default function PlanCard({ data, imgPath, project }) {
         <div className="absolute z-40">
           <Button text="View plan" onClick={handleViewPlanClick} />
         </div>
-        <div className="bg-[#ffffffcc] w-full h-full absolute top-0 left-0 z-10 backdrop-blur-[4px]"></div>
+        <div className="bg-[#ffffff84] w-full h-full absolute top-0 left-0 z-10 backdrop-blur-[4px]"></div>
       </div>
       <div className="flex flex-col items-start gap-[10px] md:gap-3 lg:gap-4 w-full relative">
         <h5 className="text-lg md:text-3xl lg:text-[43px] capitalize font-semibold tracking-[-1.1%] text-black-400">

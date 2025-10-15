@@ -6,10 +6,9 @@ export default function EventsCard({ data, imgPath }) {
   const eventSlug = data?.slug || `event-${data?.id}`;
 
   return (
-    <Link href={`/news&events/${eventSlug}`}>
       <div
         key={data.id}
-        className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2 cursor-pointer hover:shadow-lg transition-shadow duration-300"
+        className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2 "
       >
       <div className="w-full h-[222px] md:h-[35vh] lg:h-[40vh] relative img-cont">
         <Image
@@ -52,14 +51,13 @@ export default function EventsCard({ data, imgPath }) {
           {data?.short_description}
         </p>
 
-        <button
-          className="mt-2 text-orange-600 text-sm font-semibold underline"
+        <Link href={`/news&events/${eventSlug}`}
+          className="mt-2 text-orange-600 text-sm font-semibold underline cursor-pointer "
           aria-label="Read more about this event"
         >
           Read more
-        </button>
+        </Link>
       </div>
     </div>
-    </Link>
   );
 }
