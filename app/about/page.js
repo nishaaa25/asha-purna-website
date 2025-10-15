@@ -10,57 +10,57 @@ import FoundersCarousel from "@/components/pages/About/FounderCarousel";
 import AboutPageClient from "@/components/pages/About/AboutPageClient";
 
 // Fetch Journey API data
-async function getJourneyData() {
-  try {
-    const response = await fetch(
-      "https://apiservices.ashapurna.com/api/web/about-us/our-journies",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-version": "v1",
-        },
-        body: JSON.stringify({}),
-        next: { revalidate: 3600 }, // Revalidate every hour
-      }
-    );
+// async function getJourneyData() {
+//   try {
+//     const response = await fetch(
+//       "https://apiservices.ashapurna.com/api/web/about-us/our-journies",
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "api-version": "v1",
+//         },
+//         body: JSON.stringify({}),
+//         next: { revalidate: 3600 }, // Revalidate every hour
+//       }
+//     );
 
-    if (!response.ok) {
-      console.error(`Journey API returned status ${response.status}`);
-      return {
-        status: false,
-        data: null,
-        message: `API Error: ${response.status}`,
-      };
-    }
+//     if (!response.ok) {
+//       console.error(`Journey API returned status ${response.status}`);
+//       return {
+//         status: false,
+//         data: null,
+//         message: `API Error: ${response.status}`,
+//       };
+//     }
 
-    const result = await response.json();
+//     const result = await response.json();
 
-    if (result._status) {
-      return {
-        status: true,
-        data: result._data,
-        message: result._message,
-      };
-    } else {
-      return {
-        status: false,
-        data: null,
-        message: result._message,
-      };
-    }
-  } catch (error) {
-    console.error("Journey API Error:", error);
-    return {
-      status: false,
-      data: null,
-      message: error.message,
-    };
-  }
-}
+//     if (result._status) {
+//       return {
+//         status: true,
+//         data: result._data,
+//         message: result._message,
+//       };
+//     } else {
+//       return {
+//         status: false,
+//         data: null,
+//         message: result._message,
+//       };
+//     }
+//   } catch (error) {
+//     console.error("Journey API Error:", error);
+//     return {
+//       status: false,
+//       data: null,
+//       message: error.message,
+//     };
+//   }
+// }
 
 export default async function AboutPage() {
-  const journeyData = await getJourneyData();
+  // const journeyData = await getJourneyData();
   const data = [
     {
       title: "Landmark Projects",

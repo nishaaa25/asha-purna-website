@@ -200,7 +200,7 @@ export default function DetailsTabSection({
               </button>
 
               {/* Floor Plans Button */}
-              {Array.isArray(projectFloorsData?.project_floor_plans) && projectFloorsData.project_floor_plans.length > 0 && <button
+              {projectFloorsData?.project_floor_plans > 0 && <button
                 type="button"
                 onClick={() => setSelectedPlan("floor")}
                 className={`w-[166px]  lg:w-full  h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 

@@ -68,15 +68,7 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
         {canToggle && (
           <button
             className="border border-[#cccccc] bg-black-400 text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-2 capitalize"
-            onClick={() => {
-              const currentScrollY = typeof window !== "undefined" ? window.scrollY : 0;
-              setIsExpanded(!isExpanded);
-              if (typeof window !== "undefined") {
-                requestAnimationFrame(() => {
-                  window.scrollTo({ top: currentScrollY });
-                });
-              }
-            }}
+            onClick={() => setIsExpanded(!isExpanded)}
           >
             {isExpanded ? "Less Projects" : "More Projects"}
           </button>
