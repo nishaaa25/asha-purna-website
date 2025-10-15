@@ -3,55 +3,43 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ourJourneyProjects from "@/lib/ourjourneyproject";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Fixed years to display on the wheel
-const FIXED_YEARS = [1997, 2006, 2009, 2012, 2014, 2018, 2022, 2025];
+const FIXED_YEARS = [1997, 2007, 2010, 2013, 2015, 2020, 2023, 2025];
 
-// Helper function to extract year from title (e.g., "1996", "1996-2000", etc.)
-function extractYear(title) {
-  if (!title) return null;
-  const yearMatch = title.match(/\d{4}/);
-  return yearMatch ? parseInt(yearMatch[0]) : null;
-}
-
-// Helper function to parse HTML and extract project details
-function parseProjectsFromDescription(description) {
-  if (!description) return [];
-  
-  // Remove HTML tags but keep line breaks
-  let cleanText = description
-    .replace(/<br\s*\/?>/gi, '\n')  // Convert <br> to newlines
-    .replace(/<\/p>/gi, '\n')       // Convert closing </p> to newlines
-    .replace(/<\/li>/gi, '\n')      // Convert closing </li> to newlines
-    .replace(/<[^>]*>/g, '');       // Remove all other HTML tags
-  
-  // Split by newlines, bullet points, or list markers
-  const projects = cleanText
-    .split(/[\n•●◦▪▫■□]/)
-    .map(p => p.trim())
-    .filter(p => {
-      // Filter out empty strings, very long strings, and common non-project text
-      if (!p || p.length === 0 || p.length > 200) return false;
-      // Filter out common HTML entities or leftover tags
-      if (p.match(/^[\s\-,.:;]+$/)) return false;
-      return true;
-    });
-  
-  return projects;
+// Helper function to filter projects by year range
+function filterProjectsByYearRange(startYear, endYear) {
+  return ourJourneyProjects
+    .filter((project) => {
+      if (endYear === 9999) {
+        // For the last range, include all projects from startYear onwards
+        return project.year >= startYear;
+      }
+      // For other ranges, include projects >= startYear and < endYear
+      return project.year >= startYear && project.year < endYear;
+    })
+    .map((project) => ({
+      title: project.title,
+      projectType: project.projectType,
+      area: project.area,
+      year: project.year,
+    }));
 }
 
 export default function OurJourney({ journeyData }) {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const [isMediumScreen, setMediumScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [yearsData, setYearsData] = useState([]);
 
-  var size = isLargeScreen ? 400 : 290;
-  var size = isMediumScreen ? 390 : 290;
+  // Enhanced size calculation based on screen size for better responsiveness
+  const size = isLargeScreen ? 800 : isMediumScreen ? 580 : isSmallScreen ? 450 : 350;
 
   const center = size / 2;
-  const radius = isLargeScreen ? size / 1.4 : size / 1.5;
+  const radius = isLargeScreen ? size / 3.3 : isMediumScreen ? size / 3 : isSmallScreen ? size / 2.8 : size / 2.2;
   const angleStep = isLargeScreen
     ? 270 / Math.max(FIXED_YEARS.length - 1, 1)
     : -270 / Math.max(FIXED_YEARS.length - 1, 1);
@@ -61,84 +49,44 @@ export default function OurJourney({ journeyData }) {
   const squareRefs = useRef([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Process Journey API data with fixed years
+  // Process Journey projects data with fixed years
   useEffect(() => {
-    if (journeyData && journeyData.status && journeyData.data?.getOurJournies) {
-      const journies = journeyData.data.getOurJournies;
-      
-      // Extract all projects from API with their years
-      const allProjects = journies
-        .map(item => {
-          const year = extractYear(item.title);
-          const projects = parseProjectsFromDescription(item.description);
-          
-          // Log for debugging
-          console.log(`Year ${year}:`, projects);
-          
-          return projects.map(projectName => ({
-            year: year,
-            projectName: projectName,
-            title: item.title,
-            description: item.description,
-          }));
-        })
-        .flat()
-        .filter(item => item.year); // Only keep items with valid years
-      
-      console.log('All projects with years:', allProjects);
+    // Create year ranges with the fixed years
+    const yearRangesData = FIXED_YEARS.map((year, index) => {
+      const startYear = year;
+      const isLastYear = index === FIXED_YEARS.length - 1;
+      const endYear = isLastYear ? 9999 : FIXED_YEARS[index + 1]; // Use 9999 for last year to include all future projects
 
-      // Create year ranges with the fixed years
-      const yearRangesData = FIXED_YEARS.map((year, index) => {
-        const startYear = year;
-        const isLastYear = index === FIXED_YEARS.length - 1;
-        const endYear = isLastYear ? 9999 : FIXED_YEARS[index + 1]; // Use 9999 for last year to include all future projects
-        
-        // Get all projects between this year and the next year
-        const projectsInRange = allProjects
-          .filter(p => p.year >= startYear && p.year < endYear)
-          .map(p => p.projectName);
+      // Get all projects between this year and the next year
+      const projectsInRange = filterProjectsByYearRange(startYear, endYear);
 
-        // Remove duplicates
-        const uniqueProjects = [...new Set(projectsInRange)];
-        
-        console.log(`Year Range ${startYear}-${endYear}:`, uniqueProjects.length, 'projects');
+      console.log(
+        `Year Range ${startYear}-${isLastYear ? "Present" : endYear}:`,
+        projectsInRange.length,
+        "projects"
+      );
 
-        return {
-          year: year.toString(),
-          yearNum: year,
-          startYear: startYear,
-          endYear: isLastYear ? 'Present' : endYear,
-          title: isLastYear ? `Projects ${startYear}-Present` : `Projects ${startYear}-${endYear}`,
-          projects: uniqueProjects,
-        };
-      });
+      return {
+        year: year.toString(),
+        yearNum: year,
+        startYear: startYear,
+        endYear: isLastYear ? "Present" : endYear,
+        title: isLastYear
+          ? `Projects ${startYear}-Present`
+          : `Projects ${startYear}-${endYear}`,
+        projects: projectsInRange,
+      };
+    });
 
-      setYearsData(yearRangesData);
-    } else {
-      // If no API data, still show the years with empty projects
-      const emptyYearRanges = FIXED_YEARS.map((year, index) => {
-        const startYear = year;
-        const isLastYear = index === FIXED_YEARS.length - 1;
-        const endYear = isLastYear ? 'Present' : FIXED_YEARS[index + 1];
-        
-        return {
-          year: year.toString(),
-          yearNum: year,
-          startYear: startYear,
-          endYear: endYear,
-          title: isLastYear ? `Projects ${startYear}-Present` : `Projects ${startYear}-${endYear}`,
-          projects: [],
-        };
-      });
-      
-      setYearsData(emptyYearRanges);
-    }
-  }, [journeyData]);
+    setYearsData(yearRangesData);
+  }, []);
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024); // lg breakpoint is 1024px
-      setMediumScreen(window.innerWidth >= 768); // md breakpoint is 768px
+      const width = window.innerWidth;
+      setIsLargeScreen(width >= 1024); // lg breakpoint is 1024px
+      setMediumScreen(width >= 768 && width < 1024); // md breakpoint is 768px
+      setIsSmallScreen(width >= 640 && width < 768); // sm breakpoint is 640px
     };
 
     checkScreenSize();
@@ -155,7 +103,7 @@ export default function OurJourney({ journeyData }) {
     const st = ScrollTrigger.create({
       trigger: journeyRef.current,
       start: "top 0",
-      end: "+=" + FIXED_YEARS.length * 1000,
+      end: "+=" + FIXED_YEARS.length * 1500,
       pin: true,
       scrub: true,
       markers: false,
@@ -197,9 +145,21 @@ export default function OurJourney({ journeyData }) {
           }
 
           if (currentEl) {
-            tl.to(currentEl, { scale: 1, duration: 0.2, ease: "power1.out" }, 0);
-            tl.to(currentEl, { scale: 2, duration: 0.25, ease: "power1.out" }, ">");
-            tl.to(currentEl, { scale: 3, duration: 0.6, ease: "power2.out" }, ">");
+            tl.to(
+              currentEl,
+              { scale: 1, duration: 0.2, ease: "power1.out" },
+              0
+            );
+            tl.to(
+              currentEl,
+              { scale: 2, duration: 0.25, ease: "power1.out" },
+              ">"
+            );
+            tl.to(
+              currentEl,
+              { scale: 3, duration: 0.6, ease: "power2.out" },
+              ">"
+            );
             tl.to(currentEl, { backgroundColor: "#E84600", duration: 0.2 }, 0);
           }
 
@@ -226,49 +186,58 @@ export default function OurJourney({ journeyData }) {
 
     const activeEl = squareRefs.current[activeIndex];
     if (activeEl) {
-      gsap.set(activeEl, { scale: 1.8, backgroundColor: "#a78bfa" });
+      gsap.set(activeEl, { scale: 1.8, backgroundColor: "#ee6400" });
     }
   }, []);
 
   // Use yearsData if available, otherwise show years with empty projects
-  const displayData = yearsData.length > 0 ? yearsData : FIXED_YEARS.map((year, index) => {
-    const isLastYear = index === FIXED_YEARS.length - 1;
-    return {
-      year: year.toString(),
-      yearNum: year,
-      startYear: year,
-      endYear: isLastYear ? 'Present' : FIXED_YEARS[index + 1],
-      title: isLastYear ? `Projects ${year}-Present` : `Projects ${year}-${FIXED_YEARS[index + 1]}`,
-      projects: [],
-    };
-  });
+  const displayData =
+    yearsData.length > 0
+      ? yearsData
+      : FIXED_YEARS.map((year, index) => {
+          const isLastYear = index === FIXED_YEARS.length - 1;
+          return {
+            year: year.toString(),
+            yearNum: year,
+            startYear: year,
+            endYear: isLastYear ? "Present" : FIXED_YEARS[index + 1],
+            title: isLastYear
+              ? `Projects ${year}-Present`
+              : `Projects ${year}-${FIXED_YEARS[index + 1]}`,
+            projects: [],
+          };
+        });
 
   const currentYearData = displayData[activeIndex] || displayData[0];
 
   return (
     <div
       ref={journeyRef}
-      className="relative w-full min-h-screen text-center py-6 overflow-hidden flex flex-col items-center lg:flex-row lg:justify-start"
+      className="relative w-full h-screen text-center py-6 overflow-hidden flex flex-col items-center lg:flex-row lg:justify-start"
     >
       {/* Section Heading */}
-      <div className="flex lg:flex-col">
-        <h2 className="font-playfair font-semibold whitespace-nowrap text-gray-600 capitalize text-[6vw] leading-[8vw]">
+      <div className="flex lg:flex-col lg:pl-10 xl:pl-16">
+        <h2 className="font-playfair font-semibold whitespace-nowrap text-gray-600 capitalize text-[6vw] sm:text-[5vw] md:text-[4.5vw] lg:text-[3.5vw] xl:text-[3vw] leading-[8vw] lg:leading-[5vw]">
           Our
         </h2>
-        <h2 className="whitespace-nowrap tracking-tighter text-gray-600 capitalize text-[6vw] leading-[8vw]">
+        <h2 className="whitespace-nowrap tracking-tighter text-gray-600 capitalize text-[6vw] sm:text-[5vw] md:text-[4.5vw] lg:text-[3.5vw] xl:text-[3vw] leading-[8vw] lg:leading-[5vw]">
           Journey
         </h2>
       </div>
 
       {/* Outer Circle */}
-      <div className="circle absolute -top-1/4 w-[99vw] h-[99vw] scale-[1.4] rounded-full border-[40px] mx-auto border-[#d9d9d9]/20 md:w-[75vw] md:h-[75vw] md:-top-[20rem] lg:w-[50vw] lg:h-[50vw] lg:top-0 lg:-left-1/5 lg:border-[65px]">
-        <div className="w-[0.5px] h-4 bg-orange-600"></div>
+      <div className="circle absolute  -top-4 -left-3/5 -translate-y-1/2 translate-x-3/5 w-[99vw] h-[99vw] scale-[1.3] rounded-full border-[35px] mx-auto border-[#d9d9d9]/20 sm:scale-[1.25] sm:w-[90vw] sm:h-[90vw] md:scale-[1.15] md:w-[75vw] md:h-[75vw] md:border-[45px] lg:scale-[1.1] lg:top-1/2 lg:w-[55vw] lg:h-[55vw] lg:border-[55px] xl:scale-100 xl:w-[900px] xl:h-[900px] xl:border-[65px]">
+        <div className="absolute top-1/2 -translate-y-1/2 h-[35px] md:h-[45px] lg:h-[55px] xl:h-[65px] rotate-90 w-[0.5px] -right-[4%] bg-orange-600"></div>
       </div>
 
       {/* Rotating Wheel */}
-      <div className="relative flex flex-col items-center justify-center gap-1 lg:flex-row lg:items-start lg:justify-between lg:gap-15">
-        <div className="z-50 flex items-center justify-center">
-          <div className="relative -top-[20rem] flex h-[30rem] w-[30rem] items-center justify-center rounded-full lg:top-5 lg:-left-[24rem] lg:-rotate-90">
+      <div className="absolute grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-0 w-full h-full px-4 md:px-6 lg:px-10 xl:px-20 py-10 lg:py-0">
+        <div className="z-50 flex items-center justify-center absolute 
+          -top-8 -left-1/2 sm:-top-6 sm:-left-1/2 
+          md:-top-4 md:-left-2/5 
+          lg:top-1/2 lg:-left-3/7 lg:-translate-y-1/2 lg:translate-x-3/7
+          xl:top-1/2 xl:-left-1/3 xl:-translate-y-1/2 xl:translate-x-1/3">
+          <div className="relative flex items-center justify-center rounded-full lg:-rotate-90">
             <div
               ref={yearRef}
               className="relative rounded-full"
@@ -277,13 +246,18 @@ export default function OurJourney({ journeyData }) {
               {displayData.map((data, i) => {
                 const angle = i * angleStep - 270;
 
-                const yearX = center + radius * Math.cos((angle * Math.PI) / 180);
-                const yearY = center + radius * Math.sin((angle * Math.PI) / 180);
 
-                const angleDiff = Math.abs(i - activeIndex) * Math.abs(angleStep);
+                const angleDiff =
+                  Math.abs(i - activeIndex) * Math.abs(angleStep);
                 const opacity = Math.max(0, 1 - angleDiff / 90);
 
-                const squareRadius = radius + (isLargeScreen ? 205 : 145);
+                const yearX =
+                  center + radius * Math.cos((angle * Math.PI) / 180);
+                const yearY =
+                  center + radius * Math.sin((angle * Math.PI) / 180);
+
+                // Enhanced scaling for square radius based on screen size
+                const squareRadius = radius + (isLargeScreen ? 205 : isMediumScreen ? 170 : isSmallScreen ? 150 : 120);
                 const squareX =
                   center + squareRadius * Math.cos((angle * Math.PI) / 180);
                 const squareY =
@@ -293,11 +267,15 @@ export default function OurJourney({ journeyData }) {
                   <div key={i}>
                     {/* Year Text */}
                     <div
-                      className="absolute text-md font-bold transition-colors duration-300 pointer-events-none lg:text-xl"
+                      className={`absolute font-bold transition-colors duration-300 pointer-events-none ${
+                        isSmallScreen ? 'text-xs' : 
+                        isMediumScreen ? 'text-sm' : 
+                        isLargeScreen ? 'text-base' : 'text-lg'
+                      }`}
                       style={{
                         left: `${yearX}px`,
                         top: `${yearY}px`,
-                        transform: `translate(-50%, -50%) rotate(${angle}deg)`,
+                        transform: `translate(-50%, -50%) rotate(${+angle}deg)`,
                         opacity: opacity,
                         color: i === activeIndex ? "#E84600" : "#7c7c7c",
                       }}
@@ -308,12 +286,17 @@ export default function OurJourney({ journeyData }) {
                     {/* Square markers */}
                     <div
                       ref={(el) => (squareRefs.current[i] = el)}
-                      className="absolute w-1 h-1"
+                      className={`absolute ${
+                        isSmallScreen ? 'w-0.5 h-0.5' : 
+                        isMediumScreen ? 'w-1 h-1' : 
+                        isLargeScreen ? 'w-1.5 h-1.5' : 'w-2 h-2'
+                      }`}
                       style={{
                         left: `${squareX}px`,
                         top: `${squareY}px`,
                         transform: `translate(-50%, -50%) rotate(${-angle}deg)`,
-                        backgroundColor: i === activeIndex ? "#E84600" : "#374151",
+                        backgroundColor:
+                          i === activeIndex ? "#E84600" : "#374151",
                       }}
                     ></div>
                   </div>
@@ -323,24 +306,31 @@ export default function OurJourney({ journeyData }) {
           </div>
         </div>
 
-        <div className="w-3 h-3 z-10 -mt-[14.5rem] bg-[#E84600] md:-mt-[10.3rem] lg:w-3 lg:h-3 lg:mt-[34.8vh] lg:-ml-[12.9rem]"></div>
 
-        {/* Dynamic Content */}
-        <div className="px-6 text-center mt-[10rem] flex flex-col items-center justify-center gap-3 md:mt-[6rem] lg:mt-[13rem] lg:ml-20 max-w-2xl">
-          <div className="flex flex-col text-center lg:text-lg max-h-[40vh] overflow-y-auto px-4 w-full">
+        <div className="relative w-full h-full"></div>
+        {/* Dynamic Content - Fixed width on right side */}
+        <div className="px-4 sm:px-6 md:px-8 text-center mt-[8rem] sm:mt-[9rem] md:mt-[7rem] lg:mt-0 flex flex-col h-full items-center justify-center gap-3 w-full">
+          <div className="flex flex-col text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl overflow-y-auto px-4 md:px-6 lg:pl-16 xl:pl-20 w-full max-h-[50vh] lg:max-h-[90vh] no-scrollbar">
             {currentYearData.projects && currentYearData.projects.length > 0 ? (
               currentYearData.projects.map((project, idx) => (
-                <div key={idx} className="w-full flex flex-col items-center">
-                  <p className="text-gray-700 leading-relaxed py-4 block w-full text-lg md:text-xl lg:text-2xl">
-                    {project}
-                  </p>
+                <div
+                  key={idx}
+                  className="w-full flex flex-col items-center py-2 md:py-3"
+                >
+                  <h3 className="text-gray-800 font-semibold leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl mb-1">
+                    {project.title}
+                  </h3>
+                  <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm lg:text-base text-gray-800">
+                    <span>Project Type - {project.projectType}</span>
+                    <span>Area - {project.area} Acre</span>
+                  </div>
                   {idx < currentYearData.projects.length - 1 && (
-                    <div className="w-2/12 h-[0.5px] bg-orange-600 mx-auto"></div>
+                    <div className="w-3/12 sm:w-2/12 h-[1px] bg-orange-600/60 mt-4 md:mt-6"></div>
                   )}
                 </div>
               ))
             ) : (
-              <p className="text-gray-600 italic">
+              <p className="text-gray-600 italic text-sm sm:text-base md:text-lg">
                 No projects found for this period
               </p>
             )}

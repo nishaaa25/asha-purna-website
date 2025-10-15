@@ -13,8 +13,8 @@ export default function AwardSection() {
     <div className="w-full relative pb-10 md:pb-20 lg:pb-[100px]">
       <SectionHeader
         title="events"
-        heading="Excellence"
-        spanText="Recognised"
+        heading="Stories Beyond"
+        spanText="Structures"
         desc="Our commitment to quality and innovation has been recognized by leading industry bodies and publications across the nation."
       />
       <div className="relative w-full -top-4 lg:hidden">

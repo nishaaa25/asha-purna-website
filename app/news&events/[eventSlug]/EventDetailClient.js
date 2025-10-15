@@ -1,5 +1,6 @@
 "use client";
 
+import HeroComponentTwo from "@/components/HeroComponentTwo";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -29,8 +30,9 @@ export default function EventDetailClient({
   };
 
   return (
-    <div className="relative w-full bg-cream-600 py-10 md:py-15 lg:py-20">
-      <div className="w-full max-w-7xl mx-auto px-[22px] md:px-12 lg:px-20">
+    <div className="relative w-full">
+      <HeroComponentTwo imgUrl="/assets/investor.jpg" />
+      <div className="w-full max-w-7xl mx-auto px-[22px] md:px-12 lg:px-20 py-12 md:py-20 lg:py-[100px]">
         {/* Page Title */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-semibold text-gray-900 mb-8 md:mb-12 lg:mb-16">
           Ashapurna Events

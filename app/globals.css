@@ -8,25 +8,23 @@
   --font-grenda: "Grenda", sans-serif;
 }
 
-@layer base {
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-    box-shadow: 0 0 0px 1000px transparent inset !important;
-    transition: background-color 9999s ease-in-out 0s;
-  }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
 
-  .enquiry-form input:-webkit-autofill,
-  .enquiry-form input:-webkit-autofill:hover,
-  .enquiry-form input:-webkit-autofill:focus,
-  .enquiry-form input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-    box-shadow: 0 0 0px 1000px transparent inset !important;
-    --webkit-text-fill-color: #ffffff !important;
-    transition: background-color 9999s ease-in-out 0s;
-  }
+.enquiry-form input:-webkit-autofill,
+.enquiry-form input:-webkit-autofill:hover,
+.enquiry-form input:-webkit-autofill:focus,
+.enquiry-form input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 @font-face {
@@ -140,7 +138,12 @@
 }
 
 .gradient {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 49.82%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.15) 49.82%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .gradient-2 {
@@ -151,11 +154,14 @@
     rgba(0, 0, 0, 0.7) 100%
   );
 }
-.about-gradient{
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 49.82%, rgba(0, 0, 0, 0) 100%);
-
+.about-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.15) 49.82%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
-
 
 /* Lenis Smooth Scroll Styles */
 html.lenis,
@@ -223,7 +229,7 @@ body {
   .text-responsive-15 {
     font-size: 15px;
   }
-  
+
   /* Base font sizes */
   .text-responsive-16 {
     font-size: 16px;
@@ -240,7 +246,7 @@ body {
   .text-responsive-24 {
     font-size: 24px;
   }
-  
+
   /* Medium font sizes */
   .text-responsive-28 {
     font-size: 28px;
@@ -263,7 +269,7 @@ body {
   .text-responsive-48 {
     font-size: 48px;
   }
-  
+
   /* Large font sizes */
   .text-responsive-56 {
     font-size: 56px;
@@ -271,7 +277,7 @@ body {
   .text-responsive-60 {
     font-size: 60px;
   }
-  
+
   /* Large screens - use vw for responsive scaling */
   @media (min-width: 1024px) {
     .text-responsive-8 {
@@ -353,14 +359,17 @@ body {
   transition: all 200ms ease;
   margin: 0 !important; /* reset Swiper’s default margin */
 }
-.img-gradient{
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+.img-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
 }
 .ownership-swiper .swiper-pagination-bullet-active {
   background: #000000;
   border-color: #000000;
 }
-
 
 .articles .img-cont {
   height: 195px;

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAPI } from "@/lib/hooks/useAPI";
-import { isValidEmail, isValidName } from "@/lib/helpers/regex";
+import { isValidEmail, isValidPhone, isValidName } from "@/lib/helpers/regex";
 import { showErrorToast, showSuccessToast } from "@/lib/helpers/toastConfig";
 import ThankYouEnquirePopup from "../ThankYouEnquirePopup";
 
@@ -31,8 +31,8 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
     // Phone validation - matching Pages Router
     if (!formData.phone) {
       newErrors.phone = "Please enter phone number";
-    } else if (String(formData.phone).length !== 10) {
-      newErrors.phone = "Mobile number must be 10 digits only";
+    } else if (!isValidPhone(formData.phone)) {
+      newErrors.phone = "Mobile number must be 10 digits starting with 6-9";
     }
 
     // Email validation - matching Pages Router

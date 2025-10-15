@@ -32,11 +32,11 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
     }
 
     // Phone validation
-    const phoneRegex = /^[0-9]{10}$/;
+    const phoneRegex = /^[6-9]\d{9}$/;
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!phoneRegex.test(formData.phone.replace(/\s/g, ""))) {
-      newErrors.phone = "Please enter a valid 10-digit phone number";
+      newErrors.phone = "Please enter a valid 10-digit phone number starting with 6-9";
     }
 
     // message validation
@@ -84,10 +84,21 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    // For phone field, only allow numbers and limit to 10 digits
+    if (name === 'phone') {
+      const numericValue = value.replace(/\D/g, '').slice(0, 10);
+      setFormData(prev => ({
+        ...prev,
+        [name]: numericValue
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+    
     // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -162,6 +173,7 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
+                maxLength={10}
                 className={`w-full border-b ${errors.phone ? 'border-red-500' : 'border-black-400/20'} outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
                 placeholder="Phone Number"
               />

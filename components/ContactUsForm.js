@@ -31,8 +31,8 @@ export default function ContactUsForm() {
     // Phone validation - matching Pages Router logic
     if (!formData.phone) {
       newErrors.phone = "Please enter phone number";
-    } else if (String(formData.phone).length !== 10) {
-      newErrors.phone = "Mobile number must be 10 digits only";
+    } else if (!isValidPhone(formData.phone)) {
+      newErrors.phone = "Mobile number must be 10 digits starting with 6-9";
     }
 
     // Email validation - matching Pages Router logic
