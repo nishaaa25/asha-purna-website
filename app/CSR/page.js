@@ -87,7 +87,7 @@ Transforming Lives"
           desc="At Ashapurna, our commitment extends beyond construction. We believe in creating lasting impact through healthcare, education, community development, and environmental sustainability initiatives that empower lives across generations."
         />{" "}
       </div>
-      {/* <TabSection />
+      {/* <TabSection /> */}
       <div className="relative bg-cream-600 w-full pb-5">
         <div className="w-full md:w-10/12 lg:w-8/12 mx-auto">
           <SectionHeader
@@ -96,7 +96,7 @@ Transforming Lives"
           />
         </div>
         <RecentProjectsCarousel data={csrUpdates} imagePath={imagePath}/>
-      </div> */}
+      </div>
       <div className="w-full relative bg-cream-600">
         <FaqSection faq={faqs2} />
       </div>

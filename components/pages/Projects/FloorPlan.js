@@ -8,6 +8,8 @@ export default function FloorPlan({ project, floorImagePath, projectFloorsData }
   // Get floor plans from API or use fallback
   // API returns: { project_floor_plans: [...] }
   const apiFloorPlans = projectFloorsData?.project_floor_plans || [];
+
+  console.log(projectFloorsData?.project_floor_plans)
   
   // Extract unique floor types/names for tabs using the title field
   const floorPlanTabs = apiFloorPlans.length > 0
@@ -49,7 +51,7 @@ export default function FloorPlan({ project, floorImagePath, projectFloorsData }
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <PlanCard data={tabContent} project={project} />
+      <PlanCard data={tabContent} project={project} imgPath={floorImagePath}/>
     </div>
   );
 }

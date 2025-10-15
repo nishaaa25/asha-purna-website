@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { isValidEmail, isValidPhone, isValidName } from "@/lib/helpers/regex";
 
@@ -66,6 +66,38 @@ export default function BrochurePopup({
       }));
     }
   };
+
+    useEffect(() => {
+      if (isOpen) {
+        // Store the current scroll position
+        const scrollY = window.scrollY;
+        
+        // Lock the scroll
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+      } else {
+        // Get the scroll position
+        const scrollY = document.body.style.top;
+        
+        // Restore scroll
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        
+        // Restore scroll position
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+  
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+      };
+    }, [isOpen]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -141,7 +173,7 @@ export default function BrochurePopup({
   console.log("project name in brochure popup:", brochureUrl);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50" suppressHydrationWarning>
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999]" suppressHydrationWarning>
       <div className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-500 ease-in-out ${
         isOpen ? 'translate-y-0' : '-translate-y-full'
       }`}>

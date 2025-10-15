@@ -25,21 +25,11 @@ export default function Location({ project, projectLocationsData, projectLocatio
           spanText={project?.location_tagline || "advantage"}
           heading={project?.location_heading || "Strategic Location"}
           title="location"
-          desc={project?.location_description || project?.location_desc || ""}
+          desc={project?.location_description || project?.location_desc || "Located across from the Delhi–Mumbai Industrial Corridor, Agri Park offers immediate access to national highways, rail networks, and Jodhpur city."}
         />
       </div>
       <div className="w-10/12 relative mx-auto lg:flex lg:flex-row-reverse lg:gap-10">
-        <div className="w-full h-[200px] md:h-[300px] lg:h-[400px] overflow-hidden rounded-t-[10px] relative mb-10">
-          <iframe
-            src={mapLink}
-            width="600"
-            height="450"
-            style={{border:0}}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="w-full h-full"
-          ></iframe>
+        <div className="w-full h-[200px] md:h-[300px] lg:h-[400px] overflow-hidden rounded-t-[10px] relative mb-10"     dangerouslySetInnerHTML={{ __html: project?.google_map || mapLink }}>
         </div>
         <ListTwo heading="Connectivity Highlights" features={locationFeatures} />
       </div>

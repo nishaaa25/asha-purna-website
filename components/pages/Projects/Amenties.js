@@ -15,7 +15,7 @@ export default function Amenties({ project, projectAmenityData, projectAmenityIm
         spanText={project?.amenity_tagline || "Supports Enterprise"}
         title="amenities"
       />
-      <div className="w-[90%] relative flex flex-wrap lg:flex-row justify-start items-start gap-10 mx-auto mb-10 md:mb-20 lg:mb-[100px]">
+      <div className="w-[80%] relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 justify-start items-start gap-10 mx-auto mb-10 md:mb-20 lg:mb-[100px]">
         {amenitiesData.map((item, index) => (
           <div
             key={item.id || index}

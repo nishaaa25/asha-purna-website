@@ -77,8 +77,8 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
         priority
         quality={90}
       />
-      <div className="w-full h-full absolute top-0 left-0 gradient"></div>
-      <div className="w-[86%] mx-auto relative flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[30vh] text-white">
+      <div className="w-full h-full absolute top-0 left-0 bg-black/40"></div>
+      <div className="w-[86%] mx-auto relative flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
         <h1 className="text-[36px] md:text-5xl lg:text-6xl xl:text-7xl leading-[120%] tracking-[-1.1%] font-semibold drop-shadow-lg">
           {project?.name || project?.project_name || "Project"}
         </h1>

@@ -28,7 +28,7 @@ export default function DetailsTabSection({
   const tabSectionRef = useRef(null);
   const scrollPositionRef = useRef(0);
   const tab = ["overview", "gallery", "plans"];
-  
+  console.log(projectFloorsData);
   // Build counter data from project
   const data = [
     {
@@ -105,7 +105,7 @@ export default function DetailsTabSection({
       </div>
       {activeTab === "overview" && (
         <div className="flex-center w-full px-[22px] relative flex-col text-center pt-3 md:pt-6 lg:pt-10 gap-7">
-          <h4 className="text-gray-600 font-playfair text-2xl md:text-[36px] lg:text-[42px] leading-[130%] font-semibold">
+          <h4 className="text-gray-600 font-playfair uppercase text-2xl md:text-[36px] lg:text-[42px] leading-[130%] font-semibold">
             Project Overview
           </h4>
           <div 
