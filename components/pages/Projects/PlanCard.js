@@ -47,7 +47,7 @@ export default function PlanCard({ data, imgPath, project }) {
         toast.success(result._message || "Form submitted successfully!");
         const gallery = Array.isArray(data?.gallery)
           ? data.gallery
-          : Array.isArray(data?.project_floor_plan_gallery)
+          : Array.isArray(data?.project_floor_plan_gallery[2]?.image)
           ? data.project_floor_plan_gallery
           : [];
 

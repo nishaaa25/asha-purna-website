@@ -88,7 +88,7 @@ Transforming Lives"
         />{" "}
       </div>
       {/* <TabSection /> */}
-      <div className="relative bg-cream-600 w-full pb-5">
+      <div className="relative bg-cream-600 w-full pb-5 lg:pb-0">
         <div className="w-full md:w-10/12 lg:w-8/12 mx-auto">
           <SectionHeader
             heading="Recent Projects"

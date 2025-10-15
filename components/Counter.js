@@ -2,9 +2,8 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function CountersSection({ data }) {
   const countRefs = useRef([]);
@@ -12,41 +11,39 @@ export default function CountersSection({ data }) {
 
   useEffect(() => {
     const animateCounters = () => {
-      if (countRefs.current.length > 0) {
-        countRefs.current.forEach((counter) => {
-          if (!counter) return;
+      countRefs.current.forEach((counter) => {
+        if (!counter) return;
 
-          const target = Number(counter.getAttribute("data-target"));
-          const hasSign = counter.getAttribute("data-sign");
-          const duration = 1800; // Animation duration in milliseconds (1.8 seconds)
-          const startTime = performance.now();
+        const target = Number(counter.getAttribute("data-target"));
+        const hasSign = counter.getAttribute("data-sign");
+        const duration = 1800; // 1.8 seconds
+        const startTime = performance.now();
 
-          const updateCount = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function for smooth animation (easeOutQuart)
-            const easeProgress = 1 - Math.pow(1 - progress, 4);
-            
-            // For small numbers with "k" sign (like 1k), animate in hundreds
-            if (target < 10 && hasSign === 'k' && progress < 1) {
-              const scaledValue = Math.floor(easeProgress * target * 100);
-              counter.innerText = scaledValue;
-            } else {
-              const currentValue = Math.floor(easeProgress * target);
-              counter.innerText = currentValue;
-            }
+        const updateCount = (currentTime) => {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
 
-            if (progress < 1) {
-              requestAnimationFrame(updateCount);
-            } else {
-              counter.innerText = target;
-            }
-          };
+          // ✅ smoother cubic ease-out
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
 
-          requestAnimationFrame(updateCount);
-        });
-      }
+          // handle small numbers like 1k
+          if (target < 10 && hasSign === "k" && progress < 1) {
+            const scaledValue = Math.floor(easeProgress * target * 100);
+            counter.innerText = scaledValue;
+          } else {
+            const currentValue = Math.floor(easeProgress * target);
+            counter.innerText = currentValue;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        requestAnimationFrame(updateCount);
+      });
     };
 
     const trigger = ScrollTrigger.create({
@@ -71,17 +68,17 @@ export default function CountersSection({ data }) {
         >
           <div className="flex items-center font-medium">
             <span
-              ref={(el) => {
-                if (el) countRefs.current[index] = el;
-              }}
+              ref={(el) => (countRefs.current[index] = el)}
               className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
               data-target={counter.value}
-              data-sign={counter.sign || ''}
+              data-sign={counter.sign || ""}
             >
               0
             </span>
             {counter.sign && (
-              <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">{counter.sign}</span>
+              <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">
+                {counter.sign}
+              </span>
             )}
             <span className="text-[43px] md:text-[60px] lg:text-[56px] leading-[100%] text-orange-600 font-[300] tracking-[-3.6px]">
               +

@@ -84,7 +84,7 @@ export default function ProjectsPage() {
   return (
     <div className="w-full relative">
       <HeroComponentTwo imgUrl="/assets/project-bg.jpg" />
-      <div className="w-full relative md:w-[90%] lg:w-[80%] lg:mx-auto">
+      <div className="w-full relative md:w-[90%] lg:w-[80%] mx-auto">
         <SectionHeader
           spanText="Building Communities"
           heading="Transforming Landscapes,"

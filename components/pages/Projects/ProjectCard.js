@@ -96,7 +96,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
           </p>
         </div>
         <div className="flex-between mt-2 relative">
-          <div className="flex items-center gap-1 leading-[140%] pt-1">
+          {data?.address || data?.location && <div className="flex items-center gap-1 leading-[140%] pt-1">
             <Image
               src="/assets/location-red.svg"
               alt="location-icon"
@@ -107,7 +107,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
             <span className="text-xs md:text-sm lg:text-sm leading-[140%]">
               {data?.address || data?.location}
             </span>
-          </div>
+          </div>}
           <p className="text-sm md:text-base lg:text-base font-bold">
             {data?.size}
           </p>

@@ -208,7 +208,7 @@ export default function Footer() {
             </ul>
           </div>
         </div> */}
-        <div className="w-full relative flex flex-col gap-3 lg:gap-5 mt-5">
+        <div className="w-full relative flex flex-col gap-3 lg:gap-5 mt-5 pb-15 lg:pb-0">
           <div className="flex justify-start items-center gap-4 pb-1">
             <Link
               className="relative w-[14px] h-[14px] lg:w-6 lg:h-6"

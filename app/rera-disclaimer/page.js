@@ -31,6 +31,7 @@ export default function ReraDisclaimerpage() {
         heading="Important"
         desc="For any queries or clarifications regarding our projects, please contact our authorized representatives directly."
         btn="Contact us"
+        btnLink="/contact"
       />
     </div>
   );

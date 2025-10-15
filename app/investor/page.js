@@ -157,7 +157,7 @@ export default function InvestorPage() {
       />
 
       <div className="relative py-15 md:px-20 lg:py-[100px] text-center bg-cream-600 px-[22px] w-full">
-        <h2 className="text-[22px] md:text-[42px] lg:text-[64px] leading-[130%] tracking-[-1.1px] mb-5 lg:mb-7 text-black-400 lg:text-gray-600 font-medium">
+        <h2 className="text-[22px] md:text-3xl lg:text-5xl leading-[130%] tracking-[-1.1px] mb-5 lg:mb-7 text-black-400 lg:text-gray-600 font-medium">
           Want to take it further
         </h2>
         <p className="mb-6 lg:mb-10 text-sm md:text-base lg:text-[22px] leading-[140%] text-gray-800 tracking-[-1.1%]">

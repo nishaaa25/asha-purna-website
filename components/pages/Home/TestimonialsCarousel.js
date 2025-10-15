@@ -3,26 +3,25 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { testimonials } from "@/lib/content";
 
 export default function TestimonialsCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Convert YouTube URL to embed URL
   const getYouTubeEmbedUrl = (url) => {
     if (!url) return "";
 
     // Handle youtu.be format
     if (url.includes("youtu.be/")) {
       const videoId = url.split("youtu.be/")[1].split("?")[0];
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&modestbranding=1&rel=0`;
+      return `https://www.youtube.com/embed/${videoId}?controls=1&modestbranding=1&rel=0&showinfo=0`;
     }
 
     // Handle youtube.com format
     if (url.includes("youtube.com/watch")) {
       const videoId = url.split("v=")[1].split("&")[0];
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&modestbranding=1&rel=0`;
+      return `https://www.youtube.com/embed/${videoId}?controls=1&modestbranding=1&rel=0&showinfo=0`;
     }
 
     return url;
@@ -32,58 +31,20 @@ export default function TestimonialsCarousel() {
     <div className="w-full relative">
       <Swiper
         modules={[Navigation]}
-        centeredSlides={false}
         slidesPerView={1.5}
         spaceBetween={15}
-        watchSlidesProgress
-        touchRatio={1}
-        touchAngle={45}
-        threshold={5}
-        longSwipesRatio={0.5}
-        longSwipesMs={300}
-        shortSwipes={true}
-        followFinger={true}
-        allowTouchMove={true}
-        touchStartPreventDefault={false}
+        loop={true}
         navigation={{
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",
         }}
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
-        className="w-full -top-10 relative"
+        className="w-full relative"
         breakpoints={{
-          320: {
-            slidesPerView: 1.2,
-            slidesOffsetBefore: 26,
-            slidesOffsetAfter: 26,
-            touchRatio: 1,
-            touchAngle: 45,
-            threshold: 5,
-          },
-          640: {
-            slidesPerView: 1.3,
-            slidesOffsetBefore: 26,
-            slidesOffsetAfter: 26,
-            touchRatio: 1,
-            touchAngle: 45,
-            threshold: 5,
-          },
-          768: {
-            slidesPerView: 1.5,
-            slidesOffsetBefore: 26,
-            slidesOffsetAfter: 26,
-            touchRatio: 1,
-            touchAngle: 45,
-            threshold: 5,
-          },
-          1024: {
-            slidesPerView: 3,
-            slidesOffsetBefore: 30,
-            slidesOffsetAfter: 30,
-            touchRatio: 1,
-            touchAngle: 45,
-            threshold: 5,
-          },
+          320: { slidesPerView: 1.2, slidesOffsetBefore: 26 },
+          640: { slidesPerView: 1.3, slidesOffsetBefore: 26 },
+          768: { slidesPerView: 1.5, slidesOffsetBefore: 26 },
+          1024: { slidesPerView: 3, slidesOffsetBefore: 30 },
         }}
       >
         {testimonials.map((item, index) => {
@@ -100,60 +61,49 @@ export default function TestimonialsCarousel() {
                   src={getYouTubeEmbedUrl(item.videoUrl)}
                   allow="autoplay; encrypted-media"
                   allowFullScreen
-                  className="object-cover w-full h-full rounded-t-md overflow-hidden "
+                  className="object-cover w-full h-full rounded-t-md overflow-hidden"
                   title={`Testimonial from ${item.name}`}
                 />
-                {/* <div className="bg-white/10 backdrop-blur-lg absolute bottom-0 m-2 text-white p-4 rounded-md z-10">
-                  <p className="text-sm leading-[120%] w-11/12 mb-4">
-                    &#8220;{item.desc}&#8221;
-                  </p>
-                  <div>
-                    <h5 className="text-sm font-semibold leading-[120%] mb-1">
-                      {item.name}
-                    </h5>
-                    <p className="text-xs leading-[120%]">{item.position}</p>
-                  </div>
-                </div> */}
               </div>
             </SwiperSlide>
           );
         })}
+
+        {/* Navigation Arrows */}
+        <button className="swiper-button-prev-custom hidden lg:flex absolute left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-6 h-6 text-orange-600"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 19.5L8.25 12l7.5-7.5"
+            />
+          </svg>
+        </button>
+
+        <button className="swiper-button-next-custom hidden lg:flex absolute right-10 top-1/2 cursor-pointer -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-6 h-6 text-orange-600"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </button>
       </Swiper>
-
-      {/* Navigation Arrows */}
-      <button className="swiper-button-prev-custom hidden cursor-pointer lg:flex absolute left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-          className="w-6 h-6 text-orange-600"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 19.5L8.25 12l7.5-7.5"
-          />
-        </svg>
-      </button>
-
-      <button className="swiper-button-next-custom hidden lg:flex absolute right-10 top-1/2 cursor-pointer -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-          className="w-6 h-6 text-orange-600"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-          />
-        </svg>
-      </button>
     </div>
   );
 }
