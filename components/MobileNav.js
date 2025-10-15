@@ -12,7 +12,7 @@ export default function MobileNav() {
   const toggleNav = () => {
     if (!isOpen) {
       setIsOpen(true);
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
       closeNav();
     }
@@ -21,12 +21,12 @@ export default function MobileNav() {
   const closeNav = () => {
     setIsClosing(true);
     setMediaDropdownOpen(false);
-    
+
     // Wait for animation to complete before hiding
     setTimeout(() => {
       setIsOpen(false);
       setIsClosing(false);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }, 300); // Match animation duration
   };
 
@@ -37,7 +37,7 @@ export default function MobileNav() {
   // Cleanup effect to restore body scroll on unmount
   useEffect(() => {
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, []);
 
@@ -63,17 +63,19 @@ export default function MobileNav() {
       {isOpen && (
         <div className="fixed inset-0 z-110 lg:hidden">
           {/* Backdrop */}
-          <div 
+          <div
             className={`absolute inset-0 bg-black bg-opacity-50 mobile-nav-overlay ${
-              isClosing ? 'animate-fade-out' : 'animate-fade-in'
+              isClosing ? "animate-fade-out" : "animate-fade-in"
             }`}
             onClick={closeNav}
           />
-          
+
           {/* Navigation Panel */}
-          <div className={`absolute top-0 left-0 h-full w-full bg-white mobile-nav-panel ${
-            isClosing ? 'animate-slide-out-top' : 'animate-slide-in-top'
-          }`}>
+          <div
+            className={`absolute top-0 left-0 h-full w-full bg-white mobile-nav-panel ${
+              isClosing ? "animate-slide-out-top" : "animate-slide-in-top"
+            }`}
+          >
             {/* Header */}
             <div className="flex justify-between items-center p-6 ">
               <Link href="/" onClick={closeNav}>
@@ -125,7 +127,15 @@ export default function MobileNav() {
                     About Us
                   </Link>
                 </li>
-
+                <li>
+                  <Link
+                    href="/projects"
+                    onClick={closeNav}
+                    className="block p-[10px] text-[15px] leading-[110%]  text-black-400 border-b border-black-400/10 transition-colors"
+                  >
+                    Projects
+                  </Link>
+                </li>
                 {/* Media with Dropdown */}
                 <li>
                   <button
@@ -140,12 +150,12 @@ export default function MobileNav() {
                         width={16}
                         height={16}
                         className={`media-dropdown-icon ${
-                          mediaDropdownOpen ? 'open' : ''
+                          mediaDropdownOpen ? "open" : ""
                         }`}
                       />
                     </div>
                   </button>
-                  
+
                   {/* Media Dropdown */}
                   {mediaDropdownOpen && (
                     <div className="mt-4 space-y-3 animate-fade-in">
@@ -175,15 +185,6 @@ export default function MobileNav() {
                 </li>
 
                 {/* Projects */}
-                <li>
-                  <Link
-                    href="/projects"
-                    onClick={closeNav}
-                    className="block p-[10px] text-[15px] leading-[110%]  text-black-400 border-b border-black-400/10 transition-colors"
-                  >
-                    Projects
-                  </Link>
-                </li>
 
                 {/* Contact */}
                 <li>

@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className="w-full px-5 md:px-8 lg:px-13 pt-5  pb-3 absolute top-0 left-0 flex-between z-110">
       <div className="relative">
         <Link href="/">
-          <div className="w-24 h-11 lg:w-35 lg:h-16 relative">
+          <div className="w-26 h-12 lg:w-38 lg:h-20 relative">
             <Image
               src="/assets/main-logo.png"
               alt="main-logo"
