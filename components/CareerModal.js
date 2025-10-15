@@ -176,7 +176,7 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
         {/* Close button */}
         <button
           onClick={onClose}
-          className="sticky top-2 right-2 sm:absolute sm:top-4 sm:right-4 ml-auto block text-gray-500 hover:text-gray-700 z-10 bg-white rounded-full p-1"
+          className="sticky top-2 right-2 sm:absolute sm:top-4 sm:right-4 ml-auto block text-gray-500 hover:text-gray-700 z-10 bg-white rounded-full p-1 cursor-pointer"
           disabled={isLoading}
         >
           <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -345,7 +345,7 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 text-xs sm:text-base rounded-md transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 text-xs sm:text-base rounded-md transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
               >
                 {isLoading ? (
                   <>

@@ -76,10 +76,10 @@ export default function NewsEventspage() {
 
   return (
     <div className="relative w-full">
-      <HeroComponentTwo imgUrl="/assets/investor.jpg" />
+      <HeroComponentTwo imgUrl="/assets/events-bg.jpg" />
       <div className="relative w-10/12 mx-auto">
         <SectionHeader
-          title="news&events"
+          title="news & events"
           heading="Celebrating"
           spanText="moments"
           desc="From corporate milestones to festive celebrations, spiritual ceremonies to community gatherings - discover the vibrant tapestry of events that bring the Ashapurna family together."

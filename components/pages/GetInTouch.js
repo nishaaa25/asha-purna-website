@@ -191,7 +191,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
             <button
               type="submit"
               disabled={loading}
-              className="border border-[#cccccc]  bg-black-400 text-white font-bold text-sm md:text-lg lg:text-base py-[10px] min-w-8/12 md:min-w-1/2 lg:min-w-3/12 rounded-md mt-8 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="border border-[#cccccc]  bg-black-400 text-white font-bold text-sm md:text-lg lg:text-base py-[10px] min-w-8/12 md:min-w-1/2 lg:min-w-3/12 rounded-md mt-8 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? "Submitting..." : "Submit"}
             </button>

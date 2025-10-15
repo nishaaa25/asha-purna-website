@@ -23,7 +23,7 @@ export default function StayUpdated() {
           <div className="w-full relative mb-6">
             <button
               type="submit"
-              className="border border-[#cccccc]  bg-black-400 text-white font-medium text-xs md:text-base lg:text-base py-[10px] lg:py-[15px] min-w-8/12 md:min-w-4/12 lg:min-w-3/12 rounded-md mt-4"
+              className="border border-[#cccccc]  bg-black-400 text-white font-medium text-xs md:text-base lg:text-base py-[10px] lg:py-[15px] min-w-8/12 md:min-w-4/12 lg:min-w-3/12 rounded-md mt-4 cursor-pointer"
             >
               Subscribe
             </button>

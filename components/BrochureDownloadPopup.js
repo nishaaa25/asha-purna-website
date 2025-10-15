@@ -182,7 +182,7 @@ export default function BrochureDownloadPopup({
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10"
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10 cursor-pointer"
             disabled={isLoading}
           >
             <svg
@@ -317,7 +317,7 @@ export default function BrochureDownloadPopup({
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-md transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-6 rounded-md transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
             >
               {isLoading ? (
                 <>

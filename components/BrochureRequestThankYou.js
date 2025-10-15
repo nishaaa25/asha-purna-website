@@ -48,7 +48,7 @@ export default function BrochureRequestThankYou({ isOpen, onClose, projectName }
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
         >
           <Image
             src="/assets/cross.svg"
@@ -93,7 +93,7 @@ export default function BrochureRequestThankYou({ isOpen, onClose, projectName }
             <Link href="/projects">
               <button
                 onClick={onClose}
-                className="bg-orange-600 text-white py-3 px-8 rounded-lg text-base font-medium hover:bg-orange-700 transition-colors duration-200"
+                className="bg-orange-600 text-white py-3 px-8 rounded-lg text-base font-medium hover:bg-orange-700 transition-colors duration-200 cursor-pointer"
               >
                 Explore Projects
               </button>

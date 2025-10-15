@@ -21,7 +21,7 @@ export default function CareersPage() {
       value: "15",
     },
     {
-      title: "Retentiton Rate",
+      title: "Retention Rate",
       value: "95",
     },
   ];

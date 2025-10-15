@@ -174,7 +174,7 @@ export default function JobOpening() {
                   <div className="flex justify-center sm:justify-end">
                     <button
                       onClick={() => handleApplyClick(job.id)}
-                      className="w-full sm:w-auto px-6 py-2 md:py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-medium text-sm md:text-base rounded-md transition-colors"
+                      className="w-full sm:w-auto px-6 py-2 md:py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-medium text-sm md:text-base rounded-md transition-colors cursor-pointer"
                     >
                       Apply Now
                     </button>

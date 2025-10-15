@@ -58,9 +58,7 @@ export default function Page() {
           <h5 className="text-black-400 text-base md:text-[36px] lg:text-[54px] font-bold leading-[130%]">
             More Articles
           </h5>
-          <button
-            className="text-black/50 text-xs font-semibold leading-[130%] lg:hidden"
-          >
+          <button className="text-black/50 text-xs font-semibold leading-[130%] lg:hidden cursor-pointer">
             See All
           </button>
         </div>
@@ -77,8 +75,11 @@ export default function Page() {
 
         {/* Toggle Button */}
         <button
-          onClick={() => setShowAll((prev) => !prev)}
-          className="border hidden lg:flex border-[#cccccc] mx-auto bg-black-400 text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-10 capitalize transition-all duration-300 hover:opacity-90"
+          onClick={() => {
+            e.preventDefault();
+            setShowAll((prev) => !prev);
+          }}
+          className="border hidden lg:flex border-[#cccccc] mx-auto bg-black-400 text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-10 capitalize transition-all duration-300 hover:opacity-90 cursor-pointer"
         >
           {showAll ? "Show Less Articles" : "Explore More Articles"}
         </button>

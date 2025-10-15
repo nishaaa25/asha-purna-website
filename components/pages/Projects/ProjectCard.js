@@ -125,7 +125,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
               </Link>
               <button
                 onClick={handleEnquireClick}
-                className="border-[0.5px] border-black text-black-400 font-medium whitespace-nowrap text-sm md:text-base lg:text-base py-[7px]  w-full rounded-md mt-2 relative"
+                className="border-[0.5px] border-black text-black-400 font-medium whitespace-nowrap text-sm md:text-base lg:text-base py-[7px]  w-full rounded-md mt-2 relative cursor-pointer"
               >
                 Enquire Now
               </button>

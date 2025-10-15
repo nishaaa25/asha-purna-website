@@ -163,7 +163,7 @@ export default async function page() {
 
       {/* connect with us */}
 
-      <div className="relative  py-15 md:py-20 text-center px-7 w-full">
+      <div className="relative py-15 md:py-20 text-center w-full">
         <GetInTouch heading="connect with us" />
       </div>
 

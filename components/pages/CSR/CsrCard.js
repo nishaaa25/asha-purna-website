@@ -1,8 +1,26 @@
+"use client";
 import Image from "next/image";
+import { useState, useMemo } from "react";
 
 export default function CsrCard({ data, imagesPath }) {
   const isHTML = /<\/?[a-z][\s\S]*>/i.test(data?.description);
-  console.log(data);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const shouldShowToggle = useMemo(() => {
+    if (!data?.description) return false;
+    // Heuristic: show toggle if description is longer than ~160 chars
+    return String(data.description).replace(/<[^>]*>/g, "").trim().length > 160;
+  }, [data?.description]);
+
+  const clampStyles = isExpanded
+    ? {}
+    : {
+        display: "-webkit-box",
+        WebkitLineClamp: 4,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+      };
+
   return (
     <div
       key={data.id}
@@ -35,10 +53,23 @@ export default function CsrCard({ data, imagesPath }) {
         {isHTML ? (
           <div
             className="text-gray-700 text-sm"
+            style={clampStyles}
             dangerouslySetInnerHTML={{ __html: data?.description }}
           />
         ) : (
-          <p className="text-gray-700 text-sm">{data?.description}</p>
+          <p className="text-gray-700 text-sm" style={clampStyles}>
+            {data?.description}
+          </p>
+        )}
+
+        {shouldShowToggle && (
+          <button
+            type="button"
+            className="mt-2 text-orange-600 text-sm font-medium hover:underline cursor-pointer"
+            onClick={() => setIsExpanded((v) => !v)}
+          >
+            {isExpanded ? "Read less" : "Read more"}
+          </button>
         )}
       </div>
     </div>

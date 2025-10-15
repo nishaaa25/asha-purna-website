@@ -37,8 +37,7 @@ export default function ProjectDetailClient({
   projectGalleryData,
   slug,
 }) {
-
-  console.log("product ",project);
+  console.log("product ", project);
   return (
     <div className="relative w-full">
       <SlugHeroSection
@@ -51,20 +50,23 @@ export default function ProjectDetailClient({
       {/* Only show DetailsTabSection if there's meaningful content to display */}
       {(() => {
         // Check if there are actual gallery images
-        const hasGalleryImages = (project360Data && project360Data.length > 0) || 
+        const hasGalleryImages =
+          (project360Data && project360Data.length > 0) ||
           (projectVideoGalleryData && projectVideoGalleryData.length > 0) ||
-          (projectGalleryData?.gallery_names?.length > 0 && 
-           projectGalleryData.gallery_names.some(category => 
-             category.project_gallery && category.project_gallery.length > 0
-           ));
-        
+          (projectGalleryData?.gallery_names?.length > 0 &&
+            projectGalleryData.gallery_names.some(
+              (category) =>
+                category.project_gallery && category.project_gallery.length > 0
+            ));
+
         // Check if there are floor plans
-        const hasFloorPlans = projectFloorsData?.project_floor_plans && 
+        const hasFloorPlans =
+          projectFloorsData?.project_floor_plans &&
           projectFloorsData.project_floor_plans.length > 0;
-        
+
         // Check if there's project description
         const hasDescription = project?.description || project?.overview;
-        
+
         return hasGalleryImages || hasFloorPlans || hasDescription;
       })() && (
         <DetailsTabSection
@@ -81,7 +83,7 @@ export default function ProjectDetailClient({
         />
       )}
       {/* Only show Amenities section if data is available */}
-      {(projectAmenityData && projectAmenityData.length > 0) && (
+      {projectAmenityData && projectAmenityData.length > 0 && (
         <Amenties
           project={project}
           projectAmenityData={projectAmenityData}
@@ -89,7 +91,7 @@ export default function ProjectDetailClient({
         />
       )}
       {/* Only show Location section if data is available */}
-      {(projectLocationsData && projectLocationsData.length > 0) && (
+      {projectLocationsData && projectLocationsData.length > 0 && (
         <Location
           project={project}
           projectLocationsData={projectLocationsData}
@@ -97,15 +99,16 @@ export default function ProjectDetailClient({
         />
       )}
       {/* Only show Construction section if data is available */}
-      {projectConstructionsData?.project_constructions && projectConstructionsData.project_constructions.length > 0 && (
-        <Construction
-          project={project}
-          projectConstructionsData={projectConstructionsData}
-          constructionImagePath={constructionImagePath}
-        />
-      )}
+      {projectConstructionsData?.project_constructions &&
+        projectConstructionsData.project_constructions.length > 0 && (
+          <Construction
+            project={project}
+            projectConstructionsData={projectConstructionsData}
+            constructionImagePath={constructionImagePath}
+          />
+        )}
       {/* Only show Testimonials section if data is available */}
-      {testimonials && testimonials.length > 0 && <Testimoials />}
+      <Testimoials />
       <div className="w-full relative bg-cream-600">
         <GetInTouch
           heading="get in touch"
@@ -114,7 +117,7 @@ export default function ProjectDetailClient({
         />
       </div>
       {/* Only show FAQ section if data is available */}
-      {faqs && faqs.length > 0 && <FaqSection faq={faqs} />}
+      <FaqSection faq={faqs} />
     </div>
   );
 }

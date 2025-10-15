@@ -202,7 +202,7 @@ export default function ContactUsForm() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-black-400 text-white font-medium capitalize text-xs md:text-base lg:text-xl py-[10px] lg:py-3 min-w-10/12 md:min-w-8/12 lg:min-w-3/12 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-black-400 text-white font-medium capitalize text-xs md:text-base lg:text-xl py-[10px] lg:py-3 min-w-10/12 md:min-w-8/12 lg:min-w-3/12 rounded-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? "Sending..." : "Send Message"}
             </button>

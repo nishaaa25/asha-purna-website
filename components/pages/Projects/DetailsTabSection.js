@@ -201,7 +201,7 @@ export default function DetailsTabSection({
               <button
                 type="button"
                 onClick={() => setSelectedPlan("master")}
-                className={`w-[166px] lg:w-full h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 
+                className={`w-[166px] lg:w-full h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 cursor-pointer
             ${
               selectedPlan === "master"
                 ? "bg-[#222222] text-white border-[#222222]"
@@ -218,7 +218,7 @@ export default function DetailsTabSection({
                 <button
                   type="button"
                   onClick={() => setSelectedPlan("floor")}
-                  className={`w-[166px]  lg:w-full  h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 
+                  className={`w-[166px]  lg:w-full  h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 cursor-pointer
             ${
               selectedPlan === "floor"
                 ? "bg-[#222222] text-white border-[#222222]"

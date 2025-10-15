@@ -1,9 +1,5 @@
-import { testimonials } from "@/lib/content";
-import CardTwo from "./CardTwo";
 import SectionHeader from "./SectionHeader";
-import Image from "next/image";
 import TestimonialsCarousel from "./pages/Home/TestimonialsCarousel";
-import ProjectsCarousel from "./pages/Home/ProjectsCarousel";
 
 export default function Testimoials() {
   return (
@@ -16,9 +12,8 @@ export default function Testimoials() {
           desc="At Ashapurna, our work speaks through the experiences of those we serve. These testimonials reflect the trust, confidence, and satisfaction of clients who value excellence and thoughtful execution."
         />
       </div>
-      <div className="w-full">
+      <div className="w-full relative -top-6">
         <TestimonialsCarousel/>
-        {/* <ProjectsCarousel/> */}
       </div>
     </div>
   );

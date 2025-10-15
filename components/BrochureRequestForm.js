@@ -163,7 +163,7 @@ export default function BrochureRequestForm({
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10"
+          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
         >
           <Image src="/assets/cross.svg" alt="cross" width={24} height={24} className="relative object-contain"/>
         </button>
@@ -236,7 +236,7 @@ export default function BrochureRequestForm({
             <button
               type="submit"
               disabled={isLoading}
-              className="px-10 bg-black-400 text-white py-[14px] rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-10 bg-black-400 text-white py-[14px] rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200 mt-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {isLoading ? "Submitting..." : "Submit Now"}
             </button>

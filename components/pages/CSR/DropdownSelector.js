@@ -29,7 +29,7 @@ export default function DropdownSelector({ activeTab, setActiveTab, tabs }) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-[10px] md:p-[14px] lg:p-5 rounded-t-[5px] bg-[#f1f1f1] text-black-400 focus:outline-none transition-all duration-200"
+        className="w-full flex items-center justify-between p-[10px] md:p-[14px] lg:p-5 rounded-t-[5px] bg-[#f1f1f1] text-black-400 focus:outline-none transition-all duration-200 cursor-pointer"
       >
         <span className="text-[15px] md:text-lg lg:text-[22px] lg:font-medium leading-[110%] capitalize">
           {activeTab}
@@ -58,7 +58,7 @@ export default function DropdownSelector({ activeTab, setActiveTab, tabs }) {
               type="button"
               key={index}
               onClick={() => handleTabSelect(tab)}
-              className={`w-full text-left px-4 py-3 text-sm font-medium capitalize transition-colors duration-150 first:rounded-t-lg last:rounded-b-lg ${
+              className={`w-full text-left px-4 py-3 text-sm font-medium capitalize transition-colors duration-150 first:rounded-t-lg last:rounded-b-lg cursor-pointer ${
                 activeTab === tab
                   ? "bg-black-400 text-white border-l-4 border-black-400"
                   : "text-black-400 hover:bg-gray-100"

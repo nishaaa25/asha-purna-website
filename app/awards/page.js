@@ -7,7 +7,7 @@ import { awardsPageContent, awards } from "@/lib/awards";
 export default function page() {
   return (
     <div className="relative w-full">
-      <HeroComponentTwo imgUrl={awardsPageContent.heroImage} />
+      <HeroComponentTwo imgUrl="/assets/awards-bg.jpg" />
       <SectionHeader
         title={awardsPageContent.recognitionSection.title}
         heading={awardsPageContent.recognitionSection.heading}

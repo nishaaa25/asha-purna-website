@@ -49,7 +49,7 @@ export default function ThankYouEnquirePopup({ isOpen, onClose, buttonText = "Ex
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10"
+          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
         >
           <Image
             src="/assets/cross.svg"
@@ -72,7 +72,7 @@ export default function ThankYouEnquirePopup({ isOpen, onClose, buttonText = "Ex
               <Link href={buttonLink}>
                 <button
                   onClick={onClose}
-                  className="bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200"
+                  className="bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
                 >
                   {buttonText}
                 </button>
@@ -80,7 +80,7 @@ export default function ThankYouEnquirePopup({ isOpen, onClose, buttonText = "Ex
             ) : (
               <button
                 onClick={onClose}
-                className="bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200"
+                className="bg-black-400 text-white py-[14px] px-10 rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
               >
                 {buttonText}
               </button>

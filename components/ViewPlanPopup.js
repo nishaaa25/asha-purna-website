@@ -135,7 +135,7 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10"
+          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
         >
           <Image src="/assets/cross.svg" alt="cross" width={24} height={24} className="relative object-contain"/>
         </button>
@@ -207,7 +207,7 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
             
             <button
               type="submit"
-              className="px-10 bg-black-400 text-white py-[14px] rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200  mt-2"
+              className="px-10 bg-black-400 text-white py-[14px] rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200  mt-2 cursor-pointer"
             >
               Submit Now
             </button>

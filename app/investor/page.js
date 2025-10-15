@@ -261,7 +261,7 @@ export default function InvestorPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="border border-[#cccccc] bg-black-400 text-white font-medium text-sm md:text-base lg:text-xl py-[10px] lg:min-w-3/12 min-w-10/12 rounded-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
+                className="border border-[#cccccc] bg-black-400 text-white font-medium text-sm md:text-base lg:text-xl py-[10px] lg:min-w-3/12 min-w-10/12 rounded-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto cursor-pointer"
               >
                 {isLoading ? (
                   <>
