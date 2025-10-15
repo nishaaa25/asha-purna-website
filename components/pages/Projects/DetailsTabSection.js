@@ -160,7 +160,7 @@ export default function DetailsTabSection({
               </button>
 
               {/* Floor Plans Button */}
-              <button
+              {projectFloorsData?.project_floor_plans > 0 && <button
                 type="button"
                 onClick={() => setSelectedPlan("floor")}
                 className={`w-[166px]  lg:w-full  h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 
@@ -173,7 +173,7 @@ export default function DetailsTabSection({
                 <span className="font-['DM_Sans'] font-medium text-sm">
                   Floor Plans
                 </span>
-              </button>
+              </button>}
             </div>
             <div className="mt-6 w-full md:w-11/12 mx-auto relative">
               {selectedPlan === "master" && (
@@ -182,7 +182,7 @@ export default function DetailsTabSection({
                   masterImagePath={masterImagePath}
                 />
               )}
-              {selectedPlan === "floor" && (
+              {selectedPlan === "floor" &&  (
                 <FloorPlan 
                   project={project}
                   floorImagePath={floorImagePath}
