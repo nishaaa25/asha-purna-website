@@ -464,7 +464,7 @@ body {
 
 /* React-Toastify progress bar: make it fill left-to-right (instead of shrinking) */
 .Toastify__progress-bar {
-  animation-direction: reverse; /* progress grows forward */
+  animation-direction: alternate-reverse;/* progress grows forward */
   transform-origin: left; /* anchor to left for LTR */
 }
 

@@ -36,7 +36,7 @@ export default function OurJourneySmall() {
   var size = isMediumScreen ? 390 : 290;
 
   const center = size / 2;
-  const radius = isLargeScreen ? size / 1.4 : size / 1.5;
+  const radius = isLargeScreen ? size / 1.4 : size / 2;
   const angleStep = isLargeScreen
     ? 270 / Math.max(FIXED_YEARS.length, 1)
     : -270 / Math.max(FIXED_YEARS.length, 1);
@@ -199,14 +199,14 @@ export default function OurJourneySmall() {
   return (
     <div
       ref={journeyRef}
-      className="relative w-full min-h-screen text-center py-6 overflow-hidden flex flex-col items-center  lg:flex-row lg:justify-start "
+      className="relative w-full h-screen text-center py-6 overflow-hidden flex flex-col items-center  lg:flex-row lg:justify-start "
     >
       {/* Section Heading */}
-      <div className="flex lg:flex-col   ">
+      <div className="flex flex-col relative">
         <h2 className="font-playfair font-semibold whitespace-nowrap text-gray-600 capitalize text-[6vw] leading-[8vw]">
           Our
         </h2>
-        <h2 className="italic whitespace-nowrap text-gray-600 capitalize text-[6vw] leading-[8vw]">
+        <h2 className="whitespace-nowrap text-gray-600 capitalize text-[6vw] leading-[8vw]">
           Journey
         </h2>
       </div>

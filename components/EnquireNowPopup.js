@@ -171,19 +171,16 @@ export default function EnquireNowPopup({ isOpen, onClose, onSubmit, projectId, 
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
+          className="absolute top-6 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
         >
           <Image src="/assets/cross.svg" alt="cross" width={24} height={24} className="relative object-contain"/>
         </button>
         
-        <div className="w-full h-full flex flex-col items-center justify-center px-8">
-          <div className="text-center mb-6">
-            <h2 className="text-[22px] md:text-[28px] font-semibold leading-[130%] tracking-[-1.1px] mb-2 text-gray-600">
+        <div className="w-full h-full flex flex-col  items-center justify-center px-8">
+          <div className="text-center mb-6 mt-5">
+            <h2 className="text-[22px] md:text-2xl font-semibold leading-[130%] tracking-[-1.1px] mb-2 text-gray-600">
               {projectName ? `Enquire About ${projectName}` : 'Get in Touch'}
             </h2>
-            <p className="text-sm text-gray-800 leading-[140%]">
-              Fill in your details and we&apos;ll get back to you soon
-            </p>
           </div>
           
           <form onSubmit={handleSubmit} className="w-full max-w-md space-y-8 flex-center flex-col">

@@ -79,8 +79,8 @@ export default function LandOwnershipCarousel() {
                     src={item.src}
                     alt={item.title ? `${item.title} - Land Ownership at Ashapurna` : "Land Ownership Showcase"}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 60vw, 10vw"
                     priority={index < 2}
                   />
                 </div>
