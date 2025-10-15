@@ -191,6 +191,26 @@ html.lenis body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Mobile-specific optimizations for OurJourney component */
+@media (max-width: 768px) {
+  .our-journey-container {
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+  }
+  
+  /* Optimize transforms for mobile */
+  .our-journey-wheel {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  
+  /* Improve touch responsiveness */
+  .our-journey-touch-area {
+    touch-action: pan-y;
+  }
+}
+
 /* Optimize scroll performance */
 body {
   -webkit-overflow-scrolling: touch;
