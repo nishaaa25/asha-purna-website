@@ -1,0 +1,454 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-dmsans: "DM Sans", sans-serif;
+  --font-mulish: "Mulish", sans-serif;
+  --font-grenda: "Grenda", sans-serif;
+}
+
+@layer base {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  .enquiry-form input:-webkit-autofill,
+  .enquiry-form input:-webkit-autofill:hover,
+  .enquiry-form input:-webkit-autofill:focus,
+  .enquiry-form input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+    --webkit-text-fill-color: #ffffff !important;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+}
+
+@font-face {
+  font-family: "Mulish";
+  src: url("/fonts/Mulish/static/Mulish-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Grenda";
+  src: url("/fonts/Grenda/grenda.otf") format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-gray-800: #939393;
+  --color-black-400: #222222;
+  --color-gray-400: #2727271a;
+  --color-black-500: #2a2a2a;
+  --color-gray-600: #606060;
+  --color-gray-800: #939393;
+  --color-gray-300: #e9e9e9;
+  --color-gray-700: #8b8b8b;
+  --color-gray-900: #494949;
+  --color-white-600: #f0f0f0;
+  --color-cream-600: #f6f6f6;
+  --color-cream-500: #f8f8f8;
+  --color-orange-600: #e84600;
+  --color-red-400: #dc3545;
+  --color-blue-500: #17a2b8;
+  --color-orange-800: #ff5938;
+  --color-green-400: #229b3d;
+}
+
+.committed .line,
+.csr .line {
+  display: none;
+}
+/* Playfair Display */
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DM_Sans/static/DMSans-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DM_Sans/static/DMSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DM_Sans/static/DMSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DM_Sans/static/DMSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DM_Sans/static/DMSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DM_Sans/static/DMSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DM_Sans/static/DMSans-Black.ttf") format("truetype");
+  font-weight: 900;
+}
+
+.font-mulish {
+  font-family: "Mulish", sans-serif;
+}
+.font-grenda {
+  font-family: "Grenda", sans-serif;
+}
+
+.no-scrollbar {
+  overflow-x: auto;
+  overflow-y: hidden; /* prevent vertical scroll */
+  -webkit-overflow-scrolling: touch; /* momentum scroll on iOS */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.font-dmsans {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Force light mode - no dark mode switching */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+}
+
+.gradient {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 49.82%, rgba(0, 0, 0, 0) 100%);
+}
+
+.gradient-2 {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 50.48%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+.about-gradient{
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 49.82%, rgba(0, 0, 0, 0) 100%);
+
+}
+
+
+/* Lenis Smooth Scroll Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Ensure smooth scrolling performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize scroll performance */
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "DM Sans", sans-serif;
+}
+
+@layer base {
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+}
+
+/* Responsive Font Sizes - px for small screens, vw for large screens */
+@layer utilities {
+  /* Extra small font sizes */
+  .text-responsive-8 {
+    font-size: 8px;
+  }
+  .text-responsive-10 {
+    font-size: 10px;
+  }
+  .text-responsive-12 {
+    font-size: 12px;
+  }
+  .text-responsive-14 {
+    font-size: 14px;
+  }
+  .text-responsive-15 {
+    font-size: 15px;
+  }
+  
+  /* Base font sizes */
+  .text-responsive-16 {
+    font-size: 16px;
+  }
+  .text-responsive-18 {
+    font-size: 18px;
+  }
+  .text-responsive-20 {
+    font-size: 20px;
+  }
+  .text-responsive-22 {
+    font-size: 22px;
+  }
+  .text-responsive-24 {
+    font-size: 24px;
+  }
+  
+  /* Medium font sizes */
+  .text-responsive-28 {
+    font-size: 28px;
+  }
+  .text-responsive-32 {
+    font-size: 32px;
+  }
+  .text-responsive-36 {
+    font-size: 36px;
+  }
+  .text-responsive-38 {
+    font-size: 38px;
+  }
+  .text-responsive-42 {
+    font-size: 42px;
+  }
+  .text-responsive-44 {
+    font-size: 44px;
+  }
+  .text-responsive-48 {
+    font-size: 48px;
+  }
+  
+  /* Large font sizes */
+  .text-responsive-56 {
+    font-size: 56px;
+  }
+  .text-responsive-60 {
+    font-size: 60px;
+  }
+  
+  /* Large screens - use vw for responsive scaling */
+  @media (min-width: 1024px) {
+    .text-responsive-8 {
+      font-size: 0.42vw;
+    }
+    .text-responsive-10 {
+      font-size: 0.52vw;
+    }
+    .text-responsive-12 {
+      font-size: 0.625vw;
+    }
+    .text-responsive-14 {
+      font-size: 0.73vw;
+    }
+    .text-responsive-15 {
+      font-size: 0.78vw;
+    }
+    .text-responsive-16 {
+      font-size: 0.83vw;
+    }
+    .text-responsive-18 {
+      font-size: 0.94vw;
+    }
+    .text-responsive-20 {
+      font-size: 1.04vw;
+    }
+    .text-responsive-22 {
+      font-size: 1.15vw;
+    }
+    .text-responsive-24 {
+      font-size: 1.25vw;
+    }
+    .text-responsive-28 {
+      font-size: 1.46vw;
+    }
+    .text-responsive-32 {
+      font-size: 1.67vw;
+    }
+    .text-responsive-36 {
+      font-size: 1.88vw;
+    }
+    .text-responsive-38 {
+      font-size: 1.98vw;
+    }
+    .text-responsive-42 {
+      font-size: 2.19vw;
+    }
+    .text-responsive-44 {
+      font-size: 2.29vw;
+    }
+    .text-responsive-48 {
+      font-size: 2.5vw;
+    }
+    .text-responsive-56 {
+      font-size: 2.92vw;
+    }
+    .text-responsive-60 {
+      font-size: 3.13vw;
+    }
+  }
+}
+
+.ownership-swiper .swiper-pagination {
+  position: static;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px; /* reduce this value for smaller spacing */
+}
+
+.ownership-swiper .swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid #000000;
+  opacity: 1;
+  transition: all 200ms ease;
+  margin: 0 !important; /* reset Swiper’s default margin */
+}
+.img-gradient{
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+.ownership-swiper .swiper-pagination-bullet-active {
+  background: #000000;
+  border-color: #000000;
+}
+
+
+.articles .img-cont {
+  height: 195px;
+}
+
+/* Mobile Navigation Animations */
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-top {
+  animation: slideInFromTop 0.3s ease-out forwards;
+}
+
+.animate-slide-out-top {
+  animation: slideOutToTop 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+/* Mobile Navigation Styles */
+.mobile-nav-overlay {
+  backdrop-filter: blur(4px);
+}
+
+.mobile-nav-panel {
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth dropdown animation */
+.dropdown-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s ease-out;
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Media dropdown icon rotation */
+.media-dropdown-icon {
+  transition: transform 0.2s ease-in-out;
+}
+
+.media-dropdown-icon.open {
+  transform: rotate(180deg);
+}
