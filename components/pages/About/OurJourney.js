@@ -39,7 +39,7 @@ export default function OurJourney({ journeyData }) {
   const size = isLargeScreen ? 800 : isMediumScreen ? 580 : isSmallScreen ? 450 : 350;
 
   const center = size / 2;
-  const radius = isLargeScreen ? size / 3.3 : isMediumScreen ? size / 3 : isSmallScreen ? size / 2.8 : size / 2.2;
+  const radius = isLargeScreen ? size / 3.5 : isMediumScreen ? size / 3 : isSmallScreen ? size / 2.8 : size / 2.2;
   const angleStep = isLargeScreen
     ? 270 / Math.max(FIXED_YEARS.length - 1, 1)
     : -270 / Math.max(FIXED_YEARS.length - 1, 1);
