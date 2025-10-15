@@ -4,7 +4,7 @@ import HorizontalForm from "./HorizontalForm";
 export default function HeroComponent() {
   return (
     <section className="w-full relative h-dvh flex-center overflow-hidden ">
-      {/* <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <iframe
       className="absolute top-0  scale-[1.2] left-0 w-[300%] h-[300%] md:w-full md:h-full -translate-x-[33%] -translate-y-[33%] md:translate-x-0 md:translate-y-0 pointer-events-none"
       src="https://www.youtube.com/embed/Dc79jBuqnc8?autoplay=1&mute=1&loop=1&playlist=Dc79jBuqnc8&controls=0&showinfo=0&modestbranding=1&rel=0&disablekb=1"
@@ -13,8 +13,8 @@ export default function HeroComponent() {
       allow="autoplay; fullscreen"
       allowFullScreen
     ></iframe>
-      </div> */}
-      <video
+      </div>
+      {/* <video
         className="absolute top-0 left-0 w-full h-full object-cover  -z-10 pointer-events-none transform-gpu will-change-transform"
         autoPlay
         muted
@@ -24,8 +24,7 @@ export default function HeroComponent() {
       >
         <source src="/assets/home-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
-
+      </video> */}
       <div className="w-full h-full absolute top-0 left-0 gradient"></div>
       <div className="w-[95%] mx-auto relative text-center text-white flex-center flex-col gap-[6px]">
         <h1 className="text-4xl md:text-[60px] lg:text-[56px] leading-[100%] whitespace-nowrap drop-shadow-lg font-medium tracking-[-1.4px]">
