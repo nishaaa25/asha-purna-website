@@ -9,7 +9,9 @@ import ourJourneyProjects from "@/lib/ourjourneyproject";
 gsap.registerPlugin(ScrollTrigger);
 
 // Use the same fixed years and project bucketing as the main OurJourney component
-const FIXED_YEARS = [1997, 2007, 2010, 2013, 2015, 2020, 2023, 2025];
+const FIXED_YEARS = [
+  1997, 2006, 2008, 2010, 2013, 2014, 2016, 2021, 2024, 2025,
+];
 
 function filterProjectsByYearRange(startYear, endYear) {
   return ourJourneyProjects
@@ -84,12 +86,13 @@ export default function OurJourneySmall() {
   // Scroll-driven setup (pin + progress controls animation)
   useEffect(() => {
     if (!journeyRef.current) return;
+    const stepHeight = window.innerHeight * 2.5; // 1.5x viewport height per step
 
     const totalSteps = FIXED_YEARS.length - 1;
     const st = ScrollTrigger.create({
       trigger: journeyRef.current,
       start: "top 0",
-      end: "+=" + FIXED_YEARS.length * 300,
+      end: "+=" + FIXED_YEARS.length * stepHeight,
       pin: true,
       scrub: true,
       markers: false,
@@ -167,12 +170,12 @@ export default function OurJourneySmall() {
     }
 
     squareRefs.current.forEach((el) => {
-      if (el) gsap.set(el, { scale: 1, transformOrigin: "50% 50%" });
+      if (el) gsap.set(el, { scale: 1 });
     });
 
     const activeEl = squareRefs.current[activeIndex];
     if (activeEl) {
-      gsap.set(activeEl, { scale: 1.8, backgroundColor: "#a78bfa" });
+      gsap.set(activeEl, { scale: 1.8, backgroundColor: "#e84600" });
     }
   }, []);
 
@@ -199,7 +202,7 @@ export default function OurJourneySmall() {
   return (
     <div
       ref={journeyRef}
-      className="relative w-full h-screen text-center py-6 overflow-hidden flex flex-col items-center  lg:flex-row lg:justify-start "
+      className="relative w-full h-dvh text-center py-6 overflow-hidden flex flex-col items-center  lg:flex-row lg:justify-start "
     >
       {/* Section Heading */}
       <div className="flex flex-col relative">
@@ -212,14 +215,14 @@ export default function OurJourneySmall() {
       </div>
 
       {/* Outer Circle */}
-      <div className="circle absolute -top-1/4 w-[99vw] h-[99vw] scale-[1.4] rounded-full border-[40px] mx-auto border-[#d9d9d9]/20 md:w-[75vw] md:h-[75vw] md:-top-[20rem] lg:w-[50vw] lg:h-[50vw] lg:top-0 lg:-left-1/5 lg:border-[65px]  ">
-        <div className="w-[0.5px] h-4 bg-orange-600"></div>
+      <div className="circle absolute -top-2/6 w-[99vw] h-[99vw] scale-[1.4] rounded-full border-30 mx-auto border-[#d9d9d9]/20 md:w-[75vw] md:h-[75vw] md:-top-[20rem] lg:w-[50vw] lg:h-[50vw] lg:top-0 lg:-left-1/5 lg:border-[65px]  ">
+        <div className="absolute top-1/2 -translate-y-1/2 h-[35px] md:h-[60px] lg:h-[80px] xl:h-[100px]  w-[0.5px] -right-[7%] bg-orange-600"></div>
       </div>
 
       {/* Rotating Wheel */}
       <div className="relative flex  flex-col items-center justify-center gap-1 lg:flex-row lg:items-start lg:justify-between lg:gap-15 ">
-        <div className="z-50 flex items-center justify-center ">
-          <div className="relative -top-[20rem] flex h-[30rem] w-[30rem] items-center justify-center rounded-full lg:top-5 lg:-left-[24rem] lg:-rotate-90 ">
+        <div className="z-50 flex items-center justify-center relative">
+          <div className="relative -top-[20.5rem] flex h-[30rem] w-[30rem] items-center justify-center rounded-full lg:top-5 lg:-left-[24rem] lg:-rotate-90 ">
             <div
               ref={yearRef}
               className="relative rounded-full"
@@ -237,7 +240,7 @@ export default function OurJourneySmall() {
                   Math.abs(i - activeIndex) * Math.abs(angleStep);
                 const opacity = Math.max(0, 1 - angleDiff / 90);
 
-                const squareRadius = radius + (isLargeScreen ? 205 : 145);
+                const squareRadius = radius + (isLargeScreen ? 150 : 90);
                 const squareX =
                   center + squareRadius * Math.cos((angle * Math.PI) / 180);
                 const squareY =
@@ -247,7 +250,7 @@ export default function OurJourneySmall() {
                   <div key={i}>
                     {/* Year Text */}
                     <div
-                      className="absolute text-md font-bold transition-colors duration-300 pointer-events-none lg:text-xl"
+                      className="absolute text-xs font-bold transition-colors duration-300 pointer-events-none lg:text-xl"
                       style={{
                         left: `${yearX}px`,
                         top: `${yearY}px`,
@@ -260,16 +263,13 @@ export default function OurJourneySmall() {
                     </div>
 
                     {/* Square markers */}
+                    {/* Square markers */}
                     <div
                       ref={(el) => (squareRefs.current[i] = el)}
-                      className="absolute w-1 h-1  "
+                      className="absolute w-1 h-1  bg-[#E84600]" // fixed color
                       style={{
                         left: `${squareX}px`,
-                        top: `${squareY}px`,
-                        transform: `translate(-50%, -50%) rotate(${-angle}deg)`,
-                        backgroundColor: (
-                          <div className="w-3 h-3 z-10 -mt-[14.1rem] bg-[#E84600] "></div>
-                        ),
+                        top: `${squareY}px`, // keep square centered, no rotation
                       }}
                     ></div>
                   </div>
@@ -278,22 +278,16 @@ export default function OurJourneySmall() {
             </div>
           </div>
         </div>
-
-        <div className=" w-3 h-3 z-10 -mt-[14.5rem] bg-[#E84600] md:-mt-[10.3rem] lg:w-3 lg:h-3 lg:mt-[34.8vh] lg:-ml-[12.9rem]  "></div>
-
         {/* Dynamic Content */}
-        <div className="px-6 text-center mt-[10rem] flex flex-col  items-center justify-center gap-3 md:mt-[6rem] lg:mt-[13rem] lg:ml-20">
-          <h2 className="mb-2 text-xl font-semibold text-[#7c7c7c] lg:text-3xl">
-            {currentYearData.title}
-          </h2>
-          <div className="flex flex-col items-center gap-3 lg:text-xl lg:gap-15">
+        <div className="px-6 text-center absolute flex flex-col mt-[55vh] h-full w-full items-center justify-start gap-3">
+          <div className="flex flex-col items-center gap-3 lg:text-xl lg:gap-15 w-full">
             {currentYearData.projects && currentYearData.projects.length > 0 ? (
               currentYearData.projects.map((project, idx) => (
-                <div key={idx} className="flex flex-col items-center">
-                  <h3 className="font-semibold text-gray-800">
+                <div key={idx} className="flex flex-col items-center w-9/12">
+                  <h3 className="font-semibold text-sm text-gray-800">
                     {project.title}
                   </h3>
-                  <div className="flex gap-4 text-sm text-gray-800">
+                  <div className="flex gap-4 text-[8px] text-gray-800">
                     <span>Project Type - {project.projectType}</span>
                     <span>Area - {project.area} Acre</span>
                   </div>
