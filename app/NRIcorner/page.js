@@ -17,6 +17,7 @@ import CardTwo from "@/components/CardTwo";
 import { getHomeData } from "@/lib/services/homeService";
 import ContactUsForm from "@/components/ContactUsForm";
 import GetInTouch from "@/components/pages/GetInTouch";
+import LandOwnershipTwo from "@/components/pages/Home/LandOwnershipTwo";
 
 async function getAboutData() {
   try {
@@ -120,7 +121,8 @@ export default async function page() {
       <div className="w-full relative pb-10 md:pb-20 lg:pb-[100px] flex-col flex-center bg-cream-600">
         <SectionHeader heading="Why NRIs choose" spanText="Ashapurna?" />
         <div className="relative -top-10 px-[22px] w-full mx-auto">
-          <LandOwnershipCarousel />
+          <LandOwnershipCarousel/>
+          <LandOwnershipTwo />
         </div>
         <div className="relative -top-6 w-full">
           <CounterTwo data={data} />

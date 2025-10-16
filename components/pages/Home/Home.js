@@ -12,16 +12,16 @@ import { ScrollTrigger } from "gsap/all";
 import MentionSection from "@/components/pages/Home/MentionSection";
 import GetInTouch from "@/components/pages/GetInTouch";
 import { faqs } from "@/lib/content";
-import { useLenis } from "@/components/Hooks/useLenis";
 import { useRef, useEffect, use } from "react";
 import Link from "next/link";
 import HeroBottomBar from "@/components/HeroBottomBar";
 import HorizontalForm from "@/components/HorizontalForm";
 import AwardSection from "@/components/pages/Home/AwardSection";
+import useLenisScrollTrigger from "@/components/Hooks/useLenis";
 
 export default function Home({featuredProjects, imagePath, utsavImagePath, events}) {
   //  const lenisRef = useRef(null);
-  useLenis();
+  useLenisScrollTrigger();
   const imgContainerRef = useRef(null);
   const data = [
     {

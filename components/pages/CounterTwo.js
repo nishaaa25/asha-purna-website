@@ -18,16 +18,16 @@ export default function CounterTwo({ data }) {
           let count = 0;
           const target = Number(counter.getAttribute("data-target"));
 
-          const increment = target / 160;
+          const increment = target / 250;
 
           const updateCount = () => {
             if (count < target) {
               count += increment;
               if (count > target) count = target;
-              counter.innerText = Math.floor(count);
+              counter.innerText = Math.floor(count) + "+";
               requestAnimationFrame(updateCount);
             } else {
-              counter.innerText = target;
+              counter.innerText = target + "+";
             }
           };
 

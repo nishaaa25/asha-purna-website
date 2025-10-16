@@ -1,5 +1,6 @@
 import Button from "./Button";
 import LandOwnershipCarousel from "./pages/Home/LandOwnershipCarousel";
+import LandOwnershipTwo from "./pages/Home/LandOwnershipTwo";
 import SectionHeader from "./SectionHeader";
 
 export default function OwnerShipSection() {
@@ -13,6 +14,7 @@ export default function OwnerShipSection() {
       />
       <div className="relative -top-5 px-6 w-full mx-auto">
         <LandOwnershipCarousel />
+        <LandOwnershipTwo/>
       </div>
     </div>
   );

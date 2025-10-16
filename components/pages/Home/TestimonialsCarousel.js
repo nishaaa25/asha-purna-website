@@ -47,7 +47,7 @@ export default function TestimonialsCarousel() {
       <div className="hidden lg:block">
         <button
           onClick={() => swiperRef.current?.swiper?.slidePrev()}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-50 cursor-pointer w-14 h-14 flex items-center justify-center bg-white rounded-full shadow-xl hover:bg-gray-50 transition-all duration-300 group"
+          className="absolute left-10 top-1/2 -translate-y-1/2 z-50 cursor-pointer w-14 h-14 flex items-center justify-center bg-white rounded-full shadow-xl hover:bg-gray-50 transition-all duration-300 group"
           aria-label="Previous testimonial"
         >
           <svg
@@ -68,7 +68,7 @@ export default function TestimonialsCarousel() {
 
         <button
           onClick={() => swiperRef.current?.swiper?.slideNext()}
-          className="absolute right-4 top-1/2 -translate-y-1/2  cursor-pointer z-50 w-14 h-14 flex items-center justify-center bg-white rounded-full shadow-xl hover:bg-gray-50 transition-all duration-300 group"
+          className="absolute right-10 top-1/2 -translate-y-1/2  cursor-pointer z-50 w-14 h-14 flex items-center justify-center bg-white rounded-full shadow-xl hover:bg-gray-50 transition-all duration-300 group"
           aria-label="Next testimonial"
         >
           <svg

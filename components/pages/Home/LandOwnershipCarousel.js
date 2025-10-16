@@ -10,25 +10,10 @@ import { exclusiveCarouselData } from "@/lib/content";
 
 export default function LandOwnershipCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024);
-    };
-    
-    // Set initial value
-    handleResize();
-    
-    // Add event listener
-    window.addEventListener('resize', handleResize);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
-    <div className="w-full relative pb-2">
+    <div className="w-full relative pb-2 lg:hidden">
       <Swiper
         modules={[Navigation, Pagination]}
         centeredSlides={true}
@@ -53,13 +38,11 @@ export default function LandOwnershipCarousel() {
             slidesOffsetBefore: 30,
             slidesOffsetAfter: 30,
             centeredSlides: false,
-             loop:false
           },
         }}
       >
         {exclusiveCarouselData.map((item, index) => {
           const isActive = index === activeIndex;
-          const shouldShowTitle = isLargeScreen || isActive;
           return (
             <SwiperSlide
               key={index}
@@ -87,7 +70,7 @@ export default function LandOwnershipCarousel() {
                 <div className="w-full h-full absolute top-0 left-0 z-50 img-gradient">
 
                 </div>
-                {shouldShowTitle && <p className="text-lg font-medium text-white absolute bottom-3 left-3 z-50">{item.title}</p>}
+                <p className="text-lg font-medium text-white absolute bottom-3 left-3 z-50">{item.title}</p>
               </div>
             </SwiperSlide>
           );
