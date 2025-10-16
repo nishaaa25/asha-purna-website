@@ -86,7 +86,7 @@ export default function OurJourneySmall() {
   // Scroll-driven setup (pin + progress controls animation)
   useEffect(() => {
     if (!journeyRef.current) return;
-    const stepHeight = window.innerHeight * 2.5; // 1.5x viewport height per step
+    const stepHeight = window.innerHeight * 1.5; // 1.5x viewport height per step
 
     const totalSteps = FIXED_YEARS.length - 1;
     const st = ScrollTrigger.create({
