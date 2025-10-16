@@ -16,20 +16,32 @@ export default function HeroComponent() {
       </div> */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover -z-10 pointer-events-none transform-gpu will-change-transform"
+        autoPlay
         muted
         playsInline
         preload="auto"
         onLoadedMetadata={(e) => {
           const video = e.target;
           const startTime = 10; // seconds
-          // Pause, seek to start, then play after seek completes
-          video.pause();
+          
+          // Ensure video starts from 10 seconds
+          video.currentTime = startTime;
+          
+          // Play immediately after seeking
           const handleSeeked = () => {
             video.play();
             video.removeEventListener('seeked', handleSeeked);
           };
           video.addEventListener('seeked', handleSeeked);
-          video.currentTime = startTime;
+        }}
+        onCanPlay={(e) => {
+          const video = e.target;
+          const startTime = 10; // seconds
+          
+          // Also set start time when video can play
+          if (video.currentTime < startTime) {
+            video.currentTime = startTime;
+          }
         }}
         onTimeUpdate={(e) => {
           const startTime = 10; // seconds

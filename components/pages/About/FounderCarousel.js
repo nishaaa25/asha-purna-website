@@ -12,14 +12,14 @@ export default function FoundersCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full relative pb-2 -top-8 h-full">
+    <div className="w-full relative pb-2 -top-8 h-[560px] md:h-[640px] lg:h-[700px]">
       <Swiper
         centeredSlides={false}
         slidesPerView={1.1}
         spaceBetween={14}
         watchSlidesProgress
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
-        className="w-full relative"
+        className="w-full relative h-full"
         pagination={{ clickable: true }}
         breakpoints={{
           320: {
@@ -55,9 +55,9 @@ export default function FoundersCarousel() {
             >
               <div
                 key={item.id}
-                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col min-h-[560px] md:min-h-[620px] lg:min-h-[680px]"
+                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col"
               >
-                <div className="w-full relative h-[320px] md:h-[380px] lg:h-[420px] rounded-t-md overflow-hidden">
+                <div className="w-full relative h-[320px] md:h-[380px] lg:h-[420px] rounded-t-md overflow-hidden flex-none">
                   <Image
                     src={item.imgUrl}
                     alt={item.name}
@@ -72,7 +72,7 @@ export default function FoundersCarousel() {
                     width={27}
                     height={21}
                   />
-                  <p className="text-sm md:text-lg lg:text-lg leading-[140%] w-11/12 relative font-normal text-black-400/70 mt-5">
+                  <p className="text-base leading-[140%] w-11/12 relative font-normal text-black-400/70 mt-5">
                     {item.desc}
                   </p>
                   <h2 className="text-xs md:text-base lg:text-lg font-bold leading-[140%] text-black-400 mt-5 lg:mt-7">

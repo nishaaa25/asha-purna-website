@@ -137,6 +137,14 @@ input:-webkit-autofill:active {
   }
 }
 
+/* Auto-switch logos based on color scheme */
+.logo-light { display: block; }
+.logo-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  .logo-light { display: none; }
+  .logo-dark { display: block; }
+}
+
 .gradient {
   background: linear-gradient(
     180deg,

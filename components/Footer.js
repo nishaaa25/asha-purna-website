@@ -14,11 +14,21 @@ export default function Footer() {
       <div className="w-full px-[22px] md:px-10 lg:px-20 relative flex flex-col gap-8">
         <div className="relative flex flex-col gap-[10px]">
           <div className="w-27 md:w-50 h-13 lg:w-54 md:h-24 lg:h-36 relative mb-4">
+            {/* Light logo */}
             <Image
-              src="/assets/main-logo.png"
+              src="/assets/main-logo-light.svg"
               alt="main-logo"
               fill
-              className="relative object-contain"
+              className="relative object-contain logo-light"
+              priority
+            />
+            {/* Dark logo */}
+            <Image
+              src="/assets/main-logo-dark.svg"
+              alt="main-logo"
+              fill
+              className="relative object-contain logo-dark"
+              priority
             />
           </div>
           <div className="relative flex flex-col lg:flex-row gap-7">
