@@ -34,8 +34,8 @@ export default function ProjectsPage() {
       setError(null);
 
       try {
-        // Add 2-second delay for smooth transition effect
-        const delayPromise = new Promise(resolve => setTimeout(resolve, 2000));
+        // Add 3-second delay for smooth transition effect
+        const delayPromise = new Promise(resolve => setTimeout(resolve, 100));
         
         const response = await fetch(
           "https://apiservices.ashapurna.com/api/web/project/listing",
@@ -143,7 +143,7 @@ export default function ProjectsPage() {
         )}
 
         {/* Projects */}
-        <div className="min-h-screen relative w-full flex-center mx-auto flex-col">
+        <div className="min-h-screen relative w-full  mx-auto flex-col">
           {!loading && !error && (
             <div className="animate-fade-in">
               {/* Initial Projects */}
