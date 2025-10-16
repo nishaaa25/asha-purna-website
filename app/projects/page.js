@@ -15,16 +15,17 @@ export default function ProjectsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const scrollPositionRef = useRef(0);
-  const isSwitchingTabRef = useRef(false);
+  const projectSectionRef = useRef(null);
 
   const handleTabChange = (tab) => {
-    // Preserve current scroll position and mark that a tab switch is happening
-    if (typeof window !== "undefined") {
-      scrollPositionRef.current = window.scrollY || 0;
-      isSwitchingTabRef.current = true;
-    }
+    if (tab === activeTab) return; // Prevent unnecessary re-fetch
+    
+    // Save scroll position before switching
+    scrollPositionRef.current = window.scrollY;
     setActiveTab(tab);
+    setIsTransitioning(true);
   };
 
   useEffect(() => {
@@ -33,6 +34,9 @@ export default function ProjectsPage() {
       setError(null);
 
       try {
+        // Add 2-second delay for smooth transition effect
+        const delayPromise = new Promise(resolve => setTimeout(resolve, 2000));
+        
         const response = await fetch(
           "https://apiservices.ashapurna.com/api/web/project/listing",
           {
@@ -46,7 +50,11 @@ export default function ProjectsPage() {
           }
         );
 
-        if (!response.ok) throw new Error(`API returned status ${response.status}`);
+        // Wait for both API call and delay to complete
+        await delayPromise;
+
+        if (!response.ok)
+          throw new Error(`API returned status ${response.status}`);
 
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
@@ -68,14 +76,16 @@ export default function ProjectsPage() {
         setProjects([]);
       } finally {
         setLoading(false);
-        setIsExpanded(false); // reset expand on tab change
-        // Restore scroll position after content updates if we switched tabs
-        if (typeof window !== "undefined" && isSwitchingTabRef.current) {
-          requestAnimationFrame(() => {
-            window.scrollTo({ top: scrollPositionRef.current, behavior: "auto" });
-            isSwitchingTabRef.current = false;
+        setIsExpanded(false);
+        setIsTransitioning(false);
+
+        // Restore scroll position after projects update
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top: scrollPositionRef.current,
+            behavior: "instant",
           });
-        }
+        });
       }
     };
 
@@ -87,7 +97,7 @@ export default function ProjectsPage() {
   const canToggle = projects.length > 9;
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative" ref={projectSectionRef}>
       <HeroComponentTwo imgUrl="/assets/project-bg.jpg" />
 
       <div className="w-full relative md:w-[90%] lg:w-[80%] mx-auto">
@@ -106,13 +116,22 @@ export default function ProjectsPage() {
 
         {/* Tabs */}
         <div className="w-full px-[22px] md:px-12 lg:px-20 relative mx-auto">
-          <TabHeader activeTab={activeTab} setActiveTab={handleTabChange} tabs={tabs} />
+          <TabHeader
+            activeTab={activeTab}
+            setActiveTab={handleTabChange}
+            tabs={tabs}
+          />
         </div>
 
         {/* Loading */}
         {loading && (
           <div className="w-full px-[22px] md:px-12 lg:px-20 text-center py-10">
-            <p className="text-gray-500">Loading projects...</p>
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black-400"></div>
+              <p className="text-gray-500">
+                {isTransitioning ? `Loading ${activeTab} projects...` : "Loading projects..."}
+              </p>
+            </div>
           </div>
         )}
 
@@ -124,39 +143,49 @@ export default function ProjectsPage() {
         )}
 
         {/* Projects */}
-        {!loading && !error && (
-          <>
-            {/* Initial Projects */}
-            <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-              {initialProjects.map((project) => (
-                <div key={project.id}>
-                  <ProjectCard data={project} hideActions={false} imagePath={imagePath} />
-                </div>
-              ))}
-            </div>
+        <div className="min-h-screen relative w-full flex-center mx-auto flex-col">
+          {!loading && !error && (
+            <div className="animate-fade-in">
+              {/* Initial Projects */}
+              <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 min-h-screen">
+                {initialProjects.map((project) => (
+                  <div key={project.id} className="animate-slide-up">
+                    <ProjectCard
+                      data={project}
+                      hideActions={false}
+                      imagePath={imagePath}
+                    />
+                  </div>
+                ))}
+              </div>
 
-            {/* More/Less Button */}
-            {canToggle && (
-              <Button
-                text={isExpanded ? "Less Projects" : "More Projects"}
-                onClick={() => setIsExpanded((prev) => !prev)}
-              />
-            )}
+              {/* More/Less Button */}
+              {canToggle && (
+                <Button
+                  text={isExpanded ? "Less Projects" : "More Projects"}
+                  onClick={() => setIsExpanded((prev) => !prev)}
+                />
+              )}
 
-            {/* Additional Projects - always mounted */}
-            <div
-              className={`w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 ${
-                isExpanded ? "block" : "hidden"
-              }`}
-            >
-              {additionalProjects.map((project) => (
-                <div key={project.id}>
-                  <ProjectCard data={project} hideActions={false} imagePath={imagePath} />
-                </div>
-              ))}
+              {/* Additional Projects */}
+              <div
+                className={`w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 transition-all duration-300 ${
+                  isExpanded ? "block" : "hidden"
+                }`}
+              >
+                {additionalProjects.map((project) => (
+                  <div key={project.id} className="animate-slide-up">
+                    <ProjectCard
+                      data={project}
+                      hideActions={false}
+                      imagePath={imagePath}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          </>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

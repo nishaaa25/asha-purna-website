@@ -71,6 +71,13 @@ export default function BrochureDownloadPopup({
       newErrors.phone = "Please enter a valid 10-digit phone number";
     }
 
+    // Message validation - now mandatory
+    if (!formData.message.trim()) {
+      newErrors.message = "Enquiry message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Enquiry must be at least 10 characters";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -132,7 +139,7 @@ export default function BrochureDownloadPopup({
   };
 
   return (
-    <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/50 p-4">
+    <div className="fixed inset-0 z-[99999]  flex items-center justify-center bg-black/50 p-4">
       <div className="relative w-full max-w-5xl bg-white rounded-lg shadow-xl overflow-hidden max-h-[90vh] flex flex-col md:flex-row">
         {/* Left side - Brochure Images */}
         <div className="hidden md:block md:w-1/2 bg-gray-100 relative overflow-hidden">
@@ -299,7 +306,7 @@ export default function BrochureDownloadPopup({
                 htmlFor="message"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Message (Optional)
+                Message <span className="text-red-500">*</span>
               </label>
               <textarea
                 id="message"
@@ -307,10 +314,15 @@ export default function BrochureDownloadPopup({
                 value={formData.message}
                 onChange={handleChange}
                 rows={3}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none resize-none"
+                className={`w-full px-4 py-2.5 border rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none resize-none ${
+                  errors.message ? "border-red-500" : "border-gray-300"
+                }`}
                 placeholder="Enter your message"
                 disabled={isLoading}
               />
+              {errors.message && (
+                <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+              )}
             </div>
 
             {/* Submit Button */}

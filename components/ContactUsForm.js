@@ -42,9 +42,11 @@ export default function ContactUsForm() {
       newErrors.email = "Please enter valid email";
     }
 
-    // Message validation - matching Pages Router logic
+    // Message validation - now mandatory with minimum length
     if (!formData.message.trim()) {
-      newErrors.message = "Please enter message";
+      newErrors.message = "Enquiry message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Enquiry must be at least 10 characters";
     }
 
     setErrors(newErrors);
@@ -128,7 +130,7 @@ export default function ContactUsForm() {
   };
 
   return (
-    <div className="relative py-15 md:py-20 lg:py-[100px] text-center px-7 md:px-25 lg:px-50">
+    <div className="relative py-15  md:py-20 lg:py-[100px] text-center px-7 md:px-25 lg:px-50">
       <h2 className="text-[22px] md:text-[44px] lg:text-[64px] leading-[130%] tracking-[-1.1px] font-playfair mb-12 text-black-400 lg:text-gray-600 font-medium">
         Connect with Us
       </h2>

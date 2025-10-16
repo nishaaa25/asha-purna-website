@@ -42,9 +42,11 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
       newErrors.email = "Please enter valid email";
     }
 
-    // Message validation - matching Pages Router
+    // Message validation - now mandatory with minimum length
     if (!formData.message.trim()) {
-      newErrors.message = "Please enter message";
+      newErrors.message = "Enquiry message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Enquiry must be at least 10 characters";
     }
 
     setErrors(newErrors);

@@ -12,7 +12,7 @@ export default function FoundersCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full relative pb-2 -top-8">
+    <div className="w-full relative pb-2 -top-8 ">
       <Swiper
         centeredSlides={false}
         slidesPerView={1.1}
@@ -57,7 +57,7 @@ export default function FoundersCarousel() {
                 key={item.id}
                 className="w-full relative rounded-t-[10px] px-[10px] py-5 bg-white"
               >
-                <div className="w-full relative h-[320px] md:h-[380px] lg:h-[440px] rounded-t-md overflow-hidden">
+                <div className="w-full relative h-[320px] md:h-[380px] lg:h-[50vh] rounded-t-md overflow-hidden">
                   <Image
                     src={item.imgUrl}
                     alt={item.name}

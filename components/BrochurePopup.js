@@ -48,6 +48,13 @@ export default function BrochurePopup({
       newErrors.phone = "Please enter a valid 10-digit phone number";
     }
 
+    // Message validation - now mandatory
+    if (!formData.message.trim()) {
+      newErrors.message = "Enquiry message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Enquiry must be at least 10 characters";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -67,37 +74,6 @@ export default function BrochurePopup({
     }
   };
 
-    useEffect(() => {
-      if (isOpen) {
-        // Store the current scroll position
-        const scrollY = window.scrollY;
-        
-        // Lock the scroll
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = '100%';
-        document.body.style.overflow = 'hidden';
-      } else {
-        // Get the scroll position
-        const scrollY = document.body.style.top;
-        
-        // Restore scroll
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        
-        // Restore scroll position
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
-  
-      return () => {
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-      };
-    }, [isOpen]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -203,14 +179,14 @@ export default function BrochurePopup({
   console.log("project name in brochure popup:", brochureUrl);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999]" suppressHydrationWarning>
+    <div className="fixed inset-0  bg-black bg-opacity-50 z-[9999]" suppressHydrationWarning>
       <div className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-500 ease-in-out ${
         isOpen ? 'translate-y-0' : '-translate-y-full'
       }`}>
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
+          className="absolute top-12  right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
         >
           <Image src="/assets/cross.svg" alt="cross" width={24} height={24} className="relative object-contain"/>
         </button>
@@ -279,9 +255,10 @@ export default function BrochurePopup({
                 value={formData.message}
                 onChange={handleInputChange}
                 disabled={isLoading}
-                className={`w-full border-b border-black-400/20 outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400 disabled:opacity-50`}
-                placeholder="Explain Your Query"
+                className={`w-full border-b ${errors.message ? 'border-red-500' : 'border-black-400/20'} outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400 disabled:opacity-50`}
+                placeholder="Explain Your Query *"
               />
+              {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
             </div>
             
            

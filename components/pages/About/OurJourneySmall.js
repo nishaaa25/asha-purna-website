@@ -216,7 +216,7 @@ export default function OurJourneySmall() {
 
       {/* Outer Circle */}
       <div className="circle absolute -top-2/6 w-[99vw] h-[99vw] scale-[1.4] rounded-full border-30 mx-auto border-[#d9d9d9]/20 md:w-[75vw] md:h-[75vw] md:-top-[20rem] lg:w-[50vw] lg:h-[50vw] lg:top-0 lg:-left-1/5 lg:border-[65px]  ">
-        <div className="absolute top-1/2 -translate-y-1/2 h-[35px] md:h-[60px] lg:h-[80px] xl:h-[100px]  w-[0.5px] -right-[7%] bg-orange-600"></div>
+        <div className="absolute top-[25rem] h-[35px] md:h-[60px] lg:h-[80px] xl:h-[100px]  w-[0.5px] -right-[7%] bg-orange-600"></div>
       </div>
 
       {/* Rotating Wheel */}

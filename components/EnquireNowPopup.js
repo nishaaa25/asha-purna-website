@@ -49,37 +49,32 @@ export default function EnquireNowPopup({ isOpen, onClose, onSubmit, projectId, 
     return Object.keys(newErrors).length === 0;
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      // Store the current scroll position
-      const scrollY = window.scrollY;
-      
-      // Lock the scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-    } else {
-      // Get the scroll position
-      const scrollY = document.body.style.top;
-      
-      // Restore scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      
-      // Restore scroll position
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
-    }
+// useEffect(() => {
+//   if (isOpen) {
+//     const scrollY = window.scrollY;
+//     document.body.style.position = 'fixed';
+//     document.body.style.top = `-${scrollY}px`;
+//     document.body.style.width = '100%';
+//     document.body.style.overflow = 'hidden';
+//   } else {
+//     const scrollY = document.body.style.top;
+//     document.body.style.position = '';
+//     document.body.style.top = '';
+//     document.body.style.width = '';
+//     document.body.style.overflow = '';
 
-    return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+//     // ✅ restore correctly (remove minus confusion)
+//     if (scrollY) window.scrollTo(0, -parseInt(scrollY));
+//   }
+
+//   return () => {
+//     document.body.style.position = '';
+//     document.body.style.top = '';
+//     document.body.style.width = '';
+//     document.body.style.overflow = '';
+//   };
+// }, [isOpen]);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -164,7 +159,7 @@ export default function EnquireNowPopup({ isOpen, onClose, onSubmit, projectId, 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999]" suppressHydrationWarning>
+    <div className="fixed inset-0 bg-black bg-opacity-50  z-[9999]" suppressHydrationWarning>
       <div className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-500 ease-in-out ${
         isOpen ? 'translate-y-0' : '-translate-y-full'
       }`}>

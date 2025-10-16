@@ -66,7 +66,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
 
     console.log("Image path",imagePath)
   return (
-    <div className="w-full h-full relative bg-white border-[0.3px] border-black-400/50 rounded-t-[10px] p-[10px]">
+    <div className="w-full max-h-max relative bg-white border-[0.3px] border-black-400/50 rounded-t-[10px] p-[10px]">
       <div className="w-full h-[250px] md:h-[284px] lg:h-[327px] relative rounded-t-md overflow-hidden">
         {data?.project_logo_1 && (
           <Image

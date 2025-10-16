@@ -15,10 +15,10 @@ export default function CounterTwo({ data }) {
         countRefs.current.forEach((counter) => {
           if (!counter) return;
 
-          let count = 0;
+          let count = 10;
           const target = Number(counter.getAttribute("data-target"));
 
-          const increment = target / 250;
+          const increment = target / 90;
 
           const updateCount = () => {
             if (count < target) {
@@ -27,7 +27,7 @@ export default function CounterTwo({ data }) {
               counter.innerText = Math.floor(count);
               requestAnimationFrame(updateCount);
             } else {
-              counter.innerText = target ;
+              counter.innerText = target;
             }
           };
 
@@ -69,7 +69,9 @@ export default function CounterTwo({ data }) {
               0
             </span>
             {counter.sign && (
-              <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">{counter.sign}</span>
+              <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">
+                {counter.sign}
+              </span>
             )}
             <span className="text-[43px] md:text-[60px] lg:text-[56px] leading-[100%] text-orange-600 font-[300] tracking-[-3.6px]">
               {index == 3 ? "%" : "+"}
@@ -78,7 +80,7 @@ export default function CounterTwo({ data }) {
           <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center">
             {counter.title}
           </h4>
-           {/* vertical divider line */}
+          {/* vertical divider line */}
           {index !== data.length - 1 && (
             <span className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-orange-600/70"></span>
           )}

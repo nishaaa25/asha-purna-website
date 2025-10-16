@@ -39,48 +39,17 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
       newErrors.phone = "Please enter a valid 10-digit phone number starting with 6-9";
     }
 
-    // message validation
+    // message validation - now mandatory
     if (!formData.message.trim()) {
-      newErrors.message = "message is required";
-    } else if (formData.message.trim().length < 2) {
-      newErrors.message = "message must be at least 2 characters";
+      newErrors.message = "Enquiry is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Enquiry must be at least 10 characters";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      // Store the current scroll position
-      const scrollY = window.scrollY;
-      
-      // Lock the scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-    } else {
-      // Get the scroll position
-      const scrollY = document.body.style.top;
-      
-      // Restore scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      
-      // Restore scroll position
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
-    }
-
-    return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -200,7 +169,7 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
                 value={formData.message}
                 onChange={handleInputChange}
                 className={`w-full border-b ${errors.message ? 'border-red-500' : 'border-black-400/20'} outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
-                placeholder="Explain Your Query"
+                placeholder="Explain Your Query *"
               />
               {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
             </div>

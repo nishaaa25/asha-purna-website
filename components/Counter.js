@@ -17,10 +17,13 @@ export default function CountersSection({ data }) {
         countRefs.current.forEach((counter) => {
           if (!counter) return;
 
-          let count = 0;
+          let count = 10;
           const target = Number(counter.getAttribute("data-target"));
 
-          const increment = target / 250;
+          // Make small screens faster
+          const isSmallScreen = window.innerWidth < 768; // below 768px = mobile/tablet
+          const totalFrames = isSmallScreen ? 45 : 90; // half the frames = 2x faster
+          const increment = target / totalFrames;
 
           const updateCount = () => {
             if (count < target) {
@@ -29,7 +32,7 @@ export default function CountersSection({ data }) {
               counter.innerText = Math.floor(count);
               requestAnimationFrame(updateCount);
             } else {
-              counter.innerText = target ;
+              counter.innerText = target;
             }
           };
 
@@ -49,8 +52,6 @@ export default function CountersSection({ data }) {
       trigger.kill();
     };
   }, []);
-
-  
 
   return (
     <div

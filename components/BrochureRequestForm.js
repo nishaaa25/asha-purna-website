@@ -96,11 +96,11 @@ export default function BrochureRequestForm({
       newErrors.phone = "Please enter a valid 10-digit phone number starting with 6-9";
     }
 
-    // Message validation
+    // Message validation - now mandatory with minimum length
     if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.trim().length < 2) {
-      newErrors.message = "Message must be at least 2 characters";
+      newErrors.message = "Enquiry message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Enquiry must be at least 10 characters";
     }
 
     setErrors(newErrors);
@@ -155,7 +155,7 @@ export default function BrochureRequestForm({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999]" suppressHydrationWarning>
+    <div className="fixed inset-0 pointer-events-none bg-black bg-opacity-50 z-[9999]" suppressHydrationWarning>
       <div className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-500 ease-in-out ${
         isOpen ? 'translate-y-0' : '-translate-y-full'
       }`}>
@@ -228,7 +228,7 @@ export default function BrochureRequestForm({
                 value={formData.message}
                 onChange={handleChange}
                 className={`w-full border-b ${errors.message ? 'border-red-500' : 'border-black-400/20'} outline-none p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
-                placeholder="Brochure Request for Project"
+                placeholder="Brochure Request for Project *"
               />
               {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
             </div>

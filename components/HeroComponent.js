@@ -15,16 +15,34 @@ export default function HeroComponent() {
     ></iframe>
       </div> */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover  -z-10 pointer-events-none transform-gpu will-change-transform"
-        autoPlay
+        className="absolute top-0 left-0 w-full h-full object-cover -z-10 pointer-events-none transform-gpu will-change-transform"
         muted
-        loop
         playsInline
         preload="auto"
+        onLoadedMetadata={(e) => {
+          const video = e.target;
+          const startTime = 10; // seconds
+          // Pause, seek to start, then play after seek completes
+          video.pause();
+          const handleSeeked = () => {
+            video.play();
+            video.removeEventListener('seeked', handleSeeked);
+          };
+          video.addEventListener('seeked', handleSeeked);
+          video.currentTime = startTime;
+        }}
+        onTimeUpdate={(e) => {
+          const startTime = 10; // seconds
+          const segmentDuration = 10; // seconds
+          if (e.target.currentTime >= startTime + segmentDuration) {
+            e.target.currentTime = startTime;
+          }
+        }}
       >
         <source src="/assets/home-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+
       <div className="w-full h-full absolute top-0 left-0 gradient"></div>
       <div className="w-[95%] mx-auto relative text-center text-white flex-center flex-col gap-[6px]">
         <h1 className="text-4xl md:text-[60px] lg:text-[56px] leading-[100%] whitespace-nowrap drop-shadow-lg font-medium tracking-[-1.4px]">

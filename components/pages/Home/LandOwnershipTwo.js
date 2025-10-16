@@ -111,7 +111,7 @@ export default function LandOwnershipTwo() {
             <SwiperSlide key={index}>
               <div
                 className={
-                  "relative overflow-hidden rounded-t-xl transition-all duration-500 lg:scale-100 lg:blur-0 " 
+                  "relative overflow-hidden rounded-t-xl transition-all duration-500 lg:scale-100 lg:blur-0 "
                 }
               >
                 <div className="h-[440px] md:h-[500px] lg:h-[600px] w-full relative">
@@ -123,8 +123,13 @@ export default function LandOwnershipTwo() {
                         : "Land Ownership Showcase"
                     }
                     fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 768px) 60vw, 10vw"
+                    className={`object-cover ${
+                      index === 2 || index === 5
+                        ? "object-left"
+                        : "object-center"
+                    }`}
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 50vw"
+                    quality={85}
                     priority={index < 2}
                   />
                 </div>

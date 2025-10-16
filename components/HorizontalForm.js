@@ -99,9 +99,11 @@ export default function HorizontalForm() {
       newErrors.project_id = "Select property";
     }
 
-    // Message validation
+    // Message validation - now mandatory with minimum length
     if (!formData.message.trim()) {
-      newErrors.message = "Enter message";
+      newErrors.message = "Enquiry message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Enquiry must be at least 10 characters";
     }
 
     setErrors(newErrors);
