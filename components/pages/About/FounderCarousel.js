@@ -55,9 +55,9 @@ export default function FoundersCarousel() {
             >
               <div
                 key={item.id}
-                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col"
+                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col min-h-[560px] md:min-h-[620px] lg:min-h-[680px]"
               >
-                <div className="w-full relative h-[320px] md:h-[380px] lg:h-[50vh] rounded-t-md overflow-hidden">
+                <div className="w-full relative h-[320px] md:h-[380px] lg:h-[420px] rounded-t-md overflow-hidden">
                   <Image
                     src={item.imgUrl}
                     alt={item.name}

@@ -8,7 +8,7 @@ import ourJourneyProjects from "@/lib/ourjourneyproject";
 gsap.registerPlugin(ScrollTrigger);
 
 // Fixed years to display on the wheel
-const FIXED_YEARS = [1997, 2007, 2010, 2013, 2015, 2020, 2023, 2025];
+const FIXED_YEARS = [1997, 2008, 2013, 2016, 2021, 2025];
 
 // Helper function to filter projects by year range
 function filterProjectsByYearRange(startYear, endYear) {
@@ -315,17 +315,13 @@ export default function OurJourney({ journeyData }) {
               currentYearData.projects.map((project, idx) => (
                 <div
                   key={idx}
-                  className="w-full flex flex-col items-center py-2 md:py-3"
+                  className="w-full flex flex-col items-center py-2 md:py-3 gap-4"
                 >
-                  <h3 className="text-gray-800 font-semibold leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl mb-1">
+                  <h3 className="text-black-400/50 font-semibold text-sm sm:text-base md:text-lg lg:text-[22px] leading-[130%] tracking-[-1.1%]">
                     {project.title}
                   </h3>
-                  <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm lg:text-base text-gray-800">
-                    <span>Project Type - {project.projectType}</span>
-                    <span>Area - {project.area} Acre</span>
-                  </div>
                   {idx < currentYearData.projects.length - 1 && (
-                    <div className="w-3/12 sm:w-2/12 h-[1px] bg-orange-600/60 mt-4 md:mt-6"></div>
+                    <div className="w-3/12 sm:w-2/12 h-[1px] bg-orange-600/60"></div>
                   )}
                 </div>
               ))
