@@ -7,7 +7,6 @@ import OurStrength from "@/components/pages/About/OurStrength";
 import Committed from "@/components/pages/About/Committed";
 import OurJourney from "@/components/pages/About/OurJourney";
 import FoundersCarousel from "@/components/pages/About/FounderCarousel";
-import AboutPageClient from "@/components/pages/About/AboutPageClient";
 import OurJourneySmall from "@/components/pages/About/OurJourneySmall";
 
 export default async function AboutPage() {
@@ -32,7 +31,6 @@ export default async function AboutPage() {
   ];
 
   return (
-    <AboutPageClient>
       <div className="relative w-full">
         <section className="w-full relative h-[40dvh] md:h-[70vh] lg:h-[90vh] flex-center overflow-hidden ">
           <Image
@@ -62,7 +60,7 @@ export default async function AboutPage() {
             <FoundersCarousel />
           </div>
         </div>
-        <div className="w-full relative hidden lg:flex-center">
+        <div className="w-full relative hidden lg:block">
           <OurJourney />
         </div>
          <div className="w-full relative lg:hidden">
@@ -74,6 +72,5 @@ export default async function AboutPage() {
           <FaqSection faq={faqs} />
         </section>
       </div>
-    </AboutPageClient>
   );
 }

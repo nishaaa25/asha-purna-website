@@ -20,12 +20,18 @@ export default function Navbar() {
       <div className="hidden lg:flex items-center text-white ">
         <ul className="flex-center gap-[70px] ">
           <li>
-            <Link href="/" className="font-medium text-lg leading-[100%] cursor-pointer">
+            <Link
+              href="/"
+              className="font-medium text-lg leading-[100%] cursor-pointer"
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link href="/about" className="font-medium text-lg leading-[100%] cursor-pointer">
+            <Link
+              href="/about"
+              className="font-medium text-lg leading-[100%] cursor-pointer"
+            >
               About Us
             </Link>
           </li>
@@ -52,7 +58,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/news&events"
-                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
+                    className="block px-4 py-2 hover:bg-black-400 font-medium text-lg leading-[100%] cursor-pointer text-white"
                   >
                     Events
                   </Link>
@@ -60,7 +66,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/awards"
-                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
+                    className="block px-4 py-2 hover:bg-black-400 font-medium text-lg leading-[100%] cursor-pointer text-white"
                   >
                     Awards
                   </Link>
@@ -68,7 +74,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="https://ashapurna.com/blog/"
-                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
+                    className="block px-4 py-2 hover:bg-black-400 font-medium text-lg leading-[100%] cursor-pointer text-white"
                   >
                     Blogs
                   </Link>

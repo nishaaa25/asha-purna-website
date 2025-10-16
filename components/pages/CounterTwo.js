@@ -24,10 +24,10 @@ export default function CounterTwo({ data }) {
             if (count < target) {
               count += increment;
               if (count > target) count = target;
-              counter.innerText = Math.floor(count) + "+";
+              counter.innerText = Math.floor(count);
               requestAnimationFrame(updateCount);
             } else {
-              counter.innerText = target + "+";
+              counter.innerText = target ;
             }
           };
 

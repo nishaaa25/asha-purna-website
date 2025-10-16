@@ -5,35 +5,50 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
-import { exclusiveCarouselData, recentProjects } from "@/lib/content";
-import CardTwo from "@/components/CardTwo";
+// import { exclusiveCarouselData, recentProjects } from "@/lib/content";
+// import CardTwo from "@/components/CardTwo";
+// import CSRpage from "@/app/CSR/page";
+import CsrCard from "../CSR/CsrCard";
 
 export default function CommittedCarousel({data, imagePath}) {
   const [activeIndex, setActiveIndex] = useState(0);
+  
 
   return (
-    <div className="w-full relative pb-2">
+    <div className="w-full relative pb-10 lg:pb-[100px]">
       <Swiper
-        modules={[Navigation, Pagination]}
-        slidesPerView={1.3}
-        spaceBetween={20}
+        modules={[Navigation]}
+        centeredSlides={false}
+        slidesPerView={1.1}
+        spaceBetween={16}
         watchSlidesProgress
         navigation={{
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",
         }}
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
-        className="w-full relative ownership-swiper"
+        className="w-full relative"
         pagination={{ clickable: true }}
         breakpoints={{
-          320: { slidesPerView: 1.2, centeredSlides: true },
-          640: { slidesPerView: 1.3, centeredSlides: true },
-          768: { slidesPerView: 1.3, centeredSlides: true },
+          320: {
+            slidesPerView: 1.1,
+            slidesOffsetBefore: 30,
+            slidesOffsetAfter: 30,
+          },
+          640: {
+            slidesPerView: 1.1,
+            slidesOffsetBefore: 30,
+            slidesOffsetAfter: 30,
+          },
+          768: {
+            slidesPerView: 2,
+            slidesOffsetBefore: 26,
+            slidesOffsetAfter: 26,
+          },
           1024: {
             slidesPerView: 3,
-            slidesOffsetBefore: 40,
-            slidesOffsetAfter: 40,
-            centeredSlides: false, // disable centering on large screens
+            slidesOffsetBefore: 80,
+            slidesOffsetAfter: 80,
           },
         }}
       >
@@ -46,7 +61,7 @@ export default function CommittedCarousel({data, imagePath}) {
                 isActive ? "z-[70]" : "z-[10]"
               }`}
             >
-              <CardTwo key={item.id} data={item} />
+              <CsrCard key={item.id} data={item} imagesPath={imagePath} />
             </SwiperSlide>
           );
         })}

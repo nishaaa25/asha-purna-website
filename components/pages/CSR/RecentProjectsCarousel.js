@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -12,20 +12,18 @@ import CsrCard from "./CsrCard";
 
 export default function RecentProjectsCarousel({data, imagePath}) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = useRef(null);
   
 
   return (
     <div className="w-full relative">
       <Swiper
+        ref={swiperRef}
         modules={[Navigation]}
         centeredSlides={false}
         slidesPerView={1.1}
         spaceBetween={16}
         watchSlidesProgress
-        navigation={{
-          nextEl: ".swiper-button-next-custom",
-          prevEl: ".swiper-button-prev-custom",
-        }}
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
         className="w-full relative"
         pagination={{ clickable: true }}
@@ -68,7 +66,15 @@ export default function RecentProjectsCarousel({data, imagePath}) {
       </Swiper>
       
       {/* Navigation Arrows - Only visible on large screens */}
-      <button className="swiper-button-prev-custom hidden cursor-pointer lg:flex absolute left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+      <button 
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          swiperRef.current?.swiper?.slidePrev();
+        }}
+        className="hidden lg:flex absolute left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors cursor-pointer"
+        aria-label="Previous slide"
+      >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           fill="none" 
@@ -81,7 +87,15 @@ export default function RecentProjectsCarousel({data, imagePath}) {
         </svg>
       </button>
       
-      <button className="swiper-button-next-custom hidden lg:flex absolute right-10 top-1/2 cursor-pointer -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+      <button 
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          swiperRef.current?.swiper?.slideNext();
+        }}
+        className="hidden lg:flex absolute right-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors cursor-pointer"
+        aria-label="Next slide"
+      >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           fill="none" 

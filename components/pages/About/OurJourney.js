@@ -226,8 +226,8 @@ export default function OurJourney({ journeyData }) {
       </div>
 
       {/* Outer Circle */}
-      <div className="circle absolute  -top-4 -left-3/5 -translate-y-1/2 translate-x-3/5 w-[99vw] h-[99vw] scale-[1.3] rounded-full border-[35px] mx-auto border-[#d9d9d9]/20 sm:scale-[1.25] sm:w-[90vw] sm:h-[90vw] md:scale-[1.15] md:w-[75vw] md:h-[75vw] md:border-[45px] lg:scale-[1.1] lg:top-1/2 lg:w-[55vw] lg:h-[55vw] lg:border-[55px] xl:scale-100 xl:w-[900px] xl:h-[900px] xl:border-[65px]">
-        <div className="absolute top-1/2 -translate-y-1/2 h-[35px] md:h-[45px] lg:h-[55px] xl:h-[65px] rotate-90 w-[0.5px] -right-[4%] bg-orange-600"></div>
+      <div className="circle absolute  -top-4 -left-3/5 -translate-y-1/2 translate-x-3/5 w-[99vw] h-[99vw] scale-[1.3] rounded-full border-[35px] mx-auto border-[#d9d9d9]/20 sm:scale-[1.25] sm:w-[90vw] sm:h-[90vw] md:scale-[1.15] md:w-[75vw] md:h-[75vw] md:border-[50px] lg:scale-[1.1] lg:top-1/2 lg:w-[55vw] lg:h-[55vw] lg:border-[80px] xl:scale-100 xl:w-[900px] xl:h-[900px] xl:border-[100px]">
+        <div className="absolute top-1/2 -translate-y-1/2 h-[35px] md:h-[60px] lg:h-[80px] xl:h-[100px] rotate-90 w-[0.5px] -right-[7%] bg-orange-600"></div>
       </div>
 
       {/* Rotating Wheel */}

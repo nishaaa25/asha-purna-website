@@ -78,8 +78,8 @@ export default async function Committed() {
         heading="Committed to"
         desc="Through healthcare accessibility, education support, housing for all, women empowerment, and care for the specially-abled, our CSR initiatives touch lives and build stronger communities across Rajasthan."
       />
-      <div className="committed relative -top-2 mb-5 lg:mb-0 w-full">
-        <RecentProjectsCarousel data={csrUpdates} imagePath={imagePath}/>
+      <div className="committed relative -top-2 mb-5 w-full">
+        <CommittedCarousel data={csrUpdates} imagePath={imagePath}/>
       </div>
        <Button text="Explore Our CSR Initiatives" link="/CSR"/>
     </div>
