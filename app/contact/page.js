@@ -64,15 +64,7 @@ export default function page() {
                 href="mailto:contact@ashapurna.com"
                 className="hover:underline hover:text-[#e63946] transition-colors duration-200"
               >
-                contact@ashapurna.com
-              </Link>
-            </p>
-            <p>
-              <Link
-                href="mailto:info@ashapurna.com"
-                className="hover:underline hover:text-[#e63946] transition-colors duration-200"
-              >
-                info@ashapurna.com
+                marketing@ashapurna.com
               </Link>
             </p>
           </div>
@@ -80,7 +72,9 @@ export default function page() {
       </div>
       <ContactUsForm />
       <OurOffice />
-      <FaqSection faq={faqs2} />
+      <section id="faq" className="w-full relative">
+        <FaqSection faq={faqs2} />
+      </section>
     </div>
   );
 }

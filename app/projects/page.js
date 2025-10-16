@@ -143,13 +143,13 @@ export default function ProjectsPage() {
         )}
 
         {/* Projects */}
-        <div className="min-h-screen relative w-full  mx-auto flex-col">
+        <div className="min-h-screen relative w-full  mx-auto ">
           {!loading && !error && (
-            <div className="animate-fade-in">
+            <div className="animate-fade-in w-full flex-center flex-col">
               {/* Initial Projects */}
-              <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 min-h-screen">
+              <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 ">
                 {initialProjects.map((project) => (
-                  <div key={project.id} className="animate-slide-up">
+                  <div key={project.id} className="animate-slide-up h-full">
                     <ProjectCard
                       data={project}
                       hideActions={false}
@@ -174,7 +174,7 @@ export default function ProjectsPage() {
                 }`}
               >
                 {additionalProjects.map((project) => (
-                  <div key={project.id} className="animate-slide-up">
+                  <div key={project.id} className="animate-slide-up h-full">
                     <ProjectCard
                       data={project}
                       hideActions={false}

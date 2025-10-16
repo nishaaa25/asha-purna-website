@@ -74,7 +74,7 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
         fill
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
         priority
-        quality={90}
+        quality={100}
       />
       <div className="w-full h-full absolute top-0 left-0 bg-black/40"></div>
       <div className="w-[86%] mx-auto relative flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">

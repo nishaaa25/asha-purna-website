@@ -3,11 +3,11 @@ import Link from "next/link";
 
 export default function Footer() {
   const categories = [
-    {title: "residential", slug: "residential"},
-    {title: "commercial", slug: "commercial"},
-    {title: "hospitality", slug: "hospitality"},
-    {title:  "renewable energies", slug: "windmills"},
-    {title: "education", slug: "education",}
+    { title: "residential", slug: "residential" },
+    { title: "commercial", slug: "commercial" },
+    { title: "hospitality", slug: "hospitality" },
+    { title: "renewable energies", slug: "windmills" },
+    { title: "education", slug: "education" },
   ];
   return (
     <footer className="w-full relative pt-6 pb-4 md:py-10 lg:py-20 bg-black-500 text-white flex-center font-helvetica">
@@ -95,7 +95,7 @@ export default function Footer() {
                 <Link href="/#testimonials">
                   <li>Testimonials</li>
                 </Link>
-                <Link href="/about/#faq">
+                <Link href="/contact/#faq">
                   <li>FAQs</li>
                 </Link>
               </ul>
@@ -166,9 +166,9 @@ export default function Footer() {
             <Link href="/#testimonials">
               <li>Testimonials</li>
             </Link>
-            <Link href="/about/#faq">
-              <li>FAQs</li>
-            </Link>
+                <Link href="/contact/#faq">
+                  <li>FAQs</li>
+                </Link>
           </ul>
           <ul className="text-[10px] leading-[100%] flex flex-col gap-[10px]">
             <h6 className="text-orange-600 text-sm font-bold">Investors</h6>
@@ -217,7 +217,7 @@ export default function Footer() {
             >
               <Image
                 src="/assets/fb.svg"
-                alt="phone"
+                alt="facebook"
                 fill
                 className="object-contain"
               />
@@ -229,7 +229,7 @@ export default function Footer() {
             >
               <Image
                 src="/assets/yt.svg"
-                alt="phone"
+                alt="youtube"
                 fill
                 className="object-contain"
               />
@@ -241,7 +241,7 @@ export default function Footer() {
             >
               <Image
                 src="/assets/ig.svg"
-                alt="phone"
+                alt="instagram"
                 fill
                 className="object-contain"
               />
@@ -253,7 +253,31 @@ export default function Footer() {
             >
               <Image
                 src="/assets/linkedin.svg"
-                alt="phone"
+                alt="linkedin"
+                fill
+                className="object-contain"
+              />
+            </Link>
+            <Link
+              className="relative w-[14px] h-[14px] lg:w-6 lg:h-6"
+              target="/"
+              href="https://in.pinterest.com/ashapurnabuildconltd/"
+            >
+              <Image
+                src="/assets/pinterest.svg"
+                alt="pinterest"
+                fill
+                className="object-contain"
+              />
+            </Link>
+            <Link
+              className="relative w-[14px] h-[14px] lg:w-6 lg:h-6"
+              target="/"
+              href="https://x.com/ashapurnabl"
+            >
+              <Image
+                src="/assets/twitter.svg"
+                alt="twitter"
                 fill
                 className="object-contain"
               />

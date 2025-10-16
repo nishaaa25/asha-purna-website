@@ -97,9 +97,6 @@ Transforming Lives"
         </div>
         <RecentProjectsCarousel data={csrUpdates} imagePath={imagePath}/>
       </div>
-      <div className="w-full relative bg-cream-600">
-        <FaqSection faq={faqs2} />
-      </div>
     </div>
   );
 }

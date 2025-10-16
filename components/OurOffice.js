@@ -16,7 +16,7 @@ export default function OurOffice() {
     },
     {
       icon: "/assets/star.svg",
-      details: ["Office Timing", "Mon - Sat: 9:00 AM - 7:00 PM"],
+      details: ["Office Timing", "Mon - Sun : 9:00 AM - 7:00 PM"],
     },
   ];
 

@@ -89,6 +89,7 @@ export default function PlanCard({ data, imgPath, project }) {
           alt={data?.title || data?.floor || "Floor Plan"}
           fill
           className="relative w-full object-cover"
+          quality={100}
         />
         <div className="absolute z-40">
           <Button text="View plan" onClick={handleViewPlanClick} />

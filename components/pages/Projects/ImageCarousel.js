@@ -51,6 +51,7 @@ export default function ImageCarousel({images}) {
                   alt={item.title || ""}
                   fill
                   className="object-cover"
+                  quality={100}
                 />
               </div>
             </SwiperSlide>

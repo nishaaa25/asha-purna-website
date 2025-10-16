@@ -66,7 +66,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
 
     console.log("Image path",imagePath)
   return (
-    <div className="w-full max-h-max relative bg-white border-[0.3px] border-black-400/50 rounded-t-[10px] p-[10px]">
+    <div className="w-full h-full relative bg-white border-[0.3px] border-black-400/50 rounded-t-[10px] p-[10px] flex flex-col">
       <div className="w-full h-[250px] md:h-[284px] lg:h-[327px] relative rounded-t-md overflow-hidden">
         {data?.project_logo_1 && (
           <Image
@@ -86,7 +86,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
         </div>
       </div>
 
-      <div className="content-card pt-4 text-black-400">
+      <div className="content-card pt-4 text-black-400 flex flex-col flex-1">
         <div className="flex-between relative">
           <h3 className="text-2xl lg:text-2xl font-semibold leading-[120%]">
             {data?.name}
@@ -115,7 +115,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
 
         {!hideActions && (
           <>
-            <div className="w-8/12 mx-auto h-[0.5px] bg-[#272727]/10 mt-3 mb-2" />
+            <div className="w-8/12 mx-auto h-[0.5px] bg-[#272727]/10 mt-auto mb-2" />
             <div className="grid grid-cols-2 relative w-full gap-4">
               <Link
                 href={`/projects/${data?.slug}`}

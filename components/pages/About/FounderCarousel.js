@@ -12,7 +12,7 @@ export default function FoundersCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full relative pb-2 -top-8 ">
+    <div className="w-full relative pb-2 -top-8 h-full">
       <Swiper
         centeredSlides={false}
         slidesPerView={1.1}
@@ -49,13 +49,13 @@ export default function FoundersCarousel() {
           return (
             <SwiperSlide
               key={index}
-              className={`relative transition-transform duration-300 ease-in-out ${
+              className={`relative transition-transform h-full duration-300 ease-in-out ${
                 isActive ? "z-[70]" : "z-[10]"
               }`}
             >
               <div
                 key={item.id}
-                className="w-full relative rounded-t-[10px] px-[10px] py-5 bg-white"
+                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col"
               >
                 <div className="w-full relative h-[320px] md:h-[380px] lg:h-[50vh] rounded-t-md overflow-hidden">
                   <Image
@@ -65,7 +65,7 @@ export default function FoundersCarousel() {
                     className="object-cover object-center"
                   />
                 </div>
-                <div className="w-full relative mt-4 content flex flex-col">
+                <div className="w-full relative mt-4 content flex flex-col flex-1">
                   <Image
                     src="/assets/quot.svg"
                     alt="quote"

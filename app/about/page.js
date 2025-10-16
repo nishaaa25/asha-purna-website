@@ -58,7 +58,7 @@ export default async function AboutPage() {
           <h2 className="relative text-[22px] md:text-[40px] lg:text-[48px] leading-[130%] tracking-[-1.1px] font-medium text-center mb-8 text-gray-600">
             Our Leadership
           </h2>
-          <div className="w-full relative mt-8 md:mt-10 lg:mt-13 font-mulish">
+          <div className="w-11/12 mx-auto relative mt-8 md:mt-10 lg:mt-13 font-mulish">
             <FoundersCarousel />
           </div>
         </div>
