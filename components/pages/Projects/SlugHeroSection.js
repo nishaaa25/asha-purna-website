@@ -7,33 +7,50 @@ import BrochurePopup from "@/components/BrochurePopup";
 import ThankYouPopup from "@/components/ThankYouPopup";
 import { toast } from "react-toastify";
 
-export default function SlugHeroSection({ project, projectImagePath, sliderImagePath, glossySliderPath, brochureImagePath }) {
+export default function SlugHeroSection({
+  project,
+  projectImagePath,
+  sliderImagePath,
+  glossySliderPath,
+  brochureImagePath,
+  projectReraNo,
+}) {
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
   const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
+  console.log("projectReraNo ", projectReraNo);
+  const reraNo =
+    projectReraNo.find((item) => item.title === "RERA No")?.value || "";
   // Get the main image - prefer featured image or glossy slider, then first slider image
   const getMainImage = () => {
     // Priority 1: Glossy slider images
-    if (project?.project_glossy_sliders && project.project_glossy_sliders.length > 0) {
+    if (
+      project?.project_glossy_sliders &&
+      project.project_glossy_sliders.length > 0
+    ) {
       return glossySliderPath + project.project_glossy_sliders[0].image;
     }
-    
+
     // Priority 2: Featured image from sliders
     if (project?.featured_image && sliderImagePath) {
       return sliderImagePath + project.featured_image;
     }
-    
+
     // Priority 3: Regular slider images
-    if (project?.project_sliders && project.project_sliders.length > 0 && sliderImagePath) {
+    if (
+      project?.project_sliders &&
+      project.project_sliders.length > 0 &&
+      sliderImagePath
+    ) {
       return sliderImagePath + project.project_sliders[0].image;
     }
-    
+
     // Priority 4: Project logo
     if (project?.project_logo_1 && projectImagePath) {
       return projectImagePath + project.project_logo_1;
     }
-    
+
     // Fallback
-    return '/assets/project.mp4';
+    return "/assets/project.mp4";
   };
 
   const mainImage = getMainImage();
@@ -41,14 +58,15 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
   // Get brochure URL for download after form submission (same as Pages Router)
   // In Pages Router: window.open(projectImagePath + pdfUrl) where pdfUrl = projectDetailsData.brochure_file
   // NOTE: brochure file uses projectImagePath, NOT brochureImagePath
-  const brochureUrl = project?.brochure_file 
-    ? (projectImagePath + project.brochure_file)
-    : project?.brochure_link 
+  const brochureUrl = project?.brochure_file
+    ? projectImagePath + project.brochure_file
+    : project?.brochure_link
     ? project.brochure_link
     : null;
 
   // Phone number
-  const phoneNumber = project?.mobile_number || project?.ivr_number || "9314041747";
+  const phoneNumber =
+    project?.mobile_number || project?.ivr_number || "9314041747";
 
   const handleBrochureClick = () => {
     console.log("=== Brochure Download Debug ===");
@@ -60,7 +78,7 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
     console.log("Brochure image path (for slider):", brochureImagePath);
     console.log("Final Brochure URL:", brochureUrl);
     console.log("================================");
-    
+
     // Always show the brochure popup - it will handle whether brochure exists or not
     setIsBrochurePopupOpen(true);
   };
@@ -90,18 +108,21 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
           </p>
         )}
       </div>
+     {reraNo && <div className="p-3 w-2/12 absolute right-0 top-[15vh] flex-center flex-col gap-1 bg-white/90 text-black">
+        <p className="text-sm">Rera No.</p><p className="text-sm font-semibold">{reraNo}</p>
+      </div>}
       <div className="absolute bottom-9 w-full px-1">
-          <BottomBar 
-            btnOneLink="#" 
-            btnTwoLink={`tel:${phoneNumber}`} 
-            btnOneText="Brochure" 
-            btnTwoText="Call Now"
-            onBrochureClick={handleBrochureClick}
-          />
+        <BottomBar
+          btnOneLink="#"
+          btnTwoLink={`tel:${phoneNumber}`}
+          btnOneText="Brochure"
+          btnTwoText="Call Now"
+          onBrochureClick={handleBrochureClick}
+        />
       </div>
-      
+
       {/* Brochure Popup */}
-    <BrochurePopup
+      <BrochurePopup
         isOpen={isBrochurePopupOpen}
         onClose={() => setIsBrochurePopupOpen(false)}
         onSuccess={() => setIsBrochureThankYouOpen(true)}
@@ -122,7 +143,6 @@ export default function SlugHeroSection({ project, projectImagePath, sliderImage
           setIsBrochureThankYouOpen(false);
         }}
       />
-
     </section>
   );
 }

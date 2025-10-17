@@ -46,7 +46,11 @@ async function getData(slug) {
     if (result._status) {
       return {
         status: true,
-        data: result._data?.getNewlaunchs || [],
+        data: [
+          ...(result?._data?.getNewlaunchs || []),
+          ...(result?._data?.getResidentialFlats || []),
+          ...(result?._data?.getResidentialTownships || []),
+        ],
         imagePath: result._data?.project_image_path || "",
         message: result._message,
       };
@@ -72,7 +76,7 @@ async function getData(slug) {
 export async function generateMetadata({ params }) {
   const { slugPage } = await params;
   const slug = slugPage;
-  
+
   // Find header content for this slug
   const key = slug === "renewable" ? "windmills" : slug?.toLowerCase();
   const headerData = headerContent.find(
@@ -81,12 +85,14 @@ export async function generateMetadata({ params }) {
 
   if (!headerData) {
     return {
-      title: 'Page Not Found - Ashapurna Buildcon',
+      title: "Page Not Found - Ashapurna Buildcon",
     };
   }
 
   const title = `${headerData.type} Projects - Ashapurna Buildcon`;
-  const description = headerData.desc || `Explore our premium ${headerData.type} projects in Rajasthan. Quality construction with modern amenities by Ashapurna Buildcon.`;
+  const description =
+    headerData.desc ||
+    `Explore our premium ${headerData.type} projects in Rajasthan. Quality construction with modern amenities by Ashapurna Buildcon.`;
   const keywords = `${headerData.type} projects, ashapurna ${slug}, property in jodhpur, real estate rajasthan`;
 
   return {
@@ -97,7 +103,7 @@ export async function generateMetadata({ params }) {
       title,
       description,
       url: `${process.env.WEBSITE_URL}${slug}`,
-      siteName: 'Ashapurna Buildcon',
+      siteName: "Ashapurna Buildcon",
       images: [
         {
           url: `${process.env.WEBSITE_URL}assets/projects-page.jpg`,
@@ -106,10 +112,10 @@ export async function generateMetadata({ params }) {
           alt: `${headerData.type} Projects`,
         },
       ],
-      type: 'website',
+      type: "website",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images: [`${process.env.WEBSITE_URL}assets/projects-page.jpg`],
@@ -123,7 +129,7 @@ export async function generateMetadata({ params }) {
 export default async function SlugPage({ params }) {
   const { slugPage } = await params;
   const slug = slugPage;
-  
+
   // Validate slug
   const key = slug === "renewable" ? "windmills" : slug?.toLowerCase();
   const headerData = headerContent.find(

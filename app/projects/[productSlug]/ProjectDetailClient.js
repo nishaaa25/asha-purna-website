@@ -46,6 +46,7 @@ export default function ProjectDetailClient({
         sliderImagePath={sliderImagePath}
         glossySliderPath={glossySliderPath}
         brochureImagePath={brochureImagePath}
+        projectReraNo={project?.project_other_info}
       />
       {/* Only show DetailsTabSection if there's meaningful content to display */}
       {(() => {

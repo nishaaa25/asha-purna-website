@@ -220,6 +220,7 @@ export default async function ProjectDetailPage({ params }) {
     }
 
     const allData = await getProjectData(productSlug);
+    console.log(allData, "all project data");
 
     if (!allData.projectDetails.status || !allData.projectDetails.data?.getDetails) {
       notFound();
