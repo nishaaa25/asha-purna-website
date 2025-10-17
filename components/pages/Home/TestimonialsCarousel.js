@@ -137,7 +137,7 @@ export default function TestimonialsCarousel() {
             >
               <div className="relative group">
                 {/* Video Container - fixed 50vh, no thumbnail downscaling */}
-                <div className="relative h-[60vh] w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-3xl bg-black">
+                <div className="relative h-[180px] md:h-[250px] lg:h-[380px] xl:h-[540px] w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-3xl bg-black">
                   {/* Play Overlay (mobile/tablet): enable video interaction when tapped) */}
                   {interactiveVideoIndex !== index && (
                     <button
