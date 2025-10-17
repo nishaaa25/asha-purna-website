@@ -18,7 +18,7 @@ export default function ImageCarousel({images}) {
   return (
     <div className="w-full relative">
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Pagination]}
         centeredSlides={true}
         slidesPerView={1.5}
         spaceBetween={15}
@@ -27,8 +27,9 @@ export default function ImageCarousel({images}) {
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",
         }}
+        pagination={{ clickable: true }}
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
-        className="w-full relative"
+        className="w-full relative ownership-swiper"
         breakpoints={{
           320: { slidesPerView: 1.2 },
           640: { slidesPerView: 1.3 },
@@ -42,7 +43,7 @@ export default function ImageCarousel({images}) {
             <SwiperSlide
               key={index}
               className={`!h-auto relative pt-6 transition-transform duration-300 ease-in-out ${
-                isActive ? "z-[70] scale-[1]" : "z-[10] scale-[0.95]"
+                isActive ? "z-[70] scale-[1]" : "z-[10] scale-[0.95] "
               }`}
             >
               <div className="relative h-[202px] md:h-[40vh] lg:h-[70vh] w-full rounded-t-xl overflow-hidden">
@@ -58,6 +59,7 @@ export default function ImageCarousel({images}) {
           );
         })}
       </Swiper>
+      {/* Pagination bullets */}
       
       {/* Navigation Arrows - Only visible on large screens */}
       <button className="swiper-button-prev-custom hidden cursor-pointer lg:flex absolute left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">

@@ -73,7 +73,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
             src={imagePath + data?.project_logo_1}
             alt={imagePath + data?.project_logo_1_link}
             fill
-            className="object-contain w-full h-full"
+            className="object-cover w-full h-full"
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />

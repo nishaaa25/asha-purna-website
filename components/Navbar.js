@@ -58,7 +58,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/news&events"
-                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
+                    className="block px-4 py-2 hover:bg-black-400  hover:text-white font-medium text-lg leading-[100%] cursor-pointer"
                   >
                     Events
                   </Link>
@@ -66,7 +66,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/awards"
-                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
+                    className="block px-4 py-2 hover:bg-black-400  hover:text-white font-medium text-lg leading-[100%] cursor-pointer"
                   >
                     Awards
                   </Link>
@@ -74,7 +74,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="https://ashapurna.com/blog/"
-                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
+                    className="block px-4 py-2 hover:bg-black-400 hover:text-white font-medium text-lg leading-[100%] cursor-pointer"
                   >
                     Blogs
                   </Link>

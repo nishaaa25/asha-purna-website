@@ -14,7 +14,7 @@ export default function page() {
         spanText={awardsPageContent.recognitionSection.spanText}
         desc={awardsPageContent.recognitionSection.desc}
       />
-      {awards.slice(0,3).map((award, index) => (
+      {awards.slice(0,2).map((award, index) => (
         <div
           key={award.id}
           className={`w-[90%] mx-auto relative pb-7 ${

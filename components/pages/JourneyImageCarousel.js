@@ -20,7 +20,7 @@ export default function JourneyImageCarousel() {
         watchSlidesProgress
         loop={true}
         autoplay={{
-          delay: 3000,
+          delay: 1000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
