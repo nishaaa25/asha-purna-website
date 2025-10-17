@@ -47,7 +47,7 @@ export default function MobileNav() {
       <div className="lg:hidden">
         <button
           onClick={toggleNav}
-          className="w-7 h-7 relative focus:outline-none cursor-pointer"
+          className="w-7 h-7 relative focus:outline-none"
           aria-label="Toggle mobile menu"
         >
           <Image
@@ -81,7 +81,7 @@ export default function MobileNav() {
               <Link href="/" onClick={closeNav}>
                 <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
                   <Image
-                    src="/assets/main-logo-light.svg"
+                    src="/assets/logo-dark.svg"
                     alt="main-logo"
                     fill
                     className="relative object-contain"
@@ -90,7 +90,7 @@ export default function MobileNav() {
               </Link>
               <button
                 onClick={closeNav}
-                className="w-6 h-6 flex items-center justify-center top-5 relative cursor-pointer"
+                className="w-6 h-6 flex items-center justify-center top-5 relative"
                 aria-label="Close menu"
               >
                 <Image
@@ -140,7 +140,7 @@ export default function MobileNav() {
                 <li>
                   <button
                     onClick={toggleMediaDropdown}
-                    className="flex items-center justify-between w-full p-[10px] text-[15px] leading-[110%]  text-black-400 border-b border-black-400/10 transition-colors cursor-pointer"
+                    className="flex items-center justify-between w-full p-[10px] text-[15px] leading-[110%]  text-black-400 border-b border-black-400/10 transition-colors"
                   >
                     <span>Media</span>
                     <div className="flex items-center">

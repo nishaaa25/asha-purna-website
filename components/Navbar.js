@@ -4,7 +4,7 @@ import MobileNav from "./MobileNav";
 
 export default function Navbar() {
   return (
-    <nav className="w-full px-5 md:px-6 lg:px-13 pt-3 lg:pt-3  pb-3 absolute top-0 left-0 flex-between z-110 navbar-animate">
+    <nav className="w-full px-5 md:px-8 lg:px-13 pt-5  pb-3 absolute top-0 left-0 flex-between z-110">
       <div className="relative">
         <Link href="/">
           <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
@@ -17,7 +17,7 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
-      <div className="hidden lg:flex items-center text-white pb-6">
+      <div className="hidden lg:flex items-center text-white ">
         <ul className="flex-center gap-[70px] ">
           <li>
             <Link
@@ -58,7 +58,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/news&events"
-                    className="block px-4 py-2 hover:bg-black-400 font-medium text-lg leading-[100%] cursor-pointer text-white"
+                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
                   >
                     Events
                   </Link>
@@ -66,7 +66,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/awards"
-                    className="block px-4 py-2 hover:bg-black-400 font-medium text-lg leading-[100%] cursor-pointer text-white"
+                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
                   >
                     Awards
                   </Link>
@@ -74,7 +74,7 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="https://ashapurna.com/blog/"
-                    className="block px-4 py-2 hover:bg-black-400 font-medium text-lg leading-[100%] cursor-pointer text-white"
+                    className="block px-4 py-2 hover:bg-gray-100 font-medium text-lg leading-[100%] cursor-pointer"
                   >
                     Blogs
                   </Link>

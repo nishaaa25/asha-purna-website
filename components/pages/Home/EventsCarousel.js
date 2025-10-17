@@ -41,45 +41,56 @@ export default function EventsCarousel({ imagePath, events }) {
               className={`relative transition-transform duration-300 ease-in-out ${
                 isActive ? "z-[70]" : "z-[10]"
               }`}
-            >                <div className="relative rounded-t-lg overflow-hidden transition-shadow duration-300">
-                  <div className="w-full h-[222px] relative">
-                    <Image
-                      src={imagePath + event?.image}
-                      alt={event.alt_image_text || event?.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="blog-content flex flex-col place-items-start gap-1 pt-5">
-                    {/* <h5 className="text-[15px] font-bold uppercase text-gray-700">
+            >
+              {" "}
+              <div className="relative rounded-t-lg overflow-hidden transition-shadow duration-300">
+                <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
+                  <Image
+                    src={imagePath + event?.image}
+                    alt={event.alt_image_text || event?.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                {/* <div className="w-full h-[222px] relative">
+                  <Image
+                    src={imagePath + event?.image}
+                    alt={event.alt_image_text || event?.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div> */}
+                <div className="blog-content flex flex-col place-items-start gap-1 pt-5">
+                  {/* <h5 className="text-[15px] font-bold uppercase text-gray-700">
                       {event.media}
                     </h5> */}
-                    <div className="h-[1px] w-9 bg-orange-600"></div>
-                    <h3 className="text-lg font-bold text-gray-600 leading-[130%] my-1">
-                      {event.title}
-                    </h3>
-                    <p
-                      className={
-                        "text-sm md:text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2"
-                      }
-                      style={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 4,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {event?.short_description}
-                    </p>
-                    <Link
-                      href={`/news&events/${eventSlug}`}
-                      className="mt-2 text-orange-600 text-sm font-semibold underline cursor-pointer "
-                      aria-label="Read more about this event"
-                    >
-                      Read more
-                    </Link>
-                  </div>
+                  <div className="h-[1px] w-9 bg-orange-600"></div>
+                  <h3 className="text-lg font-bold text-gray-600 leading-[130%] my-1">
+                    {event.title}
+                  </h3>
+                  <p
+                    className={
+                      "text-sm md:text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2"
+                    }
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 4,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {event?.short_description}
+                  </p>
+                  <Link
+                    href={`/news&events/${eventSlug}`}
+                    className="mt-2 text-orange-600 text-sm font-semibold underline cursor-pointer "
+                    aria-label="Read more about this event"
+                  >
+                    Read more
+                  </Link>
                 </div>
+              </div>
             </SwiperSlide>
           );
         })}
