@@ -4,30 +4,20 @@ import MobileNav from "./MobileNav";
 
 export default function Navbar() {
   return (
-    <nav className="w-full px-5 md:px-8 lg:px-13 pt-1 pb-3 absolute top-0 left-0 flex-between z-110">
+    <nav className="w-full px-5 md:px-6 lg:px-13 pt-3 lg:pt-3  pb-3 absolute top-0 left-0 flex-between z-110">
       <div className="relative">
         <Link href="/">
-          <div className="w-26 h-12 lg:w-42 lg:h-34 relative">
-            {/* Light logo */}
+          <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
             <Image
               src="/assets/main-logo-light.svg"
               alt="main-logo"
               fill
               className="relative object-contain"
-              priority
             />
-            {/* Dark logo
-            <Image
-              src="/assets/main-logo-dark.svg"
-              alt="main-logo"
-              fill
-              className="relative object-contain logo-dark"
-              priority
-            /> */}
           </div>
         </Link>
       </div>
-      <div className="hidden lg:flex items-center text-white pb-5">
+      <div className="hidden lg:flex items-center text-white pb-6">
         <ul className="flex-center gap-[70px] ">
           <li>
             <Link

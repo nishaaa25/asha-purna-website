@@ -79,10 +79,10 @@ export default function MobileNav() {
             {/* Header */}
             <div className="flex justify-between items-center p-6 ">
               <Link href="/" onClick={closeNav}>
-                <div className="w-24 h-11 relative">
+                <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
                   <Image
-                    src="/assets/main-logo.svg"
-                    alt="Ashapurna Logo"
+                    src="/assets/main-logo-light.svg"
+                    alt="main-logo"
                     fill
                     className="relative object-contain"
                   />

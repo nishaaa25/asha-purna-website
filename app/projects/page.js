@@ -21,7 +21,7 @@ export default function ProjectsPage() {
 
   const handleTabChange = (tab) => {
     if (tab === activeTab) return; // Prevent unnecessary re-fetch
-    
+
     // Save scroll position before switching
     scrollPositionRef.current = window.scrollY;
     setActiveTab(tab);
@@ -35,8 +35,8 @@ export default function ProjectsPage() {
 
       try {
         // Add 3-second delay for smooth transition effect
-        const delayPromise = new Promise(resolve => setTimeout(resolve, 100));
-        
+        const delayPromise = new Promise((resolve) => setTimeout(resolve, 100));
+
         const response = await fetch(
           "https://apiservices.ashapurna.com/api/web/project/listing",
           {
@@ -64,7 +64,11 @@ export default function ProjectsPage() {
         const result = await response.json();
 
         if (result._status) {
-          setProjects(result._data.getNewlaunchs || []);
+          setProjects([
+            ...(result?._data?.getNewlaunchs || []),
+            ...(result?._data?.getResidentialFlats || []),
+            ...(result?._data?.getResidentialTownships || []),
+          ]);
           setImagePath(result._data.project_image_path || "");
         } else {
           setProjects([]);
@@ -129,7 +133,9 @@ export default function ProjectsPage() {
             <div className="flex flex-col items-center justify-center space-y-4">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black-400"></div>
               <p className="text-gray-500">
-                {isTransitioning ? `Loading ${activeTab} projects...` : "Loading projects..."}
+                {isTransitioning
+                  ? `Loading ${activeTab} projects...`
+                  : "Loading projects..."}
               </p>
             </div>
           </div>
@@ -149,7 +155,7 @@ export default function ProjectsPage() {
               {/* Initial Projects */}
               <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 ">
                 {initialProjects.map((project) => (
-                  <div key={project.id} className="animate-slide-up h-full">
+                  <div key={project.id} className="animate-slide-up">
                     <ProjectCard
                       data={project}
                       hideActions={false}
@@ -174,7 +180,7 @@ export default function ProjectsPage() {
                 }`}
               >
                 {additionalProjects.map((project) => (
-                  <div key={project.id} className="animate-slide-up h-full">
+                  <div key={project.id} className="animate-slide-up">
                     <ProjectCard
                       data={project}
                       hideActions={false}

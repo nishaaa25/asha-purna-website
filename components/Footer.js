@@ -13,23 +13,15 @@ export default function Footer() {
     <footer className="w-full relative pt-6 pb-4 md:py-10 lg:py-20 bg-black-500 text-white flex-center font-helvetica">
       <div className="w-full px-[22px] md:px-10 lg:px-20 relative flex flex-col gap-8">
         <div className="relative flex flex-col gap-[10px]">
-          <div className="w-27 md:w-50 h-13 lg:w-54 md:h-24 lg:h-36 relative mb-4">
-            {/* Light logo */}
-            <Image
-              src="/assets/main-logo-light.svg"
-              alt="main-logo"
-              fill
-              className="relative object-contain logo-light"
-              priority
-            />
-            {/* Dark logo */}
-            <Image
-              src="/assets/main-logo-dark.svg"
-              alt="main-logo"
-              fill
-              className="relative object-contain logo-dark"
-              priority
-            />
+          <div className="w-27 md:w-50 h-13 lg:w-54 md:h-24 lg:h-36 relative mb-10">
+            <div className="w-28 h-22 lg:w-50 lg:h-38 relative">
+              <Image
+                src="/assets/main-logo-light.svg"
+                alt="main-logo"
+                fill
+                className="relative object-contain"
+              />
+            </div>
           </div>
           <div className="relative flex flex-col lg:flex-row gap-7">
             <div className="relative flex flex-col gap-[10px] lg:gap-5 w-full lg:w-5/12">

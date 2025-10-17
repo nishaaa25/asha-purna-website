@@ -10,7 +10,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
   // console.log(imagePath + data.project_logo_1);
   const [isEnquirePopupOpen, setIsEnquirePopupOpen] = useState(false);
   const [isThankYouPopupOpen, setIsThankYouPopupOpen] = useState(false);
-  console.log(data)
+  // console.log(data, "project data");
 
   useEffect(() => {
     setIsMounted(true);
@@ -19,7 +19,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
 
   const setImagePath = (path) => {
     localStorage.setItem("imagePath", path);
-  }
+  };
 
   const handleEnquireClick = () => {
     setIsEnquirePopupOpen(true);
@@ -64,7 +64,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
     ? data.projectName.toLowerCase().replace(/\s+/g, "-")
     : "";
 
-    console.log("Image path",imagePath)
+  console.log("Image path", imagePath);
   return (
     <div className="w-full h-full relative bg-white border-[0.3px] border-black-400/50 rounded-t-[10px] p-[10px] flex flex-col">
       <div className="w-full h-[250px] md:h-[284px] lg:h-[327px] relative rounded-t-md overflow-hidden">
@@ -78,6 +78,18 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
             priority
           />
         )}
+        <div className="absolute w-20 h-20 top-4 left-4">
+          {data?.project_logo_2 && (
+            <Image
+              src={imagePath + data?.project_logo_2}
+              alt={imagePath + data?.project_logo_2_link}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
+          )}
+        </div>
 
         <div
           className={`absolute right-2 top-2 py-[3px] px-3 rounded-full font-medium text-[10px] uppercase ${tagColor} text-white`}
@@ -92,22 +104,24 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
             {data?.name}
           </h3>
           <p className="text-xs md:text-sm lg:text-sm leading-[140%] capitalize">
-           plots
+            plots
           </p>
         </div>
         <div className="flex-between mt-2 relative">
-          {data?.address || data?.location && <div className="flex items-center gap-1 leading-[140%] pt-1">
-            <Image
-              src="/assets/location-red.svg"
-              alt="location-icon"
-              width={10}
-              height={12}
-              className="object-contain"
-            />
-            <span className="text-xs md:text-sm lg:text-sm leading-[140%]">
-              {data?.address || data?.location}
-            </span>
-          </div>}
+          {data?.address && (
+              <div className="flex items-center gap-1 leading-[140%] pt-1">
+                <Image
+                  src="/assets/location-red.svg"
+                  alt="location-icon"
+                  width={12}
+                  height={12}
+                  className="object-contain"
+                />
+                <span className="text-xs md:text-sm lg:text-sm leading-[140%]">
+                  {data?.address || data?.location}
+                </span>
+              </div>
+            )}
           <p className="text-sm md:text-base lg:text-base font-bold">
             {data?.size}
           </p>
