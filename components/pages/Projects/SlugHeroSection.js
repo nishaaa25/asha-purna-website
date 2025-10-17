@@ -18,8 +18,13 @@ export default function SlugHeroSection({
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
   const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
   console.log("projectReraNo ", projectReraNo);
-  const reraNo =
-    projectReraNo.find((item) => item.title === "RERA No")?.value || "";
+const reraNo =
+  projectReraNo.find(
+    (item) =>
+      item.title?.toLowerCase().includes("rera") ||
+      item.value?.toUpperCase().startsWith("RAJ")
+  )?.value || "";
+  console.log("reraNo ", reraNo);
   // Get the main image - prefer featured image or glossy slider, then first slider image
   const getMainImage = () => {
     // Priority 1: Glossy slider images
@@ -108,9 +113,12 @@ export default function SlugHeroSection({
           </p>
         )}
       </div>
-     {reraNo && <div className="p-3 w-2/12 absolute right-0 top-[15vh] flex-center flex-col gap-1 bg-white/90 text-black">
-        <p className="text-sm">Rera No.</p><p className="text-sm font-semibold">{reraNo}</p>
-      </div>}
+      {reraNo && (
+        <div className="p-3 w-2/12 absolute right-0 top-[15vh] flex-center flex-col gap-1 bg-white/90 text-black">
+          <p className="text-sm">Rera No.</p>
+          <p className="text-sm font-semibold">{reraNo}</p>
+        </div>
+      )}
       <div className="absolute bottom-9 w-full px-1">
         <BottomBar
           btnOneLink="#"
