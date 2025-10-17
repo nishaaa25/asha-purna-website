@@ -12,7 +12,7 @@ export default function FoundersCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full relative pb-2 -top-8 h-[560px] md:h-[640px] lg:h-[700px]">
+    <div className="w-full relative pb-2 -top-8">
       <Swiper
         centeredSlides={false}
         slidesPerView={1.1}
@@ -55,7 +55,7 @@ export default function FoundersCarousel() {
             >
               <div
                 key={item.id}
-                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col"
+                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col min-h-[600px]"
               >
                 <div className="w-full relative h-[320px] md:h-[380px] lg:h-[420px] rounded-t-md overflow-hidden flex-none">
                   <Image
@@ -65,22 +65,26 @@ export default function FoundersCarousel() {
                     className="object-cover object-center"
                   />
                 </div>
-                <div className="w-full relative mt-4 content flex flex-col flex-1">
-                  <Image
-                    src="/assets/quot.svg"
-                    alt="quote"
-                    width={27}
-                    height={21}
-                  />
-                  <p className="text-base leading-[140%] w-11/12 relative font-normal text-black-400/70 mt-5">
-                    {item.desc}
-                  </p>
-                  <h2 className="text-xs md:text-base lg:text-lg font-bold leading-[140%] text-black-400 mt-5 lg:mt-7">
-                    {item.name}
-                  </h2>
-                  <h3 className="text-xs md:text-sm lg:text-base leading-[100%] font-medium text-orange-600/50 mt-[5px]">
-                    {item.position}
-                  </h3>
+                <div className="w-full relative mt-4 content flex flex-col flex-1 justify-between">
+                  <div className="flex flex-col">
+                    <Image
+                      src="/assets/quot.svg"
+                      alt="quote"
+                      width={27}
+                      height={21}
+                    />
+                    <p className="text-base leading-[140%] w-11/12 relative font-normal text-black-400/70 mt-5">
+                      {item.desc}
+                    </p>
+                  </div>
+                  <div className="flex flex-col mt-auto">
+                    <h2 className="text-xs md:text-base lg:text-lg font-bold leading-[140%] text-black-400 mt-5 lg:mt-7">
+                      {item.name}
+                    </h2>
+                    <h3 className="text-xs md:text-sm lg:text-base leading-[100%] font-medium text-orange-600/50 mt-[5px]">
+                      {item.position}
+                    </h3>
+                  </div>
                 </div>
               </div>
             </SwiperSlide>

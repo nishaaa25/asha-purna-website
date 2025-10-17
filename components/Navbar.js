@@ -4,12 +4,12 @@ import MobileNav from "./MobileNav";
 
 export default function Navbar() {
   return (
-    <nav className="w-full px-5 md:px-6 lg:px-13 pt-3 lg:pt-3  pb-3 absolute top-0 left-0 flex-between z-110">
+    <nav className="w-full px-5 md:px-6 lg:px-13 pt-3 lg:pt-3  pb-3 absolute top-0 left-0 flex-between z-110 navbar-animate">
       <div className="relative">
         <Link href="/">
           <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
             <Image
-              src="/assets/main-logo-light.svg"
+              src="/assets/logo-light.svg"
               alt="main-logo"
               fill
               className="relative object-contain"

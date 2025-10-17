@@ -36,7 +36,7 @@ export default async function AboutPage() {
       <div className="relative w-full">
         <section className="w-full relative h-[40dvh] md:h-[70vh] lg:h-[90vh] flex-center overflow-hidden ">
           <Image
-            src="/assets/about.jpg"
+            src="/assets/about-bg.jpg"
             alt="land-img"
             fill
             className="relative object-cover"
@@ -48,7 +48,7 @@ export default async function AboutPage() {
             spanText="Places of belonging"
             heading="Turning Lands into,"
             title="About"
-            desc="Since 1996, Ashapurna has transformed land into landmarks creating communities where families find not just homes, but heritage. With 50+ projects, 30,000+ families, and 140+ lakh sq. ft delivered, we've redefined real estate as belonging, pride, and legacy."
+            desc="Founded in 1996, Ashapurna Buildcon Limited has emerged as one of Rajasthan’s most trusted and progressive real estate developers. From its early beginnings to becoming a limited entity within a year, the company has continuously expanded its footprint with a focus on quality, transparency, and long-term value. Over 28 years, Ashapurna has delivered 45 landmark projects spanning 140+ lakh sq. ft., housing more than 30,000 families and redefining community living across categories - residential, commercial, hospitality, and education. As the first ISO 9001:2000 certified developer in Western Rajasthan, Ashapurna’s philosophy remains rooted in integrity, craftsmanship, and innovation - creating spaces that turn aspirations into lasting legacies."
           />
         </div>
         <div className=" px-3 relative -top-10 pb-10 md:pb-15 lg:pb-20">

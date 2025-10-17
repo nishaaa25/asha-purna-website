@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
@@ -15,13 +15,15 @@ export default function CommittedCarousel({data, imagePath}) {
   
 
   return (
-    <div className="w-full relative pb-10 lg:pb-[100px]">
+    <div className="w-full relative pb-4 lg:pb-6">
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, FreeMode]}
         centeredSlides={false}
         slidesPerView={1.1}
         spaceBetween={16}
         watchSlidesProgress
+        freeMode={true}
+        loop={true}
         navigation={{
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",

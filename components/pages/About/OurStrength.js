@@ -13,20 +13,20 @@ export default function OurStrength(params) {
           desc="Behind every township is a team that brings more than skill - they bring passion. What unites them is not just the ambition to build, but the belief that every project must carry integrity, care, and pride."
         />
       </div>
-      <div className="w-[80%] mx-auto relative pb-10">
+      <div className="w-[70%] mx-auto relative pb-10">
         <div className="w-full h-[220px] md:h-[50vh] lg:h-[80vh] relative mb-15 overflow-hidden">
           <Image
             src="/assets/team.svg"
             alt="team"
             fill
-            className="object-cover"
+            className="object-cover object-center relative"
           />
         </div>
         <p className=" text-center relative text-sm lg:text-base leading-[140%] tracking-[-1.1%] text-gray-800 lg:w-8/12 lg:mx-auto ">
     It is this collective spirit that has transformed Ashapurna from a Jodhpur-born dream into a trusted name across Rajasthan, and the same spirit will guide us as we expand across India.
         </p>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 relative w-9/12 mx-auto pt-5 lg:pt-10 pb-15 md:pb-20 lg:pb-[100px] items-start">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 relative w-9/12 mx-auto pt-5 lg:pt-10 pb-15 md:pb-20 items-start">
         {features.map((feature) => (
           <div
             key={feature.id}

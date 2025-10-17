@@ -64,11 +64,20 @@ export default function ProjectsPage() {
         const result = await response.json();
 
         if (result._status) {
-          setProjects([
-            ...(result?._data?.getNewlaunchs || []),
-            ...(result?._data?.getResidentialFlats || []),
-            ...(result?._data?.getResidentialTownships || []),
-          ]);
+          const newlaunchs = (result?._data?.getNewlaunchs || []).map((p) => ({
+            ...p,
+            _listType: "plots",
+          }));
+          const flats = (result?._data?.getResidentialFlats || []).map((p) => ({
+            ...p,
+            _listType: "flats",
+          }));
+          const townships = (result?._data?.getResidentialTownships || []).map((p) => ({
+            ...p,
+            _listType: "township",
+          }));
+
+          setProjects([...newlaunchs, ...flats, ...townships]);
           setImagePath(result._data.project_image_path || "");
         } else {
           setProjects([]);
@@ -102,7 +111,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="w-full relative" ref={projectSectionRef}>
-      <HeroComponentTwo imgUrl="/assets/project-bg.jpg" />
+      <HeroComponentTwo imgUrl="/assets/project-herobg.jpg" />
 
       <div className="w-full relative md:w-[90%] lg:w-[80%] mx-auto">
         <SectionHeader

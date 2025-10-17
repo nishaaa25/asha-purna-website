@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "d3qnldyv492i08.cloudfront.net",
       },
+      {
+        protocol: "https",
+        hostname: "api.qrserver.com",
+      },
     ],
   },
 

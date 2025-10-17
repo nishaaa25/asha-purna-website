@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
+  const router = useRouter();
+  
   const categories = [
     { title: "residential", slug: "residential" },
     { title: "commercial", slug: "commercial" },
@@ -9,6 +14,15 @@ export default function Footer() {
     { title: "renewable energies", slug: "windmills" },
     { title: "education", slug: "education" },
   ];
+
+  const handleLinkClick = (href, e) => {
+    // Only handle internal links (not external links or hash links)
+    if (href.startsWith('/') && !href.startsWith('http') && !href.includes('#')) {
+      e.preventDefault();
+      // Let Next.js handle scroll on navigation; avoid manual pre-navigation scrolls
+      router.push(href);
+    }
+  };
   return (
     <footer className="w-full relative pt-6 pb-4 md:py-10 lg:py-20 bg-black-500 text-white flex-center font-helvetica">
       <div className="w-full px-[22px] md:px-10 lg:px-20 relative flex flex-col gap-8">
@@ -16,7 +30,7 @@ export default function Footer() {
           <div className="w-27 md:w-50 h-13 lg:w-54 md:h-24 lg:h-36 relative mb-10">
             <div className="w-28 h-22 lg:w-50 lg:h-38 relative">
               <Image
-                src="/assets/main-logo-light.svg"
+                src="/assets/logo-light.svg"
                 alt="main-logo"
                 fill
                 className="relative object-contain"
@@ -79,19 +93,19 @@ export default function Footer() {
                 <h6 className="text-orange-600 text-sm md:text-xl lg:text-xl font-bold">
                   Quick Links
                 </h6>
-                <Link href="/">
+                <Link href="/" onClick={(e) => handleLinkClick("/", e)}>
                   <li>Home</li>
                 </Link>
-                <Link href="/about">
+                <Link href="/about" onClick={(e) => handleLinkClick("/about", e)}>
                   <li>About us</li>
                 </Link>
-                <Link href="/CSR">
+                <Link href="/CSR" onClick={(e) => handleLinkClick("/CSR", e)}>
                   <li>CSR</li>
                 </Link>
-                <Link href="/careers">
+                <Link href="/careers" onClick={(e) => handleLinkClick("/careers", e)}>
                   <li>Careers</li>
                 </Link>
-                <Link href="/blogs">
+                <Link href="/blogs" onClick={(e) => handleLinkClick("/blogs", e)}>
                   <li>Blogs</li>
                 </Link>
                 <Link href="/#testimonials">
@@ -108,16 +122,16 @@ export default function Footer() {
                 <Link href="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/newsletter/Ashapurna+Corp+Profile+(Landscape).pdf">
                   <li>Corporate Profile</li>
                 </Link>
-                <Link href="/investor">
+                <Link href="/investor" onClick={(e) => handleLinkClick("/investor", e)}>
                   <li>Investors</li>
                 </Link>
-                <Link href="/NRIcorner">
+                <Link href="/NRIcorner" onClick={(e) => handleLinkClick("/NRIcorner", e)}>
                   <li>NRI Corner</li>
                 </Link>
-                <Link href="/rera-disclaimer">
+                <Link href="/rera-disclaimer" onClick={(e) => handleLinkClick("/rera-disclaimer", e)}>
                   <li>RERA Disclaimer</li>
                 </Link>
-                <Link href="/contact">
+                <Link href="/contact" onClick={(e) => handleLinkClick("/contact", e)}>
                   <li>Contact Us</li>
                 </Link>
               </ul>
@@ -127,7 +141,7 @@ export default function Footer() {
                     Projects
                   </h6>
                   {categories.map((category) => (
-                    <Link key={category?.title} href={`/${category?.slug}`}>
+                    <Link key={category?.title} href={`/${category?.slug}`} onClick={(e) => handleLinkClick(`/${category?.slug}`, e)}>
                       <li className="capitalize">{category?.title}</li>
                     </Link>
                   ))}
@@ -136,10 +150,10 @@ export default function Footer() {
                   <h6 className="text-orange-600 text-sm md:text-xl lg:text-xl font-bold">
                     Others
                   </h6>
-                  <Link href="/privacy-policy">
+                  <Link href="/privacy-policy" onClick={(e) => handleLinkClick("/privacy-policy", e)}>
                     <li>Privacy Policy</li>
                   </Link>
-                  <Link href="/terms-conditions">
+                  <Link href="/terms-conditions" onClick={(e) => handleLinkClick("/terms-conditions", e)}>
                     <li>T & C</li>
                   </Link>
                 </ul>

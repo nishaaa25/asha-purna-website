@@ -7,7 +7,7 @@ import HeroComponentTwo from "@/components/HeroComponentTwo";
 import OurOffice from "@/components/OurOffice";
 import ArticlesCarousel from "@/components/pages/Blogs/ArticlesCarousel";
 import CustomCard from "@/components/pages/Blogs/CustomCard";
-import StayUpdated from "@/components/pages/Blogs/StayUpdated";
+// import StayUpdated from "@/components/pages/Blogs/StayUpdated";
 import IndividualCard from "@/components/pages/IndividualCard";
 import SectionHeader from "@/components/SectionHeader";
 import { faqs2, recentProjects } from "@/lib/content";
@@ -85,7 +85,7 @@ export default function Page() {
         </button>
       </div>
       <ArticlesCarousel />
-      <StayUpdated />
+      {/* <StayUpdated /> */}
     </div>
   );
 }

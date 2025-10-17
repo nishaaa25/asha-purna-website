@@ -44,13 +44,22 @@ async function getData(slug) {
     const result = await response.json();
 
     if (result._status) {
+      const newlaunchs = (result?._data?.getNewlaunchs || []).map((p) => ({
+        ...p,
+        _listType: "plots",
+      }));
+      const flats = (result?._data?.getResidentialFlats || []).map((p) => ({
+        ...p,
+        _listType: "flats",
+      }));
+      const townships = (result?._data?.getResidentialTownships || []).map((p) => ({
+        ...p,
+        _listType: "township",
+      }));
+
       return {
         status: true,
-        data: [
-          ...(result?._data?.getNewlaunchs || []),
-          ...(result?._data?.getResidentialFlats || []),
-          ...(result?._data?.getResidentialTownships || []),
-        ],
+        data: [...newlaunchs, ...flats, ...townships],
         imagePath: result._data?.project_image_path || "",
         message: result._message,
       };

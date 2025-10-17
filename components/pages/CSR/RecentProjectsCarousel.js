@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
@@ -19,11 +19,13 @@ export default function RecentProjectsCarousel({data, imagePath}) {
     <div className="w-full relative">
       <Swiper
         ref={swiperRef}
-        modules={[Navigation]}
+        modules={[Navigation, FreeMode]}
         centeredSlides={false}
         slidesPerView={1.1}
         spaceBetween={16}
         watchSlidesProgress
+        freeMode={true}
+        loop={true}
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
         className="w-full relative"
         pagination={{ clickable: true }}

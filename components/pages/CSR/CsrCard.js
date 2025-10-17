@@ -1,15 +1,26 @@
 "use client";
 import Image from "next/image";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 
 export default function CsrCard({ data, imagesPath }) {
   const isHTML = /<\/?[a-z][\s\S]*>/i.test(data?.description);
   const [isExpanded, setIsExpanded] = useState(false);
+  const contentRef = useRef(null);
+  const [shouldShowToggle, setShouldShowToggle] = useState(false);
 
-  const shouldShowToggle = useMemo(() => {
-    if (!data?.description) return false;
-    // Heuristic: show toggle if description is longer than ~160 chars
-    return String(data.description).replace(/<[^>]*>/g, "").trim().length > 160;
+  // Measure actual overflow in the collapsed state to decide whether to show the toggle
+  useEffect(() => {
+    if (!contentRef.current) {
+      setShouldShowToggle(false);
+      return;
+    }
+    // Wait a tick to ensure layout is settled with images/fonts
+    const id = setTimeout(() => {
+      const el = contentRef.current;
+      const hasOverflow = el.scrollHeight > el.clientHeight + 1; // +1 to avoid rounding issues
+      setShouldShowToggle(hasOverflow);
+    }, 0);
+    return () => clearTimeout(id);
   }, [data?.description]);
 
   const clampStyles = isExpanded
@@ -52,12 +63,13 @@ export default function CsrCard({ data, imagesPath }) {
         )}
         {isHTML ? (
           <div
+            ref={contentRef}
             className="text-gray-700 text-sm"
             style={clampStyles}
             dangerouslySetInnerHTML={{ __html: data?.description }}
           />
         ) : (
-          <p className="text-gray-700 text-sm" style={clampStyles}>
+          <p ref={contentRef} className="text-gray-700 text-sm" style={clampStyles}>
             {data?.description}
           </p>
         )}

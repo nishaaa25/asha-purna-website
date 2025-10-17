@@ -47,6 +47,7 @@ export default function OurJourneySmall() {
   const journeyRef = useRef(null);
   const squareRefs = useRef([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const animationTimeline = useRef(null);
 
   // Build year buckets from shared data
   useEffect(() => {
@@ -111,7 +112,24 @@ export default function OurJourneySmall() {
         setActiveIndex((prevIndex) => {
           if (newIndex === prevIndex) return prevIndex;
 
+          // Kill any existing animation timeline to prevent overlapping animations
+          if (animationTimeline.current) {
+            animationTimeline.current.kill();
+          }
+
+          // Reset all squares to default state immediately to prevent multiple scaling
+          squareRefs.current.forEach((el, index) => {
+            if (el && index !== newIndex) {
+              gsap.set(el, { 
+                scale: 1, 
+                backgroundColor: "#374151",
+                transformOrigin: "50% 50%"
+              });
+            }
+          });
+
           const tl = gsap.timeline();
+          animationTimeline.current = tl;
 
           // Rotate years wheel
           tl.to(
@@ -125,13 +143,7 @@ export default function OurJourneySmall() {
             0
           );
 
-          const prevEl = squareRefs.current[prevIndex];
           const currentEl = squareRefs.current[newIndex];
-
-          if (prevEl) {
-            tl.to(prevEl, { scale: 1, duration: 0.3, ease: "power2.out" }, 0);
-            tl.to(prevEl, { backgroundColor: "#374151", duration: 0.2 }, 0);
-          }
 
           if (currentEl) {
             tl.to(
@@ -170,12 +182,12 @@ export default function OurJourneySmall() {
     }
 
     squareRefs.current.forEach((el) => {
-      if (el) gsap.set(el, { scale: 1 });
+      if (el) gsap.set(el, { scale: 1, transformOrigin: "50% 50%", backgroundColor: "#374151" });
     });
 
     const activeEl = squareRefs.current[activeIndex];
     if (activeEl) {
-      gsap.set(activeEl, { scale: 1.8, backgroundColor: "#e84600" });
+      gsap.set(activeEl, { scale: 1.8, backgroundColor: "#E84600", transformOrigin: "50% 50%" });
     }
   }, []);
 

@@ -1,8 +1,7 @@
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import LenisProvider from "@/components/Hooks/LenisProvider";
 import AppProviders from "@/contexts/AppProviders";
+import ClientPageTransition from "@/components/ClientPageTransition";
 
 // Note: Home page metadata is now fetched from API via getSEOContent('home')
 // This is the fallback metadata for all pages
@@ -18,11 +17,9 @@ export default function RootLayout({ children }) {
       <body className={`antialiased w-screen relative overflow-x-hidden`}>
         <AppProviders>
           <LenisProvider>
-            <Navbar />
-            <div>
+            <ClientPageTransition>
               {children}
-              <Footer />
-            </div>
+            </ClientPageTransition>
           </LenisProvider>
         </AppProviders>
       </body>

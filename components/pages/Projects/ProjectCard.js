@@ -78,18 +78,6 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
             priority
           />
         )}
-        <div className="absolute w-20 h-20 top-4 left-4">
-          {data?.project_logo_2 && (
-            <Image
-              src={imagePath + data?.project_logo_2}
-              alt={imagePath + data?.project_logo_2_link}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
-          )}
-        </div>
 
         <div
           className={`absolute right-2 top-2 py-[3px] px-3 rounded-full font-medium text-[10px] uppercase ${tagColor} text-white`}
@@ -99,32 +87,48 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
       </div>
 
       <div className="content-card pt-4 text-black-400 flex flex-col flex-1">
-        <div className="flex-between relative">
-          <h3 className="text-2xl lg:text-2xl font-semibold leading-[120%]">
-            {data?.name}
-          </h3>
-          <p className="text-xs md:text-sm lg:text-sm leading-[140%] capitalize">
-            plots
-          </p>
-        </div>
-        <div className="flex-between mt-2 relative">
-          {data?.address && (
-              <div className="flex items-center gap-1 leading-[140%] pt-1">
-                <Image
-                  src="/assets/location-red.svg"
-                  alt="location-icon"
-                  width={12}
-                  height={12}
-                  className="object-contain"
-                />
-                <span className="text-xs md:text-sm lg:text-sm leading-[140%]">
-                  {data?.address || data?.location}
-                </span>
-              </div>
-            )}
-          <p className="text-sm md:text-base lg:text-base font-bold">
-            {data?.size}
-          </p>
+        <div className="flex gap-3 relative">
+          {data?.project_logo_2 && (
+            <div className="w-13 h-13 flex-shrink-0 mt-1 overflow-hidden relative flex-center">
+              <Image
+                src={imagePath + data?.project_logo_2}
+                alt={imagePath + data?.project_logo_2_link}
+                width={52}
+                height={52}
+                className="object-cover"
+                sizes="48px"
+              />
+            </div>
+          )}
+          <div className="flex-1">
+            <div className="flex-between relative">
+              <h3 className="text-2xl lg:text-2xl font-semibold leading-[120%]">
+                {data?.name}
+              </h3>
+              <p className="text-xs md:text-sm lg:text-sm leading-[140%] capitalize">
+                {(data?._listType || data?.property_type || data?.category || data?.projectType || data?.project_type || data?.type || "").toString()}
+              </p>
+            </div>
+            <div className="flex-between mt-[2px] mb-3 relative">
+              {data?.address && (
+                  <div className="flex items-center gap-1 leading-[140%] pt-1">
+                    <Image
+                      src="/assets/location-red.svg"
+                      alt="location-icon"
+                      width={12}
+                      height={12}
+                      className="object-contain"
+                    />
+                    <span className="text-xs leading-[140%]">
+                      {data?.address || data?.location}
+                    </span>
+                  </div>
+                )}
+              <p className="text-sm md:text-base lg:text-base font-bold">
+                {data?.size}
+              </p>
+            </div>
+          </div>
         </div>
 
         {!hideActions && (
