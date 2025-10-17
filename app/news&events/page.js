@@ -107,7 +107,7 @@ export default function NewsEventspage() {
             return (
               <Link href={`/news&events/${eventSlug}`} key={item.id}>
                 <div className="flex items-start justify-start flex-row lg:flex-col gap-4 h-full relative cursor-pointer hover:shadow-lg transition-shadow duration-300 p-2 rounded-lg">
-                  <div className="w-4/12 lg:w-full relative h-[130px] md:h-[220px] lg:h-[330px] rounded-t-lg overflow-hidden">
+                  <div className="w-4/12 lg:w-full relative h-[100px] md:h-[220px] lg:h-[240px] rounded-t-lg overflow-hidden">
                     <Image
                       src={imgPath + item?.image}
                       alt={item?.alt_image_text || item?.title}

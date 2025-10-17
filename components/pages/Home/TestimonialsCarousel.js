@@ -136,8 +136,8 @@ export default function TestimonialsCarousel() {
               key={`testimonial-${testimonial.id}-${index}`}
             >
               <div className="relative group">
-                {/* Video Container */}
-                <div className="relative h-[70vh] w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-3xl bg-black">
+                {/* Video Container - fixed 50vh, no thumbnail downscaling */}
+                <div className="relative h-[60vh] w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-3xl bg-black">
                   {/* Play Overlay (mobile/tablet): enable video interaction when tapped) */}
                   {interactiveVideoIndex !== index && (
                     <button
@@ -152,7 +152,7 @@ export default function TestimonialsCarousel() {
                     src={getYouTubeEmbedUrl(testimonial.videoUrl)}
                     allow="autoplay; encrypted-media"
                     allowFullScreen
-                    className={`w-full h-full rounded-2xl transition-transform duration-300 ${interactiveVideoIndex !== index ? "scale-90 object-contain" : "scale-100 object-contain"} ${interactiveVideoIndex === index ? "pointer-events-auto" : "pointer-events-none md:pointer-events-auto"}`}
+                    className={`w-full h-full rounded-2xl object-contain ${interactiveVideoIndex === index ? "pointer-events-auto" : "pointer-events-none md:pointer-events-auto"}`}
                     title={`Testimonial from ${testimonial.name}`}
                     loading="lazy"
                   />
