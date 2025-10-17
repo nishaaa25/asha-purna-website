@@ -1,15 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import MobileNav from "./MobileNav";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="w-full px-5 md:px-8 lg:px-13 pt-2 pb-3 absolute top-0 left-0 flex-between z-110">
+    <nav className={`w-full px-5 md:px-8 lg:px-13 pt-2 pb-3 flex-between z-110 transition-all duration-300 ${
+      isScrolled ? 'fixed top-0 left-0 bg-white shadow-lg pt-3' : 'absolute top-0 left-0 bg-transparent pt-2 pb-3 '
+    }`}>
       <div className="relative">
         <Link href="/">
-          <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
+          <div className={`relative transition-all duration-300 ${
+            isScrolled ? 'w-18 h-14 lg:w-22 lg:h-18' : 'w-22 h-16 lg:w-44 lg:h-32'
+          }`}>
             <Image
-              src="/assets/logo-light.svg"
+              src={isScrolled ? "/assets/logo-dark.svg" : "/assets/logo-light.svg"}
               alt="main-logo"
               fill
               className="relative object-contain"
@@ -17,7 +34,9 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
-      <div className="hidden lg:flex items-center text-white pb-8">
+      <div className={`hidden lg:flex items-center transition-colors duration-300 ${
+        isScrolled ? 'text-black-400 pb-0 text-xs' : 'text-white pb-8 text-base'
+      }`}>
         <ul className="flex-center gap-[70px] ">
           <li>
             <Link
@@ -54,11 +73,17 @@ export default function Navbar() {
                 className="ml-1"
               />
               {/* Dropdown */}
-              <ul className="absolute top-full left-0 mt-2 w-40 bg-black shadow-lg rounded-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all">
+              <ul className={`absolute top-full left-0 mt-2 w-40 shadow-lg rounded-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all ${
+                isScrolled ? 'bg-white' : 'bg-black'
+              }`}>
                 <li>
                   <Link
                     href="/news&events"
-                    className="block px-4 py-2 hover:bg-black-400  hover:text-white font-medium text-lg leading-[100%] cursor-pointer"
+                    className={`block px-4 py-2 font-medium text-lg leading-[100%] cursor-pointer transition-colors duration-300 ${
+                      isScrolled 
+                        ? 'text-gray-800 hover:bg-gray-100' 
+                        : 'text-white hover:bg-gray-700 hover:text-white'
+                    }`}
                   >
                     Events
                   </Link>
@@ -66,7 +91,11 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/awards"
-                    className="block px-4 py-2 hover:bg-black-400  hover:text-white font-medium text-lg leading-[100%] cursor-pointer"
+                    className={`block px-4 py-2 font-medium text-lg leading-[100%] cursor-pointer transition-colors duration-300 ${
+                      isScrolled 
+                        ? 'text-gray-800 hover:bg-gray-100' 
+                        : 'text-white hover:bg-gray-700 hover:text-white'
+                    }`}
                   >
                     Awards
                   </Link>
@@ -74,7 +103,11 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="https://ashapurna.com/blog/"
-                    className="block px-4 py-2 hover:bg-black-400 hover:text-white font-medium text-lg leading-[100%] cursor-pointer"
+                    className={`block px-4 py-2 font-medium text-lg leading-[100%] cursor-pointer transition-colors duration-300 ${
+                      isScrolled 
+                        ? 'text-gray-800 hover:bg-gray-100' 
+                        : 'text-white hover:bg-gray-700 hover:text-white'
+                    }`}
                   >
                     Blogs
                   </Link>
@@ -92,7 +125,7 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      <MobileNav />
+      <MobileNav isScrolled={isScrolled} />
     </nav>
   );
 }

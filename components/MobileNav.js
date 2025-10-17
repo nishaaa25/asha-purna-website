@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function MobileNav() {
+export default function MobileNav({ isScrolled = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [mediaDropdownOpen, setMediaDropdownOpen] = useState(false);
@@ -54,7 +54,9 @@ export default function MobileNav() {
             src="/assets/menu-bar.svg"
             alt="menu"
             fill
-            className="relative object-contain"
+            className={`relative object-contain transition-all duration-300 ${
+              isScrolled ? 'invert' : ''
+            }`}
           />
         </button>
       </div>
