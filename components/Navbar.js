@@ -7,13 +7,20 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    let timeoutId;
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 100);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const scrollTop = window.scrollY;
+        setIsScrolled(scrollTop > 150);
+      }, 10);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return (
@@ -22,7 +29,7 @@ export default function Navbar() {
     }`}>
       <div className="relative">
         <Link href="/">
-          <div className={`relative transition-all duration-300 ${
+          <div className={`relative transition-all duration-500 ease-in-out ${
             isScrolled ? 'w-18 h-14 lg:w-22 lg:h-18' : 'w-22 h-16 lg:w-44 lg:h-32'
           }`}>
             <Image
