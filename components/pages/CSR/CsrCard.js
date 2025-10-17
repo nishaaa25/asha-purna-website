@@ -42,9 +42,18 @@ export default function CsrCard({ data, imagesPath }) {
           src={imagesPath + data.image}
           alt={data.title}
           fill
-          className="object-contain w-full h-full p-2"
+          className="object-cover w-full h-full"
         />
       </div>
+      {/* <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
+        <Image
+          src={imgPath + data.image}
+          alt={data?.alt_image_text || data?.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-contain w-full h-full"
+        />
+      </div> */}
       <div className="blog-content flex flex-col place-items-start gap-1 pt-3 lg:pt-6">
         <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
           {data?.title}
@@ -69,7 +78,11 @@ export default function CsrCard({ data, imagesPath }) {
             dangerouslySetInnerHTML={{ __html: data?.description }}
           />
         ) : (
-          <p ref={contentRef} className="text-gray-700 text-sm" style={clampStyles}>
+          <p
+            ref={contentRef}
+            className="text-gray-700 text-sm"
+            style={clampStyles}
+          >
             {data?.description}
           </p>
         )}
