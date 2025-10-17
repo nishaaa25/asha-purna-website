@@ -11,7 +11,7 @@ export default function CardTwo({data}) {
         alt={data.media ? `${data.title} - ${data.media}` : data.title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-contain w-full h-full"
+        className="object-cover w-full h-full"
       />
     </div>
     <div className="blog-content flex flex-col place-items-start gap-1 pt-3 lg:pt-6">

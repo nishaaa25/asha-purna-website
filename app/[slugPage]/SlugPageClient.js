@@ -25,7 +25,7 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
       ? "/assets/windmills.png"
       : slug === "education"
       ? "/assets/education-bg.png"
-      : null;
+      : "/assets/project-herobg.jpg";
 
   return (
     <div className="w-full relative">
