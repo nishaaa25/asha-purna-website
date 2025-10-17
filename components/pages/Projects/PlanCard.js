@@ -83,12 +83,12 @@ export default function PlanCard({ data, imgPath, project }) {
 
   return (
     <div className="relative w-full flex-center flex-col gap-5 md:gap-8">
-      <div className="w-full relative h-[250px] md:h-[50vh] lg:h-[90vh] rounded-t-[10px] overflow-hidden border-[0.5px] border-black-400 flex-center flex-col ">
+      <div className="w-full relative rounded-t-[10px] overflow-hidden border-[0.5px] border-black-400 flex-center flex-col aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2] ">
         <Image
           src={data?.imgUrl || "/assets/plan.jpg"}
           alt={data?.title || data?.floor || "Floor Plan"}
           fill
-          className="relative w-full object-cover"
+          className="object-contain w-full h-full"
           quality={100}
         />
         <div className="absolute z-40">

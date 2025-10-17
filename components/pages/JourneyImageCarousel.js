@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
@@ -13,12 +13,17 @@ export default function JourneyImageCarousel() {
   return (
     <div className="w-full relative">
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         centeredSlides={false}
         slidesPerView={1.5}
         spaceBetween={15}
         watchSlidesProgress
         loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
         navigation={{
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",

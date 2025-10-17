@@ -16,7 +16,7 @@ export default function OurStrength(params) {
       <div className="w-[70%] mx-auto relative pb-10">
         <div className="w-full h-[220px] md:h-[50vh] lg:h-[80vh] relative mb-15 overflow-hidden">
           <Image
-            src="/assets/team.svg"
+            src="/assets/team.jpg"
             alt="team"
             fill
             className="object-cover object-center relative"

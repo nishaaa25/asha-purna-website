@@ -8,14 +8,14 @@ export default function NewsCard({ data, path }) {
     <Link href={`/news&events/${eventSlug}`}>
       <div
         key={data?.id}
-        className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2 cursor-pointer hover:shadow-lg transition-shadow duration-300"
+        className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2 cursor-pointer transition-shadow duration-300"
       >
-      <div className="w-full h-[222px] md:h-[70vh] lg:h-[95vh] relative img-cont">
+      <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
         <Image
           src={path + data?.image}
            alt={data?.alt_image_text || data?.title}
           fill
-          className="relative object-cover"
+          className="object-contain w-full h-full"
         />
       </div>
       <div className="blog-content flex flex-col place-items-start gap-1 pt-3 lg:pt-6">

@@ -6,13 +6,13 @@ export default function IndividualCard({ data }) {
       key={data.id}
       className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2"
     >
-      <div className="w-full h-[222px] md:h-[70vh] lg:h-[95vh] relative img-cont">
+      <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
         <Image
           src={data.imgUrl}
           alt={data.title || "img"}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="relative object-cover"
+          className="object-cover w-full h-full"
           quality={95}
           priority={false}
           placeholder="blur"

@@ -5,13 +5,13 @@ export default function CardTwo({data}) {
     key={data.id}
     className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2"
   >
-    <div className="w-full h-[222px] md:h-[35vh] lg:h-[40vh] relative img-cont">
+    <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
       <Image
         src={data.imgUrl}
         alt={data.media ? `${data.title} - ${data.media}` : data.title}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="relative object-cover"
+        className="object-contain w-full h-full"
       />
     </div>
     <div className="blog-content flex flex-col place-items-start gap-1 pt-3 lg:pt-6">

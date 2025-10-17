@@ -67,13 +67,13 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
   console.log("Image path", imagePath);
   return (
     <div className="w-full h-full relative bg-white border-[0.3px] border-black-400/50 rounded-t-[10px] p-[10px] flex flex-col">
-      <div className="w-full h-[250px] md:h-[284px] lg:h-[327px] relative rounded-t-md overflow-hidden">
+      <div className="w-full relative rounded-t-md overflow-hidden aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
         {data?.project_logo_1 && (
           <Image
             src={imagePath + data?.project_logo_1}
             alt={imagePath + data?.project_logo_1_link}
             fill
-            className="object-cover"
+            className="object-contain w-full h-full"
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />

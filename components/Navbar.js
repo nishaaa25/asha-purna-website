@@ -4,7 +4,7 @@ import MobileNav from "./MobileNav";
 
 export default function Navbar() {
   return (
-    <nav className="w-full px-5 md:px-8 lg:px-13 pt-5  pb-3 absolute top-0 left-0 flex-between z-110">
+    <nav className="w-full px-5 md:px-8 lg:px-13 pt-2 pb-3 absolute top-0 left-0 flex-between z-110">
       <div className="relative">
         <Link href="/">
           <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
@@ -17,7 +17,7 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
-      <div className="hidden lg:flex items-center text-white ">
+      <div className="hidden lg:flex items-center text-white pb-8">
         <ul className="flex-center gap-[70px] ">
           <li>
             <Link
