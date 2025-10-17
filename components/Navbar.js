@@ -21,7 +21,7 @@ export default function Navbar() {
           : "bg-transparent text-white shadow-none"
       }`}
     >
-      <div className="max-w-[1400px] mx-auto flex justify-between items-center px-5 md:px-8 lg:px-12 py-4 transition-all duration-700 ease-in-out">
+      <div className=" mx-auto flex justify-between items-center px-5 md:px-8 lg:px-12 py-4 transition-all duration-700 ease-in-out">
         {/* LOGO */}
         <Link
           href="/"

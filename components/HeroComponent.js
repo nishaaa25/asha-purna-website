@@ -1,59 +1,51 @@
-import HeroBottomBar from "./HeroBottomBar";
+"use client";
+import { useEffect, useRef } from "react";
 import HorizontalForm from "./HorizontalForm";
 
 export default function HeroComponent() {
+  const playerRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize player only if API is ready
+    function initPlayer() {
+      if (playerRef.current) return;
+      if (!window.YT) return; // API not loaded yet
+
+      playerRef.current = new window.YT.Player("yt-player", {
+        videoId: "Dc79jBuqnc8",
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          modestbranding: 1,
+          rel: 0,
+          start: 10,
+          loop: 1,
+          playlist: "Dc79jBuqnc8",
+        },
+        events: {
+          onReady: (event) => event.target.playVideo(),
+        },
+      });
+    }
+
+    // If API is already loaded, init immediately
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      // Wait for the API to load
+      window.onYouTubeIframeAPIReady = initPlayer;
+    }
+  }, []);
+
   return (
-    <section className="w-full relative h-dvh flex-center overflow-hidden ">
-      {/* <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <iframe
-      className="absolute top-0  scale-[1.2] left-0 w-[300%] h-[300%] md:w-full md:h-full -translate-x-[33%] -translate-y-[33%] md:translate-x-0 md:translate-y-0 pointer-events-none"
-      src="https://www.youtube.com/embed/Dc79jBuqnc8?autoplay=1&mute=1&loop=1&playlist=Dc79jBuqnc8&controls=0&showinfo=0&modestbranding=1&rel=0&disablekb=1"
-      title="Background Video"
-      frameBorder="0"
-      allow="autoplay; fullscreen"
-      allowFullScreen
-    ></iframe>
-      </div> */}
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10 pointer-events-none transform-gpu will-change-transform"
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        onLoadedMetadata={(e) => {
-          const video = e.target;
-          const startTime = 10; // seconds
-          
-          // Ensure video starts from 10 seconds
-          video.currentTime = startTime;
-          
-          // Play immediately after seeking
-          const handleSeeked = () => {
-            video.play();
-            video.removeEventListener('seeked', handleSeeked);
-          };
-          video.addEventListener('seeked', handleSeeked);
-        }}
-        onCanPlay={(e) => {
-          const video = e.target;
-          const startTime = 10; // seconds
-          
-          // Also set start time when video can play
-          if (video.currentTime < startTime) {
-            video.currentTime = startTime;
-          }
-        }}
-        onTimeUpdate={(e) => {
-          const startTime = 10; // seconds
-          const segmentDuration = 10; // seconds
-          if (e.target.currentTime >= startTime + segmentDuration) {
-            e.target.currentTime = startTime;
-          }
-        }}
-      >
-        <source src="/assets/home-video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <section className="w-full relative h-dvh flex-center overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div
+          id="yt-player"
+          className="absolute top-0 scale-[1.2] left-0 w-[300%] h-[300%] md:w-full md:h-full -translate-x-[33%] -translate-y-[33%] md:translate-x-0 md:translate-y-0 pointer-events-none"
+        ></div>
+      </div>
 
       <div className="w-full h-full absolute top-0 left-0 gradient"></div>
       <div className="w-[95%] mx-auto relative text-center text-white flex-center flex-col gap-[6px]">

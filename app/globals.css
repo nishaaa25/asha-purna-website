@@ -26,6 +26,18 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #ffffff !important;
   transition: background-color 9999s ease-in-out 0s;
 }
+#yt-player iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* optional, to prevent interaction */
+}
+
+#yt-player {
+  background: url("/assets/video-placeholder.jpg") center/cover no-repeat;
+}
 
 @font-face {
   font-family: "Mulish";
@@ -138,11 +150,19 @@ input:-webkit-autofill:active {
 }
 
 /* Auto-switch logos based on color scheme */
-.logo-light { display: block; }
-.logo-dark { display: none; }
+.logo-light {
+  display: block;
+}
+.logo-dark {
+  display: none;
+}
 @media (prefers-color-scheme: dark) {
-  .logo-light { display: none; }
-  .logo-dark { display: block; }
+  .logo-light {
+    display: none;
+  }
+  .logo-dark {
+    display: block;
+  }
 }
 
 .gradient {
@@ -503,7 +523,7 @@ body {
 
 /* React-Toastify progress bar: make it fill left-to-right (instead of shrinking) */
 .Toastify__progress-bar {
-  animation-direction: alternate-reverse;/* progress grows forward */
+  animation-direction: alternate-reverse; /* progress grows forward */
   transform-origin: left; /* anchor to left for LTR */
 }
 
