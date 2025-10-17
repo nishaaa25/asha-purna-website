@@ -116,12 +116,12 @@ export default function TestimonialsCarousel() {
             centeredSlides: true,
           },
           1024: {
-            slidesPerView: 2.5,
+            slidesPerView: 1.5,
             spaceBetween: 20,
             centeredSlides: true,
           },
           1280: {
-            slidesPerView: 3,
+            slidesPerView: 1.5,
             spaceBetween: 20,
              slidesOffsetBefore: 30,
              slidesOffsetAfter: 30,
