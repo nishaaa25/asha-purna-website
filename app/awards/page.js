@@ -8,22 +8,6 @@ export default function page() {
   return (
     <div className="relative w-full">
       <HeroComponentTwo imgUrl="/assets/awards-bg.jpg" />
-      <SectionHeader
-        title={awardsPageContent.recognitionSection.title}
-        heading={awardsPageContent.recognitionSection.heading}
-        spanText={awardsPageContent.recognitionSection.spanText}
-        desc={awardsPageContent.recognitionSection.desc}
-      />
-      {awards.slice(0,2).map((award, index) => (
-        <div
-          key={award.id}
-          className={`w-[90%] mx-auto relative pb-7 ${
-            index < awards.length - 1 ? "border-b-[0.5px] border-black-400/50" : ""
-          } mb-7`}
-        >
-          <IndividualCard data={award} />
-        </div>
-      ))}
       <div className="our-journey bg-cream-600 w-full relative">
         <div className="w-full md:w-[90%] lg:w-[80%] mx-auto">
           <SectionHeader

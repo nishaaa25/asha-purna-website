@@ -28,7 +28,7 @@ export default function LandOwnershipCarousel() {
         className="w-full ownership-swiper"
         pagination={{ clickable: true }}
         breakpoints={{
-          320: { slidesPerView: 1.3 },
+          320: { slidesPerView: 1.3 ,  centeredSlides: true,},
           640: { slidesPerView: 1.3 },
           768: { slidesPerView: 1.25 },
           1024: {

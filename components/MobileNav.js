@@ -22,19 +22,18 @@ export default function MobileNav({ isScrolled = false }) {
     setIsClosing(true);
     setMediaDropdownOpen(false);
 
-    // Wait for animation to complete before hiding
+    // Wait for smooth animation to finish
     setTimeout(() => {
       setIsOpen(false);
       setIsClosing(false);
       document.body.style.overflow = "unset";
-    }, 300); // Match animation duration
+    }, 500); // matches CSS duration
   };
 
   const toggleMediaDropdown = () => {
     setMediaDropdownOpen(!mediaDropdownOpen);
   };
 
-  // Cleanup effect to restore body scroll on unmount
   useEffect(() => {
     return () => {
       document.body.style.overflow = "unset";
@@ -43,7 +42,7 @@ export default function MobileNav({ isScrolled = false }) {
 
   return (
     <>
-      {/* Mobile Menu Button */}
+      {/* Menu Toggle Button */}
       <div className="lg:hidden">
         <button
           onClick={toggleNav}
@@ -55,7 +54,7 @@ export default function MobileNav({ isScrolled = false }) {
             alt="menu"
             fill
             className={`relative object-contain transition-all duration-300 ${
-              isScrolled ? 'invert' : ''
+              isScrolled ? "invert" : ""
             }`}
           />
         </button>
@@ -63,7 +62,7 @@ export default function MobileNav({ isScrolled = false }) {
 
       {/* Mobile Navigation Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-110 lg:hidden">
+        <div className="fixed inset-0 z-[110] lg:hidden">
           {/* Backdrop */}
           <div
             className={`absolute inset-0 bg-black bg-opacity-50 mobile-nav-overlay ${
@@ -79,9 +78,9 @@ export default function MobileNav({ isScrolled = false }) {
             }`}
           >
             {/* Header */}
-            <div className="flex justify-between items-center p-6 ">
+            <div className="flex justify-between items-start p-6">
               <Link href="/" onClick={closeNav}>
-                <div className="w-22 h-16 lg:w-44 lg:h-32 relative">
+                <div className="w-22 h-20 lg:w-44 lg:h-32 relative">
                   <Image
                     src="/assets/logo-dark.svg"
                     alt="main-logo"
@@ -92,7 +91,7 @@ export default function MobileNav({ isScrolled = false }) {
               </Link>
               <button
                 onClick={closeNav}
-                className="w-6 h-6 flex items-center justify-center top-5 relative"
+                className="w-6 h-6 flex-center top-7 relative"
                 aria-label="Close menu"
               >
                 <Image
@@ -108,7 +107,6 @@ export default function MobileNav({ isScrolled = false }) {
             {/* Navigation Links */}
             <nav className="p-6 mt-4">
               <ul className="space-y-12 w-11/12 mx-auto">
-                {/* Home */}
                 <li>
                   <Link
                     href="/"
@@ -119,7 +117,6 @@ export default function MobileNav({ isScrolled = false }) {
                   </Link>
                 </li>
 
-                {/* About Us */}
                 <li>
                   <Link
                     href="/about"
@@ -129,20 +126,22 @@ export default function MobileNav({ isScrolled = false }) {
                     About Us
                   </Link>
                 </li>
+
                 <li>
                   <Link
                     href="/projects"
                     onClick={closeNav}
-                    className="block p-[10px] text-[15px] leading-[110%]  text-black-400 border-b border-black-400/10 transition-colors"
+                    className="block p-[10px] text-[15px] leading-[110%] text-black-400 border-b border-black-400/10 transition-colors"
                   >
                     Projects
                   </Link>
                 </li>
-                {/* Media with Dropdown */}
+
+                {/* Media Dropdown */}
                 <li>
                   <button
                     onClick={toggleMediaDropdown}
-                    className="flex items-center justify-between w-full p-[10px] text-[15px] leading-[110%]  text-black-400 border-b border-black-400/10 transition-colors"
+                    className="flex items-center justify-between w-full p-[10px] text-[15px] leading-[110%] text-black-400 border-b border-black-400/10 transition-colors"
                   >
                     <span>Media</span>
                     <div className="flex items-center">
@@ -151,34 +150,33 @@ export default function MobileNav({ isScrolled = false }) {
                         alt="Dropdown"
                         width={16}
                         height={16}
-                        className={`media-dropdown-icon ${
-                          mediaDropdownOpen ? "open" : ""
+                        className={`transition-transform duration-300 ${
+                          mediaDropdownOpen ? "rotate-180" : "rotate-0"
                         }`}
                       />
                     </div>
                   </button>
 
-                  {/* Media Dropdown */}
                   {mediaDropdownOpen && (
                     <div className="mt-4 space-y-3 animate-fade-in">
                       <Link
                         href="/news&events"
                         onClick={closeNav}
-                        className="block p-[10px] text-[15px] leading-[110%]  text-black-400 transition-colors"
+                        className="block p-[10px] text-[15px] leading-[110%] text-black-400 transition-colors"
                       >
                         Events
                       </Link>
                       <Link
-                        href="/https://ashapurna.com/blog/"
+                        href="https://ashapurna.com/blog/"
                         onClick={closeNav}
-                        className="block p-[10px] text-[15px] leading-[110%]  text-black-400  transition-colors"
+                        className="block p-[10px] text-[15px] leading-[110%] text-black-400 transition-colors"
                       >
                         Blogs
                       </Link>
                       <Link
                         href="/awards"
                         onClick={closeNav}
-                        className="block p-[10px] text-[15px] leading-[110%]  text-black-400  transition-colors"
+                        className="block p-[10px] text-[15px] leading-[110%] text-black-400 transition-colors"
                       >
                         Awards
                       </Link>
@@ -186,14 +184,11 @@ export default function MobileNav({ isScrolled = false }) {
                   )}
                 </li>
 
-                {/* Projects */}
-
-                {/* Contact */}
                 <li>
                   <Link
                     href="/contact"
                     onClick={closeNav}
-                    className="block p-[10px] text-[15px] leading-[110%]  text-black-400 border-b border-black-400/10 transition-colors"
+                    className="block p-[10px] text-[15px] leading-[110%] text-black-400 border-b border-black-400/10 transition-colors"
                   >
                     Contact
                   </Link>

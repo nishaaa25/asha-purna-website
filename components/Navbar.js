@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-[110] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
         isScrolled
-          ? "bg-white/90 text-black shadow-md"
+          ? "bg-white text-black shadow-md"
           : "bg-transparent text-white shadow-none"
       }`}
     >
@@ -27,8 +27,8 @@ export default function Navbar() {
           href="/"
           className={`relative transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
             isScrolled
-              ? "w-28 h-12 lg:w-28 lg:h-16 scale-95"
-              : "w-28 h-12 lg:w-44 lg:h-32 scale-100"
+              ? "w-18 h-14 lg:w-28 lg:h-16 scale-95"
+              : "w-18 h-14 lg:w-44 lg:h-32 scale-100"
           }`}
         >
           <Image

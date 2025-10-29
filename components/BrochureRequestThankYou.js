@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export default function BrochureRequestThankYou({ isOpen, onClose, projectName }) {
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function BrochureRequestThankYou({ isOpen, onClose, projectName }
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 bg-black/50 lg:backdrop-blur-md z-[9999] flex items-center justify-center p-4" suppressHydrationWarning>
       <div
         className={`fixed lg:relative top-0 left-0 w-full h-full lg:w-[80vw] lg:max-w-lg lg:h-auto bg-white transform transition-transform duration-500 ease-in-out lg:rounded-lg ${
@@ -101,6 +102,7 @@ export default function BrochureRequestThankYou({ isOpen, onClose, projectName }
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

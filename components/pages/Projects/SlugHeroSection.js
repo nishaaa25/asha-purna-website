@@ -115,10 +115,10 @@ const reraNo =
         )}
       </div>
       {reraNo && (
-        <div className="absolute right-0 top-[15vh] flex flex-col gap-2">
+        <div className="absolute right-0 top-[15vh] flex flex-col gap-2 cursor-pointer z-[100]">
           <button
             onClick={() => setIsReraExpanded(!isReraExpanded)}
-            className="p-4 text-sm bg-white/60 text-black font-medium rounded-l-lg duration-200 "
+            className="p-4 text-sm bg-white/90 text-black font-medium rounded-l-lg duration-200 relative"
           >
             Click here for RERA details
           </button>

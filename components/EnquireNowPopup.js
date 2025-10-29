@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useAPI } from "@/lib/hooks/useAPI";
+import { createPortal } from "react-dom";
 import { isValidEmail, isValidPhone, isValidName } from "@/lib/helpers/regex";
 import { showErrorToast, showSuccessToast } from "@/lib/helpers/toastConfig";
 
@@ -158,7 +159,7 @@ export default function EnquireNowPopup({ isOpen, onClose, onSubmit, projectId, 
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-50  z-[9999]" suppressHydrationWarning>
       <div className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-500 ease-in-out ${
         isOpen ? 'translate-y-0' : '-translate-y-full'
@@ -238,7 +239,8 @@ export default function EnquireNowPopup({ isOpen, onClose, onSubmit, projectId, 
           </form>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

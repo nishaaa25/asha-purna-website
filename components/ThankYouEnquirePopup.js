@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { createPortal } from "react-dom";
+
 
 export default function ThankYouEnquirePopup({ isOpen, onClose, buttonText = "Explore Projects", buttonLink = "/projects" }) {
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 bg-black/50 lg:backdrop-blur-md z-[99999] flex items-center justify-center " suppressHydrationWarning>
       <div
         className={`fixed lg:relative top-0 left-0 w-full h-full lg:w-[80vw] lg:h-[80vh] bg-white transform transition-transform duration-500 ease-in-out lg:rounded-lg ${
@@ -57,7 +58,8 @@ export default function ThankYouEnquirePopup({ isOpen, onClose, buttonText = "Ex
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

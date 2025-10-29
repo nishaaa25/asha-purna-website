@@ -1,14 +1,20 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
-export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }) {
+export default function ViewPlanPopup({
+  isOpen,
+  onClose,
+  onSubmit,
+  projectName,
+}) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
-    project: projectName || ""
+    project: projectName || "",
   });
 
   const [errors, setErrors] = useState({});
@@ -36,7 +42,8 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
     } else if (!phoneRegex.test(formData.phone.replace(/\s/g, ""))) {
-      newErrors.phone = "Please enter a valid 10-digit phone number starting with 6-9";
+      newErrors.phone =
+        "Please enter a valid 10-digit phone number starting with 6-9";
     }
 
     // message validation - now mandatory
@@ -50,29 +57,28 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
     return Object.keys(newErrors).length === 0;
   };
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     // For phone field, only allow numbers and limit to 10 digits
-    if (name === 'phone') {
-      const numericValue = value.replace(/\D/g, '').slice(0, 10);
-      setFormData(prev => ({
+    if (name === "phone") {
+      const numericValue = value.replace(/\D/g, "").slice(0, 10);
+      setFormData((prev) => ({
         ...prev,
-        [name]: numericValue
+        [name]: numericValue,
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
-    
+
     // Clear error for this field when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ""
+        [name]: "",
       }));
     }
   };
@@ -87,7 +93,7 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
         email: "",
         phone: "",
         message: "",
-        project: projectName || ""
+        project: projectName || "",
       });
       setErrors({});
     }
@@ -95,47 +101,68 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
 
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999]" suppressHydrationWarning>
-      <div className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-500 ease-in-out ${
-        isOpen ? 'translate-y-0' : '-translate-y-full'
-      }`}>
+  return createPortal(
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 z-[9999]"
+      suppressHydrationWarning
+    >
+      <div
+        className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-500 ease-in-out ${
+          isOpen ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
         {/* Close button */}
         <button
           type="button"
           onClick={onClose}
           className="absolute top-12 right-6 text-red-500 hover:text-red-700 text-2xl font-bold w-8 h-8 flex items-center justify-center z-10 cursor-pointer"
         >
-          <Image src="/assets/cross.svg" alt="cross" width={24} height={24} className="relative object-contain"/>
+          <Image
+            src="/assets/cross.svg"
+            alt="cross"
+            width={24}
+            height={24}
+            className="relative object-contain"
+          />
         </button>
-        
+
         <div className="w-full h-full flex flex-col items-center justify-center px-8">
-          
-          <form onSubmit={handleSubmit} className="w-full max-w-md space-y-12 flex-center flex-col mt-10">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-md space-y-12 flex-center flex-col mt-10"
+          >
             <div className="w-full">
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.name ? 'border-red-500' : 'border-black-400/20'} outline-none p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
+                className={`w-full border-b ${
+                  errors.name ? "border-red-500" : "border-black-400/20"
+                } outline-none p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
                 placeholder="Name"
               />
-              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
             </div>
-            
+
             <div className="w-full">
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.email ? 'border-red-500' : 'border-black-400/20'} outline-none p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
+                className={`w-full border-b ${
+                  errors.email ? "border-red-500" : "border-black-400/20"
+                } outline-none p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
                 placeholder="Email"
               />
-              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
             </div>
-            
+
             <div className="w-full">
               <input
                 type="tel"
@@ -143,12 +170,16 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
                 value={formData.phone}
                 onChange={handleInputChange}
                 maxLength={10}
-                className={`w-full border-b ${errors.phone ? 'border-red-500' : 'border-black-400/20'} outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
+                className={`w-full border-b ${
+                  errors.phone ? "border-red-500" : "border-black-400/20"
+                } outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
                 placeholder="Phone Number"
               />
-              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+              )}
             </div>
-            
+
             <div className="w-full">
               <select
                 name="project"
@@ -161,19 +192,23 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
                 </option>
               </select>
             </div>
-            
+
             <div className="w-full">
               <input
                 type="text"
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.message ? 'border-red-500' : 'border-black-400/20'} outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
+                className={`w-full border-b ${
+                  errors.message ? "border-red-500" : "border-black-400/20"
+                } outline-none  p-[10px] text-[15px] leading-[110%] text-black-400 placeholder:text-black-400`}
                 placeholder="Explain Your Query *"
               />
-              {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+              {errors.message && (
+                <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+              )}
             </div>
-            
+
             <button
               type="submit"
               className="px-10 bg-black-400 text-white py-[14px] rounded-md text-xs font-medium hover:bg-gray-800 transition-colors duration-200  mt-2 cursor-pointer"
@@ -183,7 +218,7 @@ export default function ViewPlanPopup({ isOpen, onClose, onSubmit, projectName }
           </form>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
-
