@@ -19,7 +19,12 @@ import HorizontalForm from "@/components/HorizontalForm";
 import AwardSection from "@/components/pages/Home/AwardSection";
 import useLenisScrollTrigger from "@/components/Hooks/useLenis";
 
-export default function Home({featuredProjects, imagePath, utsavImagePath, events}) {
+export default function Home({
+  featuredProjects,
+  imagePath,
+  utsavImagePath,
+  events,
+}) {
   //  const lenisRef = useRef(null);
   useLenisScrollTrigger();
   const imgContainerRef = useRef(null);
@@ -98,6 +103,7 @@ export default function Home({featuredProjects, imagePath, utsavImagePath, event
       <div className="pb-5 md:pb-10 lg:pb-15 px-3">
         <CountersSection data={data} />
       </div>
+      <SignatureProject projects={featuredProjects} imagePath={imagePath} />
       <div className="w-full relative flex flex-col gap-6 mx-auto pt-20 lg:pt-[100px] pb-5 lg:pb-20 px-[22px] md:px-12 lg:px-20">
         <Link href={`/${"residential"}`}>
           <div className="w-full h-[204px] md:h-[60vh] lg:h-[90vh] relative rounded-t-[10px] overflow-hidden">
@@ -130,11 +136,10 @@ export default function Home({featuredProjects, imagePath, utsavImagePath, event
           </div>
         </Link>
       </div>
-      <SignatureProject projects={featuredProjects} imagePath={imagePath}/>
       <div className=" bg-cream-600 w-full" id="testimonials">
         <Testimoials />
       </div>
-      <MentionSection events={events} utsavImagePath={utsavImagePath}/>
+      <MentionSection events={events} utsavImagePath={utsavImagePath} />
       <div className="w-full relative bg-cream-600">
         <AwardSection />
       </div>
