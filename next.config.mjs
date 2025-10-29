@@ -2,6 +2,7 @@
 const nextConfig = {
   devIndicators: false,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -15,7 +16,10 @@ const nextConfig = {
   },
 
   env: {
-    WEBSITE_URL: process.env.NODE_ENV === 'production' ? "https://ashapurna.com/" : "http://localhost:3000/",
+    WEBSITE_URL:
+      process.env.NODE_ENV === "production"
+        ? "https://ashapurna.com/"
+        : "http://localhost:3000/",
     // WEBSITE_URL: "https://ashapurna.com/",
     // WEBSITE_URL: 'https://www.ashapurna.com/',
     // BASE_API_URL: 'http://ashapurna.digitaltyari.com/api/Web/',
