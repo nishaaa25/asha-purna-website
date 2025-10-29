@@ -9,6 +9,7 @@ import DropdownSelector from "../CSR/DropdownSelector";
 import SectionHeader from "@/components/SectionHeader";
 import { useState, useEffect } from "react";
 import ImageCarousel from "./ImageCarousel";
+import ProjectGalleryCarousel from "./ProjectGalleryCarousel";
 
 export default function Gallery({ 
   project,
@@ -102,7 +103,7 @@ export default function Gallery({
         </div>
       )}
       <div className="relative">
-        <ImageCarousel images={tabContent} />
+        <ProjectGalleryCarousel images={tabContent} />
       </div>
     </div>
   );

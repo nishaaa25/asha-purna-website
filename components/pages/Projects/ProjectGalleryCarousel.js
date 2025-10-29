@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { recentProjects, testimonials } from "@/lib/content";
 
-export default function ImageCarousel({ images }) {
+export default function ProjectGalleryCarousel({ images }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Don't render if no images
@@ -16,7 +16,7 @@ export default function ImageCarousel({ images }) {
   }
 
   return (
-    <div className="w-full relative -top-6">
+    <div className="w-full relative top-10">
       <Swiper
         modules={[Navigation, Pagination]}
         centeredSlides={true}
@@ -34,7 +34,7 @@ export default function ImageCarousel({ images }) {
           320: { slidesPerView: 1.2 },
           640: { slidesPerView: 1.3 },
           768: { slidesPerView: 1.5 },
-          1024: { slidesPerView: 1.5 },
+          1024: { slidesPerView: 2 },
         }}
       >
         {images.map((item, index) => {
@@ -42,11 +42,11 @@ export default function ImageCarousel({ images }) {
           return (
             <SwiperSlide
               key={index}
-              className={` relative transition-transform duration-300 ease-in-out ${
+              className={`!h-auto relative pt-6 transition-transform duration-300 ease-in-out bg-black-400/2  ${
                 isActive ? "z-[70] scale-[1]" : "z-[10] scale-[0.95] "
               }`}
             >
-              {/* <div className="relative h-[202px] md:h-[40vh] lg:h-[70vh] w-full rounded-t-xl overflow-hidden">
+              {/* <div className="relative h-auto w-full rounded-t-xl overflow-hidden">
                 <Image
                   src={item.imgUrl}
                   alt={item.title || ""}
@@ -55,13 +55,13 @@ export default function ImageCarousel({ images }) {
                   quality={100}
                 />
               </div> */}
-              <div className="w-full relative img-cont aspect-[2/1] lg:aspect-[3/2] rounded-t-2xl overflow-hidden">
+              <div className="w-full relative img-cont aspect-[2/1] lg:aspect-[3/2] ">
                 <Image
-                  src={item.imgUrl}
+                   src={item.imgUrl}
                   alt={item.title || ""}
-                  fill
+fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-contain w-full rounded-t-2xl overflow-hidden "
+                  className="object-contain w-full h-full"
                 />
               </div>
             </SwiperSlide>

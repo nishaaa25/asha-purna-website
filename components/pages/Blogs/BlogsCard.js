@@ -1,34 +1,70 @@
+"use client";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function BlogsCard({data}) {
-  return <div
-    key={data.id}
-    className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2"
-  >
-    <div className="w-full h-[198px] lg:h-[15vw] relative img-cont">
-      <Image
-        src={data.imgUrl}
-        alt={data.title}
-        fill
-        className="relative object-cover"
-      />
+export default function BlogsCard({ data, allBlogs }) {
+  const formattedDate = data.date
+    ? new Date(data.date).toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
+    : "";
+
+  const handleClick = () => {
+    // Save both the selected blog and all blogs data
+    sessionStorage.setItem("selectedBlog", JSON.stringify(data));
+    sessionStorage.setItem("allBlogs", JSON.stringify(allBlogs));
+  };
+
+  return (
+    <div
+      key={data.id}
+      className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-4"
+    >
+      {/* Image */}
+      <div className="relative w-full h-auto overflow-hidden rounded-t-2xl">
+        <Image
+          src={data.imgUrl}
+          alt={data.title}
+          width={800}
+          height={500}
+          className="w-full h-auto rounded-t-2xl"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="blog-content flex flex-col place-items-start gap-1 pt-4 lg:pt-6">
+        {data.media && (
+          <h5 className="text-[15px] md:text-lg lg:text-lg font-bold uppercase text-gray-700">
+            {data.media}
+          </h5>
+        )}
+        <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 bg-orange-600 line"></div>
+        {formattedDate && (
+          <p className="text-[10px] md:text-xs lg:text-sm text-black-400/80 leading-[130%] mt-1">
+            {formattedDate}
+          </p>
+        )}
+        <h3 className="text-base md:text-[22px] lg:text-xl font-semibold text-black-400 leading-[130%] my-1">
+          {data.title}
+        </h3>
+
+        <div className="custom-desc text-sm md:text-base lg:text-base text-gray-800 leading-[130%] w-full pr-2 line-clamp-3 tracking-[-1.1%]">
+          {data?.desc?.replace(/<[^>]+>/g, "")}
+        </div>
+
+        <Link
+          href={`/blogs/${data.slug}`}
+          onClick={handleClick}
+          className="text-sm font-semibold text-orange-600 underline mt-1 hover:text-orange-800 transition-colors duration-200"
+        >
+          Read More
+        </Link>
+      </div>
     </div>
-    <div className="blog-content flex flex-col place-items-start gap-1 pt-3">
-      <h5 className="text-xs font-bold uppercase text-gray-700">
-        {data.media}
-      </h5>
-      <div className="h-[1px] w-9 bg-orange-600 line"></div>
-      <h3 className="text-base font-medium text-gray-600 leading-[130%] my-1">
-        {data.title}
-      </h3>
-      {data.location && <div className="flex-between relative w-full text-black-400/70 text-xs leading-[130%] mb-2">
-        <p >{data.date}</p>
-        <p>{data.location}</p>
-      </div>}
-      <p className="text-sm text-gray-800  leading-[140%] tracking-[-1.1%] w-full pr-2">
-        {data.desc}
-      </p>
-      {data.date&& <p className="text-xs text-black-400/70 font-mulish leading-[130%]">{data.date}</p>}
-    </div>
-  </div>;
+  );
 }

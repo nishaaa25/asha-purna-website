@@ -1,46 +1,62 @@
 import Image from "next/image";
 
 export default function IndividualCard({ data }) {
+  const cleanText = data?.desc?.split("<div")[0].trim();
+  const formattedDate = data.date
+    ? new Date(data.date).toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
+    : "";
   return (
-    <div
+   <div
       key={data.id}
-      className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2"
+      className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-4"
     >
-      <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
+      {/* Image */}
+      {/* <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
         <Image
           src={data.imgUrl}
-          alt={data.title || "img"}
+          alt={data.media ? `${data.title} - ${data.media}` : data.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover w-full h-full"
-          quality={95}
-          priority={false}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+        />
+      </div> */}
+      <div className="relative w-full h-auto overflow-hidden rounded-t-2xl">
+        <Image
+          src={data.imgUrl}
+          alt={data.title}
+          width={800}
+          height={500}
+          className="w-full h-auto rounded-t-2xl"
         />
       </div>
-      <div className="blog-content flex flex-col place-items-start gap-1 pt-3 lg:pt-6">
-        <h5 className="text-[15px] md:text-[24px] lg:text-2xl font-semibold uppercase text-gray-700 mb-1 lg:mb-2">
-          {data.media}
-        </h5>
-        <div className="h-[1px] lg:h-[2px] w-9 lg:w-1/12 bg-orange-600 line mb-2"></div>
-        <h3 className="text-base md:text-[30px] lg:text-[32px] font-medium lg:font-semibold  text-gray-600 leading-[130%] ">
-          {data.title}
-        </h3>
-        {data.location && (
-          <div className="flex-between relative w-full text-black-400/70 text-xs md:text-lg lg:text-lg lg:text-black-400/30 leading-[130%] mb-2">
-            <p>{data.date}</p>
-            <p>{data.location}</p>
-          </div>
+
+      {/* Content */}
+      <div className="blog-content flex flex-col place-items-start gap-1 pt-4 lg:pt-6">
+        {data.media && (
+          <h5 className="text-[15px] md:text-lg lg:text-lg font-bold uppercase text-gray-700">
+            {data.media}
+          </h5>
         )}
-        <p className="text-sm  md:text-xl lg:text-lg text-gray-600  leading-[130%] w-full pr-2">
-          {data.desc}
-        </p>
-        {data.date && !data.location && (
-          <p className="text-[10px] md:text-base lg:text-base text-black-400/30 leading-[130%]">
-            {data.date}
+        <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 mb-2 bg-orange-600 line"></div>
+        {formattedDate && (
+          <p className="text-[10px] md:text-xs lg:text-base text-black-400/80 leading-[130%] mt-1">
+            {formattedDate}
           </p>
         )}
+        <h3 className="text-base md:text-xl lg:text-4xl font-semibold text-black-400 leading-[130%] my-1">
+          {data.title}
+        </h3>
+        {/* Description (4-line limit) */}
+        <div className="custom-desc text-sm md:text-base lg:text-xl text-gray-800 leading-[130%] w-full pr-2 line-clamp-3 tracking-[-1.1%]">
+          {cleanText}
+        </div>
       </div>
     </div>
   );

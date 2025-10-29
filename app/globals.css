@@ -512,3 +512,26 @@ body {
 .Toastify__progress-bar-theme--dark {
   background: #229b3d;
 }
+
+
+
+@layer base{
+  .blog-desc h1, .blog-desc h2{
+    @apply text-xl md:text-2xl lg:text-4xl font-semibold text-black-400 leading-[130%] mb-3 mt-10;
+  }
+  .blog-desc h3{
+    @apply text-base md:text-lg lg:text-xl font-semibold text-black-400 leading-[130%] mb-1 mt-4;
+  }
+  .blog-desc h5{
+    @apply text-sm md:text-base lg:text-lg font-semibold text-black-400 leading-[130%] mb-1 mt-4;
+  }
+  .blog-desc{
+    @apply text-xs md:text-sm lg:text-base tracking-[-1.1%] text-gray-600;
+  }
+  .blog-desc hr{
+    @apply mt-8 mb-4 hidden
+  }
+  .blog ul li b{
+    @apply text-black-400
+  }
+}

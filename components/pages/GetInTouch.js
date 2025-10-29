@@ -128,7 +128,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
   };
 
   return (
-    <div className="relative py-15 md:py-20 lg:py-[100px] text-center">
+    <div className="relative py-15 md:py-20 lg:py-[100px] text-center w-full">
        <div
           className={`whitespace-nowrap text-gray-600 capitalize text-[22px] md:text-[44px] lg:text-[42px]  mb-6`}
         >
