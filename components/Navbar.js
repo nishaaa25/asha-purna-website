@@ -51,7 +51,13 @@ export default function Navbar() {
             {["Home", "About Us", "Projects"].map((item, idx) => (
               <li key={idx}>
                 <Link
-                  href={`/${item === "Home" ? "" : item.toLowerCase().replace(" ", "")}`}
+                  href={`/${
+                    item === "Home"
+                      ? ""
+                      : item === "About Us"
+                      ? "about"
+                      : item.toLowerCase().replace(/\s+/g, "")
+                  }`}
                   className="font-medium text-lg leading-[100%] hover:opacity-70 transition-opacity duration-300"
                 >
                   {item}
@@ -77,7 +83,7 @@ export default function Navbar() {
                 {[
                   { href: "/news&events", label: "Events" },
                   { href: "/awards", label: "Awards" },
-                  { href: "https://ashapurna.com/blog/", label: "Blogs" },
+                  { href: "/blogs", label: "Blogs" },
                 ].map((link, i) => (
                   <li key={i}>
                     <Link
