@@ -18,7 +18,8 @@ export default function SlugHeroSection({
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
   const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
   const [isReraExpanded, setIsReraExpanded] = useState(false);
-  console.log("projectReraNo ", projectReraNo);
+  console.log("project image", projectImagePath, project);
+  // console.log("projectReraNo ", projectReraNo);
 const reraNo =
   projectReraNo.find(
     (item) =>
@@ -93,7 +94,8 @@ const reraNo =
     <section className="w-full relative h-dvh flex-center overflow-hidden ">
       {/* Use Image instead of video */}
       <Image
-        src={mainImage}
+        src={projectImagePath + project?.project_logo_1 
+        }
         alt={project?.name || project?.project_name || "Project"}
         fill
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
