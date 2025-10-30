@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import BlogsCard from "./BlogsCard";
 
-export default function ArticlesCarousel({ data = [] }) {
+export default function ArticlesCarousel({ data = [], allBlogs = [] }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -24,7 +24,7 @@ export default function ArticlesCarousel({ data = [] }) {
           768: { slidesPerView: 1.4 },
           1024: { slidesPerView: 3, centeredSlides: false },
         }}
-        className="w-full ownership-swiper "
+        className="w-full ownership-swiper"
       >
         {data.map((blog, index) => (
           <SwiperSlide
@@ -43,6 +43,7 @@ export default function ArticlesCarousel({ data = [] }) {
                 desc: blog.content,
                 date: blog.published_at,
               }}
+              allBlogs={allBlogs}
             />
           </SwiperSlide>
         ))}

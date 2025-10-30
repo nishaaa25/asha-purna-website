@@ -15,9 +15,12 @@ export default function BlogsCard({ data, allBlogs }) {
     : "";
 
   const handleClick = () => {
-    // Save both the selected blog and all blogs data
     sessionStorage.setItem("selectedBlog", JSON.stringify(data));
-    sessionStorage.setItem("allBlogs", JSON.stringify(allBlogs));
+
+    // Only store allBlogs if it's a valid array
+    if (allBlogs && Array.isArray(allBlogs)) {
+      sessionStorage.setItem("allBlogs", JSON.stringify(allBlogs));
+    }
   };
 
   return (
