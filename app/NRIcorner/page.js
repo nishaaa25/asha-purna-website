@@ -132,12 +132,12 @@ export default async function page() {
       {/* Featured Projects */}
       <div className="relative px-[22px] w-full">
         <SectionHeader heading="Featured" spanText="Projects" />
-        <div className="relative -top-6 lg:hidden">
+        {/* <div className="relative -top-6 lg:hidden">
           {result?.data?.getFeaturedProjects.slice(0, 1).map((project, index) => (
             <ProjectCard data={project} key={index} imagePath={result?.data?.project_image_path}/>
           ))}
-        </div>
-        <div className="relative -top-6 hidden lg:flex lg:flex-col justify-center items-center gap-15">
+        </div> */}
+        <div className="relative -top-6 flex flex-col justify-center items-center gap-15">
           <FeaturedCarousel featuredProjects={result?.data?.getFeaturedProjects} imagePath={result?.data?.project_image_path }/>
           <Button link="/projects" text="View all projects" />
         </div>

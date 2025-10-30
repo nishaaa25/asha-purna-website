@@ -16,7 +16,7 @@ export default function ImageCarousel({ images }) {
   }
 
   return (
-    <div className="w-full relative -top-6">
+    <div className="w-full relative lg:-top-6">
       <Swiper
         modules={[Navigation, Pagination]}
         centeredSlides={true}

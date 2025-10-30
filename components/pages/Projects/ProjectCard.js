@@ -6,6 +6,7 @@ import EnquireNowPopup from "../../EnquireNowPopup";
 import ThankYouEnquirePopup from "../../ThankYouEnquirePopup";
 
 export default function ProjectCard({ data, hideActions = false, imagePath }) {
+  console.log(data, "features");
   const [isMounted, setIsMounted] = useState(false);
   // console.log(imagePath + data.project_logo_1);
   const [isEnquirePopupOpen, setIsEnquirePopupOpen] = useState(false);
@@ -102,28 +103,41 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
           )}
           <div className="flex-1 pt-2">
             <div className="flex-between gap-8 relative">
-              <h3 className="text-base lg:text-2xl font-semibold leading-[120%]">
+              <h3 className="text-base lg:text-xl font-semibold leading-[120%]">
                 {data?.name}
               </h3>
-              <p className="text-xs md:text-sm lg:text-sm leading-[140%] capitalize">
-                {(data?._listType || data?.property_type || data?.category || data?.projectType || data?.project_type || data?.type || "").toString()}
-              </p>
+              {(() => {
+                const value =
+                  data?._listType ||
+                  data?.property_type ||
+                  data?.category?.name || // prioritize name if category is object
+                  (typeof data?.category === "string" ? data.category : "") ||
+                  data?.projectType ||
+                  data?.project_type ||
+                  data?.type;
+
+                return value ? (
+                  <p className="text-xs md:text-sm lg:text-sm leading-[140%] capitalize">
+                    {value}
+                  </p>
+                ) : null;
+              })()}
             </div>
             <div className="flex-between mt-[2px] mb-3 relative">
               {data?.address && (
-                  <div className="flex items-start gap-1 leading-[140%] pt-1">
-                    <Image
-                      src="/assets/location-red.svg"
-                      alt="location-icon"
-                      width={12}
-                      height={12}
-                      className="object-contain"
-                    />
-                    <span className="text-xs leading-[140%]">
-                      {data?.address || data?.location}
-                    </span>
-                  </div>
-                )}
+                <div className="flex items-start gap-1 leading-[140%] pt-1">
+                  <Image
+                    src="/assets/location-red.svg"
+                    alt="location-icon"
+                    width={12}
+                    height={12}
+                    className="object-contain"
+                  />
+                  <span className="text-xs leading-[140%]">
+                    {data?.address || data?.location}
+                  </span>
+                </div>
+              )}
               <p className="text-sm md:text-base lg:text-base font-bold">
                 {data?.size}
               </p>
@@ -133,16 +147,16 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
 
         {!hideActions && (
           <>
-            <div className="grid grid-cols-2 relative w-full gap-4">
+            <div className="grid grid-cols-2 relative w-full gap-4 mt-2">
               <Link
                 href={`/projects/${data?.slug}`}
-                className="border-[0.5px] border-[#cccccc] bg-black-400 text-white whitespace-nowrap font-medium text-sm md:text-base lg:text-base py-[7px] w-full rounded-md mt-2 text-center relative"
+                className="border-1 lg:border-[0.5px] border-[#cccccc] bg-black-400 text-white whitespace-nowrap font-medium text-sm md:text-base lg:text-base py-[7px] w-full rounded-md mt-2 text-center relative"
               >
                 View Details
               </Link>
               <button
                 onClick={handleEnquireClick}
-                className="border-[0.5px] border-black text-black-400 font-medium whitespace-nowrap text-sm md:text-base lg:text-base py-[7px]  w-full rounded-md mt-2 relative cursor-pointer"
+                className="border-1 lg:border-[0.5px] border-black text-black-400 font-medium whitespace-nowrap text-sm md:text-base lg:text-base py-[7px]  w-full rounded-md mt-2 relative cursor-pointer"
               >
                 Enquire Now
               </button>
