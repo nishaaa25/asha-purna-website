@@ -9,6 +9,7 @@ import OurJourney from "@/components/pages/About/OurJourney";
 import FoundersCarousel from "@/components/pages/About/FounderCarousel";
 import OurJourneySmall from "@/components/pages/About/OurJourneySmall";
 import AboutPageClient from "@/components/pages/About/AboutPageClient";
+import Wheel from "@/components/Wheel";
 
 export default async function AboutPage() {
   const data = [
@@ -62,11 +63,8 @@ export default async function AboutPage() {
             <FoundersCarousel />
           </div>
         </div>
-        <div className="w-full relative hidden lg:block">
-          <OurJourney />
-        </div>
-         <div className="w-full relative lg:hidden">
-          <OurJourneySmall/>
+        <div className="w-full relative ">
+          <Wheel/>
         </div>
         <OurStrength />
         <Committed />
