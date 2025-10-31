@@ -6,7 +6,7 @@ import EnquireNowPopup from "../../EnquireNowPopup";
 import ThankYouEnquirePopup from "../../ThankYouEnquirePopup";
 
 export default function ProjectCard({ data, hideActions = false, imagePath }) {
-  console.log(data, "features");
+  // console.log(data, "features");
   const [isMounted, setIsMounted] = useState(false);
   // console.log(imagePath + data.project_logo_1);
   const [isEnquirePopupOpen, setIsEnquirePopupOpen] = useState(false);
@@ -65,7 +65,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
     ? data.projectName.toLowerCase().replace(/\s+/g, "-")
     : "";
 
-  console.log("Image path", imagePath);
+  // console.log("Image path", imagePath);
   return (
     <div className="w-full h-full relative bg-white border-[0.3px] border-black-400/50 rounded-t-[10px] p-[10px] flex flex-col">
       <div className="w-full relative rounded-t-md overflow-hidden aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">

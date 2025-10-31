@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import ourJourneyProjects from "@/lib/ourjourneyproject";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Wheel() {
@@ -12,6 +12,24 @@ export default function Wheel() {
   const squareWheelRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
 
+  function filterProjectsByYearRange(startYear, endYear) {
+    return ourJourneyProjects
+      .filter((project) => {
+        if (endYear === 9999) {
+          // For the last range, include all projects from startYear onwards
+          return project.year >= startYear;
+        }
+        // For other ranges, include projects >= startYear and < endYear
+        return project.year >= startYear && project.year < endYear;
+      })
+      .map((project) => ({
+        title: project.title,
+        projectType: project.projectType,
+        area: project.area,
+        year: project.year,
+      }));
+  }
+
   useEffect(() => {
     const wheel = wheelRef.current;
     const pin = pinRef.current;
@@ -20,173 +38,136 @@ export default function Wheel() {
 
     if (!wheel || !pin || !yearWheel || !squareWheel) return;
 
-    // Create scroll trigger for pinning and rotation
     const scrollTrigger = ScrollTrigger.create({
       trigger: wheel,
       start: "top top",
-      end: "+=500%", // Pin for 500% of viewport height to allow for rotation steps
+      end: "+=500%",
       pin: true,
       pinSpacing: true,
-      scrub: 1, // Smooth scrubbing tied to scroll position
+      scrub: 1,
       onUpdate: (self) => {
-        // Calculate rotation based on scroll progress
         const progress = self.progress;
-        const totalSteps = 4; // 5 years = 4 steps
+        const totalSteps = 4;
         const newIndex = Math.round(progress * totalSteps);
-        
-        // Update active step for square animations
         setActiveStep(newIndex);
-        
-        // Calculate the angle step for 5 years spread across 2.5/4 of the circle (225 degrees)
-        const angleStep = 225 / 4; // 56.25 degrees between each year
-        
-        // Discrete steps with smooth transitions
+
+        const angleStep = 225 / 4;
         const discreteRotation = newIndex * angleStep;
-        
-        // Use GSAP animation for smooth transitions between discrete steps
-        gsap.to(yearWheel, { 
+
+        gsap.to(yearWheel, {
           rotation: -discreteRotation,
           duration: 1.5,
           ease: "power2.out",
-          transformOrigin: "50% 50%"
+          transformOrigin: "50% 50%",
         });
-
-        // No rotation for square wheel - only individual squares move
-      },
-      onEnter: () => {
-        console.log("Wheel pinned to top");
-      },
-      onLeave: () => {
-        console.log("Wheel unpinned");
       },
     });
 
-    // Cleanup function
-    return () => {
-      scrollTrigger.kill();
-    };
+    return () => scrollTrigger.kill();
   }, []);
 
   return (
-    <div className="relative">
-      {/* Content that will be pinned */}
-      <div ref={wheelRef} className="h-screen bg-white flex items-center justify-center">
-        <div ref={pinRef} className="relative">
-              {/* Wheel Container */}
-              <div className="relative w-[800px] h-[800px] flex items-center justify-center">
-            
-            {/* Outer Circle - 9 squares in 1/2 part */}
-            <div className="absolute w-[600px] h-[600px] border-2 border-gray-300 rounded-full">
-              {/* Circular line following the squares' path */}
+    <div className="relative w-full ">
+      <div
+        ref={wheelRef}
+        className="h-screen bg-white relative w-full flex items-center justify-center overflow-hidden"
+      >
+        <div ref={pinRef} className="absolute -left-1/2 ">
+          {/* Wheel Container */}
+          <div className="relative w-[1632px] h-[1632px] flex items-center justify-center">
+            {/* Outer Circle */}
+            <div className="absolute w-[1224px] h-[1224px] rounded-full">
               <svg className="absolute w-full h-full" style={{ zIndex: 1 }}>
                 <defs>
-                  <linearGradient id="orangeGradient" x1="100%" y1="0%" x2="85%" y2="0%">
+                  <linearGradient
+                    id="orangeGradient"
+                    x1="100%"
+                    y1="0%"
+                    x2="85%"
+                    y2="0%"
+                  >
                     <stop offset="0%" stopColor="#ef9566" />
-                    <stop offset="50%" stopColor="#fdcfb6" />
-                    <stop offset="100%" stopColor="#fff7ed" />
+                    <stop offset="30%" stopColor="#fdcfb6aa" />
+                    <stop offset="60%" stopColor="#ffffff" />
                   </linearGradient>
                 </defs>
                 <circle
-                  cx="298"
-                  cy="298"
-                  r="280"
+                  cx="612"
+                  cy="612"
+                  r="571.2"
                   fill="none"
                   stroke="url(#orangeGradient)"
-                  strokeWidth="1"
+                  strokeWidth="1.8"
                   style={{
-                    clipPath: 'polygon(50% 0%, 100% 10%, 100% 45%, 50% 50%)'
+                    clipPath: "polygon(50% 0%, 100% 10%, 100% 45%, 50% 50%)",
                   }}
                 />
               </svg>
+
+              {/* Square Wheel */}
               <div ref={squareWheelRef} className="relative w-full h-full">
                 {Array.from({ length: 9 }, (_, index) => {
-                  const angle = (index * 180) / 8; // 180 degrees spread for half circle with 9 squares
-                  const radius = 280; // Distance from center
-                  
-                  // Calculate original square position
+                  const angle = (index * 180) / 8;
+                  const radius = 571.2;
+
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
-                  
-                  // Determine square behavior based on active step
+
                   const isFirstSquare = index === 0;
-                  const isSecondSquare = index === 1;
-                  
-                  // Calculate final position
                   let finalX = x;
                   let finalY = y;
-                  
-                  // First square never moves - always stays at its original position
+
                   if (!isFirstSquare && activeStep > 0) {
-                    // Calculate how far this square should move along the circular path
-                    const rotationAngle = (activeStep * 22.5); // 22.5 degrees per step
-                    const rotatedAngle = angle - rotationAngle;
-                    
-                    // Check if this square has reached or passed the first square's position
-                    const firstSquareAngle = 0; // First square is at 0 degrees
-                    const hasReachedFirstSquare = rotatedAngle <= firstSquareAngle;
-                    
-                    if (hasReachedFirstSquare) {
-                      // Stick to the first square's position
-                      finalX = Math.cos((firstSquareAngle * Math.PI) / 180) * radius;
-                      finalY = Math.sin((firstSquareAngle * Math.PI) / 180) * radius;
-                    } else {
-                      // Continue moving along the circular path
-                      finalX = Math.cos((rotatedAngle * Math.PI) / 180) * radius;
-                      finalY = Math.sin((rotatedAngle * Math.PI) / 180) * radius;
-                    }
-                  }
-                  
-                  // Size calculation - first square is always large, squares grow when they stick
-                  let size = 8; // Default size for all squares except first
-                  if (isFirstSquare) {
-                    size = 16; // First square is always large
-                  } else if (activeStep > 0) {
-                    // Check if this square has reached the first square's position
-                    const rotationAngle = (activeStep * 22.5);
+                    const rotationAngle = activeStep * 22.5;
                     const rotatedAngle = angle - rotationAngle;
                     const hasReachedFirstSquare = rotatedAngle <= 0;
-                    
+
                     if (hasReachedFirstSquare) {
-                      size = 16; // Square grows when it sticks to the first square
+                      finalX = Math.cos(0) * radius;
+                      finalY = Math.sin(0) * radius;
+                    } else {
+                      finalX =
+                        Math.cos((rotatedAngle * Math.PI) / 180) * radius;
+                      finalY =
+                        Math.sin((rotatedAngle * Math.PI) / 180) * radius;
                     }
                   }
-                  
+
+                  let size = 9.6;
+                  if (isFirstSquare) {
+                    size = 16.32;
+                  } else if (activeStep > 0) {
+                    const rotationAngle = activeStep * 22.5;
+                    const rotatedAngle = angle - rotationAngle;
+                    const hasReachedFirstSquare = rotatedAngle <= 0;
+                    if (hasReachedFirstSquare) {
+                      size = 16.32;
+                    }
+                  }
+
                   const offset = size / 2;
-                  
+
                   return (
                     <div
                       key={index}
-                      className={`absolute transition-all duration-700 ease-out ${
-                        (() => {
-                          if (isFirstSquare) return 'bg-orange-600'; // First square is always orange
-                          
-                          // Check if this square has ever reached the first square position
-                          let hasEverReachedFirstSquare = false;
-                          for (let step = 1; step <= activeStep; step++) {
-                            const rotationAngle = (step * 22.5);
-                            const rotatedAngle = angle - rotationAngle;
-                            if (rotatedAngle <= 0) {
-                              hasEverReachedFirstSquare = true;
-                              break;
-                            }
+                      className={`absolute transition-all duration-700 ease-out ${(() => {
+                        if (isFirstSquare) return "bg-orange-600";
+                        let hasEverReachedFirstSquare = false;
+                        for (let step = 1; step <= activeStep; step++) {
+                          const rotationAngle = step * 22.5;
+                          const rotatedAngle = angle - rotationAngle;
+                          if (rotatedAngle <= 0) {
+                            hasEverReachedFirstSquare = true;
+                            break;
                           }
-                          
-                          if (hasEverReachedFirstSquare) {
-                            return 'bg-orange-600'; // Stay orange once it reaches the first square
-                          }
-                          
-                          // Check if this square is currently at the center position (0 degrees)
-                          if (activeStep > 0) {
-                            const rotationAngle = (activeStep * 22.5);
-                            const rotatedAngle = angle - rotationAngle;
-                            if (Math.abs(rotatedAngle) < 11.25) { // Within half the step angle
-                              return 'bg-orange-600'; // Orange when at center
-                            }
-                          }
-                          
-                          return 'bg-gray-800'; // Gray otherwise
-                        })()
-                      }`}
+                        }
+                        if (hasEverReachedFirstSquare) return "bg-orange-600";
+                        const rotationAngle = activeStep * 22.5;
+                        const rotatedAngle = angle - rotationAngle;
+                        if (Math.abs(rotatedAngle) < 11.25)
+                          return "bg-orange-600";
+                        return "bg-gray-800";
+                      })()}`}
                       style={{
                         width: `${size}px`,
                         height: `${size}px`,
@@ -199,47 +180,107 @@ export default function Wheel() {
               </div>
             </div>
 
-            {/* Middle Circle - Static center circle */}
-            <div className="absolute w-[420px] h-[420px] rounded-full border-70 border-[#d9d9d9] flex items-center justify-center">
+            {/* Middle Circle */}
+            <div className="absolute w-[1060px] h-[1060px] rounded-full border-[104px] border-[#d9d9d9]/20 flex items-center justify-center">
+              <div className="w-[104px] h-[1px] bg-orange-600 absolute -right-[104px]"></div>
             </div>
 
-            {/* Inner Circle - 5 years in 2.5/4 part */}
-            <div className="absolute w-[240px] h-[240px] border-2 border-gray-300 rounded-full">
-              {/* Years positioned in 2.5/4 of the circle */}
+            {/* Inner Circle */}
+            <div className="absolute w-[780px] h-[780px]  rounded-full">
               <div ref={yearWheelRef} className="relative w-full h-full">
-                {['2019', '2020', '2021', '2022', '2023'].map((year, index) => {
-                  // Start from 0 degrees (3 o'clock position) to align with first square
-                  const angle = (index * 225) / 4; // 225 degrees spread (2.5/4), starting from 0 degrees
-                  const radius = 100; // Distance from center
+                {["1997", "2008", "2013", "2016", "2021"].map((year, index) => {
+                  const angle = (index * 225) / 4;
+                  const radius = 360;
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
-                  
-                // Check if this year is currently at the center position (3 o'clock)
-                const isAtCenter = activeStep === index;
-                
+                  const isAtCenter = activeStep === index;
+
+                  return (
+                    <div
+                      key={year}
+                      className={`absolute text-[1.2rem] font-semibold ${
+                        isAtCenter
+                          ? "text-orange-600 opacity-100"
+                          : "text-gray-800 opacity-60"
+                      }`}
+                      style={{
+                        left: `calc(50% + ${x}px - 24px)`,
+                        top: `calc(50% + ${y}px - 18px)`,
+                        transform: `rotate(${angle}deg)`,
+                      }}
+                    >
+                      {year}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-full absolute h-full flex-center top-0 left-0 ">
+                <div className="flex-center flex-col relative text-[64px] leading-[120%] tracking-[-1.1px] left-1/8 text-gray-600">
+                  <h1 className="font-medium">Our </h1>
+                  <h1 className="font-light">Journey</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Right Section */}
+        {/* Right Section */}
+        <div className="w-1/2 h-full relative overflow-hidden ml-auto flex items-center justify-center">
+          <div
+            className="absolute top-0 left-0 w-full transition-transform duration-[0.7s] ease-out"
+            style={{
+              transform: `translateY(-${activeStep * 100}vh)`,
+            }}
+          >
+            {["1997", "2008", "2013", "2016", "2021"].map(
+              (year, index, years) => {
+                const startYear = parseInt(year);
+                const endYear =
+                  index < years.length - 1 ? parseInt(years[index + 1]) : 9999;
+
+                // Filter projects for this year range
+                const filteredProjects = filterProjectsByYearRange(
+                  startYear,
+                  endYear
+                );
+
+                // Calculate opacity based on distance from activeStep
+                const opacity = Math.max(
+                  0,
+                  1 - Math.abs(activeStep - index) * 0.3
+                );
+
                 return (
                   <div
                     key={year}
-                    className={`absolute text-sm font-semibold ${
-                      isAtCenter ? 'text-orange-600' : 'text-gray-800'
-                    }`}
-                    style={{
-                      left: `calc(50% + ${x}px - 15px)`,
-                      top: `calc(50% + ${y}px - 10px)`,
-                      transform: `rotate(${angle}deg)`, // Counter-rotate to keep text upright
-                    }}
+                    className="h-screen w-full flex items-center justify-center text-[3rem] font-bold text-gray-800 transition-all duration-[1.5s] ease-out"
+                    style={{ opacity }}
                   >
-                    {year}
+                    <div className="text-center">
+                      {filteredProjects.length > 0 ? (
+                        <div className="flex flex-col justify-center items-center max-w-[600px] mx-auto">
+                          {filteredProjects.map((project, idx) => (
+                            <div key={idx} className="relative w-full">
+                              <h3 className="text-xl text-gray-800 font-semibold my-4">
+                                {project.title}
+                              </h3>
+                              <div className="w-3/12 h-[1px] bg-orange-600/40 mx-auto"></div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-lg text-gray-500">
+                          No projects available.
+                        </p>
+                      )}
+                    </div>
                   </div>
                 );
-                })}
-              </div>
-            </div>
-
+              }
+            )}
           </div>
         </div>
       </div>
-
     </div>
   );
 }

@@ -20,12 +20,12 @@ export default function SlugHeroSection({
   const [isReraExpanded, setIsReraExpanded] = useState(false);
   console.log("project image", projectImagePath, project);
   // console.log("projectReraNo ", projectReraNo);
-const reraNo =
-  projectReraNo.find(
-    (item) =>
-      item.title?.toLowerCase().includes("rera") ||
-      item.value?.toUpperCase().startsWith("RAJ")
-  )?.value || "";
+  const reraNo =
+    projectReraNo.find(
+      (item) =>
+        item.title?.toLowerCase().includes("rera") ||
+        item.value?.toUpperCase().startsWith("RAJ")
+    )?.value || "";
   console.log("reraNo ", reraNo);
   // Get the main image - prefer featured image or glossy slider, then first slider image
   const getMainImage = () => {
@@ -76,32 +76,34 @@ const reraNo =
     project?.mobile_number || project?.ivr_number || "9314041747";
 
   const handleBrochureClick = () => {
-    console.log("=== Brochure Download Debug ===");
-    console.log("Project ID:", project?.id);
-    console.log("Project Name:", project?.name || project?.project_name);
-    console.log("Brochure file field:", project?.brochure_file);
-    console.log("Brochure link field:", project?.brochure_link);
-    console.log("Project image path (for brochure):", projectImagePath);
-    console.log("Brochure image path (for slider):", brochureImagePath);
-    console.log("Final Brochure URL:", brochureUrl);
-    console.log("================================");
 
     // Always show the brochure popup - it will handle whether brochure exists or not
     setIsBrochurePopupOpen(true);
   };
 
+  console.log(process.env.PROJECT_VIDEO_PATH + project?.page_full_video , "video path")
   return (
     <section className="w-full relative h-dvh flex-center overflow-hidden ">
       {/* Use Image instead of video */}
-      <Image
-        src={projectImagePath + project?.project_logo_1 
-        }
-        alt={project?.name || project?.project_name || "Project"}
-        fill
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        priority
-        quality={100}
-      />
+      {project?.page_full_video ? (
+        <video
+          src={process.env.PROJECT_VIDEO_PATH + project?.page_full_video}
+          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      ) : (
+        <Image
+          src={projectImagePath + project?.project_logo_1}
+          alt={project?.name || project?.project_name || "Project"}
+          fill
+          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
+          priority
+          quality={100}
+        />
+      )}
       <div className="w-full h-full absolute top-0 left-0 bg-black/40"></div>
       <div className="w-[86%] mx-auto relative flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
         <h1 className="text-[36px] md:text-5xl lg:text-6xl xl:text-7xl leading-[120%] tracking-[-1.1%] font-semibold drop-shadow-lg">
@@ -135,19 +137,21 @@ const reraNo =
                   ×
                 </button>
               </div>
-              
+
               <div className="space-y-3">
                 <div>
                   <p className="text-xs text-gray-600 mb-1">RERA Number:</p>
                   <p className="text-sm font-medium">{reraNo}</p>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="flex-1">
                     <p className="text-xs text-gray-600 mb-1">QR Code:</p>
                     <div className="w-5 h-5 bg-white border border-gray-300 rounded flex items-center justify-center">
                       <Image
-                        src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(reraNo)}`}
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
+                          reraNo
+                        )}`}
                         alt={`QR Code for RERA: ${reraNo}`}
                         width={20}
                         height={20}
@@ -155,11 +159,13 @@ const reraNo =
                       />
                     </div>
                   </div>
-                  
+
                   <div className="flex-1">
                     <p className="text-xs text-gray-600 mb-1">Link:</p>
                     <a
-                      href={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(reraNo)}`}
+                      href={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
+                        reraNo
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs text-blue-600 hover:text-blue-800 underline break-all"

@@ -32,7 +32,7 @@ export default function PlanCard({ data, imgPath, project }) {
             phone: formData.phone,
             message: formData.message || "",
             project_id: project?.id ? Number(project?.id) : 0,
-            parma_mantra_type: "brochure",
+            parma_mantra_type: "floor_plan",
           }),
         }
       );

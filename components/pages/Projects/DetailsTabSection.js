@@ -163,9 +163,9 @@ export default function DetailsTabSection({
               __html: project?.description || project?.overview || "",
             }}
           />
-          {/* <div className="w-11/12 relative mb-10">
+          <div className="w-11/12 relative mb-10">
             <DetailsPageCounter data={data} />
-          </div> */}
+          </div> 
           {/* <div className="w-[95%] md:w-[80%] relative text-left bg-cream-500 rounded-xl px-4 py-6 md:py-10 md:px-8">
             <List features={features} heading="Key features" />
           </div> */}
