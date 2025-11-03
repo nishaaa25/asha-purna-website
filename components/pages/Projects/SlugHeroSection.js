@@ -6,6 +6,7 @@ import { useState } from "react";
 import BrochurePopup from "@/components/BrochurePopup";
 import ThankYouPopup from "@/components/ThankYouPopup";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function SlugHeroSection({
   project,
@@ -76,12 +77,14 @@ export default function SlugHeroSection({
     project?.mobile_number || project?.ivr_number || "9314041747";
 
   const handleBrochureClick = () => {
-
     // Always show the brochure popup - it will handle whether brochure exists or not
     setIsBrochurePopupOpen(true);
   };
 
-  console.log(process.env.PROJECT_VIDEO_PATH + project?.page_full_video , "video path")
+  console.log(
+    process.env.PROJECT_VIDEO_PATH + project?.page_full_video,
+    "video path"
+  );
   return (
     <section className="w-full relative h-dvh flex-center overflow-hidden ">
       {/* Use Image instead of video */}
@@ -119,65 +122,50 @@ export default function SlugHeroSection({
         )}
       </div>
       {reraNo && (
-        <div className="absolute right-0 top-[15vh] flex flex-col gap-2 cursor-pointer z-[100]">
-          <button
-            onClick={() => setIsReraExpanded(!isReraExpanded)}
-            className="p-4 text-sm bg-white/90 text-black font-medium rounded-l-lg duration-200 relative"
-          >
-            Click here for RERA details
-          </button>
-          {isReraExpanded && (
-            <div className="p-4 bg-white/95 text-black rounded-lg shadow-lg border border-gray-200 w-64">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold">RERA Details</h3>
-                <button
-                  onClick={() => setIsReraExpanded(false)}
-                  className="text-gray-500 hover:text-gray-700 text-lg"
+        <button
+          onClick={() => setIsReraExpanded(!isReraExpanded)}
+          className={`${
+            isReraExpanded
+              ? "w-3/12 md:w-2/12 lg:w-[10%]"
+              : "w-7/12 md:w-5/12 lg:w-[30%]"
+          } absolute right-0 top-[15vh] flex flex-col gap-2 cursor-pointer z-[100] transition-all duration-200 `}
+        >
+          {isReraExpanded ? (
+            <p
+              className={`p-[10px] md:p-[14px] lg:p-5 text-[10px] md:text-xs text-center lg:text-sm bg-white/20 text-white  font-medium relative`}
+            >
+              <span className={`relative`}>Click here for RERA details</span>
+            </p>
+          ) : (
+            <div className="p-[10px] md:p-[14px] lg:p-5 bg-white/20 text-white relative text-[10px] md:text-xs lg:text-sm flex-between">
+              <div className="flex-col flex justify-start items-start ">
+                <p>RERA Number</p>
+                <p className="text-sm font-medium">{reraNo}</p>
+                <Link
+                  href={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
+                    reraNo
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline break-all text-white mt-3"
                 >
-                  ×
-                </button>
+                  Link
+                </Link>
               </div>
-
-              <div className="space-y-3">
-                <div>
-                  <p className="text-xs text-gray-600 mb-1">RERA Number:</p>
-                  <p className="text-sm font-medium">{reraNo}</p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="flex-1">
-                    <p className="text-xs text-gray-600 mb-1">QR Code:</p>
-                    <div className="w-5 h-5 bg-white border border-gray-300 rounded flex items-center justify-center">
-                      <Image
-                        src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
-                          reraNo
-                        )}`}
-                        alt={`QR Code for RERA: ${reraNo}`}
-                        width={20}
-                        height={20}
-                        className="w-full h-full"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex-1">
-                    <p className="text-xs text-gray-600 mb-1">Link:</p>
-                    <a
-                      href={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
-                        reraNo
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-blue-600 hover:text-blue-800 underline break-all"
-                    >
-                      View Full QR
-                    </a>
-                  </div>
-                </div>
+              <div className="w-2/12 h-full bg-white border border-gray-300 rounded flex items-center justify-center">
+                <Image
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
+                    reraNo
+                  )}`}
+                  alt={`QR Code for RERA: ${reraNo}`}
+                  width={20}
+                  height={20}
+                  className="w-full h-full"
+                />
               </div>
             </div>
           )}
-        </div>
+        </button>
       )}
       <div className="absolute bottom-9 w-full px-1">
         <BottomBar
