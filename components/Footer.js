@@ -131,6 +131,9 @@ export default function Footer() {
                 <Link href="/rera-disclaimer" onClick={(e) => handleLinkClick("/rera-disclaimer", e)}>
                   <li>RERA Disclaimer</li>
                 </Link>
+                <Link href="/become-a-partner" onClick={(e) => handleLinkClick("/become-a-partner", e)}>
+                  <li>Become a Partner</li>
+                </Link>
                 <Link href="/contact" onClick={(e) => handleLinkClick("/contact", e)}>
                   <li>Contact Us</li>
                 </Link>
