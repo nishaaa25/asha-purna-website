@@ -16,7 +16,7 @@ export default function RecentProjectsCarousel({data, imagePath}) {
   
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative ">
       <Swiper
         ref={swiperRef}
         modules={[Navigation, FreeMode]}

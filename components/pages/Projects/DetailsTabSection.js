@@ -26,7 +26,11 @@ export default function DetailsTabSection({
   // Build tabs dynamically based on available data
   const availableTabs = [];
 
-  console.log(projectFloorsData?.project_floor_plans[0]?.project_floor_plan_gallery[0]?.image, "floors data");
+  console.log(
+    projectFloorsData?.project_floor_plans[0]?.project_floor_plan_gallery[0]
+      ?.image,
+    "floors data"
+  );
   // Always show overview if there's project description
   if (project?.description || project?.overview) {
     availableTabs.push("overview");
@@ -59,8 +63,7 @@ export default function DetailsTabSection({
   // Show plans tab if there's master plan or floor plans data
   if (
     project?.master_plan_image ||
-    (projectFloorsData &&
-      projectFloorsData.project_floor_plans )
+    (projectFloorsData && projectFloorsData.project_floor_plans)
   ) {
     availableTabs.push("plans");
   }
@@ -71,24 +74,24 @@ export default function DetailsTabSection({
   const scrollPositionRef = useRef(0);
 
   const tab = availableTabs;
-  console.log(projectFloorsData);
+  console.log(project, "o=counter");
   // Build counter data from project
   const data = [
     {
-      title: project?.counter_1_title || "Bighas of land",
-      value: project?.counter_1_value || "250",
+      title: "Bighas of land",
+      value: project?.bighas_of_land || 0,
     },
     {
-      title: project?.counter_2_title || "Premium Plots",
-      value: project?.counter_2_value || "245",
+      title: "Premium Plots",
+      value: project?.premium_plots || 0,
     },
     {
-      title: project?.counter_3_title || "Security & Access",
-      value: project?.counter_3_value || "24x7",
+      title: "Security & Access",
+      value: "24x7",
     },
     {
-      title: project?.counter_4_title || "Starting Price",
-      value: project?.counter_4_value || project?.starting_price || "₹28L",
+      title: "Starting Price",
+      value: "₹"+ project?.price_range?.match(/\d+(\.\d+)?/)?.[0] +"L" || "0",
     },
   ];
 
@@ -165,7 +168,7 @@ export default function DetailsTabSection({
           />
           <div className="w-11/12 relative mb-10">
             <DetailsPageCounter data={data} />
-          </div> 
+          </div>
           {/* <div className="w-[95%] md:w-[80%] relative text-left bg-cream-500 rounded-xl px-4 py-6 md:py-10 md:px-8">
             <List features={features} heading="Key features" />
           </div> */}
@@ -214,7 +217,8 @@ export default function DetailsTabSection({
               </button>
 
               {/* Floor Plans Button */}
-              {projectFloorsData?.project_floor_plans[0]?.project_floor_plan_gallery[0]?.image && (
+              {projectFloorsData?.project_floor_plans[0]
+                ?.project_floor_plan_gallery[0]?.image && (
                 <button
                   type="button"
                   onClick={() => setSelectedPlan("floor")}

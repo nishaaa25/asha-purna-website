@@ -7,13 +7,13 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-export default function EventDetailClient({ 
-  event, 
-  imagePath, 
+export default function EventDetailClient({
+  event,
+  imagePath,
   galleryImages = [],
   recentEvents = [],
   upcomingProjects = [],
-  slug 
+  slug,
 }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -38,25 +38,25 @@ export default function EventDetailClient({
           Ashapurna Events
         </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-4 md:p-6 lg:p-8">
           {/* Main Content - Left Side */}
           <div className="lg:col-span-8">
-            <div className="bg-white rounded-lg overflow-hidden shadow-sm">
+            <div className="bg-white rounded-lg overflow-hidden shadow-sm p-6">
               {/* Event Main Image */}
               {event.image && (
-                <div className="relative w-full h-[250px] md:h-[350px] lg:h-[450px]">
+                <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
                   <Image
                     src={imagePath + event.image}
                     alt={event.alt_image_text || event.title}
                     fill
-                    className="object-cover"
-                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain w-full h-full"
                   />
                 </div>
               )}
 
               {/* Event Details */}
-              <div className="p-4 md:p-6 lg:p-8">
+              <div className="">
                 {/* Title */}
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-900 mb-4">
                   {event.title}
@@ -64,7 +64,7 @@ export default function EventDetailClient({
 
                 {/* Meta Information */}
                 <div className="flex flex-wrap gap-4 mb-6">
-                  {event.date && event.date !== '1970-01-01' && (
+                  {event.date && event.date !== "1970-01-01" && (
                     <div className="flex items-center gap-2 text-gray-600">
                       <svg
                         className="w-4 h-4 md:w-5 md:h-5 text-orange-600"
@@ -103,7 +103,9 @@ export default function EventDetailClient({
                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                         />
                       </svg>
-                      <span className="text-sm md:text-base">{event.location}</span>
+                      <span className="text-sm md:text-base">
+                        {event.location}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -112,7 +114,9 @@ export default function EventDetailClient({
                 {event.description && (
                   <div className="text-gray-700 text-sm md:text-base leading-relaxed mb-6">
                     {/<\/?[a-z][\s\S]*>/i.test(event.description) ? (
-                      <div dangerouslySetInnerHTML={{ __html: event.description }} />
+                      <div
+                        dangerouslySetInnerHTML={{ __html: event.description }}
+                      />
                     ) : (
                       <p className="whitespace-pre-line">{event.description}</p>
                     )}
@@ -129,15 +133,18 @@ export default function EventDetailClient({
                       {galleryImages.map((item, index) => (
                         <div
                           key={index}
-                          className="relative group overflow-hidden rounded-lg cursor-pointer aspect-[4/3]"
+                          className="relative group overflow-hidden rounded-lg cursor-pointer w-full bg-gray-600/5"
                           onClick={() => openLightbox(index)}
                         >
-                          <Image
-                            src={imagePath + item.image}
-                            alt={item.alt_image_text || "Event Highlight"}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
-                          />
+                          <div className="w-full relative  img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
+                            <Image
+                              src={imagePath + item.image}
+                              alt={item.alt_image_text || "Event Highlight"}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-110"
+                            />
+                          </div>
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
                             <button className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium cursor-pointer">
                               View
@@ -211,7 +218,10 @@ export default function EventDetailClient({
                         />
                       </svg>
                       <Link
-                        href={`/projects/${item.slug || item.projectName?.toLowerCase().replace(/\s+/g, '-')}`}
+                        href={`/projects/${
+                          item.slug ||
+                          item.projectName?.toLowerCase().replace(/\s+/g, "-")
+                        }`}
                         className="text-sm md:text-base text-gray-700 hover:text-orange-600 transition-colors leading-relaxed"
                       >
                         {item.projectName || item.name}
@@ -237,4 +247,3 @@ export default function EventDetailClient({
     </div>
   );
 }
-

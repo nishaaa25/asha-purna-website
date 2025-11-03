@@ -82,26 +82,31 @@ export default function CounterTwo({ data }) {
                 </>
               ) : (
                 // Static styled text (like 24×7 or ₹28L)
-                <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] tracking-[-3%]">
-                  {counter.value.split("").map((char, i) =>
-                    char === "×" || char.toLowerCase() === "l" ? (
-                      <span
-                        key={i}
-                        className="text-orange-600 font-[300] tracking-[-3.6px]"
-                      >
-                        {char}
-                      </span>
-                    ) : (
-                      <span key={i}>{char}</span>
-                    )
-                  )}
-                </span>
+                <>
+                  <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] tracking-[-3%]">
+                      {counter.value.split("").map((char, i) =>
+                        char === "×" || char.toLowerCase() === "l" ? (
+                          <span
+                            key={i}
+                            className="text-orange-600 font-[300] tracking-[-3.6px]"
+                          >
+                            {char}
+                          </span>
+                        ) : (
+                          <span key={i}>{char}</span>
+                        )
+                      )}
+                    </span>
+                  
+                </>
               )}
             </div>
 
-            <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center">
-              {counter.title}
-            </h4>
+            
+              <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center">
+                {counter.title}
+              </h4>
+            
             {index !== data.length - 1 && (
               <span className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-orange-600/70"></span>
             )}

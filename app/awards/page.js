@@ -1,10 +1,58 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import HeroComponentTwo from "@/components/HeroComponentTwo";
 import IndividualCard from "@/components/pages/IndividualCard";
 import JourneyImageCarousel from "@/components/pages/JourneyImageCarousel";
 import SectionHeader from "@/components/SectionHeader";
-import { awardsPageContent, awards } from "@/lib/awards";
+import { awardsPageContent } from "@/lib/awards";
 
-export default function page() {
+export default function Page() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAwards = async () => {
+      try {
+        const response = await fetch(
+          "https://apiservices.ashapurna.com/api/web/media-events/awards",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "api-version": "v1",
+            },
+          }
+        );
+
+        if (!response.ok)
+          throw new Error(`API returned status ${response.status}`);
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Invalid response format");
+        }
+
+        const result = await response.json();
+        if (result._status) {
+          console.log(result?._data, "awards");
+          // const blogsData = result._data?.getblogs || [];
+          // setBlogs([...blogsData].reverse()); // latest first
+        } else {
+          throw new Error(result._message || "Failed to fetch awards");
+        }
+      } catch (err) {
+        console.error("Error fetching awards:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAwards();
+  }, []);
+
   return (
     <div className="relative w-full">
       <HeroComponentTwo imgUrl="/assets/awards-bg.jpg" />
@@ -16,7 +64,26 @@ export default function page() {
             desc={awardsPageContent.journeySection.desc}
           />
         </div>
+
         <JourneyImageCarousel />
+
+        {loading && (
+          <p className="text-center text-gray-600 mt-10">Loading awards...</p>
+        )}
+        {error && (
+          <p className="text-center text-red-600 mt-10">
+            Failed to load awards: {error}
+          </p>
+        )}
+
+        {!loading && !error && blogs.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-[90%] md:w-[85%] lg:w-[80%] mx-auto mt-10">
+            {blogs.map((blog, i) => (
+              <IndividualCard key={i} blog={blog} />
+            ))}
+          </div>
+        )}
+
         <p className="w-[90%] md:w-[75%] lg:w-[60%] relative text-sm md:text-base lg:text-xl text-gray-800 mx-auto text-center pb-15 md:pb-20 lg:pb-[100px] mt-5 lg:mt-10">
           {awardsPageContent.journeySection.closingText}
         </p>

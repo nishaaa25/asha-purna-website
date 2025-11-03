@@ -21,6 +21,7 @@ async function getCSRData() {
       }
     );
 
+
     // Check if response is OK and is JSON
     if (!response.ok) {
       console.error(`CSR API returned status ${response.status}`);
@@ -44,6 +45,7 @@ async function getCSRData() {
     }
 
     const result = await response.json();
+    console.log(result , "csr content")
 
     if (result._status) {
       return {
@@ -76,7 +78,7 @@ export default async function CSRpage() {
   const imagePath = csrData?.data?.csr_social_updates_image_path || "";
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative ">
       <HeroComponentTwo imgUrl="/assets/csr-bg.jpg" />
       <div className="w-full relative md:w-10/12 lg:w-9/12 lg:mx-auto">
         <SectionHeader
@@ -88,7 +90,7 @@ Transforming Lives"
         />{" "}
       </div>
       {/* <TabSection /> */}
-      <div className="relative bg-cream-600 w-full pb-5 lg:pb-0">
+      <div className="relative bg-cream-600 w-full pb-5 md:pb-10 lg:pb-20">
         <div className="w-full md:w-10/12 lg:w-8/12 mx-auto">
           <SectionHeader
             heading="Recent Projects"
