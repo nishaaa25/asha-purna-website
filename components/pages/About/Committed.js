@@ -43,6 +43,7 @@ async function getCSRData() {
     }
 
     const result = await response.json();
+    console.log(result?._data,  "csr-data");
 
     if (result._status) {
       return {

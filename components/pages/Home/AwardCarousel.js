@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { awards } from "@/lib/awards";
 
-export default function AwardCarousel() {
+export default function AwardCarousel({ awardsData, imgPath }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -31,7 +31,7 @@ export default function AwardCarousel() {
           1024: { slidesPerView: 1.5 },
         }}
       >
-        {awards.map((award, index) => {
+        {awardsData.map((award, index) => {
           const isActive = index === activeIndex;
           return (
             <SwiperSlide
@@ -43,7 +43,7 @@ export default function AwardCarousel() {
               <div className="relative rounded-t-lg overflow-hidden">
                 <div className="relative w-full flex items-center justify-center overflow-hidden">
                   <Image
-                    src={award.imgUrl}
+                    src={imgPath + award.image}
                     alt={award.title}
                     width={1200}
                     height={800}
@@ -59,7 +59,7 @@ export default function AwardCarousel() {
                     {award.title}
                   </h3>
                   <p className="text-sm text-gray-800 leading-[140%] tracking-[-1%]">
-                    {award.desc}
+                    {award.description}
                   </p>
                 </div>
               </div>

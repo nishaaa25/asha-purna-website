@@ -11,15 +11,15 @@ export default function CounterTwo({ data }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    if (!data || data.length === 0) return;
+
     const animateCounters = () => {
       if (countRefs.current.length > 0) {
-        countRefs.current.forEach((counter, i) => {
+        countRefs.current.forEach((counter) => {
           if (!counter) return;
 
           const target = counter.getAttribute("data-target");
-
-          // Skip non-numeric targets like 24×7 or ₹28L
-          if (isNaN(Number(target))) return;
+          if (isNaN(Number(target))) return; // skip non-numeric
 
           let count = 0;
           const increment = Number(target) / 160;
@@ -48,71 +48,79 @@ export default function CounterTwo({ data }) {
     });
 
     return () => trigger.kill();
-  }, []);
+  }, [data]);
+
+  // Handle empty or undefined data safely
+  if (!data || data.length === 0) return null;
+
+  // ✅ If only one counter, use flex-center layout instead of grid
+  const isSingleItem = data.length === 1;
 
   return (
     <div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10  w-[90%] lg:w-9/12 mx-auto relative"
       ref={containerRef}
+      className={`${
+        isSingleItem
+          ? "flex justify-center pt-10 w-[90%] lg:w-9/12 mx-auto relative"
+          : "grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto relative"
+      }`}
     >
-      {data.map((counter, index) => {
-        const isStatic = isNaN(Number(counter.value));
+      {data
+        .filter((counter) => counter.value !== null && counter.value !== undefined)
+        .map((counter, index) => {
+          const isStatic = isNaN(Number(counter.value));
 
-        return (
-          <div
-            key={index}
-            className="text-gray-900 w-full relative counter flex-center flex-col lg:gap-2"
-          >
-            <div className="flex items-center font-medium">
-              {/* Animated numeric counters */}
-              {!isStatic ? (
-                <>
-                  <span
-                    ref={(el) => {
-                      if (el) countRefs.current[index] = el;
-                    }}
-                    className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
-                    data-target={counter.value}
-                  >
-                    0
-                  </span>
-                  <span className="text-[43px] md:text-[60px] lg:text-[56px] leading-[100%] text-orange-600 font-[300] tracking-[-3.6px]">
-                    +
-                  </span>
-                </>
-              ) : (
-                // Static styled text (like 24×7 or ₹28L)
-                <>
-                  <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] tracking-[-3%]">
-                      {counter.value.split("").map((char, i) =>
-                        char === "×" || char.toLowerCase() === "l" ? (
-                          <span
-                            key={i}
-                            className="text-orange-600 font-[300] tracking-[-3.6px]"
-                          >
-                            {char}
-                          </span>
-                        ) : (
-                          <span key={i}>{char}</span>
-                        )
-                      )}
+          return (
+            <div
+              key={index}
+              className="text-gray-900 w-full relative counter flex-center flex-col lg:gap-2"
+            >
+              <div className="flex items-center font-medium">
+                {/* Animated numeric counters */}
+                {!isStatic ? (
+                  <>
+                    <span
+                      ref={(el) => {
+                        if (el) countRefs.current[index] = el;
+                      }}
+                      className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
+                      data-target={counter.value}
+                    >
+                      0
                     </span>
-                  
-                </>
-              )}
-            </div>
+                    <span className="text-[43px] md:text-[60px] lg:text-[56px] leading-[100%] text-orange-600 font-[300] tracking-[-3.6px]">
+                      +
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] tracking-[-3%]">
+                    {counter.value.split("").map((char, i) =>
+                      char === "×" || char.toLowerCase() === "l" ? (
+                        <span
+                          key={i}
+                          className="text-orange-600 font-[300] tracking-[-3.6px]"
+                        >
+                          {char}
+                        </span>
+                      ) : (
+                        <span key={i}>{char}</span>
+                      )
+                    )}
+                  </span>
+                )}
+              </div>
 
-            
               <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center">
                 {counter.title}
               </h4>
-            
-            {index !== data.length - 1 && (
-              <span className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-orange-600/70"></span>
-            )}
-          </div>
-        );
-      })}
+
+              {/* Divider line visible only if there are multiple items */}
+              {!isSingleItem && index !== data.length - 1 && (
+                <span className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-orange-600/70"></span>
+              )}
+            </div>
+          );
+        })}
     </div>
   );
 }

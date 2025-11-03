@@ -79,11 +79,11 @@ export default function DetailsTabSection({
   const data = [
     {
       title: "Bighas of land",
-      value: project?.bighas_of_land || 0,
+      value: project?.bighas_of_land ,
     },
     {
       title: "Premium Plots",
-      value: project?.premium_plots || 0,
+      value: project?.premium_plots ,
     },
     {
       title: "Security & Access",
@@ -91,7 +91,7 @@ export default function DetailsTabSection({
     },
     {
       title: "Starting Price",
-      value: "₹"+ project?.price_range?.match(/\d+(\.\d+)?/)?.[0] +"L" || "0",
+      value: project?.price_range?.match(/\d+(\.\d+)?/)?.[0] ? "₹"+ project?.price_range?.match(/\d+(\.\d+)?/)?.[0] +"L": null  ,
     },
   ];
 

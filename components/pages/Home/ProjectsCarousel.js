@@ -87,7 +87,7 @@ export default function ProjectsCarousel({projects, imagePath}) {
                         {project?.address}
                       </span>
                     </div>
-                    <h3 className="text-[28px] font-grenda leading-[100%]">
+                    <h3 className="text-[28px] font-medium leading-[100%]">
                       {project?.name}
                     </h3>
                     <p className="text-[11px] leading-[140%] font-medium text-white-600">

@@ -8,8 +8,9 @@ import SectionHeader from "@/components/SectionHeader";
 import { awardsPageContent } from "@/lib/awards";
 
 export default function Page() {
-  const [blogs, setBlogs] = useState([]);
+  const [awards, setAwards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [imgPath, setImgPath]= useState('');
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -37,8 +38,9 @@ export default function Page() {
         const result = await response.json();
         if (result._status) {
           console.log(result?._data, "awards");
-          // const blogsData = result._data?.getblogs || [];
-          // setBlogs([...blogsData].reverse()); // latest first
+          const awardsData = result._data?.getAwards || [];
+          setAwards(awardsData); 
+          setImgPath(result?._data?.image_path)
         } else {
           throw new Error(result._message || "Failed to fetch awards");
         }
@@ -65,7 +67,7 @@ export default function Page() {
           />
         </div>
 
-        <JourneyImageCarousel />
+        <JourneyImageCarousel awardsData={awards} imgPath={imgPath}/>
 
         {loading && (
           <p className="text-center text-gray-600 mt-10">Loading awards...</p>
@@ -74,14 +76,6 @@ export default function Page() {
           <p className="text-center text-red-600 mt-10">
             Failed to load awards: {error}
           </p>
-        )}
-
-        {!loading && !error && blogs.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-[90%] md:w-[85%] lg:w-[80%] mx-auto mt-10">
-            {blogs.map((blog, i) => (
-              <IndividualCard key={i} blog={blog} />
-            ))}
-          </div>
         )}
 
         <p className="w-[90%] md:w-[75%] lg:w-[60%] relative text-sm md:text-base lg:text-xl text-gray-800 mx-auto text-center pb-15 md:pb-20 lg:pb-[100px] mt-5 lg:mt-10">

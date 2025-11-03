@@ -7,8 +7,9 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { awardsGallery } from "@/lib/awards";
 
-export default function JourneyImageCarousel() {
+export default function JourneyImageCarousel({awardsData, imgPath}) {
   const [activeIndex, setActiveIndex] = useState(0);
+  console.log(awardsData);
 
   return (
     <div className="w-full relative">
@@ -53,7 +54,7 @@ export default function JourneyImageCarousel() {
           },
         }}
       >
-        {awardsGallery.map((award, index) => {
+        {awardsData.map((award, index) => {
           const isActive = index === activeIndex;
           return (
             <SwiperSlide
@@ -64,7 +65,7 @@ export default function JourneyImageCarousel() {
             >
               <div className="relative w-full flex items-center justify-center overflow-hidden">
                 <Image
-                  src={award.imgUrl}
+                  src={imgPath+award.image}
                   alt={award.title}
                   width={1200}
                   height={800}

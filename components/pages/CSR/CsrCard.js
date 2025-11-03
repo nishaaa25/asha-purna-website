@@ -43,6 +43,7 @@ export default function CsrCard({ data, imagesPath }) {
           alt={data.title}
           fill
           className="object-cover w-full h-full"
+          quality={90}
         />
       </div>
       {/* <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">

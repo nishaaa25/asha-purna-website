@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -17,6 +17,51 @@ export default function TestimonialsCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [interactiveVideoIndex, setInteractiveVideoIndex] = useState(null);
   const swiperRef = useRef(null);
+  const [awards, setAwards] = useState([]);
+  const [imgPath, setImgPath] = useState("");
+  const [error, setError] = useState(null);
+  const displayedProjects = awards.slice(0, 3);
+
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch(
+          "https://apiservices.ashapurna.com/api/web/testimonials",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "api-version": "v1",
+            },
+          }
+        );
+
+        if (!response.ok)
+          throw new Error(`API returned status ${response.status}`);
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Invalid response format");
+        }
+
+        const result = await response.json();
+        if (result._status) {
+          console.log(result?._data, "testimonials");
+          // const awardsData = result._data?.getAwards || [];
+          // setAwards(awardsData);
+          // setImgPath(result?._data?.image_path);
+        } else {
+          throw new Error(result._message || "Failed to fetch awards");
+        }
+      } catch (err) {
+        console.error("Error fetching awards:", err);
+        setError(err.message);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
 
   const getYouTubeEmbedUrl = (url) => {
     if (!url) return "";
@@ -123,8 +168,8 @@ export default function TestimonialsCarousel() {
           1280: {
             slidesPerView: 1.5,
             spaceBetween: 20,
-             slidesOffsetBefore: 30,
-             slidesOffsetAfter: 30,
+            slidesOffsetBefore: 30,
+            slidesOffsetAfter: 30,
             centeredSlides: true,
           },
         }}
@@ -132,9 +177,7 @@ export default function TestimonialsCarousel() {
         {testimonials.map((testimonial, index) => {
           const isActive = index === activeIndex;
           return (
-            <SwiperSlide
-              key={`testimonial-${testimonial.id}-${index}`}
-            >
+            <SwiperSlide key={`testimonial-${testimonial.id}-${index}`}>
               <div className="relative group">
                 {/* Video Container - fixed 50vh, no thumbnail downscaling */}
                 <div className="relative h-[180px] md:h-[250px] lg:h-[380px] xl:h-[540px] w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-3xl bg-black">
@@ -145,14 +188,17 @@ export default function TestimonialsCarousel() {
                       onClick={() => setInteractiveVideoIndex(index)}
                       className="md:hidden absolute inset-0 z-20 flex items-center justify-center bg-black/30 active:bg-black/40 transition-colors"
                       aria-label="Play video"
-                    >
-                    </button>
+                    ></button>
                   )}
                   <iframe
                     src={getYouTubeEmbedUrl(testimonial.videoUrl)}
                     allow="autoplay; encrypted-media"
                     allowFullScreen
-                    className={`w-full h-full rounded-2xl object-contain ${interactiveVideoIndex === index ? "pointer-events-auto" : "pointer-events-none md:pointer-events-auto"}`}
+                    className={`w-full h-full rounded-2xl object-contain ${
+                      interactiveVideoIndex === index
+                        ? "pointer-events-auto"
+                        : "pointer-events-none md:pointer-events-auto"
+                    }`}
                     title={`Testimonial from ${testimonial.name}`}
                     loading="lazy"
                   />
