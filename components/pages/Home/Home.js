@@ -104,7 +104,7 @@ export default function Home({
         <CountersSection data={data} />
       </div>
       <SignatureProject projects={featuredProjects} imagePath={imagePath} />
-      <div className="w-full relative flex flex-col gap-6 mx-auto pt-20 lg:pt-[100px] pb-5 lg:pb-20 px-[22px] md:px-12 lg:px-20">
+      <div className="w-full relative flex flex-col gap-6 mx-auto pt-20  pb-5 lg:pb-20 px-[22px] md:px-12 lg:px-20">
         <Link href={`/${"residential"}`}>
           <div className="w-full h-[204px] md:h-[60vh] lg:h-[90vh] relative rounded-t-[10px] overflow-hidden">
             <Image

@@ -101,7 +101,7 @@ export default function NewsEventspage() {
           desc="Explore our comprehensive event history and upcoming celebrations"
         />
 
-        <div className="w-full px-[22px] h-full relative justify-start lg:px-20 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-y-10 lg:gap-x-6 mb-10">
+        <div className="w-full px-[22px] h-full relative justify-start lg:px-20 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-y-10 lg:gap-x-6 mb-10 -top-6 lg:-top-10">
           {eventsToShow.map((item) => {
             const eventSlug = item?.slug || `event-${item?.id}`;
             return (
@@ -143,7 +143,7 @@ export default function NewsEventspage() {
         </div>
 
         {events.length > initialEventCount && (
-          <div className="w-full flex-center pb-10 lg:pb-[80px]">
+          <div className="w-full flex-center pb-6 lg:pb-12 -top-6 lg:-top-10 relative">
             <Button
               text={showAllEvents ? "Show Less" : "All Events"}
               onClick={() => setShowAllEvents(!showAllEvents)}

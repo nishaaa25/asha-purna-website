@@ -14,7 +14,7 @@ export default function Page() {
       <HeroComponentTwo imgUrl="/assets/investor.jpg" />
 
       {/* Become Partner Section */}
-      <section className="w-full relative px-20 flex-center flex-col ">
+      <section className="w-full relative lg:px-20 flex-center flex-col ">
         <SectionHeader
           heading="Become a Partner"
           desc="Whether you’re an individual looking to collaborate as a Channel Partner 
@@ -23,7 +23,7 @@ export default function Page() {
             will reach out to you shortly."
           
         />
-        <div className="flex gap-4 relative -top-15">
+        <div className="flex gap-4 relative -top-10 lg:-top-15">
           <button
             onClick={() => setActiveForm("channel")}
             className={` text-xs md:text-base border border-black-400 lg:text-base py-[10px] font-medium lg:py-[15px] min-w-38 lg:min-w-50 px-5 lg:px-6 rounded-md mt-2 capitalize cursor-pointer text-center ${

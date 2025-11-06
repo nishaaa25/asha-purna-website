@@ -21,7 +21,7 @@ export default function JourneyImageCarousel({awardsData, imgPath}) {
         watchSlidesProgress
         loop={true}
         autoplay={{
-          delay: 1000,
+          delay: 2500,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}

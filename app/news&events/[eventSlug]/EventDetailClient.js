@@ -31,7 +31,16 @@ export default function EventDetailClient({
 
   return (
     <div className="relative w-full">
-      <HeroComponentTwo imgUrl="/assets/investor.jpg" />
+      <div className="relative w-full h-auto overflow-hidden  mb-10 lg:mb-20">
+        <Image
+          src={imagePath + event.image}
+          alt={event.alt_image_text || event.title}
+          width={800}
+          height={500}
+          className="w-full h-auto "
+        />
+        <div className="w-full h-full bg-black/50 absolute top-0 left-0 z-10"></div>
+      </div>
       <div className="w-full max-w-7xl mx-auto px-[22px] md:px-12 lg:px-20 py-12 md:py-20 lg:py-[100px]">
         {/* Page Title */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-semibold text-gray-900 mb-8 md:mb-12 lg:mb-16">
@@ -42,19 +51,6 @@ export default function EventDetailClient({
           {/* Main Content - Left Side */}
           <div className="lg:col-span-8">
             <div className="bg-white rounded-lg overflow-hidden shadow-sm p-6">
-              {/* Event Main Image */}
-              {event.image && (
-                <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
-                  <Image
-                    src={imagePath + event.image}
-                    alt={event.alt_image_text || event.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-contain w-full h-full"
-                  />
-                </div>
-              )}
-
               {/* Event Details */}
               <div className="">
                 {/* Title */}

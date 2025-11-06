@@ -72,7 +72,7 @@ export default function BlogSlugPage() {
   return (
     <div className="w-full relative">
       {/* <HeroComponentTwo imgUrl={blog.imgUrl} /> */}
-      <div className="relative w-full h-auto overflow-hidden  mb-10 lg:mb-20">
+      <div className="relative w-full h-auto overflow-hidden">
         <Image
           src={blog.imgUrl}
           alt={blog.title}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function IndividualCard({ data }) {
   const cleanText = data?.desc?.split("<div")[0].trim();
@@ -12,21 +13,18 @@ export default function IndividualCard({ data }) {
         hour12: true,
       })
     : "";
+
+  const handleClick = () => {
+    sessionStorage.setItem("selectedBlog", JSON.stringify(data));
+  };
+
   return (
-   <div
-      key={data.id}
-      className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-4"
+    <Link
+      href={`/blogs/${data?.slug}`}
+      onClick={handleClick}
+      className="block relative min-w-[270px] rounded-t-lg overflow-hidden pb-4"
     >
       {/* Image */}
-      {/* <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2]">
-        <Image
-          src={data.imgUrl}
-          alt={data.media ? `${data.title} - ${data.media}` : data.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover w-full h-full"
-        />
-      </div> */}
       <div className="relative w-full h-auto overflow-hidden rounded-t-2xl">
         <Image
           src={data.imgUrl}
@@ -53,11 +51,10 @@ export default function IndividualCard({ data }) {
         <h3 className="text-base md:text-xl lg:text-4xl font-semibold text-black-400 leading-[130%] my-1">
           {data.title}
         </h3>
-        {/* Description (4-line limit) */}
         <div className="custom-desc text-sm md:text-base lg:text-xl text-gray-800 leading-[130%] w-full pr-2 line-clamp-3 tracking-[-1.1%]">
           {cleanText}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
