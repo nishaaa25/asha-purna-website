@@ -81,6 +81,36 @@ async function getData(slug) {
     };
   }
 }
+export async function generateStaticParams() {
+  try {
+    const response = await fetch(
+      "https://apiservices.ashapurna.com/api/web/project/listing",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-version": "v1",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    // You can return slugs you want to statically export
+    // For example, based on your headerContent or known project categories:
+    const staticSlugs = [
+      "flats",
+      "township",
+      "plots",
+      "renewable", // whatever slugs exist on your site
+    ];
+
+    return staticSlugs.map((slug) => ({ slugPage: slug }));
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }) {
   const { slugPage } = await params;

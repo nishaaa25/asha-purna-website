@@ -8,46 +8,50 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const handleScroll = () => setIsScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-[110] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+      className={`fixed top-0 left-0 w-full z-[110] transition-colors duration-200 ease-in-out ${
         isScrolled
           ? "bg-white text-black shadow-md"
           : "bg-transparent text-white shadow-none"
       }`}
     >
-      <div className=" mx-auto flex justify-between items-center px-5 md:px-8 lg:px-12 py-4 transition-all duration-700 ease-in-out">
+      <div className="relative mx-auto flex justify-end items-center px-5 md:px-8 lg:px-12 py-5 lg:py-8 transition-all duration-200 ease-in-out">
         {/* LOGO */}
-        <Link
-          href="/"
-          className={`relative transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-            isScrolled
-              ? "w-18 h-14 lg:w-28 lg:h-16 scale-95"
-              : "w-18 h-14 lg:w-44 lg:h-32 scale-100"
+        <div
+          className={`absolute left-3 md:left-8 lg:left-12 pt-6 -top-4   ${
+            isScrolled ? "lg:bg-white  scale-[1.02] lg:shadow-md" : "bg-transparent scale-100"
           }`}
         >
-          <Image
-            src={
-              isScrolled ? "/assets/logo-dark.svg" : "/assets/logo-light.svg"
-            }
-            alt="main-logo"
-            fill
-            className="object-contain transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
-          />
-        </Link>
+          <Link
+            href="/"
+            className={`relative w-24 h-14 lg:w-44 lg:h-32 flex items-center justify-center  overflow-hidden transition-all duration-200 ease-in-out `}
+          >
+            <Image
+              key={isScrolled ? "dark" : "light"} // clean re-render on swap
+              src={
+                isScrolled ? "/assets/logo-dark.svg" : "/assets/logo-light.svg"
+              }
+              alt="main-logo"
+              fill
+              priority
+              className="object-contain transition-opacity duration-200 ease-in-out"
+            />
+          </Link>
+        </div>
 
         {/* DESKTOP NAV */}
         <div
           className={`hidden ${
             isScrolled ? "pb-0" : "pb-8"
-          } lg:flex items-center transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]`}
+          } lg:flex items-center transition-all duration-200 ease-in-out`}
         >
-          <ul className="flex gap-[60px] items-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+          <ul className="flex gap-[60px] items-center">
             {["Home", "About Us", "Projects"].map((item, idx) => (
               <li key={idx}>
                 <Link
@@ -58,7 +62,7 @@ export default function Navbar() {
                       ? "about"
                       : item.toLowerCase().replace(/\s+/g, "")
                   }`}
-                  className="font-medium text-lg leading-[100%] hover:opacity-70 transition-opacity duration-300"
+                  className="font-medium text-lg leading-[100%] hover:opacity-70 transition-opacity duration-200"
                 >
                   {item}
                 </Link>
@@ -76,7 +80,7 @@ export default function Navbar() {
                 />
               </span>
               <ul
-                className={`absolute top-full left-0 mt-2 w-40 rounded-md overflow-hidden opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 invisible group-hover:visible transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                className={`absolute top-full left-0 mt-2 w-40 rounded-md overflow-hidden opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 invisible group-hover:visible transition-all duration-200 ease-in-out ${
                   isScrolled ? "bg-black" : "bg-black/80"
                 }`}
               >
@@ -88,7 +92,7 @@ export default function Navbar() {
                   <li key={i}>
                     <Link
                       href={link.href}
-                      className="block px-4 py-2 font-medium text-base text-white hover:bg-gray-700 transition-colors duration-300"
+                      className="block px-4 py-2 font-medium text-base text-white hover:bg-gray-700 transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -100,7 +104,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/contact"
-                className="font-medium text-lg leading-[100%] hover:opacity-70 transition-opacity duration-300"
+                className="font-medium text-lg leading-[100%] hover:opacity-70 transition-opacity duration-200"
               >
                 Contact Us
               </Link>

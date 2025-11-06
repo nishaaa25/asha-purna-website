@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "export": "next export",
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {

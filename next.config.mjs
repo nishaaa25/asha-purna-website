@@ -14,7 +14,6 @@ const nextConfig = {
       },
     ],
   },
-
   env: {
     WEBSITE_URL:
       process.env.NODE_ENV === "production"
@@ -35,7 +34,8 @@ const nextConfig = {
     CAREER_DATA: "career",
     CAREER_FORM: "career/enquiry",
     CAREER_FORM_RESUME: "https://admin.ashapurna.com/api/upload-career-resume",
-    PROJECT_VIDEO_PATH : "https://d3qnldyv492i08.cloudfront.net/ashapurna/images/projects/full_video_path/",
+    PROJECT_VIDEO_PATH:
+      "https://d3qnldyv492i08.cloudfront.net/ashapurna/images/projects/full_video_path/",
     SEO_CONTENT_API: "seo-content",
     EXTRA_LINKS: "footer-extra-links",
     HOME_API: "home",
