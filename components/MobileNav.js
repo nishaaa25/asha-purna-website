@@ -167,7 +167,7 @@ export default function MobileNav({ isScrolled = false }) {
                         Events
                       </Link>
                       <Link
-                        href="https://ashapurna.com/blog/"
+                        href="/blogs"
                         onClick={closeNav}
                         className="block p-[10px] text-[15px] leading-[110%] text-black-400 transition-colors"
                       >
