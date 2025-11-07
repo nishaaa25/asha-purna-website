@@ -63,7 +63,7 @@ export default async function AboutPage() {
             <FoundersCarousel />
           </div>
         </div>
-        <div className="w-full relative ">
+        <div className="w-full relative  z-0 will-change-auto transform-none">
           <Wheel/>
         </div>
         <OurStrength />

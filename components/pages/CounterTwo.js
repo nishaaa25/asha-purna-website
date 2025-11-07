@@ -66,7 +66,7 @@ export default function CounterTwo({ data }) {
               className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
               data-target={counter.value}
             >
-              0
+              6
             </span>
             {counter.sign && (
               <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">

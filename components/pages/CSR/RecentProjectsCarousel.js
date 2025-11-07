@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, FreeMode } from "swiper/modules";
+import { Navigation, Pagination, FreeMode, Autoplay } from "swiper/modules"; // ✅ include Autoplay
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
@@ -10,22 +10,25 @@ import CardTwo from "@/components/CardTwo";
 import CSRpage from "@/app/CSR/page";
 import CsrCard from "./CsrCard";
 
-export default function RecentProjectsCarousel({data, imagePath}) {
+export default function RecentProjectsCarousel({ data, imagePath }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
-  
 
   return (
-    <div className="w-full relative ">
+    <div className="w-full relative">
       <Swiper
         ref={swiperRef}
-        modules={[Navigation, FreeMode]}
+        modules={[Navigation, FreeMode, Autoplay]} // ✅ added Autoplay
         centeredSlides={false}
         slidesPerView={1.1}
         spaceBetween={16}
         watchSlidesProgress
         freeMode={true}
         loop={true}
+        autoplay={{
+          delay: 2000, // ✅ autoplay delay in ms
+          disableOnInteraction: false, // keeps autoplay running after user interacts
+        }}
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
         className="w-full relative"
         pagination={{ clickable: true }}
@@ -66,9 +69,9 @@ export default function RecentProjectsCarousel({data, imagePath}) {
           );
         })}
       </Swiper>
-      
+
       {/* Navigation Arrows - Only visible on large screens */}
-      <button 
+      <button
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -77,19 +80,19 @@ export default function RecentProjectsCarousel({data, imagePath}) {
         className="hidden lg:flex absolute left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors cursor-pointer"
         aria-label="Previous slide"
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          strokeWidth={2} 
-          stroke="currentColor" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
           className="w-6 h-6 text-orange-600"
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
       </button>
-      
-      <button 
+
+      <button
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -98,12 +101,12 @@ export default function RecentProjectsCarousel({data, imagePath}) {
         className="hidden lg:flex absolute right-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors cursor-pointer"
         aria-label="Next slide"
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          strokeWidth={2} 
-          stroke="currentColor" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
           className="w-6 h-6 text-orange-600"
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />

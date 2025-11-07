@@ -62,53 +62,6 @@ export default function JobOpening() {
         />
       </div>
 
-        {/* FILTERS - COMMENTED OUT AS REQUESTED */}
-        {/* <div className="w-full px-[22px] lg:px-20 relative mx-auto flex flex-col lg:flex-row gap-8 pb-10 mb-4">
-        <div className="relative w-full">
-          <select
-            name="subject"
-            id="subject"
-            className="w-full bg-transparent outline-none pt-[5px] pb-2 lg:py-5 px-[10px] text-[15px] md:text-lg lg:text-base
-                  placeholder:text-black-400 border-b border-black-400/50 
-                  text-black-400 appearance-none leading-[110%]"
-          >
-            <option value="">Designation</option>
-          </select>
-          <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-orange-500">
-            <Image src="/assets/down.svg" alt="down" width={10} height={5} />
-          </div>
-        </div>
-        <div className="relative w-full">
-          <select
-            name="subject"
-            id="subject"
-            className="w-full bg-transparent outline-none pt-[5px] pb-2 lg:py-5 px-[10px] text-[15px] md:text-lg lg:text-base
-                  placeholder:text-black-400 border-b border-black-400/50 
-                  text-black-400 appearance-none leading-[110%]"
-          >
-            <option value="">Experience</option>
-          </select>
-          <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-orange-500">
-            <Image src="/assets/down.svg" alt="down" width={10} height={5} />
-          </div>
-        </div>
-        <div className="relative w-full">
-          <select
-            name="subject"
-            id="subject"
-            className="w-full bg-transparent outline-none pt-[5px] pb-2 lg:py-5 px-[10px] text-[15px] md:text-lg lg:text-base
-                  placeholder:text-black-400 border-b border-black-400/50 
-                  text-black-400 appearance-none leading-[110%]"
-          >
-            <option value="">Department</option>
-          </select>
-          <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-orange-500">
-            <Image src="/assets/down.svg" alt="down" width={10} height={5} />
-          </div>
-        </div>
-      </div>
-        <Button text="Search Jobs" /> */}
-
         {/* JOB LISTINGS */}
         <div className="w-full px-[22px] md:px-12 lg:px-20 mt-6 md:mt-10">
           {isLoading ? (

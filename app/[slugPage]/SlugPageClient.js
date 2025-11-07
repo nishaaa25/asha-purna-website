@@ -20,17 +20,10 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
     (p) => p.type.toLowerCase().replace(/\s+/g, "-") === slug?.toLowerCase()
   );
 
-  const heroImage =
-    slug === "windmills"
-      ? "/assets/windmills.png"
-      : slug === "education"
-      ? "/assets/education-bg.png"
-      : "/assets/project-herobg.jpg";
 
   return (
     <div className="w-full relative">
-      <HeroComponentTwo imgUrl={heroImage} />
-
+      <HeroComponentTwo imgUrl={headerData?.imgUrl} />
       <SectionHeader
         spanText={headerData?.spanText}
         heading={headerData?.heading}

@@ -11,7 +11,7 @@ export default function Page() {
 
   return (
     <div className="w-full relative pb-10 md:pb-20 lg:pb-[100px]">
-      <HeroComponentTwo imgUrl="/assets/investor.jpg" />
+      <HeroComponentTwo imgUrl="/assets/bp-bg.jpg" />
 
       {/* Become Partner Section */}
       <section className="w-full relative lg:px-20 flex-center flex-col ">

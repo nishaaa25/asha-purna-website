@@ -177,7 +177,7 @@ export default function TestimonialsCarousel() {
         {testimonials.map((testimonial, index) => {
           const isActive = index === activeIndex;
           return (
-            <SwiperSlide key={`testimonial-${testimonial.id}-${index}`}>
+            <SwiperSlide key={`testimonial-${testimonial.id}-${index} `}>
               <div className="relative group">
                 {/* Video Container - fixed 50vh, no thumbnail downscaling */}
                 <div className="relative h-[180px] md:h-[250px] lg:h-[380px] xl:h-[540px] w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-3xl bg-black">

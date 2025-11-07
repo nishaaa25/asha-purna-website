@@ -16,7 +16,7 @@ export default function CountersSection() {
         countRefs.current.forEach((counter) => {
           if (!counter) return;
 
-          let count = 0;
+          let count = 5;
           const target = Number(counter.getAttribute("data-target"));
 
           const increment = target / 250;
@@ -92,7 +92,7 @@ export default function CountersSection() {
             className="text-3xl lg:text-[72px] leading-[100%] counter-title"
             data-target={counter.value}
           >
-            0+
+            6+
           </span>
           <h4 className="text-base lg:text-lg mt-2">{counter.title}</h4>
         </div>

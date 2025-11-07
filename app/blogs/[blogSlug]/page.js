@@ -62,6 +62,7 @@ export default function BlogSlugPage() {
 
   // get next 20 blogs after this one
   const nextBlogs = allBlogs.slice(currentIndex + 1, currentIndex + 21);
+  console.log(nextBlogs, "next blogs");
 
   // if not enough blogs remain at end, wrap around to start
   const blogsToShow =

@@ -79,7 +79,7 @@ export default function AwardSection() {
           </div>
         ))}
       </div>
-      <div className="w-full flex-center relative mb-15 md:mb-20 lg:mb-[100px]">
+      <div className="w-full flex-center relative mb-10">
         <Button text="See more" link="/awards" />
       </div>
     </div>

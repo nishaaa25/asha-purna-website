@@ -21,7 +21,7 @@ export default function ClientPageTransition({ children }) {
         {children}
         <Footer />
       </div>
-      {showNavbar && <Navbar key={`nav-${pathname}`} className="navbar-fade-in" />}
+      {showNavbar && <Navbar key={`nav-${pathname}`}  />}
     </>
   );
 }

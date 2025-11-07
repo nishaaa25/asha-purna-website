@@ -88,7 +88,7 @@ export default function Gallery({
   }
 
   return (
-    <div className="relative w-full text-center">
+    <div className="relative w-full text-center pb-10">
       <h5 className="text-orange-600 uppercase text-xs font-medium leading-[110%] pt-4">
         Project images
       </h5>

@@ -51,7 +51,9 @@ export default function PlanCard({ data, imgPath, project }) {
           ? data.project_floor_plan_gallery
           : [];
 
-        const firstImage = gallery.find((g) => g && g.image && typeof g.image === "string");
+        const firstImage = gallery.find(
+          (g) => g && g.image && typeof g.image === "string"
+        );
         if (firstImage?.image) {
           const href = (imgPath || "") + firstImage.image;
           window.location.href = href;
@@ -82,13 +84,13 @@ export default function PlanCard({ data, imgPath, project }) {
   };
 
   return (
-    <div className="relative w-full flex-center flex-col gap-5 md:gap-8">
-      <div className="w-full relative rounded-t-[10px] overflow-hidden border-[0.5px] border-black-400 flex-center flex-col aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2] ">
+    <div className="relative w-full flex-center flex-col gap-5">
+      <div className="w-full relative h-[250px] md:h-[40vh] lg:h-[50vh] rounded-t-[10px] overflow-hidden border-[0.5px] border-black-400 flex-center flex-col ">
         <Image
-          src={data?.imgUrl || "/assets/plan.jpg"}
+             src={data?.imgUrl || "/assets/plan.jpg"}
           alt={data?.title || data?.floor || "Floor Plan"}
           fill
-          className="object-contain w-full h-full"
+          className="relative w-full object-cover"
           quality={100}
         />
         <div className="absolute z-40">
@@ -100,12 +102,12 @@ export default function PlanCard({ data, imgPath, project }) {
         <h5 className="text-lg md:text-3xl lg:text-[43px] capitalize font-semibold tracking-[-1.1%] text-black-400">
           {data?.title || data?.floor || "Floor Plan"}
         </h5>
-        <p className="text-sm  md:text-[22px] lg:text-[30px] leading-[21px] text-gray-600">
+        {data?.area || data?.size && <p className="text-sm  md:text-[22px] lg:text-[30px] leading-[21px] text-gray-600">
           {data?.area || data?.size || ""}
-        </p>
-        <p className="text-sm  md:text-base lg:text-[22px] text-start leading-[140%]  text-gray-800 tracking-[-1.1%]">
+        </p>}
+        {data?.desc || data?.description && <p className="text-sm  md:text-base lg:text-xl text-start leading-[140%]  text-gray-800 tracking-[-1.1%]">
           {data?.desc || data?.description || ""}
-        </p>
+        </p>}
       </div>
 
       {/* View Plan Popup */}

@@ -70,7 +70,7 @@ export default function CountersSection({ data }) {
               data-target={counter.value}
               data-sign={counter.sign || ""}
             >
-              0
+              5
             </span>
             {counter.sign && (
               <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">

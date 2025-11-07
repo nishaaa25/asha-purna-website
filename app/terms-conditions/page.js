@@ -5,7 +5,7 @@ import { termsConditionsContent } from "@/lib/content";
 export default function TermsConditionsPage() {
   return (
     <div className="w-full relative">
-      <HeroComponentTwo imgUrl="/assets/investor.jpg" />
+      <HeroComponentTwo imgUrl="/assets/tc-bg.png" />
       <SectionHeader
         spanText="Guidelines for Using Our Services"
         heading="Terms & Conditions"
@@ -16,22 +16,22 @@ export default function TermsConditionsPage() {
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-12">
           {termsConditionsContent.map((item) => (
             <div className="flex flex-col gap-5" key={item.id}>
-              <h2 className="text-black-400 text-base md:text-3xl lg:text-[43px] font-semibold leading-[130%] tracking-[-1.1%]">
+              <h2 className="text-black-400 text-base md:text-xl lg:text-3xl font-semibold leading-[130%] tracking-[-1.1%]">
                 {item.title}
               </h2>
-              <p className="text-gray-800 text-sm md:text-xl lg:text-[26px] leading-[140%] tracking-[-1.1%]">
+              <p className="text-gray-800 text-sm md:text-base lg:text-xl leading-[140%] tracking-[-1.1%]">
                 {item.desc}
               </p>
               {item.list && (
                 <div className="mt-3">
                   {item.listTitle && (
-                    <p className="text-gray-800 text-sm md:text-xl lg:text-[26px] leading-[140%] tracking-[-1.1%] font-semibold mb-3">
+                    <p className="text-gray-800 text-sm md:text-base lg:text-xl leading-[140%] tracking-[-1.1%] font-semibold mb-3">
                       {item.listTitle}
                     </p>
                   )}
                   <ul className="list-disc pl-6 md:pl-8 lg:pl-10 space-y-2">
                     {item.list.map((listItem, index) => (
-                      <li key={index} className="text-gray-800 text-sm md:text-lg lg:text-2xl leading-[140%] tracking-[-1.1%]">
+                      <li key={index} className="text-gray-800 text-sm md:text-base lg:text-lg leading-[140%] tracking-[-1.1%]">
                         {listItem}
                       </li>
                     ))}
@@ -41,10 +41,10 @@ export default function TermsConditionsPage() {
             </div>
           ))}
           <div className="flex flex-col gap-3 mt-8">
-            <p className="text-gray-800 text-sm md:text-lg lg:text-2xl leading-[140%] tracking-[-1.1%] font-semibold">
+            <p className="text-gray-800 text-sm md:text-lg leading-[140%] tracking-[-1.1%] font-semibold">
               Effective Date: October 2025
             </p>
-            <p className="text-gray-800 text-sm md:text-lg lg:text-2xl leading-[140%] tracking-[-1.1%]">
+            <p className="text-gray-800 text-sm md:text-base leading-[140%] tracking-[-1.1%]">
               For any questions regarding these terms, please reach out to us at{" "}
               <a href="mailto:marketing@ashapurna.com" className="text-orange-600 hover:underline">
                 marketing@ashapurna.com
@@ -58,7 +58,7 @@ export default function TermsConditionsPage() {
                 0291-2514747
               </a>
             </p>
-            <p className="text-gray-800 text-sm md:text-base lg:text-lg leading-[140%] tracking-[-1.1%] mt-2">
+            <p className="text-gray-800 text-sm md:text-base leading-[140%] tracking-[-1.1%]">
               4A, East Patel Nagar, Circuit House Road, Opposite LIC Office, Jodhpur, Rajasthan, 342011
             </p>
           </div>

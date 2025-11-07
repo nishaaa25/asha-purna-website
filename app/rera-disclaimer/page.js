@@ -5,8 +5,7 @@ import { disclaimer } from "@/lib/content";
 
 export default function ReraDisclaimerpage() {
   return (
-    <div className="w-full relative">
-      <HeroComponentTwo imgUrl="/assets/investor.jpg"/>
+    <div className="w-full relative pt-[10vh] ">
       <SectionHeader
         spanText="Disclaimer"
         heading="Rera"

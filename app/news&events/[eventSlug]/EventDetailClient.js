@@ -39,7 +39,7 @@ export default function EventDetailClient({
           height={500}
           className="w-full h-auto "
         />
-        <div className="w-full h-full bg-black/50 absolute top-0 left-0 z-10"></div>
+        <div className="w-full h-full banner-gradient absolute top-0 left-0 z-10"></div>
       </div>
       <div className="w-full max-w-7xl mx-auto px-[22px] md:px-12 lg:px-20 py-12 md:py-20 lg:py-[100px]">
         {/* Page Title */}
@@ -125,7 +125,7 @@ export default function EventDetailClient({
                     <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 mb-4 md:mb-6">
                       Highlights
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2  gap-4 md:gap-6">
                       {galleryImages.map((item, index) => (
                         <div
                           key={index}

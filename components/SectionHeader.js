@@ -10,8 +10,8 @@ export default function SectionHeader({
   btnLink
 }) {
   return (
-    <div className="w-full relative py-15 md:py-20 lg:py-[100px] px-[22px]">
-      <div className="w-full md:w-[85%] md:px-2 relative flex-center text-center flex-col gap-5 md:gap-8 lg:gap-12 mx-auto">
+    <div className="w-full relative py-15 lg:py-20  px-[22px]">
+      <div className="w-full md:w-[85%] md:px-2 relative flex-center text-center flex-col gap-5 md:gap-8 mx-auto">
         {title && (
           <h5 className="text-orange-600 uppercase text-xs md:text-base lg:text-responsive-16 font-medium leading-[110%]">
             {title}

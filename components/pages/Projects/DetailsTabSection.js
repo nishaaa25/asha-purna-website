@@ -1,10 +1,7 @@
 "use client";
-import { useEffect, useRef, useLayoutEffect } from "react";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { csr } from "@/lib/content";
 import TabHeader from "../CSR/TabHeader";
-import { useState } from "react";
-import CountersSection from "@/components/Counter";
-import List from "@/components/List";
 import Gallery from "./Gallery";
 import SectionHeader from "@/components/SectionHeader";
 import MasterPlan from "./MasterPlan";
@@ -23,111 +20,60 @@ export default function DetailsTabSection({
   projectGalleryData,
   galleryImagePath,
 }) {
-  // Build tabs dynamically based on available data
+  // ----------------------- Tabs Setup -----------------------
   const availableTabs = [];
 
-  console.log(
-    projectFloorsData?.project_floor_plans[0]?.project_floor_plan_gallery[0]
-      ?.image,
-    "floors data"
-  );
-  // Always show overview if there's project description
-  if (project?.description || project?.overview) {
-    availableTabs.push("overview");
-  }
+  if (project?.description || project?.overview) availableTabs.push("overview");
 
-  // Show gallery tab only if there are actual gallery images available
   const hasGalleryImages = () => {
-    // Check for 360 views
-    if (project360Data && project360Data.length > 0) return true;
-
-    // Check for video gallery
-    if (projectVideoGalleryData && projectVideoGalleryData.length > 0)
-      return true;
-
-    // Check for gallery categories with actual images
+    if (project360Data?.length > 0) return true;
+    if (projectVideoGalleryData?.length > 0) return true;
     if (projectGalleryData?.gallery_names?.length > 0) {
       return projectGalleryData.gallery_names.some(
-        (category) =>
-          category.project_gallery && category.project_gallery.length > 0
+        (cat) => cat.project_gallery?.length > 0
       );
     }
-
     return false;
   };
+  if (hasGalleryImages()) availableTabs.push("gallery");
 
-  if (hasGalleryImages()) {
-    availableTabs.push("gallery");
-  }
-
-  // Show plans tab if there's master plan or floor plans data
   if (
     project?.master_plan_image ||
-    (projectFloorsData && projectFloorsData.project_floor_plans)
+    (projectFloorsData && projectFloorsData.project_floor_plans?.length > 0)
   ) {
     availableTabs.push("plans");
   }
 
   const [activeTab, setActiveTab] = useState(availableTabs[0] || "overview");
   const [selectedPlan, setSelectedPlan] = useState("master");
-  const tabSectionRef = useRef(null);
-  const scrollPositionRef = useRef(0);
 
-  const tab = availableTabs;
-  console.log(project, "o=counter");
-  // Build counter data from project
+  const scrollPositionRef = useRef(0);
+  const prevTab = useRef(activeTab);
+
+  // ----------------------- Counter Data -----------------------
   const data = [
-    {
-      title: "Bighas of land",
-      value: project?.bighas_of_land ,
-    },
-    {
-      title: "Premium Plots",
-      value: project?.premium_plots ,
-    },
-    {
-      title: "Security & Access",
-      value: "24x7",
-    },
+    { title: "Bighas of land", value: project?.bighas_of_land },
+    { title: "Premium Plots", value: project?.premium_plots },
+    { title: "Security & Access", value: "24x7" },
     {
       title: "Starting Price",
-      value: project?.price_range?.match(/\d+(\.\d+)?/)?.[0] ? "₹"+ project?.price_range?.match(/\d+(\.\d+)?/)?.[0] +"L": null  ,
+      value: project?.price_range?.match(/\d+(\.\d+)?/)?.[0]
+        ? "₹" +
+          project?.price_range?.match(/\d+(\.\d+)?/)?.[0] +
+          "L"
+        : null,
     },
   ];
 
-  // Extract features from project or use default
-  const features = project?.key_features
-    ? typeof project.key_features === "string"
-      ? project.key_features.split(",").map((f) => f.trim())
-      : project.key_features
-    : [
-        "250 bighas of industrial-ready plots",
-        "245 plots with flexible sizing",
-        "Opposite Delhi–Mumbai Industrial Corridor",
-        "Minutes from RIICO Industrial Area",
-      ];
-
-  const [tabContent, setTabContent] = useState(
-    csr.filter((el) => el.type.toLowerCase() === "healthcare")
-  );
-
-  useEffect(() => {
-    const filteredContent = csr.filter(
-      (el) => el.type.toLowerCase() === activeTab.toLowerCase()
-    );
-    setTabContent(filteredContent);
-  }, [activeTab]);
-
+  // ----------------------- Tab Change Handling -----------------------
   const handleTabChange = (tab) => {
-    // Store current scroll position before changing tab
     scrollPositionRef.current = window.scrollY;
     setActiveTab(tab);
   };
 
-  // Restore scroll position after tab content renders
+  // ✅ Only restore scroll when switching main tabs
   useLayoutEffect(() => {
-    if (scrollPositionRef.current > 0) {
-      // Use requestAnimationFrame to ensure DOM has updated
+    if (prevTab.current !== activeTab && scrollPositionRef.current > 0) {
       requestAnimationFrame(() => {
         window.scrollTo({
           top: scrollPositionRef.current,
@@ -135,45 +81,62 @@ export default function DetailsTabSection({
         });
       });
     }
+    prevTab.current = activeTab;
   }, [activeTab]);
 
+  // ✅ Prevent scroll jump when switching between master/floor
+  const handlePlanSwitch = (plan) => {
+    const currentScroll = window.scrollY; // save exact position
+    setSelectedPlan(plan);
+
+    // restore after DOM update
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: currentScroll,
+        behavior: "auto",
+      });
+    });
+  };
+
+  // ----------------------- JSX -----------------------
   return (
-    <div
-      ref={tabSectionRef}
-      className="w-full relative pt-15 pb-10 md:pb-20 lg:pb-[100px]"
-    >
+    <div className="w-full relative pt-15 pb-10">
       <p className="text-gray-800 text-sm md:text-base lg:text-base leading-[140%] w-11/12 md:w-9/12 lg:w-8/12 relative text-center mx-auto mb-15">
         {project?.short_description || project?.tagline || ""}
       </p>
-      {/* Only show tab header if there are multiple tabs */}
-      {tab.length > 1 && (
-        <div className="w-[90%] md:w-[80%] relative mx-auto px-2 ">
+
+      {/* Tabs Header */}
+      {availableTabs.length > 1 && (
+        <div className="w-[90%] md:w-10/12 lg:w-8/12 relative mx-auto">
           <TabHeader
             activeTab={activeTab}
             setActiveTab={handleTabChange}
-            tabs={tab}
+            tabs={availableTabs}
           />
         </div>
       )}
+
+      {/* OVERVIEW */}
       {activeTab === "overview" && (
         <div className="flex-center w-full px-[22px] relative flex-col text-center pt-3 md:pt-6 lg:pt-10 gap-7">
           <h4 className="text-gray-600 font-playfair uppercase text-2xl md:text-[36px] lg:text-[42px] leading-[130%] font-semibold">
             Project Overview
           </h4>
+
           <div
-            className="w-[90%] md:w-[80%] lg:w-[70%] relative text-gray-800 text-sm md:text-base lg:text-base leading-[140%]"
+            className="w-[90%] md:w-[80%] lg:w-8/12 relative text-gray-800 text-sm md:text-base lg:text-base leading-[140%]"
             dangerouslySetInnerHTML={{
               __html: project?.description || project?.overview || "",
             }}
           />
+
           <div className="w-11/12 relative mb-10">
             <DetailsPageCounter data={data} />
           </div>
-          {/* <div className="w-[95%] md:w-[80%] relative text-left bg-cream-500 rounded-xl px-4 py-6 md:py-10 md:px-8">
-            <List features={features} heading="Key features" />
-          </div> */}
         </div>
       )}
+
+      {/* GALLERY */}
       {activeTab === "gallery" && (
         <Gallery
           project={project}
@@ -185,49 +148,50 @@ export default function DetailsTabSection({
           galleryImagePath={galleryImagePath}
         />
       )}
+
+      {/* PLANS */}
       {activeTab === "plans" && (
-        <div className="flex-center w-full px-[22px]  md:px-12 lg:px-20 relative flex-col text-center pt-3 gap-7">
-          {/* Plot Layouts & Configurations Section */}
+        <div className="flex-center w-full px-[22px] md:px-12 lg:px-20 relative flex-col text-center pt-3">
           <div className="w-full bg-white rounded-lg ">
-            <div className="relative w-full md:w-10/12 lg:w-8/12 mx-auto">
+            <div className="relative w-full md:w-10/12 lg:w-8/12 mx-auto -top-14">
               <SectionHeader
-                heading={project?.plan_heading || "Plot layouts"}
+                heading={project?.plan_heading || "layouts &"}
                 spanText={project?.plan_tagline || "Configurations"}
                 desc={
                   project?.plan_description ||
-                  "Choose from a range of plot sizes tailored for industries, logistics, and agri-based enterprises. Infrastructure and utilities are ready, ensuring ease of setup."
+                  "Choose from a range of plot sizes tailored for industries, logistics, and agri-based enterprises."
                 }
               />
             </div>
-            <div className="flex justify-center gap-4 w-full md:w-11/12 mx-auto">
-              {/* Master Plan Button */}
+
+            {/* Plan Switch Buttons */}
+            <div className="flex justify-center gap-4 w-full md:w-10/12 lg:w-9/12 mx-auto -top-14 relative">
               <button
                 type="button"
-                onClick={() => setSelectedPlan("master")}
+                onClick={() => handlePlanSwitch("master")}
                 className={`w-[166px] lg:w-full h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 cursor-pointer
-            ${
-              selectedPlan === "master"
-                ? "bg-[#222222] text-white border-[#222222]"
-                : "bg-white text-[#222222] border-[#222222]"
-            }`}
+              ${
+                selectedPlan === "master"
+                  ? "bg-[#222222] text-white border-[#222222]"
+                  : "bg-white text-[#222222] border-[#222222]"
+              }`}
               >
                 <span className="font-['DM_Sans'] font-medium text-sm">
                   Master Plan
                 </span>
               </button>
 
-              {/* Floor Plans Button */}
-              {projectFloorsData?.project_floor_plans[0]
-                ?.project_floor_plan_gallery[0]?.image && (
+              {projectFloorsData?.project_floor_plans?.[0]
+                ?.project_floor_plan_gallery?.[0]?.image && (
                 <button
                   type="button"
-                  onClick={() => setSelectedPlan("floor")}
-                  className={`w-[166px]  lg:w-full  h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 cursor-pointer
-            ${
-              selectedPlan === "floor"
-                ? "bg-[#222222] text-white border-[#222222]"
-                : "bg-white text-[#222222] border-[#222222]"
-            }`}
+                  onClick={() => handlePlanSwitch("floor")}
+                  className={`w-[166px] lg:w-full h-[40px] py-[10px] border rounded-[5px] flex items-center justify-center gap-[10px] opacity-100 cursor-pointer
+                ${
+                  selectedPlan === "floor"
+                    ? "bg-[#222222] text-white border-[#222222]"
+                    : "bg-white text-[#222222] border-[#222222]"
+                }`}
                 >
                   <span className="font-['DM_Sans'] font-medium text-sm">
                     Floor Plans
@@ -235,15 +199,18 @@ export default function DetailsTabSection({
                 </button>
               )}
             </div>
-            <div className="mt-6 w-full md:w-11/12 mx-auto relative">
-              {selectedPlan === "master" && (
+
+            {/* Master / Floor Plan Display */}
+            <div className="w-full md:w-9/12 mx-auto -top-8 relative">
+              {selectedPlan === "master" ? (
                 <MasterPlan
+                  key="master"
                   project={project}
                   masterImagePath={masterImagePath}
                 />
-              )}
-              {selectedPlan === "floor" && (
+              ) : (
                 <FloorPlan
+                  key="floor"
                   project={project}
                   floorImagePath={floorImagePath}
                   projectFloorsData={projectFloorsData}

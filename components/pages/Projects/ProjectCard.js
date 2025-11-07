@@ -149,7 +149,11 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
           <>
             <div className="grid grid-cols-2 relative w-full gap-4 mt-2">
               <Link
-                href={`/projects/${data?.slug}`}
+                href={`${
+                  data?.name?.toLowerCase() === "buddha institutions"
+                    ? "https://www.buddhagroup.org/"
+                    : `/projects/${data?.slug}`
+                }`}
                 className="border-1 lg:border-[0.5px] border-[#cccccc] bg-black-400 text-white whitespace-nowrap font-medium text-sm md:text-base lg:text-base py-[7px] w-full rounded-md mt-2 text-center relative"
               >
                 View Details

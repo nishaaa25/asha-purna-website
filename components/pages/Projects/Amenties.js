@@ -17,13 +17,13 @@ export default function Amenties({ project, projectAmenityData, projectAmenityIm
         spanText={project?.amenity_tagline || "Supports Enterprise"}
         title="amenities"
       />
-      <div className="w-[80%] relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 justify-start items-start gap-10 mx-auto mb-10 md:mb-20 lg:mb-[100px]">
+      <div className="w-8/12 relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 justify-start items-start gap-10 mx-auto mb-10 md:mb-20 lg:mb-[100px]">
         {amenitiesData.map((item, index) => (
           <div
             key={item.id || index}
             className="w-full lg:w-auto relative flex-center flex-col gap-3 lg:gap-5"
           >
-            <div className="relative w-10 h-10 md:w-13 md:h-13 lg:w-15 lg:h-15">
+            <div className="relative w-9 h-9 md:w-10 md:h-10 lg:w-12 lg:h-12">
               <Image
                 src={item.image ? (projectAmenityImagePath + item.image) : item.imgUrl}
                 alt={item.amenity || item.title || item.name || item.text1 || item.text2 || item.text3}
@@ -38,7 +38,7 @@ export default function Amenties({ project, projectAmenityData, projectAmenityIm
               </h5>
               {/* Display additional text fields if available */}
               {item.sub_title && (
-                <p className="text-xs md:text-xs text-gray-600 leading-[120%] tracking-[-1.4%]">
+                <p className="text-xs  text-gray-600 leading-[120%] tracking-[-1.4%]">
                   {item.sub_title}
                 </p>
               )}

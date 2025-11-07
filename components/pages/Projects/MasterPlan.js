@@ -82,7 +82,7 @@ export default function MasterPlan({ project, masterImagePath }) {
 
   return (
     <div className="relative w-full flex-center flex-col gap-5 md:gap-8">
-      <div className="w-full relative h-[250px] md:h-[50vh] lg:h-[90vh] rounded-t-[10px] overflow-hidden border-[0.5px] border-black-400 flex-center flex-col ">
+      <div className="w-full relative h-[250px] md:h-[40vh] lg:h-[50vh] rounded-t-[10px] overflow-hidden border-[0.5px] border-black-400 flex-center flex-col ">
         <Image
           src={masterPlanImage}
           alt="Master Plan"
@@ -96,14 +96,14 @@ export default function MasterPlan({ project, masterImagePath }) {
         <div className="bg-[#ffffff84] w-full h-full absolute top-0 left-0 z-10 backdrop-blur-[4px]">
         </div>
       </div>
-      <div className="flex flex-col items-start gap-[10px] md:gap-3 lg:gap-4 w-full">
-        <h5 className="text-lg md:text-3xl lg:text-[43px] font-semibold tracking-[-1.1%] text-black-400">
+      <div className="flex flex-col items-start gap-[10px] md:gap-1 lg:gap-1 w-full">
+        <h5 className="text-lg md:text-xl lg:text-3xl font-semibold tracking-[-1.1%] text-black-400">
           {masterPlan?.title || "Master plan"}
         </h5>
-        <p className="text-sm md:text-[22px] lg:text-[30px] leading-[21px] text-gray-600">
+        <p className="text-sm md:text-lg lg:text-2xl leading-[21px] text-gray-600">
           {masterPlan?.area || project?.area || ""}
         </p>
-        <p className="text-sm md:text-base lg:text-[22px] text-start leading-[140%]  text-gray-800 tracking-[-1.1%]">
+        <p className="text-sm md:text-base lg:text-lg text-start leading-[140%]  text-gray-800 tracking-[-1.1%] lg:w-11/12">
           {masterPlan?.description || project?.master_plan_description || ""}
         </p>
       </div>

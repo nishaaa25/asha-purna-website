@@ -5,7 +5,7 @@ import { privacyPolicyContent } from "@/lib/content";
 export default function PrivacyPolicyPage() {
   return (
     <div className="w-full relative">
-      <HeroComponentTwo imgUrl="/assets/investor.jpg" />
+      <HeroComponentTwo imgUrl="/assets/pp-bg.png" />
       <SectionHeader
         spanText="Your Data, Our Commitment"
         heading="Privacy Policy"
@@ -16,19 +16,19 @@ export default function PrivacyPolicyPage() {
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-12">
           {privacyPolicyContent.map((item) => (
             <div className="flex flex-col gap-5" key={item.id}>
-              <h2 className="text-black-400 text-base md:text-3xl lg:text-[43px] font-semibold leading-[130%] tracking-[-1.1%]">
+              <h2 className="text-black-400 text-base md:text-2xl lg:text-3xl font-semibold leading-[130%] tracking-[-1.1%]">
                 {item.title}
               </h2>
-              <p className="text-gray-800 text-sm md:text-xl lg:text-[26px] leading-[140%] tracking-[-1.1%]">
+              <p className="text-gray-800 text-sm md:text-base lg:text-lg leading-[140%] tracking-[-1.1%]">
                 {item.desc}
               </p>
             </div>
           ))}
           <div className="flex flex-col gap-3 mt-8">
-            <p className="text-gray-800 text-sm md:text-lg lg:text-2xl leading-[140%] tracking-[-1.1%] font-semibold">
+            <p className="text-gray-800 text-sm md:text-base lg:text-lg leading-[140%] tracking-[-1.1%] font-semibold">
               Last Updated: October 2025
             </p>
-            <p className="text-gray-800 text-sm md:text-lg lg:text-2xl leading-[140%] tracking-[-1.1%]">
+            <p className="text-gray-800 text-sm md:text-base lg:text-lg  leading-[140%] tracking-[-1.1%]">
               If you have any questions about this Privacy Policy, please contact us at{" "}
               <a href="mailto:marketing@ashapurna.com" className="text-orange-600 hover:underline">
                 marketing@ashapurna.com
@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
                 0291-2514747
               </a>
             </p>
-            <p className="text-gray-800 text-sm md:text-base lg:text-lg leading-[140%] tracking-[-1.1%] mt-2">
+            <p className="text-gray-800 text-sm md:text-base lg:text-lg leading-[140%] tracking-[-1.1%] ">
               4A, East Patel Nagar, Circuit House Road, Opposite LIC Office, Jodhpur, Rajasthan, 342011
             </p>
           </div>

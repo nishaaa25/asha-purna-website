@@ -2,6 +2,7 @@ import "./globals.css";
 import LenisProvider from "@/components/Hooks/LenisProvider";
 import AppProviders from "@/contexts/AppProviders";
 import ClientPageTransition from "@/components/ClientPageTransition";
+import ScrollToTop from "@/components/pages/ScrollToTop";
 
 // Note: Home page metadata is now fetched from API via getSEOContent('home')
 // This is the fallback metadata for all pages
@@ -22,7 +23,9 @@ export default function RootLayout({ children }) {
       <body className={`antialiased w-screen relative overflow-x-hidden`}>
         <AppProviders>
           <LenisProvider>
-            <ClientPageTransition>{children}</ClientPageTransition>
+            <ClientPageTransition>
+              <ScrollToTop/>
+              {children}</ClientPageTransition>
           </LenisProvider>
         </AppProviders>
       </body>

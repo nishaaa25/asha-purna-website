@@ -91,7 +91,7 @@ export default function MobileNav({ isScrolled = false }) {
               </Link>
               <button
                 onClick={closeNav}
-                className="w-6 h-6 flex-center top-7 relative"
+                className="w-6 h-6 flex-center top-4 relative"
                 aria-label="Close menu"
               >
                 <Image
@@ -106,7 +106,7 @@ export default function MobileNav({ isScrolled = false }) {
 
             {/* Navigation Links */}
             <nav className="p-6 mt-4">
-              <ul className="space-y-12 w-11/12 mx-auto">
+              <ul className="space-y-12 w-full mx-auto">
                 <li>
                   <Link
                     href="/"

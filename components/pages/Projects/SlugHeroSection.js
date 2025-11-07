@@ -127,7 +127,7 @@ export default function SlugHeroSection({
           className={`${
             isReraExpanded
               ? "w-3/12 md:w-2/12 lg:w-[10%]"
-              : "w-7/12 md:w-5/12 lg:w-[30%]"
+              : "w-7/12 md:w-5/12 lg:w-[20%]"
           } absolute right-0 top-[15vh] flex flex-col gap-2 cursor-pointer z-[100] transition-all duration-200 `}
         >
           {isReraExpanded ? (
@@ -142,9 +142,7 @@ export default function SlugHeroSection({
                 <p>RERA Number</p>
                 <p className="text-sm font-medium">{reraNo}</p>
                 <Link
-                  href={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
-                    reraNo
-                  )}`}
+                  href="https://rera.rajasthan.gov.in/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline break-all text-white mt-3"
@@ -152,7 +150,7 @@ export default function SlugHeroSection({
                   Link
                 </Link>
               </div>
-              <div className="w-2/12 h-full bg-white border border-gray-300 rounded flex items-center justify-center">
+              <div className="w-3/12 h-full bg-white border border-gray-300 rounded flex items-center justify-center">
                 <Image
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
                     reraNo

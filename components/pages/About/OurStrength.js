@@ -13,8 +13,8 @@ export default function OurStrength(params) {
           desc="Behind every township is a team that brings more than skill - they bring passion. What unites them is not just the ambition to build, but the belief that every project must carry integrity, care, and pride."
         />
       </div>
-      <div className="w-[70%] mx-auto relative pb-10">
-        <div className="w-full h-[220px] md:h-[50vh] lg:h-[80vh] relative mb-15 overflow-hidden">
+      <div className="w-[50%] mx-auto relative pb-10">
+        <div className="w-full h-[220px] md:h-[40vh] lg:h-[50vh] relative mb-15 overflow-hidden">
           <Image
             src="/assets/team.jpg"
             alt="team"

@@ -102,7 +102,7 @@ export default function ChannelPartnerForm() {
   };
 
   return (
-    <div className="py-10 md:py-[70px] lg:py-[100px] px-8 md:px-20 lg:px-28 w-full lg:w-10/12 relative border-[0.65px]  border-black/50 rounded-xl lg:mx-auto">
+    <div className="py-10 md:py-13 lg:py-16 px-8 md:px-16 lg:px-20 w-full lg:w-8/12 relative border-[0.65px]  border-black/50 rounded-xl lg:mx-auto">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-6 md:gap-8 lg:gap-10"
@@ -116,7 +116,7 @@ export default function ChannelPartnerForm() {
             value={formData.name}
             onChange={handleChange}
             disabled={isLoading}
-            className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
+            className={`outline-none lg:py-2 py-2 px-1 lg:px-[10px] text-sm md:text-base lg:text-lg placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
               errors.name ? "border-red-500" : ""
             }`}
           />
@@ -132,7 +132,7 @@ export default function ChannelPartnerForm() {
             value={formData.company}
             onChange={handleChange}
             disabled={isLoading}
-            className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
+            className={`outline-none lg:py-2 py-2 px-1 lg:px-[10px] text-sm md:text-base lg:text-lg placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
               errors.company ? "border-red-500" : ""
             }`}
           >
@@ -158,7 +158,7 @@ export default function ChannelPartnerForm() {
             onChange={handleChange}
             maxLength={10}
             disabled={isLoading}
-            className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
+            className={`outline-none lg:py-2 py-2 px-1 lg:px-[10px] text-sm md:text-base lg:text-lg placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
               errors.phone ? "border-red-500" : ""
             }`}
           />
@@ -178,7 +178,7 @@ export default function ChannelPartnerForm() {
             value={formData.email}
             onChange={handleChange}
             disabled={isLoading}
-            className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
+            className={`outline-none lg:py-2 py-2 px-1 lg:px-[10px] text-sm md:text-base lg:text-lg placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
               errors.email ? "border-red-500" : ""
             }`}
           />
