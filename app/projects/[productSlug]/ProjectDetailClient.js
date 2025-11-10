@@ -34,10 +34,11 @@ export default function ProjectDetailClient({
   projectVideoGalleryImagePath,
   projectConstructionsData,
   projectFloorsData,
+  projectMasterData,
   projectGalleryData,
   slug,
 }) {
-  console.log("product ", project);
+  console.log("product details data", project);
   return (
     <div className="relative w-full">
       <SlugHeroSection
@@ -78,6 +79,7 @@ export default function ProjectDetailClient({
           viewsImagePath={viewsImagePath}
           projectVideoGalleryData={projectVideoGalleryData}
           projectVideoGalleryImagePath={projectVideoGalleryImagePath}
+          projectMasterData={projectMasterData}
           projectFloorsData={projectFloorsData}
           projectGalleryData={projectGalleryData}
           galleryImagePath={galleryImagePath}

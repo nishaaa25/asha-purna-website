@@ -19,15 +19,26 @@ export default function SlugHeroSection({
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
   const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
   const [isReraExpanded, setIsReraExpanded] = useState(false);
-  console.log("project image", projectImagePath, project);
+  console.log("project rera data", project?.rera_number);
   // console.log("projectReraNo ", projectReraNo);
   const reraNo =
-    projectReraNo.find(
-      (item) =>
-        item.title?.toLowerCase().includes("rera") ||
-        item.value?.toUpperCase().startsWith("RAJ")
-    )?.value || "";
-  console.log("reraNo ", reraNo);
+    project?.rera_number ||
+    projectReraNo?.find((item) => {
+      const title = item?.title?.toUpperCase() || "";
+      const value = item?.value?.toUpperCase() || "";
+
+      return (
+        title.includes("RERA") || // title explicitly mentions "RERA"
+        value.startsWith("RAJ/") || // value begins with RAJ/...
+        title.startsWith("RAJ/") // or title itself is the RERA number
+      );
+    })?.value ||
+    projectReraNo?.find((item) => {
+      const title = item?.title?.toUpperCase() || "";
+      return title.startsWith("RAJ/"); // fallback if only in title
+    })?.title ||
+    "";
+
   // Get the main image - prefer featured image or glossy slider, then first slider image
   const getMainImage = () => {
     // Priority 1: Glossy slider images

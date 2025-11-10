@@ -12,6 +12,7 @@ export default function DetailsTabSection({
   project,
   masterImagePath,
   floorImagePath,
+  projectMasterData,
   project360Data,
   viewsImagePath,
   projectVideoGalleryData,
@@ -38,11 +39,12 @@ export default function DetailsTabSection({
   if (hasGalleryImages()) availableTabs.push("gallery");
 
   if (
-    project?.master_plan_image ||
+    project?.project_master_plans[0]?.image ||
     (projectFloorsData && projectFloorsData.project_floor_plans?.length > 0)
   ) {
     availableTabs.push("plans");
   }
+  console.log(project, "project console");
 
   const [activeTab, setActiveTab] = useState(availableTabs[0] || "overview");
   const [selectedPlan, setSelectedPlan] = useState("master");
@@ -58,9 +60,7 @@ export default function DetailsTabSection({
     {
       title: "Starting Price",
       value: project?.price_range?.match(/\d+(\.\d+)?/)?.[0]
-        ? "₹" +
-          project?.price_range?.match(/\d+(\.\d+)?/)?.[0] +
-          "L"
+        ? "₹" + project?.price_range?.match(/\d+(\.\d+)?/)?.[0] + "L"
         : null,
     },
   ];

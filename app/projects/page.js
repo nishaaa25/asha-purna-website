@@ -126,7 +126,6 @@ export default function ProjectsPage() {
         <h3 className="text-[22px] md:text-[34px] lg:text-[42px] leading-[130%] tracking-[-1.1px] uppercase text-black-400 font-medium text-center mb-10">
           Our Projects
         </h3>
-
         {/* Tabs */}
         <div className="w-full px-[22px] md:px-12 lg:px-20 relative mx-auto">
           <TabHeader
@@ -135,7 +134,6 @@ export default function ProjectsPage() {
             tabs={tabs}
           />
         </div>
-
         {/* Loading */}
         {loading && (
           <div className="w-full px-[22px] md:px-12 lg:px-20 text-center py-10">

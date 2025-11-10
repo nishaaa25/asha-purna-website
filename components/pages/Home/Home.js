@@ -106,7 +106,7 @@ export default function Home({
       <SignatureProject projects={featuredProjects} imagePath={imagePath} />
       <div className="w-full relative flex flex-col gap-6 mx-auto pt-20  pb-5 lg:pb-20 px-[22px] md:px-12 lg:px-20">
         <Link href={`/${"residential"}`}>
-          <div className="w-full h-[204px] md:h-[60vh] lg:h-[90vh] relative rounded-t-[10px] overflow-hidden">
+          <div className="w-full h-[204px] md:h-[50vh] lg:h-[80vh] relative rounded-t-[10px] overflow-hidden">
             <Image
               src="/assets/residential-card.jpg"
               alt="Residential Projects - Ashapurna Buildcon"
@@ -121,7 +121,7 @@ export default function Home({
           </div>
         </Link>
         <Link href={`/${"commercial"}`}>
-          <div className="w-full h-[204px] md:h-[60vh] lg:h-[90vh] relative rounded-t-[10px] overflow-hidden">
+          <div className="w-full h-[204px] md:h-[50vh] lg:h-[80vh] relative rounded-t-[10px] overflow-hidden">
             <Image
               src="/assets/agri-park.jpg"
               alt="Commercial Projects - Ashapurna Buildcon"
