@@ -137,7 +137,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
           )}
           {spanText && <h2 className="text-[20px] md:text-[38px] lg:text-[36px] leading-[130%] tracking-[-1.1%] font-light">{spanText}</h2>}
         </div>
-      <div className="py-10 md:py-20 lg:py-[100px] px-7 md:px-20 lg:px-30 mt-5 md:mt-7 lg:mt-10 relative border-[0.50px] w-10/12 md:w-9/12 mx-auto border-black/50 rounded-xl">
+      <div className="py-7 md:py-12 lg:py-16 px-7 md:px-13 lg:px-18 mt-5 md:mt-7 lg:mt-10 relative border-[0.50px] w-10/12 md:w-9/12 lg:w-7/12 mx-auto border-black/50 rounded-xl">
         <form onSubmit={handleSubmit} className="flex flex-col gap-7">
           <div className="w-full">
             <input
@@ -147,7 +147,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
               value={formData.name}
               onChange={handleInputChange}
               placeholder="Name"
-              className={`bg-transparent w-full outline-none py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm md:text-lg lg:text-base leading-[110%] lg:px-4 ${errors.name ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50`}
+              className={`bg-transparent w-full outline-none py-1 md:py-4 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm lg:text-base leading-[110%] lg:px-4 ${errors.name ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50`}
             />
             {errors.name && <p className="text-red-500 text-xs text-left mt-1">{errors.name}</p>}
           </div>
@@ -160,7 +160,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
               onChange={handleInputChange}
               placeholder="Phone Number"
               maxLength="10"
-              className={`bg-transparent w-full outline-none py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm md:text-lg lg:text-base leading-[110%] lg:px-4 ${errors.phone ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50`}
+              className={`bg-transparent w-full outline-none py-1 md:py-4 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm lg:text-base leading-[110%] lg:px-4 ${errors.phone ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50`}
             />
             {errors.phone && <p className="text-red-500 text-xs text-left mt-1">{errors.phone}</p>}
           </div>
@@ -172,7 +172,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
               value={formData.email}
               onChange={handleInputChange}
               placeholder="Email"
-              className={`bg-transparent w-full outline-none py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm md:text-lg lg:text-base leading-[110%] lg:px-4 ${errors.email ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50`}
+              className={`bg-transparent w-full outline-none py-1 md:py-4  border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm lg:text-base leading-[110%] lg:px-4 ${errors.email ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50`}
             />
             {errors.email && <p className="text-red-500 text-xs text-left mt-1">{errors.email}</p>}
           </div>
@@ -184,7 +184,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
               onChange={handleInputChange}
               placeholder="Message"
               rows="5"
-              className={`bg-transparent w-full outline-none py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm md:text-lg lg:text-base leading-[110%] lg:px-4 ${errors.message ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50 resize-none`}
+              className={`bg-transparent w-full outline-none py-1 md:py-4 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 text-sm lg:text-base leading-[110%] lg:px-4 ${errors.message ? 'border-red-500' : 'border-black-400/30'} text-black-400/60 placeholder:text-black-400/50 resize-none`}
             />
             {errors.message && <p className="text-red-500 text-xs text-left mt-1">{errors.message}</p>}
           </div>
@@ -193,7 +193,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
             <button
               type="submit"
               disabled={loading}
-              className="border border-[#cccccc]  bg-black-400 text-white font-bold text-sm md:text-lg lg:text-base py-[10px] min-w-8/12 md:min-w-1/2 lg:min-w-3/12 rounded-md mt-8 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="border border-[#cccccc]  bg-black-400 text-white font-bold text-sm md:text-lg lg:text-base py-[10px] min-w-8/12 md:min-w-1/2 lg:min-w-3/12 rounded-md mt-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? "Submitting..." : "Submit"}
             </button>

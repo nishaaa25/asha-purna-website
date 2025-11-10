@@ -130,11 +130,11 @@ export default function ContactUsForm() {
   };
 
   return (
-    <div className="relative py-15  md:py-20 lg:py-[100px] text-center px-7 md:px-25 lg:px-50">
-      <h2 className="text-[22px] md:text-[44px] lg:text-[64px] leading-[130%] tracking-[-1.1px] font-playfair mb-12 text-black-400 lg:text-gray-600 font-medium">
+    <div className="relative py-15  md:py-20  text-center px-7 md:px-25 lg:px-50">
+      <h2 className="text-[22px] md:text-[44px] lg:text-[3rem] leading-[130%] tracking-[-1.1px] font-playfair mb-12 text-black-400 lg:text-gray-600 font-medium">
         Connect with Us
       </h2>
-      <div className="py-10 md:py-[70px] lg:py-[100px] px-8 md:px-18 lg:px-29  relative border-[0.65px] w-full border-black/50 rounded-xl">
+      <div className="py-10 md:py-14 lg:py-16 px-8 md:px-12 lg:px-18  relative border-[0.65px] w-full md:w-11/12 lg:w-9/12 mx-auto border-black/50 rounded-xl">
         <form onSubmit={handleSubmit} className="flex flex-col gap-7">
           <div className="w-full">
             <input
@@ -144,7 +144,7 @@ export default function ContactUsForm() {
               value={formData.name}
               onChange={handleInputChange}
               placeholder="Enter your full name"
-              className={`outline-none w-full py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.name ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-lg lg:text-[22px] leading-[110%]`}
+              className={`outline-none w-full py-3 md:py-4 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.name ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-base lg:text-lg leading-[110%]`}
             />
             {errors.name && <p className="text-red-500 text-xs text-left mt-1">{errors.name}</p>}
           </div>
@@ -157,7 +157,7 @@ export default function ContactUsForm() {
               onChange={handleInputChange}
               placeholder="Enter your phone number"
               maxLength="10"
-              className={`outline-none w-full py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.phone ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-lg lg:text-[22px] leading-[110%]`}
+              className={`outline-none w-full py-3 md:py-4 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.phone ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-base lg:text-lg leading-[110%]`}
             />
             {errors.phone && <p className="text-red-500 text-xs text-left mt-1">{errors.phone}</p>}
           </div>
@@ -169,7 +169,7 @@ export default function ContactUsForm() {
               value={formData.email}
               onChange={handleInputChange}
               placeholder="Enter your email address"
-              className={`outline-none w-full py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.email ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-lg lg:text-[22px] leading-[110%]`}
+              className={`outline-none w-full py-3 md:py-4 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.email ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-base lg:text-lg leading-[110%]`}
             />
             {errors.email && <p className="text-red-500 text-xs text-left mt-1">{errors.email}</p>}
           </div>
@@ -179,7 +179,7 @@ export default function ContactUsForm() {
               id="subject"
               value={formData.subject}
               onChange={handleInputChange}
-              className={`outline-none w-full py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.subject ? 'border-red-500' : 'border-black-400/30'} text-black-400/50 text-sm md:text-lg lg:text-[22px] leading-[110%] cursor-pointer bg-transparent`}
+              className={`outline-none w-full py-3 md:py-4  border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.subject ? 'border-red-500' : 'border-black-400/30'} text-black-400/50 text-sm md:text-base lg:text-lg leading-[110%] cursor-pointer bg-transparent`}
             >
               <option value="" className="text-black-400">Select Subject</option>
               <option value="Site Enquiry" className="text-black-400">Site Enquiry</option>
@@ -195,8 +195,8 @@ export default function ContactUsForm() {
               value={formData.message}
               onChange={handleInputChange}
               placeholder="Your Message"
-              rows="8"
-              className={`outline-none w-full py-3 md:py-4 lg:py-6 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.message ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-lg lg:text-[22px] leading-[110%]`}
+              rows="6"
+              className={`outline-none w-full py-3 md:py-4 border-b-[0.70px] lg:border-b-1 px-1 md:px-2 lg:px-4 ${errors.message ? 'border-red-500' : 'border-black-400/30'} placeholder:text-black-400/50 text-black-400/50 text-sm md:text-base lg:text-lg leading-[110%]`}
             />
             {errors.message && <p className="text-red-500 text-xs text-left mt-1">{errors.message}</p>}
           </div>
@@ -204,7 +204,7 @@ export default function ContactUsForm() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-black-400 text-white font-medium capitalize text-xs md:text-base lg:text-xl py-[10px] lg:py-3 min-w-10/12 md:min-w-8/12 lg:min-w-3/12 rounded-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="bg-black-400 text-white font-medium capitalize text-xs md:text-base lg:text-lg py-[10px] lg:py-3 min-w-10/12 md:min-w-8/12 lg:min-w-4/12 rounded-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? "Sending..." : "Send Message"}
             </button>

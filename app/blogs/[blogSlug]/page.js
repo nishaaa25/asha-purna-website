@@ -81,7 +81,7 @@ export default function BlogSlugPage() {
           height={500}
           className="w-full h-auto "
         />
-        <div className="w-full h-full bg-black/50 absolute top-0 left-0 z-10">
+        <div className="w-full h-full banner-gradient absolute top-0 left-0 z-10">
 
         </div>
       </div>
