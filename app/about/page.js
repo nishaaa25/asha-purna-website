@@ -37,7 +37,7 @@ export default async function AboutPage() {
       <div className="relative w-full">
         <section className="w-full relative h-[40dvh] md:h-[70vh] lg:h-[90vh] flex-center overflow-hidden ">
           <Image
-            src="/assets/about-bg.jpg"
+            src="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/about-bg.jpg"
             alt="land-img"
             fill
             className="relative object-cover"

@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function page() {
   return (
     <div className="relative w-full">
-      <HeroComponentTwo imgUrl="/assets/contact-bg.jpg" />
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/contact-bg.jpg" />
       <div className="w-full md:w-[80%] lg:w-[65%] mx-auto relative">
         <SectionHeader
           title="contact"

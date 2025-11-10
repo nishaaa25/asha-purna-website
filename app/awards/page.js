@@ -57,7 +57,7 @@ export default function Page() {
 
   return (
     <div className="relative w-full">
-      <HeroComponentTwo imgUrl="/assets/awards-bg.jpg" />
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/awards-bg.jpg" />
       <div className="our-journey bg-cream-600 w-full relative">
         <div className="w-full md:w-[90%] lg:w-[80%] mx-auto">
           <SectionHeader

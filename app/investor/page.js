@@ -149,7 +149,7 @@ export default function InvestorPage() {
 
   return (
     <div className="w-full relative">
-      <HeroComponentTwo imgUrl="/assets/investor-bg.png"/>
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/investor-bg.png"/>
       <SectionHeader
         spanText="Investor Club"
         heading="Ashapurna"

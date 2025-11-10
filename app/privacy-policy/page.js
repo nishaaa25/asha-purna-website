@@ -5,7 +5,7 @@ import { privacyPolicyContent } from "@/lib/content";
 export default function PrivacyPolicyPage() {
   return (
     <div className="w-full relative">
-      <HeroComponentTwo imgUrl="/assets/pp-bg.png" />
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/pp-bg.png" />
       <SectionHeader
         spanText="Your Data, Our Commitment"
         heading="Privacy Policy"

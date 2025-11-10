@@ -27,7 +27,7 @@ export default function CareersPage() {
   ];
   return (
     <div className="relative w-full">
-   <HeroComponentTwo imgUrl="/assets/careers-bg.jpg"/>
+   <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/careers-bg.jpg"/>
       <SectionHeader
         spanText="Excellence"
         title="Careers"

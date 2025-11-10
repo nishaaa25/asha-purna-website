@@ -79,7 +79,7 @@ export default async function CSRpage() {
 
   return (
     <div className="w-full relative ">
-      <HeroComponentTwo imgUrl="/assets/csr-bg.jpg" />
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/csr-bg.jpg" />
       <div className="w-full relative md:w-10/12 lg:w-8/12 lg:mx-auto">
         <SectionHeader
           spanText="

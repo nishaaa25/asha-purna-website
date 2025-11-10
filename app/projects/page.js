@@ -111,7 +111,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="w-full relative" ref={projectSectionRef}>
-      <HeroComponentTwo imgUrl="/assets/project-herobg.jpg" />
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/project-herobg.jpg" />
 
       <div className="w-full relative md:w-[90%] lg:w-[80%] mx-auto">
         <SectionHeader

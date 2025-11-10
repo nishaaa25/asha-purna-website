@@ -109,7 +109,7 @@ export default async function page() {
 
   return (
     <div className="w-full relative ">
-      <HeroComponentTwo imgUrl="/assets/nri-bg.jpg"/>
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/nri-bg.jpg"/>
       <SectionHeader
         spanText="for NRIs"
         heading="Ownership Made Simple"

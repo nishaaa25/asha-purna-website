@@ -76,7 +76,7 @@ export default function NewsEventspage() {
 
   return (
     <div className="relative w-full">
-      <HeroComponentTwo imgUrl="/assets/events-bg.jpg" />
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/events-bg.jpg" />
       <div className="relative w-10/12 mx-auto">
         <SectionHeader
           title="news & events"
