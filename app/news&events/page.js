@@ -106,17 +106,19 @@ export default function NewsEventspage() {
             const eventSlug = item?.slug || `event-${item?.id}`;
             return (
               <Link href={`/news&events/${eventSlug}`} key={item.id}>
-                <div className="flex items-start justify-start flex-row lg:flex-col gap-4 h-full relative cursor-pointer  transition-shadow duration-300 p-2 rounded-lg">
-                  <div className="w-4/12 lg:w-full relative h-[100px] md:h-[220px] lg:h-[240px] rounded-t-lg overflow-hidden">
+                <div className="flex items-start justify-start flex-col gap-4 h-full relative cursor-pointer  transition-shadow duration-300 p-2 rounded-lg">
+                  <div className="w-full  img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2] rounded-t-lg overflow-hidden">
                     <Image
                       src={imgPath + item?.image}
                       alt={item?.alt_image_text || item?.title}
-                      fill
-                      className="relative object-cover"
+                      width={280}
+                      height={180}
+                      
+                      className="relative object-contain"
                     />
                   </div>
 
-                  <div className="relative w-8/12 lg:w-full flex flex-col gap-2">
+                  <div className="relative w-full flex flex-col gap-2">
                     <h3 className="text-sm md:text-lg lg:text-[22px] font-semibold text-gray-700 leading-[130%] lg:mt-2">
                       {item?.title}
                     </h3>

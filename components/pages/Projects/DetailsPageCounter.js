@@ -53,27 +53,32 @@ export default function CounterTwo({ data }) {
   // Handle empty or undefined data safely
   if (!data || data.length === 0) return null;
 
+  console.log(data, "data ength");
+  const filteredData = data.filter((item) =>
+    Object.values(item).every((value) => value !== null && value !== undefined)
+  );
+
+  console.log(filteredData, "filtered data");
+
   // ✅ If only one counter, use flex-center layout instead of grid
   const isSingleItem = data.length === 1;
 
   return (
     <div
       ref={containerRef}
-      className={`${
-        isSingleItem
-          ? "flex justify-center pt-10 w-[90%] lg:w-9/12 mx-auto relative"
-          : "grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto justify-center items-center relative"
-      }`}
+      className={"lg:flex justify-center flex-row pt-10 w-[90%] lg:w-9/12 mx-auto relative gap-y-8 gap-3 grid grid-cols-2 lg:flex-nowrap items-center"}
     >
-      {data
-        .filter((counter) => counter.value !== null && counter.value !== undefined)
+      {filteredData
+        .filter(
+          (counter) => counter.value !== null && counter.value !== undefined
+        )
         .map((counter, index) => {
           const isStatic = isNaN(Number(counter.value));
 
           return (
             <div
               key={index}
-              className="text-gray-900 w-full relative counter flex-center flex-col lg:gap-2"
+              className="text-gray-900 min-w-2/4 lg:min-w-1/4 relative counter flex-center flex-col lg:gap-2"
             >
               <div className="flex items-center font-medium">
                 {/* Animated numeric counters */}

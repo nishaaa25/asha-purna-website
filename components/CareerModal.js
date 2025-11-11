@@ -3,7 +3,6 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { toast } from "react-toastify";
 import { isValidEmail, isValidPhone, isValidName } from "@/lib/helpers/regex";
-import Image from "next/image";
 
 export default function CareerModal({ isOpen, onClose, positions, qualifications, jobId }) {
   const [formData, setFormData] = useState({
@@ -13,7 +12,6 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
     currentLocation: "",
     qualification: "",
     position: "",
-    resume: null,
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -26,27 +24,6 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
 
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const allowedTypes = [
-        "application/pdf",
-        "application/msword",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      ];
-      if (!allowedTypes.includes(file.type)) {
-        setErrors((prev) => ({ ...prev, resume: "Please upload a PDF or DOC file" }));
-        return;
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        setErrors((prev) => ({ ...prev, resume: "File size must be less than 5MB" }));
-        return;
-      }
-      setFormData((prev) => ({ ...prev, resume: file }));
-      setErrors((prev) => ({ ...prev, resume: "" }));
     }
   };
 
@@ -65,7 +42,6 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
     if (!formData.currentLocation.trim()) newErrors.currentLocation = "Current location is required";
     if (!formData.qualification) newErrors.qualification = "Please select qualification";
     if (!formData.position) newErrors.position = "Please select position";
-    if (!formData.resume) newErrors.resume = "Please upload your resume";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -98,42 +74,26 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
       });
 
       const result = await response.json();
+      console.log(result, "career enquiry response");
 
-      if (result._status && result._data?.career_id) {
-        const formDataResume = new FormData();
-        formDataResume.append("resume_file", formData.resume);
-        formDataResume.append("enquiry_id", result._data.career_id);
-
-        const resumeResponse = await fetch("https://admin.ashapurna.com/api/upload-career-resume", {
-          method: "POST",
-          headers: { "api-version": "v1" },
-          body: formDataResume,
+      if (result._status) {
+        toast.success("Your application has been submitted successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          currentLocation: "",
+          qualification: "",
+          position: "",
         });
-
-        const resumeResult = await resumeResponse.json();
-
-        if (resumeResult._status) {
-          toast.success(resumeResult._message || "Application submitted successfully!");
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            currentLocation: "",
-            qualification: "",
-            position: "",
-            resume: null,
-          });
-          setErrors({});
-          onClose();
-        } else {
-          toast.error(resumeResult._message || "Failed to upload resume");
-        }
+        setErrors({});
+        onClose();
       } else {
-        toast.error(result._message || "Something went wrong. Please try again.");
+        toast.error(result._message || "Something went wrong. Please try again later.");
       }
     } catch (error) {
       console.error("Career form submission error:", error);
-      toast.error("Failed to submit application. Please try again.");
+      toast.error("Failed to submit application. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -144,7 +104,7 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
       {/* Header */}
       <div className="sticky top-0 bg-white border-b z-50 flex items-center justify-between p-4 sm:p-6">
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 uppercase">
-          Submit Your Resume Here!
+          Submit Your Application
         </h2>
         <button
           onClick={onClose}
@@ -289,29 +249,6 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
             {errors.position && <p className="text-red-500 text-xs mt-1">{errors.position}</p>}
           </div>
 
-          {/* Resume Upload */}
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Upload Resume <span className="text-red-500">*</span>
-              <span className="block text-xs text-gray-500">(PDF or DOC, max 5MB)</span>
-            </label>
-            <input
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-              disabled={isLoading}
-              className={`w-full px-4 py-2 text-sm border rounded-md focus:ring-2 focus:ring-orange-500 outline-none ${
-                errors.resume ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {formData.resume && (
-              <p className="text-xs text-gray-600 mt-1 truncate">
-                Selected: {formData.resume.name}
-              </p>
-            )}
-            {errors.resume && <p className="text-red-500 text-xs mt-1">{errors.resume}</p>}
-          </div>
-
           {/* Submit */}
           <div className="md:col-span-2 mt-2">
             <button
@@ -344,6 +281,6 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
         </form>
       </div>
     </div>,
-    document.body // ✅ render outside main DOM structure
+    document.body
   );
 }

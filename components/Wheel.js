@@ -233,7 +233,7 @@ export default function Wheel() {
             {/* Inner Circle */}
             <div className="absolute w-[400px] h-[400px] xl:w-[780px] xl:h-[780px]  rounded-full">
               <div ref={yearWheelRef} className="relative w-full h-full">
-                {["1997", "2008", "2013", "2016", "2021"].map((year, index) => {
+                {["1997", "2008", "2013", "2016", "2025"].map((year, index) => {
                   const angle = (index * 225) / 4;
                   const radius = innerRadius;
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
@@ -282,7 +282,7 @@ export default function Wheel() {
                   : `translateX(-${activeStep * 100}vw)`,
             }}
           >
-            {["1997", "2008", "2013", "2016", "2021"].map(
+            {["1997", "2008", "2013", "2016", "2025"].map(
               (year, index, years) => {
                 const startYear = parseInt(year);
                 const endYear =

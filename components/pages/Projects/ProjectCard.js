@@ -49,13 +49,14 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
 
   const tagColor =
     data.current_status === "Few Units Left"
-      ? "bg-red-400"
+      ? "bg-yellow-600"
       : data.current_status === "Booking Open"
       ? "bg-green-400"
       : data.current_status === "Ready To Move"
       ? "bg-green-400"
       : data.current_status === "Possession Soon"
-      ? "bg-blue-400"
+      ? "bg-blue-400":  data.current_status === "Sold Out"
+      ? "bg-red-400"
       : data.current_status === "Ready To Occupy" ||
         data.current_status === "Ready to Occupy"
       ? "bg-blue-400"
@@ -81,9 +82,9 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
         )}
 
         <div
-          className={`absolute right-2 top-2 py-[3px] px-3 rounded-full font-medium text-[10px] uppercase ${tagColor} text-white`}
+          className={`absolute right-2 top-2 py-[3px] px-3 rounded-full font-semibold text-[10px] uppercase ${tagColor} text-white`}
         >
-          {data?.current_status}
+          {data?.current_status === "Booking Open"? "Bookings Open" : data?.current_status}
         </div>
       </div>
 
