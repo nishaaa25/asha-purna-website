@@ -61,7 +61,7 @@ export default function DetailsTabSection({
       title: "Starting Price",
       value: project?.price_range?.match(/\d+(\.\d+)?/)?.[0]
         ? "₹" + project?.price_range?.match(/\d+(\.\d+)?/)?.[0] + "L"
-        : null,
+        : project?.price_range
     },
   ];
 

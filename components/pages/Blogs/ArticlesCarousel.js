@@ -37,7 +37,7 @@ export default function ArticlesCarousel({ data = [], allBlogs = [] }) {
               data={{
                 id: blog.id,
                 slug: blog.slug,
-                imgUrl: blog.featured_image,
+                imgUrl: blog.post_image,
                 media: blog.source_name,
                 title: blog.title,
                 desc: blog.content,

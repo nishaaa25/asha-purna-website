@@ -90,7 +90,7 @@ export default function Page() {
                 data={{
                   id: firstBlog.id,
                   slug: firstBlog.slug,
-                  imgUrl: firstBlog.featured_image,
+                  imgUrl: firstBlog.post_image,
                   media: firstBlog.source_name,
                   title: firstBlog.title,
                   desc: firstBlog.content,
@@ -127,13 +127,13 @@ export default function Page() {
             <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 transition-all duration-300 lg:mb-10 md:px-12 lg:px-20">
               {visibleBlogs.map(
                 (item, index) =>
-                  item?.featured_image && (
+                  item?.post_image && (
                     <div key={item.id || index}>
                       <BlogsCard
                         data={{
                           id: item.id,
                           slug: item.slug,
-                          imgUrl: item.featured_image,
+                          imgUrl: item.post_image,
                           media: item.source_name,
                           title: item.title,
                           desc: item.content,
@@ -154,13 +154,13 @@ export default function Page() {
                 <div className="grid grid-cols-1 gap-5 transition-all duration-300 px-5 mt-5">
                   {otherBlogs.map(
                     (item, index) =>
-                      item?.featured_image && (
+                      item?.post_image && (
                         <div key={item.id || index}>
                           <BlogsCard
                             data={{
                               id: item.id,
                               slug: item.slug,
-                              imgUrl: item.featured_image,
+                              imgUrl: item.post_image,
                               media: item.source_name,
                               title: item.title,
                               desc: item.content,

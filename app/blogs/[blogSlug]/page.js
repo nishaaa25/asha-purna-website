@@ -37,6 +37,9 @@ export default function BlogSlugPage() {
           const matched = parsedAll.find((b) => b.slug === blogSlug);
           setBlog(matched || null);
         }
+      } else if (parsedAll.length) {
+        const matched = parsedAll.find((b) => b.slug === blogSlug);
+        setBlog(matched || null);
       }
     } catch (e) {
       console.error("Error parsing selectedBlog:", e);
@@ -57,34 +60,39 @@ export default function BlogSlugPage() {
       })
     : "";
 
-  // find current blog index
+  // Find current blog index
   const currentIndex = allBlogs.findIndex((b) => b.slug === blog.slug);
 
-  // get next 20 blogs after this one
-  const nextBlogs = allBlogs.slice(currentIndex + 1, currentIndex + 21);
-  console.log(nextBlogs, "next blogs");
+  // Get next 3 blogs after the current one (wrap around if needed)
+  let nextBlogs = [];
+  if (currentIndex !== -1 && allBlogs.length > 0) {
+    nextBlogs = allBlogs.slice(currentIndex + 1, currentIndex + 4);
+    if (nextBlogs.length < 3) {
+      nextBlogs = [...nextBlogs, ...allBlogs.slice(0, 3 - nextBlogs.length)];
+    }
+  }
 
-  // if not enough blogs remain at end, wrap around to start
-  const blogsToShow =
-    nextBlogs.length < 20
-      ? [...nextBlogs, ...allBlogs.slice(0, 20 - nextBlogs.length)]
-      : nextBlogs;
+  const blogsToShow = nextBlogs;
+  console.log(blogsToShow, "next blogh");
 
   return (
     <div className="w-full relative">
+      {/* Optional hero section */}
       {/* <HeroComponentTwo imgUrl={blog.imgUrl} /> */}
+
+      {/* Banner image */}
       <div className="relative w-full h-auto overflow-hidden">
         <Image
           src={blog.imgUrl}
           alt={blog.title}
           width={800}
           height={500}
-          className="w-full h-auto "
+          className="w-full h-auto"
         />
-        <div className="w-full h-full banner-gradient absolute top-0 left-0 z-10">
-
-        </div>
+        <div className="w-full h-full banner-gradient absolute top-0 left-0 z-10"></div>
       </div>
+
+      {/* Blog content */}
       <div className="w-full px-[22px] md:px-12 lg:px-20 py-12 md:py-20 lg:py-[100px]">
         <h1 className="text-base md:text-2xl lg:text-[44px] font-bold mb-5">
           {blog.title}
@@ -101,16 +109,6 @@ export default function BlogSlugPage() {
         />
       </div>
 
-      <div className="w-full relative pb-15 lg:pb-[100px]">
-        <div className="relative flex-between mb-5 px-[22px] md:px-12 lg:px-20">
-          <h5 className="text-black-400 text-base md:text-[30px] lg:text-[40px] font-bold leading-[130%]">
-            More Articles
-          </h5>
-        </div>
-        <div className="relative  px-[22px] md:px-12 lg:px-20">
-          <ArticlesCarousel data={blogsToShow} allBlogs={allBlogs} />
-        </div>
-      </div>
     </div>
   );
 }
