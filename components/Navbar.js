@@ -11,7 +11,7 @@ export default function Navbar() {
 
   useEffect(() => {
     // Pages that should always appear "scrolled"
-    const alwaysScrolledPages = ["/rera-disclaimer"];
+    const alwaysScrolledPages = ["/rera-disclaimer", "/blogs"];
 
     if (alwaysScrolledPages.includes(pathname)) {
       setIsScrolled(true);

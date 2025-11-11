@@ -66,9 +66,9 @@ export default function Page() {
   const visibleBlogs = otherBlogs.slice(0, visibleCount);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full pt-[5vh]">
       {/* Hero Section */}
-      <HeroComponentTwo imgUrl="/assets/investor.jpg" />
+      {/* <HeroComponentTwo imgUrl="/assets/investor.jpg" /> */}
 
       {/* Section Header */}
       <SectionHeader

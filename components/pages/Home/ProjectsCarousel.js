@@ -16,7 +16,7 @@ export default function ProjectsCarousel({ projects, imagePath }) {
     <div className="w-full relative">
       <Swiper
         modules={[Navigation]}
-        loop={true} 
+        loop={true}
         centeredSlides={true}
         slidesPerView={1.5}
         spaceBetween={10}
@@ -109,7 +109,7 @@ export default function ProjectsCarousel({ projects, imagePath }) {
       </Swiper>
 
       {/* Navigation Arrows - Only visible on large screens */}
-      <button className="swiper-button-prev-custom hidden cursor-pointer lg:flex absolute left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+      <button className="swiper-button-prev-custom  cursor-pointer flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -126,7 +126,7 @@ export default function ProjectsCarousel({ projects, imagePath }) {
         </svg>
       </button>
 
-      <button className="swiper-button-next-custom hidden lg:flex absolute right-10 top-1/2 cursor-pointer -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+      <button className="swiper-button-next-custom flex absolute right-6 lg:right-10 top-1/2 cursor-pointer -translate-y-1/2 z-50 w-12 h-12 items-center justify-center bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

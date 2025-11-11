@@ -1,8 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "dompurify"; // make sure you installed it: npm install dompurify
 
 export default function IndividualCard({ data }) {
-  const cleanText = data?.desc?.split("<div")[0].trim();
+  // Clean and sanitize HTML description
+  const cleanHTML = data?.desc ? data.desc.split("<div")[0].trim() : "";
+  const safeHTML = DOMPurify.sanitize(cleanHTML);
+
+  // Format date
   const formattedDate = data.date
     ? new Date(data.date).toLocaleString("en-GB", {
         day: "2-digit",
@@ -43,17 +48,22 @@ export default function IndividualCard({ data }) {
           </h5>
         )}
         <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 mb-2 bg-orange-600 line"></div>
+
         {formattedDate && (
           <p className="text-[10px] md:text-xs lg:text-base text-black-400/80 leading-[130%] mt-1">
             {formattedDate}
           </p>
         )}
+
         <h3 className="text-base md:text-xl lg:text-4xl font-semibold text-black-400 leading-[130%] my-1">
           {data.title}
         </h3>
-        <div className="custom-desc text-sm md:text-base lg:text-xl text-gray-800 leading-[130%] w-full pr-2 line-clamp-3 tracking-[-1.1%]">
-          {cleanText}
-        </div>
+
+        {/* Description with HTML */}
+        <div
+          className="custom-desc text-sm md:text-base lg:text-xl text-gray-800 leading-[130%] w-full pr-2 line-clamp-3 tracking-[-1.1%]"
+          dangerouslySetInnerHTML={{ __html: safeHTML }}
+        ></div>
       </div>
     </Link>
   );
