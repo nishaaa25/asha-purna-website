@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { isValidEmail, isValidPhone, isValidName } from "@/lib/helpers/regex";
 
-export default function ChannelPartnerForm() {
+export default function ChannelPartnerForm({onSuccess}) {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -47,59 +47,65 @@ export default function ChannelPartnerForm() {
   };
 
   // submit form
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) {
-      toast.error("Please fix the errors before submitting");
-      return;
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!validateForm()) {
+    toast.error("Please fix the errors before submitting");
+    return;
+  }
+
+  setIsLoading(true);
+
+  const currentDateTime = new Date().toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
+  });
+
+  try {
+    const response = await fetch(
+      "https://apiservices.ashapurna.com/api/web/enquiries",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-version": "v1",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          message: `Company: ${formData.company}, DateTime: ${currentDateTime}`,
+          parma_mantra_type: "channel_partner",
+        }),
+      }
+    );
+
+    const result = await response.json();
+
+    // ✅ Handle both success possibilities
+    if (result?._status) {
+      toast.success("Form submitted successfully!");
+    } else {
+      toast.info("Thank you! We have received your submission.");
     }
 
-    setIsLoading(true);
-
-    // automatically capture current date & time in readable format
-    const currentDateTime = new Date().toLocaleString("en-IN", {
-      timeZone: "Asia/Kolkata",
+    // ✅ Always clear form and show popup after submission
+    setFormData({
+      name: "",
+      company: "",
+      phone: "",
+      email: "",
     });
 
-    try {
-      const response = await fetch(
-        "https://apiservices.ashapurna.com/api/web/enquiries",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "api-version": "v1",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            phone: formData.phone,
-            email: formData.email,
-            message: `Company: ${formData.company}, DateTime: ${currentDateTime}`,
-            parma_mantra_type: "channel_partner",
-          }),
-        }
-      );
+    onSuccess?.();
 
-      const result = await response.json();
-
-      if (result._status) {
-        toast.success("Form submitted successfully!");
-        setFormData({
-          name: "",
-          company: "",
-          phone: "",
-          email: "",
-        });
-      } else {
-        toast.info("Thank you! We have received your submission.");
-      }
-    } catch (error) {
-      console.error("Submission error:", error);
-      toast.error("Something went wrong. Please try again later.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (error) {
+    console.error("Submission error:", error);
+    toast.error("Something went wrong. Please try again later.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="py-10 md:py-13 lg:py-16 px-8 md:px-16 lg:px-20 w-full lg:w-8/12 relative border-[0.65px]  border-black/50 rounded-xl lg:mx-auto">

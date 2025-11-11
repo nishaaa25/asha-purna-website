@@ -5,31 +5,38 @@ import HeroComponentTwo from "@/components/HeroComponentTwo";
 import ChannelPartnerForm from "@/components/pages/Form/ChannelPartnerForm";
 import ClientForm from "@/components/pages/Form/ClientForm";
 import SectionHeader from "@/components/SectionHeader";
+import ThankYouPopup from "@/components/ThankYouPopup"; // ✅ Import popup
 
 export default function Page() {
   const [activeForm, setActiveForm] = useState("channel");
+  const [showThankYou, setShowThankYou] = useState(false); // ✅ Popup state
+
+  // ✅ Function to handle successful submission
+  const handleSuccess = () => {
+    setShowThankYou(true);
+  };
 
   return (
     <div className="w-full relative pb-10 md:pb-20 lg:pb-[100px]">
       <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/bp-bg.jpg" />
 
       {/* Become Partner Section */}
-      <section className="w-full relative lg:px-20 flex-center flex-col ">
+      <section className="w-full relative lg:px-20 flex-center flex-col">
         <SectionHeader
           heading="Become a Partner"
           desc="Whether you’re an individual looking to collaborate as a Channel Partner 
             or a client interested in exploring our real estate opportunities — 
             we’d love to connect with you. Fill out the form below and our team 
             will reach out to you shortly."
-          
         />
+
         <div className="flex gap-4 relative -top-10 lg:-top-15">
           <button
             onClick={() => setActiveForm("channel")}
-            className={` text-xs md:text-base border border-black-400 lg:text-base py-[10px] font-medium lg:py-[15px] min-w-38 lg:min-w-50 px-5 lg:px-6 rounded-md mt-2 capitalize cursor-pointer text-center ${
-              activeForm === "channel" 
-                ? "bg-black-400 text-white "
-                : " text-black-400 hover:bg-white"
+            className={`text-xs md:text-base border border-black-400 lg:text-base py-[10px] font-medium lg:py-[15px] min-w-38 lg:min-w-50 px-5 lg:px-6 rounded-md mt-2 capitalize cursor-pointer text-center ${
+              activeForm === "channel"
+                ? "bg-black-400 text-white"
+                : "text-black-400 hover:bg-white"
             }`}
           >
             Channel Partner
@@ -37,10 +44,10 @@ export default function Page() {
 
           <button
             onClick={() => setActiveForm("client")}
-             className={` text-xs md:text-base border border-black-400 lg:text-base py-[10px] font-medium lg:py-[15px] min-w-38 lg:min-w-50 px-5 lg:px-6 rounded-md mt-2 capitalize cursor-pointer text-center ${
-              activeForm === "client" 
+            className={`text-xs md:text-base border border-black-400 lg:text-base py-[10px] font-medium lg:py-[15px] min-w-38 lg:min-w-50 px-5 lg:px-6 rounded-md mt-2 capitalize cursor-pointer text-center ${
+              activeForm === "client"
                 ? "bg-black-400 text-white"
-                : " text-black-400 hover:bg-white"
+                : "text-black-400 hover:bg-white"
             }`}
           >
             Client
@@ -48,16 +55,21 @@ export default function Page() {
         </div>
 
         {/* Forms */}
-        <div className="w-10/12 mx-auto bg-white  transition-all">
-          {activeForm === "channel" && <ChannelPartnerForm />}
-          {activeForm === "client" && <ClientForm />}
-          {!activeForm && (
-            <p className="text-gray-500 text-center">
-              Please select an option to get started.
-            </p>
+        <div className="w-10/12 mx-auto bg-white transition-all">
+          {activeForm === "channel" && (
+            <ChannelPartnerForm onSuccess={handleSuccess} /> 
+          )}
+          {activeForm === "client" && (
+            <ClientForm onSuccess={handleSuccess} /> 
           )}
         </div>
       </section>
+
+      {/* ✅ Thank You Popup */}
+      <ThankYouPopup
+        isOpen={showThankYou}
+        onClose={() => setShowThankYou(false)}
+      />
     </div>
   );
 }
