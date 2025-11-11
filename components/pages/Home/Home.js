@@ -30,21 +30,20 @@ export default function Home({
   const imgContainerRef = useRef(null);
   const data = [
     {
-      title: "Bighas of land bank",
-      value: "1000",
+      title: "Happy Families",
+      value: "30000",
     },
     {
-      title: "Lakh Sq. Ft. delivered",
-      value: "140",
-    },
-    {
-      title: "Families rooted",
-      value: "30",
-      sign: "k",
-    },
-    {
-      title: "Project accross 6 cities",
+      title: "Projects",
       value: "45",
+    },
+    {
+      title: "Crore+ sqft. Developed",
+      value: "4",
+    },
+    {
+      title: "Years of Experience",
+      value: "29",
     },
   ];
 

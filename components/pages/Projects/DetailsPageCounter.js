@@ -62,7 +62,7 @@ export default function CounterTwo({ data }) {
       className={`${
         isSingleItem
           ? "flex justify-center pt-10 w-[90%] lg:w-9/12 mx-auto relative"
-          : "grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto relative"
+          : "grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto justify-center items-center relative"
       }`}
     >
       {data

@@ -94,7 +94,7 @@ Transforming Lives"
       <div className="relative bg-cream-600 w-full pb-5 md:pb-10 lg:pb-20">
         <div className="w-full md:w-10/12 lg:w-8/12 mx-auto">
           <SectionHeader
-            heading="Recent Projects"
+            heading="CSR Initiatives"
             desc="Discover our latest CSR initiatives that are making a real difference in communities across Rajasthan."
           />
         </div>

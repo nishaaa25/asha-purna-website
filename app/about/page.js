@@ -12,25 +12,25 @@ import AboutPageClient from "@/components/pages/About/AboutPageClient";
 import Wheel from "@/components/Wheel";
 
 export default async function AboutPage() {
-  const data = [
+const data = [
     {
-      title: "Landmark Projects",
-      value: "50",
+      title: "Happy Families",
+      value: "30000",
     },
     {
-      title: "Families",
-      value: "30",
-      sign: "k",
+      title: "Projects",
+      value: "45",
     },
     {
-      title: "Lakh Sq. Ft. Delivered",
-      value: "140",
+      title: "Crore+ sqft. Developed",
+      value: "4",
     },
     {
-      title: "Yours Legacy",
-      value: "28",
+      title: "Years of Experience",
+      value: "29",
     },
   ];
+
 
   return (
     <AboutPageClient>
