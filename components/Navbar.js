@@ -38,7 +38,7 @@ export default function Navbar() {
         {/* LOGO */}
         <div
           className={`absolute left-5 md:left-8 lg:left-12 pt-6 -top-4 ${
-            isScrolled ? "bg-white scale-[1.02] shadow-md" : "bg-transparent scale-100"
+            isScrolled ? "bg-white scale-110 shadow-md" : "bg-transparent scale-100"
           }`}
         >
           <Link
@@ -47,7 +47,7 @@ export default function Navbar() {
           >
             <Image
               key={isScrolled ? "dark" : "light"}
-              src={isScrolled ? "https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg" : "https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg"}
+              src={isScrolled ? "/assets/dark-logo.svg" : "https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg"}
               alt="main-logo"
               fill
               priority
