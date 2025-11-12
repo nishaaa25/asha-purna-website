@@ -43,13 +43,12 @@ export default function ProjectsPage() {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "api-version": "v1",
+              "api-version": "v2",
             },
             body: JSON.stringify({ slug: activeTab }),
             next: { revalidate: 3600 },
           }
         );
-
         // Wait for both API call and delay to complete
         await delayPromise;
 
@@ -62,6 +61,7 @@ export default function ProjectsPage() {
         }
 
         const result = await response.json();
+                console.log(result, "all blogs")
 
         if (result._status) {
           const newlaunchs = (result?._data?.getNewlaunchs || []).map((p) => ({

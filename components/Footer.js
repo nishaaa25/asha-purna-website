@@ -61,7 +61,7 @@ export default function Footer() {
           <div className="w-27 md:w-50 h-13 lg:w-54 md:h-24 lg:h-36 relative mb-10">
             <div className="w-28 h-22 lg:w-50 lg:h-38 relative">
               <Image
-                src="/assets/logo-light.svg"
+                src="https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg"
                 alt="main-logo"
                 fill
                 className="relative object-contain"

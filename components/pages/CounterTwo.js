@@ -77,7 +77,7 @@ export default function CounterTwo({ data }) {
               {index == 3 ? "%" : "+"}
             </span>
           </div>
-          <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center">
+          <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center whitespace-nowrap">
             {counter.title}
           </h4>
           {/* vertical divider line */}

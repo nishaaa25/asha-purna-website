@@ -22,7 +22,7 @@ const data = [
       value: "45",
     },
     {
-      title: "Crore+ sqft. Developed",
+      title: "Cr+ sqft. developed",
       value: "4",
     },
     {
@@ -59,7 +59,7 @@ const data = [
           <h2 className="relative text-[22px] md:text-[40px] lg:text-[48px] leading-[130%] tracking-[-1.1px] font-medium text-center mb-8 text-gray-600">
             Our Leadership
           </h2>
-          <div className="w-full mx-auto relative mt-8 md:mt-10 lg:mt-13 font-mulish">
+          <div className="w-full mx-auto lg:w-11/12 relative mt-8 md:mt-10 lg:mt-13 font-mulish">
             <FoundersCarousel />
           </div>
         </div>

@@ -47,7 +47,7 @@ export default function Navbar() {
           >
             <Image
               key={isScrolled ? "dark" : "light"}
-              src={isScrolled ? "/assets/logo-dark.svg" : "/assets/logo-light.svg"}
+              src={isScrolled ? "https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg" : "https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg"}
               alt="main-logo"
               fill
               priority

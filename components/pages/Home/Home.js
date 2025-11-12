@@ -38,7 +38,7 @@ export default function Home({
       value: "45",
     },
     {
-      title: "Crore+ sqft. Developed",
+      title: "Cr+ sqft. developed",
       value: "4",
     },
     {

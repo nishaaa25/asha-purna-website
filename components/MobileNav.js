@@ -82,7 +82,7 @@ export default function MobileNav({ isScrolled = false }) {
               <Link href="/" onClick={closeNav}>
                 <div className="w-22 h-20 lg:w-44 lg:h-32 relative">
                   <Image
-                    src="/assets/logo-dark.svg"
+                    src="https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg"
                     alt="main-logo"
                     fill
                     className="relative object-contain"

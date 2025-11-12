@@ -55,14 +55,22 @@ export default function FoundersCarousel() {
             >
               <div
                 key={item.id}
-                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col min-h-[600px]"
+                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col"
               >
-                <div className="w-full relative h-[320px] md:h-[380px] lg:h-[480px] rounded-t-md overflow-hidden flex-none">
+                {/* <div className="w-full relative h-[320px] md:h-[380px] lg:h-[480px] rounded-t-md overflow-hidden flex-none">
                   <Image
                     src={item.imgUrl}
                     alt={item.name}
                     fill
                     className="object-cover object-center"
+                  />
+                </div> */}
+                <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2] h-[40vh] lg:h-[50vh]">
+                  <Image
+                     src={item.imgUrl}
+                    alt={item.name}
+                    fill
+                    className="object-cover w-full h-ful object-top"
                   />
                 </div>
                 <div className="w-full relative mt-4 content flex flex-col flex-1 justify-between">
