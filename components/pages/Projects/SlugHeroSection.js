@@ -139,7 +139,7 @@ export default function SlugHeroSection({
             isReraExpanded
               ? "w-3/12 md:w-2/12 lg:w-[10%]"
               : "w-7/12 md:w-5/12 lg:w-[20%]"
-          } absolute right-0 top-[15vh] flex flex-col gap-2 cursor-pointer z-[100] transition-all duration-200 `}
+          } absolute right-0 top-[15vh] ml-auto flex flex-col gap-2 cursor-pointer z-[100] transition-all duration-200 `}
         >
           {isReraExpanded ? (
             <p

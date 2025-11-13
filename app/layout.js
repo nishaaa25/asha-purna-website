@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
       <head>
         <script src="https://www.youtube.com/iframe_api" async defer></script>
       </head>
-      <body className={`antialiased w-screen relative overflow-x-hidden`}>
+      <body className={`antialiased w-full relative overflow-x-hidden`}>
         <AppProviders>
           <LenisProvider>
             <ClientPageTransition>

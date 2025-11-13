@@ -100,7 +100,7 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-[99999] w-screen h-screen bg-white overflow-y-auto">
+    <div className="fixed inset-0 z-[99999] w-full h-screen bg-white overflow-y-auto">
       {/* Header */}
       <div className="sticky top-0 bg-white border-b z-50 flex items-center justify-between p-4 sm:p-6">
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 uppercase">

@@ -10,15 +10,15 @@ export default function CareersPage() {
   const data = [
     {
       title: "Yeaers Legacy",
-      value: "28",
+      value: "29",
     },
     {
       title: "Team Members",
-      value: "500",
+      value: "100",
     },
     {
       title: "Departments",
-      value: "15",
+      value: "10",
     },
     {
       title: "Retention Rate",
@@ -34,16 +34,6 @@ export default function CareersPage() {
         heading="A Culture that shapes"
         desc='At Ashapurna, we believe a "can-do" spirit comes from trust and empowerment at every level. Our people get the freedom to innovate, the space to perform, and the opportunity to grow faster. From day one, structured induction ensures new colleagues are aligned with our vision and culture, while ongoing training - spanning both technical and leadership skills - keeps careers moving forward with confidence.'
       />
-      <div className="w-full px-[22px] lg:px-20 h-[200px] md:h-[70vh] lg:h-[95vh] relative lg:pt-15">
-        <div className="relative w-full h-full overflow-hidden rounded-t-[10px]">
-          <Image
-            src="/assets/project.jpg"
-            alt="location-map"
-            fill
-            className="relative object-cover"
-          />
-        </div>
-      </div>
       <div className="mb-15 lg:mb-[100px] mt-5 relative w-full px-[40px]">
         <CounterTwo data={data} />
       </div>

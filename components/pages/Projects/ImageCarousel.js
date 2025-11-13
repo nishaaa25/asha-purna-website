@@ -14,6 +14,8 @@ export default function ImageCarousel({ images }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  const galleryImages = [...images, ...images]
+
   // Don't render if no images
   if (!images || images.length === 0) return null;
 
@@ -37,6 +39,7 @@ export default function ImageCarousel({ images }) {
         slidesPerView={1.5}
         spaceBetween={15}
         watchSlidesProgress
+        loop={true}
         navigation={{
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",
@@ -51,7 +54,7 @@ export default function ImageCarousel({ images }) {
           1024: { slidesPerView: 1.5 },
         }}
       >
-        {images.map((item, index) => {
+        {galleryImages.map((item, index) => {
           const isActive = index === activeIndex;
           return (
             <SwiperSlide

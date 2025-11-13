@@ -80,7 +80,6 @@ export default function Wheel() {
       start: "top top",
       end: "+=500%",
       pin: true,
-      anticipatePin:true,
       scrub: 1,
       onUpdate: (self) => {
         const progress = self.progress;
@@ -304,7 +303,7 @@ export default function Wheel() {
                     className={`${
                       windowWidth >= 1024
                         ? "h-screen w-full"
-                        : "w-screen h-full flex-shrink-0"
+                        : "w-full h-full flex-shrink-0"
                     } flex items-center justify-center text-[3rem] font-bold text-gray-800 transition-all duration-[1.5s] ease-out`}
                     style={{ opacity }}
                   >
