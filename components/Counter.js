@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
-gsap.registerPlugin(ScrollTrigger);
 
 export default function CountersSection({ data }) {
   const countRefs = useRef([]);
@@ -13,32 +12,34 @@ export default function CountersSection({ data }) {
 
   useEffect(() => {
     const animateCounters = () => {
-      if (countRefs.current.length > 0) {
-        countRefs.current.forEach((counter) => {
+      if (countRefs.current.length === 0) return;
+
+      const duration = 1500; // total animation time (ms)
+      const intervalSpeed = 40; // how fast digits flicker (ms)
+      const totalFrames = duration / intervalSpeed;
+      let frame =  1;
+
+      const interval = setInterval(() => {
+        frame++;
+        countRefs.current.forEach((counter, i) => {
           if (!counter) return;
 
-          let count = 10;
+          // show random number roughly near the target's range
           const target = Number(counter.getAttribute("data-target"));
-
-          // Make small screens faster
-          const isSmallScreen = window.innerWidth < 768; // below 768px = mobile/tablet
-          const totalFrames = isSmallScreen ? 45 : 90; // half the frames = 2x faster
-          const increment = target / totalFrames;
-
-          const updateCount = () => {
-            if (count < target) {
-              count += increment;
-              if (count > target) count = target;
-              counter.innerText = Math.floor(count);
-              requestAnimationFrame(updateCount);
-            } else {
-              counter.innerText = target;
-            }
-          };
-
-          updateCount();
+          const randomValue = Math.floor(Math.random() * target);
+          counter.innerText = randomValue.toLocaleString();
         });
-      }
+
+        if (frame >= totalFrames) {
+          clearInterval(interval);
+          // finally set the real value
+          countRefs.current.forEach((counter) => {
+            if (!counter) return;
+            const target = Number(counter.getAttribute("data-target"));
+            counter.innerText = target.toLocaleString();
+          });
+        }
+      }, intervalSpeed);
     };
 
     const trigger = ScrollTrigger.create({
@@ -48,9 +49,7 @@ export default function CountersSection({ data }) {
       onEnter: animateCounters,
     });
 
-    return () => {
-      trigger.kill();
-    };
+    return () => trigger.kill();
   }, []);
 
   return (
@@ -68,9 +67,8 @@ export default function CountersSection({ data }) {
               ref={(el) => (countRefs.current[index] = el)}
               className="text-[40px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
               data-target={counter.value}
-              data-sign={counter.sign || ""}
             >
-              5
+              1
             </span>
             {counter.sign && (
               <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">
@@ -85,7 +83,6 @@ export default function CountersSection({ data }) {
             {counter.title}
           </h4>
 
-          {/* vertical divider line */}
           {index !== data.length - 1 && (
             <span className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-orange-600/70"></span>
           )}

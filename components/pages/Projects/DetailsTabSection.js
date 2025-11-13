@@ -7,6 +7,7 @@ import SectionHeader from "@/components/SectionHeader";
 import MasterPlan from "./MasterPlan";
 import FloorPlan from "./FloorPlan";
 import DetailsPageCounter from "./DetailsPageCounter";
+import CounterThree from "./CounterThree";
 
 export default function DetailsTabSection({
   project,
@@ -131,7 +132,7 @@ export default function DetailsTabSection({
           />
 
           <div className="w-11/12 relative mb-10">
-            <DetailsPageCounter data={data} />
+            <CounterThree data={data} />
           </div>
         </div>
       )}

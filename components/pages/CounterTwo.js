@@ -5,35 +5,44 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 export default function CounterTwo({ data }) {
   const countRefs = useRef([]);
   const containerRef = useRef(null);
 
   useEffect(() => {
     const animateCounters = () => {
-      if (countRefs.current.length > 0) {
+      if (countRefs.current.length === 0) return;
+
+      const duration = 1500; // total animation duration (ms)
+      const intervalSpeed = 40; // time between random number updates (ms)
+      const totalFrames = duration / intervalSpeed;
+      let frame = 0;
+
+      const interval = setInterval(() => {
+        frame++;
         countRefs.current.forEach((counter) => {
           if (!counter) return;
-
-          let count = 10;
           const target = Number(counter.getAttribute("data-target"));
-
-          const increment = target / 90;
-
-          const updateCount = () => {
-            if (count < target) {
-              count += increment;
-              if (count > target) count = target;
-              counter.innerText = Math.floor(count);
-              requestAnimationFrame(updateCount);
-            } else {
-              counter.innerText = target;
-            }
-          };
-
-          updateCount();
+          const randomValue = Math.floor(Math.random() * target);
+          counter.innerText = randomValue.toLocaleString();
         });
-      }
+
+        if (frame >= totalFrames) {
+          clearInterval(interval);
+          // After flicker ends, set real values
+          countRefs.current.forEach((counter) => {
+            if (!counter) return;
+            const target = Number(counter.getAttribute("data-target"));
+            counter.innerText = target.toLocaleString();
+            gsap.fromTo(
+              counter,
+              { opacity: 0.5, scale: 1.1 },
+              { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }
+            );
+          });
+        }
+      }, intervalSpeed);
     };
 
     const trigger = ScrollTrigger.create({
@@ -50,7 +59,7 @@ export default function CounterTwo({ data }) {
 
   return (
     <div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10  w-[90%] lg:w-9/12 mx-auto relative"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto relative"
       ref={containerRef}
     >
       {data.map((counter, index) => (
@@ -66,7 +75,7 @@ export default function CounterTwo({ data }) {
               className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
               data-target={counter.value}
             >
-              6
+              0
             </span>
             {counter.sign && (
               <span className="text-[50px] md:text-[60px] lg:text-[56px] leading-[100%]">
@@ -74,13 +83,13 @@ export default function CounterTwo({ data }) {
               </span>
             )}
             <span className="text-[43px] md:text-[60px] lg:text-[56px] leading-[100%] text-orange-600 font-[300] tracking-[-3.6px]">
-              {index == 3 ? "%" : "+"}
+              {index === 3 ? "%" : "+"}
             </span>
           </div>
           <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center whitespace-nowrap">
             {counter.title}
           </h4>
-          {/* vertical divider line */}
+
           {index !== data.length - 1 && (
             <span className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-orange-600/70"></span>
           )}

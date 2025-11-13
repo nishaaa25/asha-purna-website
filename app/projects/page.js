@@ -61,7 +61,7 @@ export default function ProjectsPage() {
         }
 
         const result = await response.json();
-                console.log(result, "all blogs")
+        console.log(result, "all projects");
 
         if (result._status) {
           const newlaunchs = (result?._data?.getNewlaunchs || []).map((p) => ({
@@ -72,12 +72,19 @@ export default function ProjectsPage() {
             ...p,
             _listType: "flats",
           }));
-          const townships = (result?._data?.getResidentialTownships || []).map((p) => ({
-            ...p,
-            _listType: "township",
-          }));
+          const townships = (result?._data?.getResidentialTownships || []).map(
+            (p) => ({
+              ...p,
+              _listType: "township",
+            })
+          );
 
-          setProjects([...newlaunchs, ...flats, ...townships]);
+          const combinedProjects = [...newlaunchs, ...flats, ...townships];
+
+          // ✅ Sort projects by order number
+          combinedProjects.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+          setProjects(combinedProjects);
           setImagePath(result._data.project_image_path || "");
         } else {
           setProjects([]);
