@@ -22,7 +22,8 @@ const data = [
       value: "45",
     },
     {
-      title: "Cr+ sqft. developed",
+      title: "sqft developed",
+      sign: "Cr",
       value: "4",
     },
     {

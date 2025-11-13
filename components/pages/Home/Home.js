@@ -38,8 +38,9 @@ export default function Home({
       value: "45",
     },
     {
-      title: "Cr+ sqft. developed",
+      title: "sqft. developed",
       value: "4",
+      sign: "Cr"
     },
     {
       title: "Years of Experience",

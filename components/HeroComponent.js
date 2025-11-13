@@ -6,7 +6,7 @@ export default function HeroComponent() {
     <section className="w-full relative h-screen flex-center overflow-hidden">
       {/* Background Video */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 scale-125 ">
-        <iframe
+        {/* <iframe
           id="bg-video"
           fetchPriority="high"
           className="absolute top-0 left-0 w-[300%] h-[300%] md:w-full md:h-full pointer-events-none"
@@ -15,7 +15,18 @@ export default function HeroComponent() {
           frameBorder="0"
           allow="autoplay; fullscreen"
           allowFullScreen
-        ></iframe>
+        ></iframe> */}
+        <video
+          id="bg-video"
+          className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+          src="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/home-video.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+
         {/* <video
           id="bg-video"
           className="absolute top-0 left-0 w-[300%] h-[300%] md:w-full md:h-full object-cover pointer-events-none"
