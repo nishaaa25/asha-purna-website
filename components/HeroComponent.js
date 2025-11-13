@@ -5,39 +5,19 @@ export default function HeroComponent() {
   return (
     <section className="w-full relative h-screen flex-center overflow-hidden">
       {/* Background Video */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 scale-125 ">
-        {/* <iframe
-          id="bg-video"
-          fetchPriority="high"
-          className="absolute top-0 left-0 w-[300%] h-[300%] md:w-full md:h-full pointer-events-none"
-          src="https://www.youtube.com/embed/yMOk_HcPunk?autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&loop=1&playlist=yMOk_HcPunk&start=10&iv_load_policy=3&disablekb=1&fs=0&playsinline=1&autohide=1&enablejsapi=1"
-          title="Background Video"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-        ></iframe> */}
-        <video
-          id="bg-video"
-          className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
-          src="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/home-video.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        />
-
-        {/* <video
-          id="bg-video"
-          className="absolute top-0 left-0 w-[300%] h-[300%] md:w-full md:h-full object-cover pointer-events-none"
-          src="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/home-video.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          style={{ pointerEvents: "none" }}
-        /> */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div className="absolute top-1/2 left-1/2 w-[400%] h-[400%] md:w-[120%] md:h-[120%] -translate-x-1/2 -translate-y-1/2">
+          <iframe
+            id="bg-video"
+            fetchPriority="high"
+            className="w-full h-full pointer-events-none"
+            src="https://www.youtube.com/embed/yMOk_HcPunk?autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&loop=1&playlist=yMOk_HcPunk&start=0&iv_load_policy=3&disablekb=1&fs=0&playsinline=1&autohide=1&enablejsapi=1"
+            title="Background Video"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          ></iframe>
+        </div>
       </div>
 
       {/* Overlay */}
