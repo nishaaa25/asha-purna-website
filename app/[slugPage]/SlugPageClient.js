@@ -57,7 +57,7 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
 
           {canToggle && (
             <div
-              className="border border-[#cccccc] bg-black-400 cursor-pointer text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-2 capitalize"
+              className="border border-[#cccccc] bg-black-400 cursor-pointer text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-2 capitalize text-center"
               onClick={() => setIsExpanded((prev) => !prev)}
             >
               {isExpanded ? "Less Projects" : "More Projects"}
