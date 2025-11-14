@@ -17,7 +17,6 @@ export default function SlugHeroSection({
 }) {
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
   const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
-  const [isReraExpanded, setIsReraExpanded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [isSafari, setIsSafari] = useState(false);
 
@@ -26,57 +25,7 @@ export default function SlugHeroSection({
     const ua = navigator.userAgent.toLowerCase();
     const safari = ua.includes("safari") && !ua.includes("chrome") && !ua.includes("android");
     setIsSafari(safari);
-
-    // YouTube API if video is YouTube
-    if (
-      project?.page_full_video?.includes("youtube.com") ||
-      project?.page_full_video?.includes("youtu.be")
-    ) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
-
-      window.onYouTubeIframeAPIReady = () => {
-        new window.YT.Player("bg-video", {
-          events: {
-            onReady: (event) => {
-              if (!safari) {
-                event.target.mute();
-                event.target.playVideo();
-              }
-            },
-          },
-          playerVars: {
-            autoplay: safari ? 0 : 1,
-            controls: 0,
-            modestbranding: 1,
-            rel: 0,
-            loop: 1,
-            playlist: project.page_full_video.split("v=")[1]?.split("&")[0] || project.page_full_video.split("/").pop(),
-            fs: 0,
-            showinfo: 0,
-            iv_load_policy: 3,
-            disablekb: 1,
-            playsinline: 1,
-            autohide: 1,
-          },
-        });
-      };
-    }
-  }, [project?.page_full_video]);
-
-  const reraNo =
-    project?.rera_number ||
-    projectReraNo?.find((item) => {
-      const title = item?.title?.toUpperCase() || "";
-      const value = item?.value?.toUpperCase() || "";
-      return title.includes("RERA") || value.startsWith("RAJ/") || title.startsWith("RAJ/");
-    })?.value ||
-    projectReraNo?.find((item) => {
-      const title = item?.title?.toUpperCase() || "";
-      return title.startsWith("RAJ/");
-    })?.title ||
-    "";
+  }, []);
 
   const fallbackImage = project?.project_logo_1
     ? projectImagePath + project.project_logo_1
@@ -94,13 +43,26 @@ export default function SlugHeroSection({
 
   const getYouTubeEmbed = (url) => {
     const videoId = url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
-    return (
-      url
-        .replace("watch?v=", "embed/")
-        .replace("youtu.be/", "www.youtube.com/embed/") +
-      `?autoplay=${isSafari ? 0 : 1}&mute=${isSafari ? 0 : 1}&controls=0&modestbranding=1&rel=0&loop=1&playlist=${videoId}&iv_load_policy=3&disablekb=1&playsinline=1&autohide=1`
-    );
+    if (isSafari) {
+      // Safari: show controls, no autoplay
+      return `https://www.youtube.com/embed/${videoId}?controls=1&modestbranding=1&rel=0&loop=1&playlist=${videoId}&playsinline=1`;
+    }
+    // Other browsers: autoplay muted, no controls
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&playlist=${videoId}&iv_load_policy=3&disablekb=1&playsinline=1&autohide=1`;
   };
+
+  const reraNo =
+    project?.rera_number ||
+    projectReraNo?.find((item) => {
+      const title = item?.title?.toUpperCase() || "";
+      const value = item?.value?.toUpperCase() || "";
+      return title.includes("RERA") || value.startsWith("RAJ/") || title.startsWith("RAJ/");
+    })?.value ||
+    projectReraNo?.find((item) => {
+      const title = item?.title?.toUpperCase() || "";
+      return title.startsWith("RAJ/");
+    })?.title ||
+    "";
 
   return (
     <section className="w-full relative h-dvh flex-center overflow-hidden">
@@ -108,15 +70,15 @@ export default function SlugHeroSection({
       {project?.page_full_video && !videoError ? (
         project.page_full_video.includes("youtube.com") ||
         project.page_full_video.includes("youtu.be") ? (
-          <div className={`absolute top-0 left-0 w-full h-full overflow-hidden ${isSafari ? "z-10" : "-z-10"}`}>
+          <div className={`absolute top-0 left-0 w-full h-full overflow-hidden  ${isSafari ? "z-10" : "-z-10"}`}>
             <div className="absolute top-1/2 left-1/2 w-[400%] h-[400%] md:w-[120%] md:h-[120%] -translate-x-1/2 -translate-y-1/2">
               <iframe
                 id="bg-video"
-                className="w-full h-full pointer-events-none"
+                className="w-full h-full "
                 src={getYouTubeEmbed(project.page_full_video)}
                 title="Background Video"
                 frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
+                allow={isSafari ? "fullscreen; picture-in-picture" : "autoplay; fullscreen; picture-in-picture"}
                 allowFullScreen
               />
             </div>
@@ -153,10 +115,10 @@ export default function SlugHeroSection({
       )}
 
       {/* Overlay */}
-      <div className="w-full h-full absolute top-0 left-0 bg-black/40"></div>
+      <div className="w-full h-full absolute top-0 left-0 bg-black/40 z-20 pointer-events-none"></div>
 
       {/* Text Content */}
-      <div className="w-[86%] mx-auto relative z-50 pointer-events-none flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
+      <div className="w-[86%] mx-auto relative pointer-events-none flex flex-col gap-2 z-30 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
         <h1 className="text-[36px] md:text-5xl lg:text-6xl xl:text-7xl leading-[120%] tracking-[-1.1%] font-semibold drop-shadow-lg">
           {project?.name || project?.project_name || "Project"}
         </h1>
@@ -174,7 +136,7 @@ export default function SlugHeroSection({
       <ReraSlideOut reraNo={reraNo} />
 
       {/* Bottom Buttons */}
-      <div className="absolute bottom-9 w-full px-1 z-50">
+      <div className="absolute bottom-9 w-full px-1 z-40">
         <BottomBar
           btnOneLink="#"
           btnTwoLink={`tel:${phoneNumber}`}
