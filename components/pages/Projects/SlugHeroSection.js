@@ -135,7 +135,7 @@ export default function SlugHeroSection({
       <div className="w-full h-full absolute top-0 left-0 bg-black/40"></div>
 
       {/* Text Content */}
-      <div className="w-[86%] mx-auto relative flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
+      <div className="w-[86%] mx-auto relative z-50 flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
         <h1 className="text-[36px] md:text-5xl lg:text-6xl xl:text-7xl leading-[120%] tracking-[-1.1%] font-semibold drop-shadow-lg">
           {project?.name || project?.project_name || "Project"}
         </h1>
@@ -153,7 +153,7 @@ export default function SlugHeroSection({
       <ReraSlideOut reraNo={reraNo} />
 
       {/* Bottom Buttons */}
-      <div className="absolute bottom-9 w-full px-1">
+      <div className="absolute bottom-9 w-full px-1 z-50">
         <BottomBar
           btnOneLink="#"
           btnTwoLink={`tel:${phoneNumber}`}
@@ -196,7 +196,7 @@ export function ReraSlideOut({ reraNo }) {
 
   return (
     <div
-      className={`fixed top-1/4 transform -translate-y-1/2 transition-all duration-500 z-[5000] bg-white/75 p-3 flex items-center justify-center rounded-l-md shadow-md ${
+      className={`fixed top-1/4 transform -translate-y-1/2 transition-all duration-500 z-50 bg-white/75 p-3 flex items-center justify-center rounded-l-md shadow-md ${
         open ? "right-0" : "-right-[321px]"
       } w-[321px]`}
     >
