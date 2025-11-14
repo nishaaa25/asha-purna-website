@@ -27,7 +27,11 @@ export default function SlugHeroSection({
     const safari = ua.includes("safari") && !ua.includes("chrome") && !ua.includes("android");
     setIsSafari(safari);
 
-    if (project?.page_full_video?.includes("youtube.com") || project?.page_full_video?.includes("youtu.be")) {
+    // YouTube API if video is YouTube
+    if (
+      project?.page_full_video?.includes("youtube.com") ||
+      project?.page_full_video?.includes("youtu.be")
+    ) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
       document.body.appendChild(tag);
@@ -41,6 +45,20 @@ export default function SlugHeroSection({
                 event.target.playVideo();
               }
             },
+          },
+          playerVars: {
+            autoplay: safari ? 0 : 1,
+            controls: 0,
+            modestbranding: 1,
+            rel: 0,
+            loop: 1,
+            playlist: project.page_full_video.split("v=")[1]?.split("&")[0] || project.page_full_video.split("/").pop(),
+            fs: 0,
+            showinfo: 0,
+            iv_load_policy: 3,
+            disablekb: 1,
+            playsinline: 1,
+            autohide: 1,
           },
         });
       };
@@ -80,7 +98,7 @@ export default function SlugHeroSection({
       url
         .replace("watch?v=", "embed/")
         .replace("youtu.be/", "www.youtube.com/embed/") +
-      `?${isSafari ? "autoplay=0&controls=1&mute=0" : "autoplay=1&mute=1&controls=0"}&loop=1&playlist=${videoId}&enablejsapi=1&playsinline=1`
+      `?autoplay=${isSafari ? 0 : 1}&mute=${isSafari ? 0 : 1}&controls=0&modestbranding=1&rel=0&loop=1&playlist=${videoId}&iv_load_policy=3&disablekb=1&playsinline=1&autohide=1`
     );
   };
 
@@ -90,16 +108,19 @@ export default function SlugHeroSection({
       {project?.page_full_video && !videoError ? (
         project.page_full_video.includes("youtube.com") ||
         project.page_full_video.includes("youtu.be") ? (
-          <iframe
-            id="bg-video"
-            src={getYouTubeEmbed(project.page_full_video)}
-            className={`absolute top-0 left-0 w-full h-full object-cover ${isSafari ? "z-10" : "-z-10"} scale-400 lg:scale-120`}
-            title="YouTube video"
-            frameBorder="0"
-            allow="autoplay; fullscreen; encrypted-media"
-            allowFullScreen
-            onError={() => setVideoError(true)}
-          />
+          <div className={`absolute top-0 left-0 w-full h-full overflow-hidden ${isSafari ? "z-10" : "-z-10"}`}>
+            <div className="absolute top-1/2 left-1/2 w-[400%] h-[400%] md:w-[120%] md:h-[120%] -translate-x-1/2 -translate-y-1/2">
+              <iframe
+                id="bg-video"
+                className="w-full h-full pointer-events-none"
+                src={getYouTubeEmbed(project.page_full_video)}
+                title="Background Video"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
         ) : project.page_full_video.endsWith(".mp4") ? (
           <video
             src={process.env.PROJECT_VIDEO_PATH + project.page_full_video}
@@ -135,7 +156,7 @@ export default function SlugHeroSection({
       <div className="w-full h-full absolute top-0 left-0 bg-black/40"></div>
 
       {/* Text Content */}
-      <div className="w-[86%] mx-auto relative z-50 flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
+      <div className="w-[86%] mx-auto relative z-50 pointer-events-none flex flex-col gap-2 lg:gap-3 justify-end h-full items-start mb-[35vh] lg:mb-[45vh] text-white">
         <h1 className="text-[36px] md:text-5xl lg:text-6xl xl:text-7xl leading-[120%] tracking-[-1.1%] font-semibold drop-shadow-lg">
           {project?.name || project?.project_name || "Project"}
         </h1>
@@ -200,7 +221,6 @@ export function ReraSlideOut({ reraNo }) {
         open ? "right-0" : "-right-[321px]"
       } w-[321px]`}
     >
-      {/* Tab */}
       <div
         onClick={() => setOpen(!open)}
         className={`absolute left-[-90px] w-[90px] bg-white/75 text-black text-center font-jost text-[12px] leading-[15px] p-2 rounded-l-sm cursor-pointer shadow-sm transition-opacity duration-300 ${
@@ -210,8 +230,6 @@ export function ReraSlideOut({ reraNo }) {
         Click here for <br />
         RERA details
       </div>
-
-      {/* Content */}
       <div className="flex items-start justify-between w-full px-2 text-black">
         <div className="text-[12px] font-jost">
           <p className="mb-1">
@@ -228,11 +246,8 @@ export function ReraSlideOut({ reraNo }) {
             https://rera.rajasthan.gov.in/
           </Link>
         </div>
-
         <Image
-          src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
-            reraNo
-          )}`}
+          src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(reraNo)}`}
           alt="RERA"
           width={80}
           height={80}
