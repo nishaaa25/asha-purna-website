@@ -539,36 +539,29 @@ body {
 }
 .page-fade-in {
   opacity: 0;
-  margin-top: 50px; /* start below */
   animation: fadeUpContent 1s ease-out forwards;
 }
 
 #navbar-fade-in {
   opacity: 0;
-  margin-top: -50px; /* start above */
-  animation: fadeUpNavbar 0.6s ease-out forwards;
-  animation-delay: 0.1s;
+  animation: fadeUpNavbar 1s ease-out forwards;
 }
 
 @keyframes fadeUpContent {
   0% {
     opacity: 0;
-    margin-top: 50px; /* start lower */
   }
   100% {
     opacity: 1;
-    margin-top: 0; /* final position */
   }
 }
 
 @keyframes fadeUpNavbar {
   0% {
     opacity: 0;
-    margin-top: -20px; /* start higher */
   }
   100% {
     opacity: 1;
-    margin-top: 0; /* final position */
   }
 }
 
@@ -579,3 +572,4 @@ body {
     rgba(0, 0, 0, 0)     /* transparent at bottom */
   );
 }
+ 

@@ -24,8 +24,9 @@ export default function RootLayout({ children }) {
         <AppProviders>
           <LenisProvider>
             <ClientPageTransition>
-              <ScrollToTop/>
-              {children}</ClientPageTransition>
+              <ScrollToTop />
+              {children}
+            </ClientPageTransition>
           </LenisProvider>
         </AppProviders>
       </body>

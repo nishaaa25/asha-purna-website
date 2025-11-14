@@ -312,7 +312,7 @@ export default function Wheel() {
                         <div className="flex flex-col justify-center items-center max-w-[600px] mx-auto">
                           {filteredProjects.map((project, idx) => (
                             <div key={idx} className="relative w-full">
-                              <h3 className="text-xs md:text-lg lg:text-base xl:text-xl text-gray-800 font-semibold my-2 md:4 lg:my-2 xl:my-4">
+                              <h3 className="text-xs md:text-lg lg:text-[1.2rem] xl:text-[0.9rem] text-gray-800 font-semibold my-2 md:4 lg:my-2 xl:my-4">
                                 {project.title}
                               </h3>
                               <div className="w-3/12 h-[1px] bg-orange-600/40 mx-auto"></div>

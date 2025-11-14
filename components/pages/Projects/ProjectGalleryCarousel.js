@@ -28,6 +28,7 @@ export default function ProjectGalleryCarousel({ images }) {
     setLightboxOpen(true);
   };
 
+  const galleryImages = [...images, ...images];
   return (
     <div className="w-full relative top-10">
       {/* Swiper */}
@@ -41,6 +42,7 @@ export default function ProjectGalleryCarousel({ images }) {
           nextEl: ".swiper-button-next-custom",
           prevEl: ".swiper-button-prev-custom",
         }}
+        loop={true}
         pagination={{ clickable: true }}
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
         className="w-full relative ownership-swiper"
@@ -51,7 +53,7 @@ export default function ProjectGalleryCarousel({ images }) {
           1024: { slidesPerView: 2 },
         }}
       >
-        {images.map((item, index) => {
+        {galleryImages.map((item, index) => {
           const isActive = index === activeIndex;
           return (
             <SwiperSlide
@@ -92,7 +94,11 @@ export default function ProjectGalleryCarousel({ images }) {
           stroke="currentColor"
           className="w-6 h-6 text-orange-600"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
         </svg>
       </button>
 
@@ -105,7 +111,11 @@ export default function ProjectGalleryCarousel({ images }) {
           stroke="currentColor"
           className="w-6 h-6 text-orange-600"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
         </svg>
       </button>
 

@@ -11,15 +11,24 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
   const apiData = initialData || [];
   const additionalRef = useRef(null);
 
-  const initialProjects = useMemo(() => apiData.slice(0, 12), [apiData]);
-  const additionalProjects = useMemo(() => apiData.slice(12), [apiData]);
+  // ✅ Sort projects by "order" key
+  const sortedProjects = useMemo(() => {
+    return [...apiData].sort((a, b) => {
+      const orderA = a?.order ?? Infinity;
+      const orderB = b?.order ?? Infinity;
+      return orderA - orderB;
+    });
+  }, [apiData]);
 
-  const canToggle = apiData.length > 12;
+  // Slice after sorting
+  const initialProjects = useMemo(() => sortedProjects.slice(0, 12), [sortedProjects]);
+  const additionalProjects = useMemo(() => sortedProjects.slice(12), [sortedProjects]);
+
+  const canToggle = sortedProjects.length > 12;
 
   const headerData = headerContent.find(
     (p) => p.type.toLowerCase().replace(/\s+/g, "-") === slug?.toLowerCase()
   );
-
 
   return (
     <div className="w-full relative">
@@ -37,20 +46,15 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
             {headerData?.type || slug} Projects
           </h2>
 
-          {/* Initial Projects Grid */}
+          {/* Initial Projects */}
           <div className="w-full px-[22px] lg:px-[100px] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10">
             {initialProjects.map((project) => (
               <div key={project.id}>
-                <ProjectCard
-                  data={project}
-                  hideActions={false}
-                  imagePath={imagePath}
-                />
+                <ProjectCard data={project} hideActions={false} imagePath={imagePath} />
               </div>
             ))}
           </div>
 
-          {/* More/Less Projects Button */}
           {canToggle && (
             <div
               className="border border-[#cccccc] bg-black-400 cursor-pointer text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-2 capitalize"
@@ -60,10 +64,10 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
             </div>
           )}
 
-          {/* Additional Projects Grid - always mounted, smooth height animation */}
+          {/* Additional Projects */}
           <div
             ref={additionalRef}
-            className="w-full px-[22px] lg:px-[100px] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10 overflow-hidden "
+            className="w-full px-[22px] lg:px-[100px] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10 overflow-hidden"
             style={{
               maxHeight: isExpanded
                 ? `${additionalRef.current?.scrollHeight || 0}px`
@@ -73,11 +77,7 @@ export default function SlugPageClient({ initialData, imagePath, slug }) {
           >
             {additionalProjects.map((project) => (
               <div key={project.id}>
-                <ProjectCard
-                  data={project}
-                  hideActions={false}
-                  imagePath={imagePath}
-                />
+                <ProjectCard data={project} hideActions={false} imagePath={imagePath} />
               </div>
             ))}
           </div>

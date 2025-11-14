@@ -47,7 +47,7 @@ export default function CounterThree({ data }) {
                 )}
               </div>
 
-              <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-1/2 lg:text-center">
+              <h4 className="text-sm md:text-lg  leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900  lg:text-center">
                 {counter.title}
               </h4>
 

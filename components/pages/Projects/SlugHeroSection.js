@@ -2,7 +2,7 @@
 import HeroBottomBar from "@/components/HeroBottomBar";
 import BottomBar from "./BottomBar";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BrochurePopup from "@/components/BrochurePopup";
 import ThankYouPopup from "@/components/ThankYouPopup";
 import Link from "next/link";
@@ -39,10 +39,9 @@ export default function SlugHeroSection({
     "";
 
   // ✅ Fallback image
-  const fallbackImage =
-    project?.project_logo_1
-      ? projectImagePath + project.project_logo_1
-      : projectImagePath + project.project_logo_2;
+  const fallbackImage = project?.project_logo_1
+    ? projectImagePath + project.project_logo_1
+    : projectImagePath + project.project_logo_2;
 
   // ✅ Brochure download URL
   const brochureUrl = project?.brochure_file
@@ -58,12 +57,13 @@ export default function SlugHeroSection({
 
   // ✅ Handle YouTube embed URL
   const getYouTubeEmbed = (url) => {
-    const videoId =
-      url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
-    return url
-      .replace("watch?v=", "embed/")
-      .replace("youtu.be/", "www.youtube.com/embed/") +
-      `?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+    const videoId = url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
+    return (
+      url
+        .replace("watch?v=", "embed/")
+        .replace("youtu.be/", "www.youtube.com/embed/") +
+      `?autoplay=1&mute=1&loop=1&playlist=${videoId}`
+    );
   };
 
   // ✅ Main Render
@@ -132,48 +132,44 @@ export default function SlugHeroSection({
       </div>
 
       {/* RERA Button */}
-      {reraNo && (
-        <button
-          onClick={() => setIsReraExpanded(!isReraExpanded)}
-          className={`${
-            isReraExpanded
-              ? "w-3/12 md:w-2/12 lg:w-[10%]"
-              : "w-7/12 md:w-5/12 lg:w-[20%]"
-          } absolute right-0 top-[15vh] ml-auto flex flex-col gap-2 cursor-pointer z-[100] transition-all duration-200`}
-        >
-          {isReraExpanded ? (
-            <p className="p-[10px] md:p-[14px] lg:p-5 text-[10px] md:text-xs text-center lg:text-sm bg-white/20 text-white font-medium relative">
-              Click here for RERA details
-            </p>
-          ) : (
-            <div className="p-[10px] md:p-[14px] lg:p-5 bg-white/20 text-white relative text-[10px] md:text-xs lg:text-sm flex-between">
-              <div className="flex-col flex justify-start items-start">
-                <p>RERA Number</p>
-                <p className="text-sm font-medium">{reraNo}</p>
-                <Link
-                  href="https://rera.rajasthan.gov.in/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline break-all text-white mt-3"
-                >
-                  Link
-                </Link>
-              </div>
-              <div className="w-3/12 h-full bg-white border border-gray-300 rounded flex items-center justify-center">
-                <Image
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
-                    reraNo
-                  )}`}
-                  alt={`QR Code for RERA: ${reraNo}`}
-                  width={20}
-                  height={20}
-                  className="w-full h-full"
-                />
-              </div>
+      {/* {reraNo && (
+        <div className={`${isReraExpanded ? "-translate-x-[100%]":""} flex justify-center items-start border gap-1 absolute transform duration-300 w-4/12 right-0 top-[15vh]`}>
+          <button
+            onClick={() => setIsReraExpanded(!isReraExpanded)}
+            className={`${isReraExpanded ? "scale-0":"scale-100"}  w-40 relative  ml-auto flex flex-col gap-2 cursor-pointer z-[100] transition-all duration-200`}
+          >
+              <p className="p-[10px] md:p-[14px] lg:p-2 text-[10px] md:text-xs text-center lg:text-sm bg-white/30 text-white font-medium relative">
+                Click here for RERA details
+              </p>
+          </button>
+          <div className={`p-[10px] md:p-[14px] w-full lg:p-5 bg-white/30 text-white relative text-[10px] md:text-xs lg:text-sm flex-between gap-10`}>
+            <div className="flex-col flex justify-start items-start">
+              <p>RERA Number</p>
+              <p className="text-sm font-medium">{reraNo}</p>
+              <Link
+                href="https://rera.rajasthan.gov.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline break-all text-white mt-3"
+              >
+                https://rera.rajasthan.gov.in/
+              </Link>
             </div>
-          )}
-        </button>
-      )}
+            <div className="w-3/12 h-full bg-white border border-gray-300 rounded flex items-center justify-center">
+              <Image
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
+                  reraNo
+                )}`}
+                alt={`QR Code for RERA: ${reraNo}`}
+                width={20}
+                height={20}
+                className="w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+      )} */}
+      <ReraSlideOut reraNo={reraNo} />
 
       {/* Bottom Buttons */}
       <div className="absolute bottom-9 w-full px-1">
@@ -205,5 +201,67 @@ export default function SlugHeroSection({
         }}
       />
     </section>
+  );
+}
+
+export function ReraSlideOut({ reraNo }) {
+  const [open, setOpen] = useState(false);
+
+  // Close the slide-out on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setOpen(false); // close the slide
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div
+      className={`fixed top-1/4 transform -translate-y-1/2 transition-all duration-500 z-[5000] bg-white/75 p-3 flex items-center justify-center rounded-l-md shadow-md ${
+        open ? "right-0" : "-right-[321px]"
+      } w-[321px]`}
+    >
+      {/* Tab */}
+      <div
+        onClick={() => setOpen(!open)}
+        className={`absolute left-[-90px] w-[90px] bg-white/75 text-black text-center font-jost text-[12px] leading-[15px] p-2 rounded-l-sm cursor-pointer shadow-sm transition-opacity duration-300 ${
+          open ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        Click here for <br />
+        RERA details
+      </div>
+
+      {/* Content */}
+      <div className="flex items-start justify-between w-full px-2 text-black">
+        <div className="text-[12px] font-jost">
+          <p className="mb-1">
+            RERA Number
+            <br />
+            {reraNo}
+          </p>
+          <Link
+            href="https://rera.rajasthan.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#9d7f19] hover:underline text-[12px]"
+          >
+            https://rera.rajasthan.gov.in/
+          </Link>
+        </div>
+
+        <Image
+          src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
+            reraNo
+          )}`}
+          alt="RERA"
+          width={80}
+          height={80}
+          className="ml-3"
+        />
+      </div>
+    </div>
   );
 }
