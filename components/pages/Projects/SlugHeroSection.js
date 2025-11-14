@@ -19,18 +19,40 @@ export default function SlugHeroSection({
   const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
   const [isReraExpanded, setIsReraExpanded] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [isSafari, setIsSafari] = useState(false);
 
-  // ✅ Get RERA number
+  useEffect(() => {
+    // Detect Safari (desktop + iOS)
+    const ua = navigator.userAgent.toLowerCase();
+    const safari = ua.includes("safari") && !ua.includes("chrome") && !ua.includes("android");
+    setIsSafari(safari);
+
+    if (project?.page_full_video?.includes("youtube.com") || project?.page_full_video?.includes("youtu.be")) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+
+      window.onYouTubeIframeAPIReady = () => {
+        new window.YT.Player("bg-video", {
+          events: {
+            onReady: (event) => {
+              if (!safari) {
+                event.target.mute();
+                event.target.playVideo();
+              }
+            },
+          },
+        });
+      };
+    }
+  }, [project?.page_full_video]);
+
   const reraNo =
     project?.rera_number ||
     projectReraNo?.find((item) => {
       const title = item?.title?.toUpperCase() || "";
       const value = item?.value?.toUpperCase() || "";
-      return (
-        title.includes("RERA") ||
-        value.startsWith("RAJ/") ||
-        title.startsWith("RAJ/")
-      );
+      return title.includes("RERA") || value.startsWith("RAJ/") || title.startsWith("RAJ/");
     })?.value ||
     projectReraNo?.find((item) => {
       const title = item?.title?.toUpperCase() || "";
@@ -38,35 +60,30 @@ export default function SlugHeroSection({
     })?.title ||
     "";
 
-  // ✅ Fallback image
   const fallbackImage = project?.project_logo_1
     ? projectImagePath + project.project_logo_1
     : projectImagePath + project.project_logo_2;
 
-  // ✅ Brochure download URL
   const brochureUrl = project?.brochure_file
     ? projectImagePath + project.brochure_file
     : project?.brochure_link
     ? project.brochure_link
     : null;
 
-  const phoneNumber =
-    project?.mobile_number || project?.ivr_number || "9314041747";
+  const phoneNumber = project?.mobile_number || project?.ivr_number || "9314041747";
 
   const handleBrochureClick = () => setIsBrochurePopupOpen(true);
 
-  // ✅ Handle YouTube embed URL
   const getYouTubeEmbed = (url) => {
     const videoId = url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
     return (
       url
         .replace("watch?v=", "embed/")
         .replace("youtu.be/", "www.youtube.com/embed/") +
-      `?autoplay=1&mute=1&loop=1&playlist=${videoId}`
+      `?${isSafari ? "autoplay=0&controls=1&mute=0" : "autoplay=1&mute=1&controls=0"}&loop=1&playlist=${videoId}&enablejsapi=1&playsinline=1`
     );
   };
 
-  // ✅ Main Render
   return (
     <section className="w-full relative h-dvh flex-center overflow-hidden">
       {/* 🎥 Video or Fallback Image */}
@@ -74,8 +91,9 @@ export default function SlugHeroSection({
         project.page_full_video.includes("youtube.com") ||
         project.page_full_video.includes("youtu.be") ? (
           <iframe
+            id="bg-video"
             src={getYouTubeEmbed(project.page_full_video)}
-            className="absolute top-0 left-0 w-full h-full object-cover -z-10 scale-400 lg:scale-120"
+            className={`absolute top-0 left-0 w-full h-full object-cover ${isSafari ? "z-10" : "-z-10"} scale-400 lg:scale-120`}
             title="YouTube video"
             frameBorder="0"
             allow="autoplay; fullscreen; encrypted-media"
@@ -131,44 +149,7 @@ export default function SlugHeroSection({
         )}
       </div>
 
-      {/* RERA Button */}
-      {/* {reraNo && (
-        <div className={`${isReraExpanded ? "-translate-x-[100%]":""} flex justify-center items-start border gap-1 absolute transform duration-300 w-4/12 right-0 top-[15vh]`}>
-          <button
-            onClick={() => setIsReraExpanded(!isReraExpanded)}
-            className={`${isReraExpanded ? "scale-0":"scale-100"}  w-40 relative  ml-auto flex flex-col gap-2 cursor-pointer z-[100] transition-all duration-200`}
-          >
-              <p className="p-[10px] md:p-[14px] lg:p-2 text-[10px] md:text-xs text-center lg:text-sm bg-white/30 text-white font-medium relative">
-                Click here for RERA details
-              </p>
-          </button>
-          <div className={`p-[10px] md:p-[14px] w-full lg:p-5 bg-white/30 text-white relative text-[10px] md:text-xs lg:text-sm flex-between gap-10`}>
-            <div className="flex-col flex justify-start items-start">
-              <p>RERA Number</p>
-              <p className="text-sm font-medium">{reraNo}</p>
-              <Link
-                href="https://rera.rajasthan.gov.in/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline break-all text-white mt-3"
-              >
-                https://rera.rajasthan.gov.in/
-              </Link>
-            </div>
-            <div className="w-3/12 h-full bg-white border border-gray-300 rounded flex items-center justify-center">
-              <Image
-                src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
-                  reraNo
-                )}`}
-                alt={`QR Code for RERA: ${reraNo}`}
-                width={20}
-                height={20}
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-        </div>
-      )} */}
+      {/* RERA Slide Out */}
       <ReraSlideOut reraNo={reraNo} />
 
       {/* Bottom Buttons */}
@@ -207,12 +188,8 @@ export default function SlugHeroSection({
 export function ReraSlideOut({ reraNo }) {
   const [open, setOpen] = useState(false);
 
-  // Close the slide-out on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setOpen(false); // close the slide
-    };
-
+    const handleScroll = () => setOpen(false);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
