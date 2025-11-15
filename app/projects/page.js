@@ -9,35 +9,33 @@ import SectionHeader from "@/components/SectionHeader";
 
 export default function ProjectsPage() {
   const tabs = ["residential", "commercial", "hospitality"];
+
   const [activeTab, setActiveTab] = useState("residential");
   const [projects, setProjects] = useState([]);
   const [imagePath, setImagePath] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const scrollPositionRef = useRef(0);
-  const projectSectionRef = useRef(null);
+  const scrollPos = useRef(0);
 
   const handleTabChange = (tab) => {
-    if (tab === activeTab) return; // Prevent unnecessary re-fetch
+    if (tab === activeTab) return;
 
-    // Save scroll position before switching
-    scrollPositionRef.current = window.scrollY;
+    // save scroll position (non-blocking)
+    scrollPos.current = window.scrollY;
+
+    setLoading(true);
     setActiveTab(tab);
-    setIsTransitioning(true);
   };
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true);
-      setError(null);
+    let canceled = false;
 
+    const fetchData = async () => {
       try {
-        // Add 3-second delay for smooth transition effect
-        const delayPromise = new Promise((resolve) => setTimeout(resolve, 100));
+        setError(null);
 
-        const response = await fetch(
+        const res = await fetch(
           "https://apiservices.ashapurna.com/api/web/project/listing",
           {
             method: "POST",
@@ -49,67 +47,53 @@ export default function ProjectsPage() {
             next: { revalidate: 3600 },
           }
         );
-        // Wait for both API call and delay to complete
-        await delayPromise;
 
-        if (!response.ok)
-          throw new Error(`API returned status ${response.status}`);
+        if (!res.ok) throw new Error(`API returned status ${res.status}`);
 
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Invalid response format");
-        }
+        const data = await res.json();
+        if (!data._status) throw new Error(data._message);
 
-        const result = await response.json();
-        console.log(result, "all projects");
+        if (canceled) return;
 
-        if (result._status) {
-          const newlaunchs = (result?._data?.getNewlaunchs || []).map((p) => ({
-            ...p,
-            _listType: "plots",
-          }));
-          const flats = (result?._data?.getResidentialFlats || []).map((p) => ({
-            ...p,
-            _listType: "flats",
-          }));
-          const townships = (result?._data?.getResidentialTownships || []).map(
-            (p) => ({
-              ...p,
-              _listType: "township",
-            })
-          );
+        const d = data._data;
 
-          const combinedProjects = [...newlaunchs, ...flats, ...townships];
+        const merge = (arr, type) =>
+          (arr || []).map((p) => ({ ...p, _listType: type }));
 
-          // ✅ Sort projects by order number
-          combinedProjects.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        const combined = [
+          ...merge(d.getNewlaunchs, "plots"),
+          ...merge(d.getResidentialFlats, "flats"),
+          ...merge(d.getResidentialTownships, "township"),
+        ].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
-          setProjects(combinedProjects);
-          setImagePath(result._data.project_image_path || "");
-        } else {
-          setProjects([]);
-          setError(result._message || "Failed to fetch projects");
-        }
+        setProjects(combined);
+        setImagePath(d.project_image_path || "");
       } catch (err) {
-        console.error("Error fetching projects:", err);
-        setError(err.message);
-        setProjects([]);
+        if (!canceled) {
+          setError(err.message);
+          setProjects([]);
+        }
       } finally {
-        setLoading(false);
-        setIsExpanded(false);
-        setIsTransitioning(false);
-
-        // Restore scroll position after projects update
-        requestAnimationFrame(() => {
-          window.scrollTo({
-            top: scrollPositionRef.current,
-            behavior: "instant",
+        if (!canceled) {
+          // allow React to paint first → avoid lag
+          requestAnimationFrame(() => {
+            requestIdleCallback
+              ? requestIdleCallback(() =>
+                  window.scrollTo({ top: scrollPos.current, behavior: "instant" })
+                )
+              : window.scrollTo({ top: scrollPos.current, behavior: "instant" });
           });
-        });
+
+          setLoading(false);
+          setIsExpanded(false);
+        }
       }
     };
 
-    fetchProjects();
+    fetchData();
+    return () => {
+      canceled = true;
+    };
   }, [activeTab]);
 
   const initialProjects = useMemo(() => projects.slice(0, 9), [projects]);
@@ -117,7 +101,7 @@ export default function ProjectsPage() {
   const canToggle = projects.length > 9;
 
   return (
-    <div className="w-full relative" ref={projectSectionRef}>
+    <div className="w-full relative">
       <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/project-herobg.jpg" />
 
       <div className="w-full relative md:w-[90%] lg:w-[80%] mx-auto">
@@ -125,87 +109,60 @@ export default function ProjectsPage() {
           spanText="Building Communities"
           heading="Transforming Landscapes,"
           title="our portfolio"
-          desc="Ashapurna’s portfolio reflects a vision that goes beyond building homes. From landmark residential townships and commercial hubs to schools, hotels, and renewable energy initiatives, every project is a step toward creating self-sustaining ecosystems. Together, they form a legacy of progress rooted in trust, innovation, and long-term value."
+          desc="Ashapurna’s portfolio reflects a vision..."
         />
       </div>
 
-      <div className="w-full relative pt-10 md:pt-15 lg:pt-20 pb-20 lg:pb-[100px] bg-cream-600 flex-center flex-col">
-        <h3 className="text-[22px] md:text-[34px] lg:text-[42px] leading-[130%] tracking-[-1.1px] uppercase text-black-400 font-medium text-center mb-10">
+      <div className="w-full pt-10 pb-20 bg-cream-600 flex-center flex-col">
+        <h3 className="text-[22px] md:text-[34px] lg:text-[42px] text-black-400 font-medium text-center mb-10">
           Our Projects
         </h3>
-        {/* Tabs */}
+
         <div className="w-full px-[22px] md:px-12 lg:px-20 relative mx-auto">
-          <TabHeader
-            activeTab={activeTab}
-            setActiveTab={handleTabChange}
-            tabs={tabs}
-          />
+          <TabHeader activeTab={activeTab} setActiveTab={handleTabChange} tabs={tabs} />
         </div>
-        {/* Loading */}
+
         {loading && (
-          <div className="w-full px-[22px] md:px-12 lg:px-20 text-center py-10">
-            <div className="flex flex-col items-center justify-center space-y-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black-400"></div>
-              <p className="text-gray-500">
-                {isTransitioning
-                  ? `Loading ${activeTab} projects...`
-                  : "Loading projects..."}
-              </p>
+          <div className="w-full text-center py-10">
+            <div className="flex flex-col items-center space-y-4">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black-400" />
+              <p className="text-gray-500">Loading {activeTab} projects...</p>
             </div>
           </div>
         )}
 
-        {/* Error */}
         {error && !loading && (
-          <div className="w-full px-[22px] md:px-12 lg:px-20 text-center py-10">
-            <p className="text-red-500">Error: {error}</p>
+          <div className="w-full text-center py-10">
+            <p className="text-red-500">{error}</p>
           </div>
         )}
 
-        {/* Projects */}
-        <div className="min-h-screen relative w-full  mx-auto ">
-          {!loading && !error && (
-            <div className="animate-fade-in w-full flex-center flex-col">
-              {/* Initial Projects */}
-              <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 ">
-                {initialProjects.map((project) => (
-                  <div key={project.id} className="animate-slide-up">
-                    <ProjectCard
-                      data={project}
-                      hideActions={false}
-                      imagePath={imagePath}
-                    />
-                  </div>
-                ))}
-              </div>
-
-              {/* More/Less Button */}
-              {canToggle && (
-                <Button
-                  text={isExpanded ? "Less Projects" : "More Projects"}
-                  onClick={() => setIsExpanded((prev) => !prev)}
-                />
-              )}
-
-              {/* Additional Projects */}
-              <div
-                className={`w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 transition-all duration-300 ${
-                  isExpanded ? "block" : "hidden"
-                }`}
-              >
-                {additionalProjects.map((project) => (
-                  <div key={project.id} className="animate-slide-up">
-                    <ProjectCard
-                      data={project}
-                      hideActions={false}
-                      imagePath={imagePath}
-                    />
-                  </div>
-                ))}
-              </div>
+        {!loading && !error && (
+          <div className="w-full flex-center flex-col">
+            {/* First 9 */}
+            <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+              {initialProjects.map((p) => (
+                <ProjectCard key={p.id} data={p} imagePath={imagePath} />
+              ))}
             </div>
-          )}
-        </div>
+
+            {canToggle && (
+              <Button
+                text={isExpanded ? "Less Projects" : "More Projects"}
+                onClick={() => setIsExpanded((prev) => !prev)}
+              />
+            )}
+
+            {/* Rest */}
+            {isExpanded && (
+              <div className="w-full px-[22px] md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+                {additionalProjects.map((p) => (
+                  <ProjectCard key={p.id} data={p} imagePath={imagePath} />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
