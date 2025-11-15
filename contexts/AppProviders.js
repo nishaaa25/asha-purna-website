@@ -1,25 +1,15 @@
-'use client';
+"use client";
 
-import { AuthProvider } from './AuthContext';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AuthProvider } from "./AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useLenisScrollTrigger from "@/components/Hooks/useLenis";
 
 export default function AppProviders({ children }) {
-  useEffect(() => {
-    // Register ScrollTrigger globally
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Enable normalizeScroll globally to prevent browser tab hiding on small screens
-    ScrollTrigger.normalizeScroll(true);
-    
-    return () => {
-      // Cleanup on unmount
-      ScrollTrigger.normalizeScroll(false);
-    };
-  }, []);
+  useLenisScrollTrigger();
 
   return (
     <AuthProvider>
@@ -39,6 +29,3 @@ export default function AppProviders({ children }) {
     </AuthProvider>
   );
 }
-
-
-

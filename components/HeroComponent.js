@@ -1,19 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import HorizontalForm from "./HorizontalForm";
 
 export default function HeroComponent() {
-  const [isSafari, setIsSafari] = useState(false);
-
   useEffect(() => {
-    // Detect Safari (desktop + iOS)
-    const ua = navigator.userAgent.toLowerCase();
-    const safari =
-      ua.includes("safari") &&
-      !ua.includes("chrome") &&
-      !ua.includes("android");
-    setIsSafari(safari);
-
     const tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     document.body.appendChild(tag);
@@ -24,22 +14,16 @@ export default function HeroComponent() {
       player = new window.YT.Player("bg-video", {
         events: {
           onReady: (event) => {
-            if (!safari) {
-              event.target.mute();
-              event.target.playVideo();
-            }
+            event.target.mute();
+            event.target.playVideo();
 
-            // Force highest quality based on screen width
-            const width = window.innerWidth;
-            if (width >= 1920) {
-              event.target.setPlaybackQuality("highres"); // 1080p+
-            } else if (width >= 1280) {
-              event.target.setPlaybackQuality("hd1080");
-            } else if (width >= 854) {
-              event.target.setPlaybackQuality("hd720");
-            } else {
-              event.target.setPlaybackQuality("large"); // 480p fallback
-            }
+            // Force highest available quality
+            event.target.setPlaybackQuality("highres");
+
+            // Force again after 2 sec to override YouTube auto-quality
+            setTimeout(() => {
+              event.target.setPlaybackQuality("highres");
+            }, 2000);
           },
         },
       });
@@ -56,16 +40,16 @@ export default function HeroComponent() {
             fetchPriority="high"
             className="w-full h-full pointer-events-none object-cover"
             src={`https://www.youtube.com/embed/yMOk_HcPunk?
-      autoplay=1
-      &mute=1
-      &controls=0
-      &modestbranding=1
-      &rel=0
-      &loop=1
-      &playlist=yMOk_HcPunk
-      &playsinline=1
-      &enablejsapi=1
-  `.replace(/\s+/g, "")}
+              autoplay=1
+              &mute=1
+              &controls=0
+              &modestbranding=1
+              &rel=0
+              &loop=1
+              &playlist=yMOk_HcPunk
+              &playsinline=1
+              &enablejsapi=1
+            `.replace(/\s+/g, "")}
             title="Background Video"
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture"
@@ -88,7 +72,7 @@ export default function HeroComponent() {
       </div>
 
       {/* Form */}
-      <div className="w-10/12 mx-auto absolute bottom-10">
+      <div className="w-10/12 mx-auto absolute bottom-10 z-20">
         <HorizontalForm />
       </div>
     </section>

@@ -1,6 +1,5 @@
 import "./globals.css";
 import LenisProvider from "@/components/Hooks/LenisProvider";
-import AppProviders from "@/contexts/AppProviders";
 import ClientPageTransition from "@/components/ClientPageTransition";
 import ScrollToTop from "@/components/pages/ScrollToTop";
 
@@ -21,14 +20,12 @@ export default function RootLayout({ children }) {
         <script src="https://www.youtube.com/iframe_api" async defer></script>
       </head>
       <body className={`antialiased w-full relative overflow-x-hidden`}>
-        <AppProviders>
           <LenisProvider>
             <ClientPageTransition>
               <ScrollToTop />
               {children}
             </ClientPageTransition>
           </LenisProvider>
-        </AppProviders>
       </body>
     </html>
   );

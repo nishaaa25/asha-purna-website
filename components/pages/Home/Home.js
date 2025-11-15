@@ -6,28 +6,23 @@ import SectionHeader from "@/components/SectionHeader";
 import Testimoials from "@/components/Testimoials";
 import CountersSection from "@/components/Counter";
 import Image from "next/image";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import MentionSection from "@/components/pages/Home/MentionSection";
 import GetInTouch from "@/components/pages/GetInTouch";
-import { faqs } from "@/lib/content";
-import { useRef, useEffect, use } from "react";
 import Link from "next/link";
 import HeroBottomBar from "@/components/HeroBottomBar";
-import HorizontalForm from "@/components/HorizontalForm";
 import AwardSection from "@/components/pages/Home/AwardSection";
-import useLenisScrollTrigger from "@/components/Hooks/useLenis";
 
+
+gsap.registerPlugin(ScrollTrigger);
 export default function Home({
   featuredProjects,
   imagePath,
   utsavImagePath,
   events,
 }) {
-  //  const lenisRef = useRef(null);
-  useLenisScrollTrigger();
-  const imgContainerRef = useRef(null);
+
   const data = [
     {
       title: "Happy Families",
@@ -47,45 +42,6 @@ export default function Home({
       value: "29",
     },
   ];
-
-  useEffect(() => {
-    // Enable normalized scrolling across browsers
-    ScrollTrigger.normalizeScroll(true);
-
-    // Optional: refresh ScrollTrigger on resize
-    ScrollTrigger.refresh();
-
-    return () => {
-      // Cleanup if needed
-      ScrollTrigger.normalizeScroll(false); // disable normalization on unmount
-    };
-  }, []);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.refresh();
-  }, []);
-
-  useGSAP(() => {
-    gsap.fromTo(
-      ".img",
-      {
-        scale: 0.3,
-        transformOrigin: "top center",
-      },
-      {
-        scale: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: imgContainerRef.current,
-          start: "top top",
-          end: "bottom top",
-          pin: true,
-          scrub: 1,
-        },
-      }
-    );
-  });
 
   return (
     <div className="w-full relative">

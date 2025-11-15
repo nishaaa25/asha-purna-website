@@ -18,14 +18,6 @@ export default function SlugHeroSection({
   const [isBrochurePopupOpen, setIsBrochurePopupOpen] = useState(false);
   const [isBrochureThankYouOpen, setIsBrochureThankYouOpen] = useState(false);
   const [videoError, setVideoError] = useState(false);
-  const [isSafari, setIsSafari] = useState(false);
-
-  useEffect(() => {
-    // Detect Safari (desktop + iOS)
-    const ua = navigator.userAgent.toLowerCase();
-    const safari = ua.includes("safari") && !ua.includes("chrome") && !ua.includes("android");
-    setIsSafari(safari);
-  }, []);
 
   const fallbackImage = project?.project_logo_1
     ? projectImagePath + project.project_logo_1
@@ -43,7 +35,6 @@ export default function SlugHeroSection({
 
   const getYouTubeEmbed = (url) => {
     const videoId = url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
-    // Other browsers: autoplay muted, no controls
     return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&playlist=${videoId}&iv_load_policy=3&disablekb=1&playsinline=1&autohide=1`;
   };
 
@@ -66,15 +57,15 @@ export default function SlugHeroSection({
       {project?.page_full_video && !videoError ? (
         project.page_full_video.includes("youtube.com") ||
         project.page_full_video.includes("youtu.be") ? (
-          <div className={`absolute top-0 left-0 w-full h-full overflow-hidden  ${isSafari ? "z-10" : "-z-10"}`}>
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
             <div className="absolute top-1/2 left-1/2 w-[400%] h-[400%] md:w-[120%] md:h-[120%] -translate-x-1/2 -translate-y-1/2">
               <iframe
                 id="bg-video"
-                className="w-full h-full "
+                className="w-full h-full"
                 src={getYouTubeEmbed(project.page_full_video)}
                 title="Background Video"
                 frameBorder="0"
-                allow={isSafari ? "fullscreen; picture-in-picture" : "autoplay; fullscreen; picture-in-picture"}
+                allow="autoplay; fullscreen; picture-in-picture"
                 allowFullScreen
               />
             </div>
