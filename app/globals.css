@@ -572,17 +572,4 @@ body {
   color: #808080 !important;
 }
 
-/* Default placeholder color for select */
-select {
-  color: #000000; /* Default text color */
-}
 
-/* Color for selected/active option */
-select option {
-  color: black !important;
-}
-
-/* Optional: keep placeholder gray and disable selection */
-select option[disabled][selected] {
-  color: #808080;
-}
