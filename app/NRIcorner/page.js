@@ -84,7 +84,6 @@ async function getAboutData() {
 
 export default async function page() {
   const result = await getHomeData();
-  // console.log(result?.data);
     const aboutData = await getAboutData();
   const displayedProjects = blogs.slice(0, 3);
   const data = [

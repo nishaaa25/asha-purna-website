@@ -19,7 +19,7 @@ export default function FoundersCarousel() {
         spaceBetween={14}
         watchSlidesProgress
         onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
-        className="w-full relative h-full"
+        className="w-full relative h-full "
         pagination={{ clickable: true }}
         breakpoints={{
           320: {
@@ -49,47 +49,41 @@ export default function FoundersCarousel() {
           return (
             <SwiperSlide
               key={index}
-              className={`relative transition-transform h-full duration-300 ease-in-out ${
+              className={`relative !h-auto transition-transform duration-300 ease-in-out ${
                 isActive ? "z-[70]" : "z-[10]"
               }`}
             >
               <div
                 key={item.id}
-                className="w-full h-full relative rounded-t-[10px] px-[10px] py-5 bg-white flex flex-col"
+                className="w-full h-full flex flex-col rounded-t-[10px] px-[10px] py-5 bg-white"
               >
-                {/* <div className="w-full relative h-[320px] md:h-[380px] lg:h-[480px] rounded-t-md overflow-hidden flex-none">
+                <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2] h-[40vh] lg:h-[50vh]">
                   <Image
                     src={item.imgUrl}
                     alt={item.name}
                     fill
-                    className="object-cover object-center"
-                  />
-                </div> */}
-                <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2] h-[40vh] lg:h-[50vh]">
-                  <Image
-                     src={item.imgUrl}
-                    alt={item.name}
-                    fill
-                    className="object-cover w-full h-ful object-top"
+                    className="object-cover object-top"
                   />
                 </div>
-                <div className="w-full relative mt-4 content flex flex-col flex-1 justify-between">
-                  <div className="flex flex-col">
+
+                <div className="w-full mt-4 flex flex-col flex-1 justify-between">
+                  <div>
                     <Image
                       src="/assets/quot.svg"
                       alt="quote"
                       width={27}
                       height={21}
                     />
-                    <p className="text-base leading-[140%] w-11/12 relative font-normal text-black-400/70 mt-5">
+                    <p className="text-xs lg:text-base leading-[140%] w-11/12 font-normal text-black-400/70 mt-5">
                       {item.desc}
                     </p>
                   </div>
-                  <div className="flex flex-col mt-auto">
-                    <h2 className="text-xs md:text-base lg:text-lg font-bold leading-[140%] text-black-400 mt-5 lg:mt-7">
+
+                  <div className="mt-6">
+                    <h2 className="text-sm md:text-base lg:text-lg font-bold text-black-400">
                       {item.name}
                     </h2>
-                    <h3 className="text-xs md:text-sm lg:text-base leading-[100%] font-medium text-orange-600/50 mt-[5px]">
+                    <h3 className="text-xs md:text-sm lg:text-base font-medium text-orange-600/50 mt-[5px]">
                       {item.position}
                     </h3>
                   </div>

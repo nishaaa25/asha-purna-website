@@ -74,105 +74,71 @@ export default function BrochurePopup({
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!validateForm()) {
-      toast.error("Please fix the errors in the form");
-      return;
-    }
+  if (!validateForm()) {
+    toast.error("Please fix the errors in the form");
+    return;
+  }
 
-    setIsLoading(true);
+  setIsLoading(true);
 
-    try {
-      const response = await fetch(
-        "https://apiservices.ashapurna.com/api/web/enquiries",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "api-version": "v1",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            message: formData.message || "",
-            project_id: projectId ? Number(projectId) : 0,
-            parma_mantra_type: "brochure",
-          }),
-        }
+  // ---- SAFARI FIX: OPEN A TEMP TAB IMMEDIATELY ----
+  let tempTab = null;
+  if (brochureUrl) {
+    tempTab = window.open("", "_blank"); // allowed by Safari
+    if (tempTab) {
+      tempTab.document.write(
+        "<p style='font-family: sans-serif; padding: 20px;'>Loading brochure...</p>"
       );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      if (result._status) {
-        // Always show success - try to open brochure if available
-        if (brochureUrl) {
-          console.log("Opening brochure URL:", brochureUrl);
-          window.open(brochureUrl, "_blank", "noopener,noreferrer");
-        } else {
-          console.log("No brochure URL provided - showing thank you page");
-        }
-
-        // Reset form
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-          project: projectName || "",
-        });
-        setErrors({});
-
-        // Close popup and trigger success callback for thank you page
-        onClose();
-        onSuccess && onSuccess();
-      } else {
-        // Even if API fails, show thank you page
-        console.log("API returned false status, but showing thank you page");
-
-        // Reset form
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-          project: projectName || "",
-        });
-        setErrors({});
-
-        // Close popup and trigger success callback for thank you page
-        onClose();
-        onSuccess && onSuccess();
-      }
-    } catch (error) {
-      console.error("Brochure form submission error:", error);
-
-      // Even if there's an error, show thank you page
-      console.log("Network error occurred, but showing thank you page");
-
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-        project: projectName || "",
-      });
-      setErrors({});
-
-      // Close popup and trigger success callback for thank you page
-      onClose();
-      onSuccess && onSuccess();
-    } finally {
-      setIsLoading(false);
     }
-  };
+  }
+
+  try {
+    const response = await fetch(
+      "https://apiservices.ashapurna.com/api/web/enquiries",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-version": "v1",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message || "",
+          project_id: projectId ? Number(projectId) : 0,
+          parma_mantra_type: "brochure",
+        }),
+      }
+    );
+
+    const result = await response.json();
+
+    // ---- UPDATE THE TEMP TAB WITH BROCHURE URL ----
+    if (brochureUrl && tempTab) {
+      tempTab.location.href = brochureUrl;
+    }
+
+    onClose();
+    onSuccess && onSuccess();
+  } catch (err) {
+    console.error(err);
+
+    // Even on failure, show brochure
+    if (brochureUrl && tempTab) {
+      tempTab.location.href = brochureUrl;
+    }
+
+    onClose();
+    onSuccess && onSuccess();
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   if (!isOpen) return null;
   console.log("project name in brochure popup:", brochureUrl);

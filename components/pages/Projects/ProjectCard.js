@@ -11,7 +11,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
   // console.log(imagePath + data.project_logo_1);
   const [isEnquirePopupOpen, setIsEnquirePopupOpen] = useState(false);
   const [isThankYouPopupOpen, setIsThankYouPopupOpen] = useState(false);
-  // console.log(data, "project data");
+  console.log(data, "project data");
 
   useEffect(() => {
     setIsMounted(true);
@@ -109,13 +109,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
               </h3>
               {(() => {
                 const value =
-                  data?._listType ||
-                  data?.property_type ||
-                  data?.category?.name || // prioritize name if category is object
-                  (typeof data?.category === "string" ? data.category : "") ||
-                  data?.projectType ||
-                  data?.project_type ||
-                  data?.type;
+                  data?.site_type || "plots"
 
                 return value ? (
                   <p className="text-xs md:text-sm lg:text-sm leading-[140%] capitalize">

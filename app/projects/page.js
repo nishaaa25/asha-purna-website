@@ -51,6 +51,7 @@ export default function ProjectsPage() {
         if (!res.ok) throw new Error(`API returned status ${res.status}`);
 
         const data = await res.json();
+        console.log(data, "project listing");
         if (!data._status) throw new Error(data._message);
 
         if (canceled) return;
@@ -61,12 +62,13 @@ export default function ProjectsPage() {
           (arr || []).map((p) => ({ ...p, _listType: type }));
 
         const combined = [
-          ...merge(d.getNewlaunchs, "plots"),
-          ...merge(d.getResidentialFlats, "flats"),
-          ...merge(d.getResidentialTownships, "township"),
+          ...merge(d.getNewlaunchs),
+          ...merge(d.getResidentialFlats),
+          ...merge(d.getResidentialTownships),
         ].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
         setProjects(combined);
+
         setImagePath(d.project_image_path || "");
       } catch (err) {
         if (!canceled) {

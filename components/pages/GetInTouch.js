@@ -137,7 +137,7 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
           )}
           {spanText && <h2 className="text-[20px] md:text-[38px] lg:text-[36px] leading-[130%] tracking-[-1.1%] font-light">{spanText}</h2>}
         </div>
-      <div className="py-7 md:py-12 lg:py-16 px-7 md:px-13 lg:px-18 mt-5 md:mt-7 lg:mt-10 relative border-[0.50px] w-10/12 md:w-9/12 lg:w-7/12 mx-auto border-black/50 rounded-xl">
+      <div className="py-7 md:py-12 lg:py-16 px-7 md:px-13 lg:px-18 mt-5 md:mt-7 lg:mt-10 relative border-1  lg:border-[0.50px] w-10/12 md:w-9/12 lg:w-7/12 mx-auto border-black/50 rounded-xl">
         <form onSubmit={handleSubmit} className="flex flex-col gap-7">
           <div className="w-full">
             <input
