@@ -43,10 +43,6 @@ export default function SlugHeroSection({
 
   const getYouTubeEmbed = (url) => {
     const videoId = url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
-    if (isSafari) {
-      // Safari: show controls, no autoplay
-      return `https://www.youtube.com/embed/${videoId}?controls=1&modestbranding=1&rel=0&loop=1&playlist=${videoId}&playsinline=1`;
-    }
     // Other browsers: autoplay muted, no controls
     return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&playlist=${videoId}&iv_load_policy=3&disablekb=1&playsinline=1&autohide=1`;
   };
