@@ -2,6 +2,7 @@ import "./globals.css";
 import LenisProvider from "@/components/Hooks/LenisProvider";
 import ClientPageTransition from "@/components/ClientPageTransition";
 import ScrollToTop from "@/components/pages/ScrollToTop";
+import ContactOverlay from "@/components/ContactOverlay";
 
 // Note: Home page metadata is now fetched from API via getSEOContent('home')
 // This is the fallback metadata for all pages
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
             <ClientPageTransition>
               <ScrollToTop />
               {children}
+              <ContactOverlay/>
             </ClientPageTransition>
           </LenisProvider>
       </body>
