@@ -67,7 +67,7 @@ export default function Construction({ project, projectConstructionsData, constr
           setActiveTab={setActiveTab}
         />
       </div>
-      <div className="relative ">
+      <div className="relative mt-6 md:mt-4 lg:mt-0">
         <ImageCarousel images={tabContent} />
       </div>
     </div>

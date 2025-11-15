@@ -166,7 +166,7 @@ export function ReraSlideOut({ reraNo }) {
 
   return (
     <div
-      className={`fixed top-1/4 transform -translate-y-1/2 transition-all duration-500 z-50 bg-white/75 p-3 flex items-center justify-center rounded-l-md shadow-md ${
+      className={`fixed top-1/4 transform -translate-y-1/2 transition-all duration-500 z-100 bg-white/75 p-3 flex items-center justify-center rounded-l-md shadow-md ${
         open ? "right-0" : "-right-[321px]"
       } w-[321px]`}
     >

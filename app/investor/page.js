@@ -101,7 +101,7 @@ export default function InvestorPage() {
 
     try {
       const response = await fetch(
-        "https://apiservices.ashapurna.com/api/web/enquiries/contact",
+        "/enquiries/contact",
         {
           method: "POST",
           headers: {

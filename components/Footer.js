@@ -130,7 +130,6 @@ export default function Footer() {
                 ["/investor", "Investors"],
                 ["/NRIcorner", "NRI Corner"],
                 ["/rera-disclaimer", "RERA Disclaimer"],
-                ["/become-a-partner", "Become a Partner"],
                 ["/contact", "Contact Us"],
               ].map(([href, label]) => (
                 <Link key={label} href={href} onClick={(e) => handleLinkClick(href, e)}>

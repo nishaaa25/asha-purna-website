@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "lite-youtube-embed/src/lite-yt-embed.css";
 
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -405,7 +404,6 @@ body {
   height: 195px;
 }
 
-
 @keyframes slideInFromTop {
   0% {
     transform: translateY(-50px);
@@ -472,10 +470,8 @@ body {
 .mobile-nav-panel {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   transform-origin: top;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
 }
-
 
 /* Smooth dropdown animation */
 .dropdown-enter {
@@ -515,26 +511,25 @@ body {
   background: #229b3d;
 }
 
-
-
-@layer base{
-  .blog-desc h1, .blog-desc h2{
+@layer base {
+  .blog-desc h1,
+  .blog-desc h2 {
     @apply text-xl md:text-2xl lg:text-4xl font-semibold text-black-400 leading-[130%] mb-3 mt-10;
   }
-  .blog-desc h3{
+  .blog-desc h3 {
     @apply text-base md:text-lg lg:text-xl font-semibold text-black-400 leading-[130%] mb-1 mt-4;
   }
-  .blog-desc h5{
+  .blog-desc h5 {
     @apply text-sm md:text-base lg:text-lg font-semibold text-black-400 leading-[130%] mb-1 mt-4;
   }
-  .blog-desc{
+  .blog-desc {
     @apply text-xs md:text-sm lg:text-base tracking-[-1.1%] text-gray-600;
   }
-  .blog-desc hr{
-    @apply mt-8 mb-4 hidden
+  .blog-desc hr {
+    @apply mt-8 mb-4 hidden;
   }
-  .blog ul li b{
-    @apply text-black-400
+  .blog ul li b {
+    @apply text-black-400;
   }
 }
 .page-fade-in {
@@ -567,9 +562,27 @@ body {
 
 .banner-gradient {
   background: linear-gradient(
-    to bottom, 
-    rgba(0, 0, 0, 0.3),  /* dark at top */
-    rgba(0, 0, 0, 0)     /* transparent at bottom */
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    /* dark at top */ rgba(0, 0, 0, 0) /* transparent at bottom */
   );
 }
- 
+
+.custom-placeholder::placeholder {
+  color: #808080 !important;
+}
+
+/* Default placeholder color for select */
+select {
+  color: #000000; /* Default text color */
+}
+
+/* Color for selected/active option */
+select option {
+  color: black !important;
+}
+
+/* Optional: keep placeholder gray and disable selection */
+select option[disabled][selected] {
+  color: #808080;
+}
