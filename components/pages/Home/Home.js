@@ -105,14 +105,6 @@ export default function Home({
       <div className="w-full relative bg-cream-600">
         <GetInTouch spanText="Begins here" heading="your next chapter" />
       </div>
-      <div className="fixed lg:hidden bottom-9 w-full px-1 z-90">
-        <HeroBottomBar
-          btnOneLink="tel:9314041747"
-          btnTwoLink="https://wa.me/919314041747?text=Hi%2C%20I%27m%20interested%20in%20your%20property!"
-          btnOneText="Call Us"
-          btnTwoText="Chat Now"
-        />
-      </div>
     </div>
   );
 }

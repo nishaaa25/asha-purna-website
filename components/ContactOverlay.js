@@ -7,7 +7,7 @@ export default function FloatingContactButtons() {
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
-    <div className="fixed bottom-40 lg:bottom-6 right-4 lg:right-6 flex flex-col gap-3 z-50">
+    <div className="fixed hidden lg:flex bottom-40 lg:bottom-6 right-4 lg:right-6  flex-col gap-3 z-50">
       {/* WhatsApp Button */}
       <a
         href={whatsappLink}
