@@ -57,13 +57,6 @@ export default function NewsEventspage() {
     fetchEvents();
   }, []);
 
-  useEffect(() => {
-    const checkScreenSize = () => setIsLargeScreen(window.innerWidth >= 1024);
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
-
   const truncateText = (text, maxLength) => {
     if (!text) return "";
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;

@@ -5,10 +5,7 @@ import { faqs } from "@/lib/content";
 import Image from "next/image";
 import OurStrength from "@/components/pages/About/OurStrength";
 import Committed from "@/components/pages/About/Committed";
-import OurJourney from "@/components/pages/About/OurJourney";
 import FoundersCarousel from "@/components/pages/About/FounderCarousel";
-import OurJourneySmall from "@/components/pages/About/OurJourneySmall";
-import AboutPageClient from "@/components/pages/About/AboutPageClient";
 import Wheel from "@/components/Wheel";
 
 export default async function AboutPage() {
@@ -34,9 +31,8 @@ const data = [
 
 
   return (
-    <AboutPageClient>
       <div className="relative w-full">
-        <section className="w-full relative h-[40dvh] md:h-[70vh] lg:h-[90vh] flex-center overflow-hidden ">
+        <section className="w-full relative h-[40vh] md:h-[70vh] lg:h-[90vh] flex-center overflow-hidden ">
           <Image
             src="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/about-bg.jpg"
             alt="land-img"
@@ -64,7 +60,7 @@ const data = [
             <FoundersCarousel />
           </div>
         </div>
-        <div className="w-full relative  z-0 will-change-auto transform-none">
+        <div className="w-full relative ">
           <Wheel/>
         </div>
         <OurStrength />
@@ -73,6 +69,5 @@ const data = [
           <FaqSection faq={faqs} />
         </section>
       </div>
-    </AboutPageClient>
   );
 }

@@ -80,6 +80,7 @@ export default function Wheel() {
       start: "top top",
       end: "+=500%",
       pin: true,
+      anticipatePin: 1,
       scrub: 1,
       onUpdate: (self) => {
         const progress = self.progress;
