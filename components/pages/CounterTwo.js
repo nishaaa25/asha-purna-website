@@ -15,30 +15,34 @@ export default function CounterTwo({ data }) {
       if (countRefs.current.length === 0) return;
 
       const duration = 1500; // total animation duration (ms)
-      const intervalSpeed = 40; // time between random number updates (ms)
+      const intervalSpeed = 30; // ~60fps
       const totalFrames = duration / intervalSpeed;
       let frame = 0;
 
       const interval = setInterval(() => {
         frame++;
+        const progress = frame / totalFrames;
+
         countRefs.current.forEach((counter) => {
           if (!counter) return;
           const target = Number(counter.getAttribute("data-target"));
-          const randomValue = Math.floor(Math.random() * target);
-          counter.innerText = randomValue.toLocaleString();
+          // Ease out animation: starts fast, ends slow
+          const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+          const currentValue = Math.floor(easeOutProgress * target);
+          counter.innerText = currentValue.toLocaleString();
         });
 
         if (frame >= totalFrames) {
           clearInterval(interval);
-          // After flicker ends, set real values
+          // After animation ends, set exact values with subtle scale effect
           countRefs.current.forEach((counter) => {
             if (!counter) return;
             const target = Number(counter.getAttribute("data-target"));
             counter.innerText = target.toLocaleString();
             gsap.fromTo(
               counter,
-              { opacity: 0.5, scale: 1.1 },
-              { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }
+              { scale: 1.05 },
+              { scale: 1, duration: 0.3, ease: "power2.out" }
             );
           });
         }

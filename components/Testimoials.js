@@ -7,9 +7,8 @@ export default function Testimoials() {
       <div className="w-11/12 mx-auto relative">
         <SectionHeader
           title="testimonials"
-          heading="Stories that"
-          spanText="shaped us"
-          desc="At Ashapurna, our work speaks through the experiences of those we serve. These testimonials reflect the trust, confidence, and satisfaction of clients who value excellence and thoughtful execution."
+          heading="Our Excellence"
+          spanText="Your words"
         />
       </div>
       <div className="w-full relative -top-6">

@@ -15,24 +15,27 @@ export default function CountersSection({ data }) {
       if (countRefs.current.length === 0) return;
 
       const duration = 1500; // total animation time (ms)
-      const intervalSpeed = 40; // how fast digits flicker (ms)
+      const intervalSpeed = 30; // ~60fps
       const totalFrames = duration / intervalSpeed;
-      let frame =  1;
+      let frame = 0;
 
       const interval = setInterval(() => {
         frame++;
-        countRefs.current.forEach((counter, i) => {
+        const progress = frame / totalFrames;
+
+        countRefs.current.forEach((counter) => {
           if (!counter) return;
 
-          // show random number roughly near the target's range
           const target = Number(counter.getAttribute("data-target"));
-          const randomValue = Math.floor(Math.random() * target);
-          counter.innerText = randomValue.toLocaleString();
+          // Ease out animation: starts fast, ends slow
+          const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+          const currentValue = Math.floor(easeOutProgress * target);
+          counter.innerText = currentValue.toLocaleString();
         });
 
         if (frame >= totalFrames) {
           clearInterval(interval);
-          // finally set the real value
+          // finally set the exact target value
           countRefs.current.forEach((counter) => {
             if (!counter) return;
             const target = Number(counter.getAttribute("data-target"));
@@ -68,7 +71,7 @@ export default function CountersSection({ data }) {
               className="text-[40px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
               data-target={counter.value}
             >
-              1
+              0
             </span>
             {counter.sign && (
               <span className="text-[36px] md:text-[44px] lg:text-[50px] ml-1 leading-[100%]">

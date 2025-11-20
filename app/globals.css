@@ -573,3 +573,8 @@ body {
 }
 
 
+.mobile-nav{
+  backdrop-filter: blur(20px) !important;
+  background-color: rgba(255, 255, 255, 0.111);
+  z-index: 40;
+}

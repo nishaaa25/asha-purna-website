@@ -12,7 +12,7 @@ import ProjectsCarousel from "./ProjectsCarousel";
 export default function SignatureProject({projects, imagePath}) {
   return (
     <div className="relative w-full pb-15 ms:pb-20 lg:pb-[100px]">
-      <SectionHeader heading="Our Signature" spanText="Projects"/>
+      <SectionHeader heading="Iconic" spanText="Masterpiece"/>
       <div className="relative w-full mx-auto flex-center flex-col" >
         <ProjectsCarousel projects={projects} imagePath={imagePath}/>
         <Button text="View All Projects" link="/projects"/>
