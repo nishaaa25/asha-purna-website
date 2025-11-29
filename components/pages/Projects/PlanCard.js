@@ -9,14 +9,11 @@ import { toast } from "react-toastify";
 export default function PlanCard({ data, imgPath, project }) {
   const [isViewPlanPopupOpen, setIsViewPlanPopupOpen] = useState(false);
   const [isThankYouPopupOpen, setIsThankYouPopupOpen] = useState(false);
-  console.log(data, "floor plan data");
   const handleViewPlanClick = () => {
     setIsViewPlanPopupOpen(true);
   };
 
   const handleViewPlanSubmit = async (formData) => {
-    console.log("View Plan form submitted:", formData);
-
     try {
       const response = await fetch(
         "https://apiservices.ashapurna.com/api/web/enquiries",
@@ -57,7 +54,6 @@ export default function PlanCard({ data, imgPath, project }) {
         if (firstImage?.image) {
           const href = (imgPath || "") + firstImage.image;
           window.location.href = href;
-          console.log(href + " floorpath");
         } else if (data?.imgUrl) {
           // Fallback to main image if gallery missing
           window.location.href = data.imgUrl;

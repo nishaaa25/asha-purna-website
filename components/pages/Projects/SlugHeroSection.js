@@ -29,7 +29,8 @@ export default function SlugHeroSection({
     ? project.brochure_link
     : null;
 
-  const phoneNumber = project?.mobile_number || project?.ivr_number || "9314041747";
+  const phoneNumber =
+    project?.mobile_number || project?.ivr_number || "9314041747";
 
   const handleBrochureClick = () => setIsBrochurePopupOpen(true);
 
@@ -38,12 +39,25 @@ export default function SlugHeroSection({
     return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&playlist=${videoId}&iv_load_policy=3&disablekb=1&playsinline=1&autohide=1`;
   };
 
+  const getVimeoEmbed = (url) => {
+    const videoId = url.split("vimeo.com/")[1]?.split("?")[0] || url.split("/").pop();
+    return `https://player.vimeo.com/video/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playsinline=1`;
+  };
+
+  const isYouTubeUrl = (url) => url?.includes("youtube.com") || url?.includes("youtu.be");
+  const isVimeoUrl = (url) => url?.includes("vimeo.com");
+  const isMp4Url = (url) => url?.endsWith(".mp4");
+
   const reraNo =
     project?.rera_number ||
     projectReraNo?.find((item) => {
       const title = item?.title?.toUpperCase() || "";
       const value = item?.value?.toUpperCase() || "";
-      return title.includes("RERA") || value.startsWith("RAJ/") || title.startsWith("RAJ/");
+      return (
+        title.includes("RERA") ||
+        value.startsWith("RAJ/") ||
+        title.startsWith("RAJ/")
+      );
     })?.value ||
     projectReraNo?.find((item) => {
       const title = item?.title?.toUpperCase() || "";
@@ -51,35 +65,71 @@ export default function SlugHeroSection({
     })?.title ||
     "";
 
+  const reranumImg = project?.rera_image
+    ? projectImagePath + project.rera_image
+    : `https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
+        reraNo
+      )}`;
+
+  const renderVideo = (videoUrl) => {
+    if (!videoUrl) return null;
+
+    if (isYouTubeUrl(videoUrl)) {
+      return (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+          <div className="absolute top-1/2 left-1/2 w-[400%] h-[400%] md:w-[120%] md:h-[120%] -translate-x-1/2 -translate-y-1/2">
+            <iframe
+              className="w-full h-full"
+              src={getYouTubeEmbed(videoUrl)}
+              title="Background Video"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      );
+    }
+
+    if (isVimeoUrl(videoUrl)) {
+      return (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+          <div className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2">
+            <iframe
+              className="w-full h-full scale-130 lg:scale-110"
+              src={getVimeoEmbed(videoUrl)}
+              title="Background Video"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              playsInline
+            />
+          </div>
+        </div>
+      );
+    }
+
+    if (isMp4Url(videoUrl)) {
+      return (
+        <video
+          src={process.env.PROJECT_VIDEO_PATH + videoUrl}
+          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
+          autoPlay
+          loop
+          muted
+          playsInline
+          onError={() => setVideoError(true)}
+        />
+      );
+    }
+
+    return null;
+  };
+
   return (
     <section className="w-full relative h-dvh flex-center overflow-hidden">
-      {/* 🎥 Video or Fallback Image */}
-      {project?.page_full_video && !videoError ? (
-        project.page_full_video.includes("youtube.com") ||
-        project.page_full_video.includes("youtu.be") ? (
-          <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-            <div className="absolute top-1/2 left-1/2 w-[400%] h-[400%] md:w-[120%] md:h-[120%] -translate-x-1/2 -translate-y-1/2">
-              <iframe
-                id="bg-video"
-                className="w-full h-full"
-                src={getYouTubeEmbed(project.page_full_video)}
-                title="Background Video"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        ) : project.page_full_video.endsWith(".mp4") ? (
-          <video
-            src={process.env.PROJECT_VIDEO_PATH + project.page_full_video}
-            className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-            autoPlay
-            loop
-            muted
-            playsInline
-            onError={() => setVideoError(true)}
-          />
+      {/* 🎥 Desktop Video */}
+      <div className="hidden md:block">
+        {project?.desktop_video && !videoError ? (
+          renderVideo(project.desktop_video)
         ) : (
           <Image
             src={fallbackImage}
@@ -89,17 +139,24 @@ export default function SlugHeroSection({
             priority
             quality={100}
           />
-        )
-      ) : (
-        <Image
-          src={fallbackImage}
-          alt={project?.name || project?.project_name || "Project"}
-          fill
-          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-          priority
-          quality={100}
-        />
-      )}
+        )}
+      </div>
+
+      {/* 🎥 Mobile Video */}
+      <div className="md:hidden">
+        {project?.mobile_video && !videoError ? (
+          renderVideo(project.mobile_video)
+        ) : (
+          <Image
+            src={fallbackImage}
+            alt={project?.name || project?.project_name || "Project"}
+            fill
+            className="absolute top-0 left-0 w-full h-full object-cover -z-10"
+            priority
+            quality={100}
+          />
+        )}
+      </div>
 
       {/* Overlay */}
       <div className="w-full h-full absolute top-0 left-0 bg-black/40 z-20 pointer-events-none"></div>
@@ -120,7 +177,7 @@ export default function SlugHeroSection({
       </div>
 
       {/* RERA Slide Out */}
-      <ReraSlideOut reraNo={reraNo} />
+      <ReraSlideOut reraNo={reraNo} reranumImg={reranumImg} />
 
       {/* Bottom Buttons */}
       <div className="absolute bottom-9 w-full px-1 z-40">
@@ -155,7 +212,7 @@ export default function SlugHeroSection({
   );
 }
 
-export function ReraSlideOut({ reraNo }) {
+export function ReraSlideOut({ reraNo, reranumImg }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -196,7 +253,7 @@ export function ReraSlideOut({ reraNo }) {
           </Link>
         </div>
         <Image
-          src={`https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(reraNo)}`}
+          src={reranumImg}
           alt="RERA"
           width={80}
           height={80}

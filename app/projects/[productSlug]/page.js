@@ -31,6 +31,7 @@ async function fetchAPI(endpoint, params = {}) {
 
     const result = await response.json();
 
+
     if (result._status && result._data) {
       return {
         status: true,
@@ -45,7 +46,6 @@ async function fetchAPI(endpoint, params = {}) {
       };
     }
   } catch (error) {
-    console.error(`API Error for ${endpoint}:`, error);
     return {
       status: false,
       data: null,
@@ -183,7 +183,6 @@ export async function generateMetadata({ params }) {
       },
     };
   } catch (error) {
-    console.error("Error generating metadata:", error);
     return {
       title: "Project - Ashapurna Buildcon",
       description:
@@ -210,7 +209,6 @@ export async function generateStaticParams() {
 
     // Check if response is OK and is JSON
     if (!response.ok) {
-      console.error(`API returned status ${response.status}`);
       return [];
     }
 
@@ -218,7 +216,6 @@ export async function generateStaticParams() {
     const contentType = response.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       const textResponse = await response.text();
-      console.error("Non-JSON response:", textResponse);
       return [];
     }
 
@@ -234,7 +231,6 @@ export async function generateStaticParams() {
 
     return [];
   } catch (error) {
-    console.error("Error generating static params:", error);
     return [];
   }
 }
@@ -248,7 +244,6 @@ export default async function ProjectDetailPage({ params }) {
     }
 
     const allData = await getProjectData(productSlug);
-    console.log(allData, "all project data");
 
     // if (!allData.projectDetails.status || !allData.projectDetails.data?.getDetails) {
     //   notFound();
@@ -313,7 +308,6 @@ export default async function ProjectDetailPage({ params }) {
       />
     );
   } catch (error) {
-    console.error("Error in ProjectDetailPage:", error);
     notFound();
   }
 }

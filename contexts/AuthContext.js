@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         try {
           setUser(JSON.parse(userCookie));
         } catch (error) {
-          console.error('Error parsing user cookie:', error);
+          // Silent error handling for invalid user cookie
         }
       }
       setLoading(false);

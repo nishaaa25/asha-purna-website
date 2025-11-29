@@ -9,8 +9,6 @@ export default function FloorPlan({ project, floorImagePath, projectFloorsData }
   // API returns: { project_floor_plans: [...] }
   const apiFloorPlans = projectFloorsData?.project_floor_plans || [];
 
-  console.log(projectFloorsData?.project_floor_plans)
-  
   // Build safe tab labels with index fallback to avoid duplicates/empties
   const floorPlanTabs = apiFloorPlans.length > 0
     ? apiFloorPlans.map((plan, idx) => {

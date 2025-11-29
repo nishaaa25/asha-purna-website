@@ -47,7 +47,6 @@ export default function NewsPage() {
           setError(result._message || "Failed to fetch news");
         }
       } catch (err) {
-        console.error("Error fetching news:", err);
         setError(err.message);
         setNews([]);
       }

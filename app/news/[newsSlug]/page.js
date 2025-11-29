@@ -26,7 +26,6 @@ async function fetchNewsDetail(slug) {
       data: result._data || null,
     };
   } catch (error) {
-    console.error("Error fetching news detail:", error);
     return { status: false, data: null };
   }
 }
@@ -52,7 +51,6 @@ async function fetchAllNews() {
     const result = await response.json();
     return result._data?.getUtsavCamps || [];
   } catch (error) {
-    console.error("Error fetching news:", error);
     return [];
   }
 }
@@ -79,7 +77,6 @@ async function fetchUpcomingProjects() {
     const result = await response.json();
     return result._data?.getUpcomingProjects || [];
   } catch (error) {
-    console.error("Error fetching upcoming projects:", error);
     return [];
   }
 }
@@ -109,7 +106,6 @@ export async function generateMetadata({ params }) {
       },
     };
   } catch (error) {
-    console.error("Error generating metadata:", error);
     return {
       title: "News | Ashapurna Buildcon",
       description: "Discover our latest news and updates",
@@ -125,7 +121,6 @@ export async function generateStaticParams() {
       newsSlug: news.slug || `news-${news.id}`,
     }));
   } catch (error) {
-    console.error("Error generating static params:", error);
     return [];
   }
 }
@@ -166,7 +161,6 @@ export default async function NewsDetailPage({ params }) {
       />
     );
   } catch (error) {
-    console.error("Error in NewsDetailPage:", error);
     notFound();
   }
 }

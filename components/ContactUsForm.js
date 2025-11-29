@@ -123,7 +123,6 @@ export default function ContactUsForm() {
           showErrorToast(response.message || "Failed to submit form. Please try again.");
         }
       } catch (error) {
-        console.error('ContactUs submission error:', error);
         showErrorToast("An unexpected error occurred. Please try again.");
       }
     }

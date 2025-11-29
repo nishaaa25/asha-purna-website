@@ -151,7 +151,6 @@ export default function EnquireNowPopup({ isOpen, onClose, onSubmit, projectId, 
           showErrorToast(response.message || "Failed to submit enquiry. Please try again.");
         }
       } catch (error) {
-        console.error('Enquiry submission error:', error);
         showErrorToast("An unexpected error occurred. Please try again.");
       }
     }

@@ -99,7 +99,6 @@ export default function ClientForm({ onSuccess }) {
       onSuccess?.();
 
     } catch (error) {
-      console.error("Form submission error:", error);
       toast.error("Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);

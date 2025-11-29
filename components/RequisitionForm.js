@@ -126,7 +126,6 @@ export default function RequisitionForm() {
         toast.error(data.message || "Failed to submit form");
       }
     } catch (err) {
-      console.error(err);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);

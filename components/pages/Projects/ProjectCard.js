@@ -6,12 +6,9 @@ import EnquireNowPopup from "../../EnquireNowPopup";
 import ThankYouEnquirePopup from "../../ThankYouEnquirePopup";
 
 export default function ProjectCard({ data, hideActions = false, imagePath }) {
-  // console.log(data, "features");
   const [isMounted, setIsMounted] = useState(false);
-  // console.log(imagePath + data.project_logo_1);
   const [isEnquirePopupOpen, setIsEnquirePopupOpen] = useState(false);
   const [isThankYouPopupOpen, setIsThankYouPopupOpen] = useState(false);
-  console.log(data, "project data");
 
   useEffect(() => {
     setIsMounted(true);
@@ -27,7 +24,6 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
   };
 
   const handleEnquireSubmit = (formData) => {
-    console.log("Enquiry form submitted:", formData);
     setIsEnquirePopupOpen(false);
     setIsThankYouPopupOpen(true);
   };

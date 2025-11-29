@@ -51,7 +51,6 @@ export default function ProjectsPage() {
         if (!res.ok) throw new Error(`API returned status ${res.status}`);
 
         const data = await res.json();
-        console.log(data, "project listing");
         if (!data._status) throw new Error(data._message);
 
         if (canceled) return;

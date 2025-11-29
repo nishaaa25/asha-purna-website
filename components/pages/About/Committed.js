@@ -22,7 +22,6 @@ async function getCSRData() {
 
     // Check if response is OK and is JSON
     if (!response.ok) {
-      console.error(`CSR API returned status ${response.status}`);
       return {
         status: false,
         data: { getCsrSocialUpdates: [], csr_social_updates_image_path: '' },
@@ -34,7 +33,6 @@ async function getCSRData() {
     const contentType = response.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       const textResponse = await response.text();
-      console.error("Non-JSON response:", textResponse);
       return {
         status: false,
         data: { getCsrSocialUpdates: [], csr_social_updates_image_path: '' },
@@ -43,7 +41,6 @@ async function getCSRData() {
     }
 
     const result = await response.json();
-    console.log(result?._data,  "csr-data");
 
     if (result._status) {
       return {
@@ -59,7 +56,6 @@ async function getCSRData() {
       };
     }
   } catch (error) {
-    console.error("CSR API Error:", error);
     return {
       status: false,
       data: { getCsrSocialUpdates: [], csr_social_updates_image_path: '' },

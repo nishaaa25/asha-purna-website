@@ -25,7 +25,6 @@ export default function BlogSlugPage() {
         setAllBlogs(parsedAll);
       }
     } catch (e) {
-      console.error("Error parsing allBlogs:", e);
     }
 
     try {
@@ -42,7 +41,6 @@ export default function BlogSlugPage() {
         setBlog(matched || null);
       }
     } catch (e) {
-      console.error("Error parsing selectedBlog:", e);
     }
   }, [blogSlug]);
 
@@ -73,7 +71,6 @@ export default function BlogSlugPage() {
   }
 
   const blogsToShow = nextBlogs;
-  console.log(blogsToShow, "next blogh");
 
   return (
     <div className="w-full relative">

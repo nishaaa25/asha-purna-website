@@ -9,7 +9,6 @@ import { awardsGallery } from "@/lib/awards";
 
 export default function JourneyImageCarousel({awardsData, imgPath}) {
   const [activeIndex, setActiveIndex] = useState(0);
-  console.log(awardsData);
 
   return (
     <div className="w-full relative">

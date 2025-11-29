@@ -74,7 +74,6 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
       });
 
       const result = await response.json();
-      console.log(result, "career enquiry response");
 
       if (result._status) {
         toast.success("Your application has been submitted successfully!");
@@ -92,7 +91,6 @@ export default function CareerModal({ isOpen, onClose, positions, qualifications
         toast.error(result._message || "Something went wrong. Please try again later.");
       }
     } catch (error) {
-      console.error("Career form submission error:", error);
       toast.error("Failed to submit application. Please try again later.");
     } finally {
       setIsLoading(false);

@@ -4,11 +4,9 @@ import Image from "next/image";
 
 export default function Amenties({ project, projectAmenityData, projectAmenityImagePath }) {
   // Use API data if available, otherwise fall back to content
-  const amenitiesData = projectAmenityData && projectAmenityData.length > 0 
-    ? projectAmenityData 
+  const amenitiesData = projectAmenityData && projectAmenityData.length > 0
+    ? projectAmenityData
     : amenities;
-
-    console.log('Amenities Data:', amenitiesData);
 
   return (
     <div className="w-full relative">

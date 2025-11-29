@@ -53,12 +53,9 @@ export default function CounterTwo({ data }) {
   // Handle empty or undefined data safely
   if (!data || data.length === 0) return null;
 
-  console.log(data, "data ength");
   const filteredData = data.filter((item) =>
     Object.values(item).every((value) => value !== null && value !== undefined)
   );
-
-  console.log(filteredData, "filtered data");
 
   // ✅ If only one counter, use flex-center layout instead of grid
   const isSingleItem = data.length === 1;

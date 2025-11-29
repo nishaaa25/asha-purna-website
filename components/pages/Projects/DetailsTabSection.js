@@ -45,7 +45,6 @@ export default function DetailsTabSection({
   ) {
     availableTabs.push("plans");
   }
-  console.log(project, "project console");
 
   const [activeTab, setActiveTab] = useState(availableTabs[0] || "overview");
   const [selectedPlan, setSelectedPlan] = useState("master");

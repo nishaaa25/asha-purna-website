@@ -19,7 +19,6 @@ async function getData(slug) {
 
     // Check if response is OK and is JSON
     if (!response.ok) {
-      console.error(`API returned status ${response.status}`);
       return {
         status: false,
         data: [],
@@ -32,7 +31,6 @@ async function getData(slug) {
     const contentType = response.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       const textResponse = await response.text();
-      console.error("Non-JSON response:", textResponse);
       return {
         status: false,
         data: [],
@@ -72,7 +70,6 @@ async function getData(slug) {
       };
     }
   } catch (error) {
-    console.error("API Error:", error);
     return {
       status: false,
       data: [],
@@ -107,7 +104,6 @@ export async function generateStaticParams() {
 
     return staticSlugs.map((slug) => ({ slugPage: slug }));
   } catch (error) {
-    console.error("Error in generateStaticParams:", error);
     return [];
   }
 }

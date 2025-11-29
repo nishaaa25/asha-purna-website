@@ -37,7 +37,6 @@ export default function Page() {
         }
 
         const result = await response.json();
-        console.log(result, "blogs");
         if (result._status) {
           const blogsData = result._data?.getblogs || [];
           setBlogs([...blogsData].reverse()); // latest first
@@ -45,7 +44,6 @@ export default function Page() {
           throw new Error(result._message );
         }
       } catch (err) {
-        console.error("Error fetching blogs:", err);
         setError(err.message);
       } finally {
         setLoading(false);

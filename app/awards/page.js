@@ -37,15 +37,13 @@ export default function Page() {
 
         const result = await response.json();
         if (result._status) {
-          console.log(result?._data, "awards");
           const awardsData = result._data?.getAwards || [];
-          setAwards(awardsData); 
+          setAwards(awardsData);
           setImgPath(result?._data?.image_path)
         } else {
           throw new Error(result._message || "Failed to fetch awards");
         }
       } catch (err) {
-        console.error("Error fetching awards:", err);
         setError(err.message);
       } finally {
         setLoading(false);

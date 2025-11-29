@@ -100,7 +100,6 @@ const handleSubmit = async (e) => {
     onSuccess?.();
 
   } catch (error) {
-    console.error("Submission error:", error);
     toast.error("Something went wrong. Please try again later.");
   } finally {
     setIsLoading(false);

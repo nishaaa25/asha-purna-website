@@ -15,11 +15,6 @@ export default function MasterPlan({ project, masterImagePath }) {
   };
 
   const handleViewPlanSubmit = async(formData) => {
-    console.log("View Plan form submitted:", formData);
-   
-
-    console.log(project)
- 
      try {
       const response = await fetch(
         "https://apiservices.ashapurna.com/api/web/enquiries",

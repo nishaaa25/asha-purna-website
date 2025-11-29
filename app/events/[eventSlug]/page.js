@@ -26,7 +26,6 @@ async function fetchEventDetail(slug) {
       data: result._data || null,
     };
   } catch (error) {
-    console.error("Error fetching event detail:", error);
     return { status: false, data: null };
   }
 }
@@ -52,7 +51,6 @@ async function fetchAllEvents() {
     const result = await response.json();
     return result._data?.getUtsavCamps || [];
   } catch (error) {
-    console.error("Error fetching events:", error);
     return [];
   }
 }
@@ -79,7 +77,6 @@ async function fetchUpcomingProjects() {
     const result = await response.json();
     return result._data?.getUpcomingProjects || [];
   } catch (error) {
-    console.error("Error fetching upcoming projects:", error);
     return [];
   }
 }
@@ -109,7 +106,6 @@ export async function generateMetadata({ params }) {
       },
     };
   } catch (error) {
-    console.error("Error generating metadata:", error);
     return {
       title: "Event | Ashapurna Buildcon",
       description: "Discover our events and celebrations",
@@ -125,7 +121,6 @@ export async function generateStaticParams() {
       eventSlug: event.slug || `event-${event.id}`,
     }));
   } catch (error) {
-    console.error("Error generating static params:", error);
     return [];
   }
 }
@@ -166,7 +161,6 @@ export default async function EventDetailPage({ params }) {
       />
     );
   } catch (error) {
-    console.error("Error in EventDetailPage:", error);
     notFound();
   }
 }

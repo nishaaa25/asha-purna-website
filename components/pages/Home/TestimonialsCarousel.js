@@ -43,7 +43,6 @@ export default function TestimonialsCarousel() {
           throw new Error(result._message || "Failed to fetch testimonials");
         }
       } catch (err) {
-        console.error("Error fetching testimonials:", err);
         setError(err.message);
       }
     };

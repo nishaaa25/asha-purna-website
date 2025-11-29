@@ -48,7 +48,6 @@ export default function NewsEventspage() {
           setError(result._message || "Failed to fetch events");
         }
       } catch (err) {
-        console.error("Error fetching projects:", err);
         setError(err.message);
         setEvents([]);
       }

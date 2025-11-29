@@ -34,15 +34,12 @@ export default function JobOpening() {
 
       const result = await response.json();
 
-      console.log(result, "career result")
-      
       if (result._status && result._data) {
         setJobOpenings(result._data.getCareers || []);
         setPositions(result._data.getPositions || []);
         setQualifications(result._data.getQualifications || []);
       }
     } catch (error) {
-      console.error("Error fetching career data:", error);
     } finally {
       setIsLoading(false);
     }

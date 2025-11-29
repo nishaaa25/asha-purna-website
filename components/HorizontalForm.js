@@ -38,15 +38,12 @@ export default function HorizontalForm() {
             body: JSON.stringify({}),
           }
         );
-        
+
         const result = await response.json();
-        console.log('Property Options API Response:', result);
-        
+
         if (result._status && result._data?.getProperties) {
           setPropertyOptions(result._data.getProperties);
-          console.log('Loaded', result._data.getProperties.length, 'property options from API');
         } else {
-          console.warn('API returned false status, using fallback options');
           setPropertyOptions([
             { id: 1, name: "Plots" },
             { id: 2, name: "Townships/Villas" },
@@ -56,7 +53,6 @@ export default function HorizontalForm() {
           ]);
         }
       } catch (error) {
-        console.error('Error fetching property options:', error);
         // Use fallback options
         setPropertyOptions([
           { id: 1, name: "Plots" },
@@ -127,9 +123,7 @@ export default function HorizontalForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('HorizontalForm submission started');
-    console.log('Form data:', formData);
-    
+
     if (validateForm()) {
       try {
         // Submit to API
@@ -141,13 +135,9 @@ export default function HorizontalForm() {
           project_id: Number(formData.project_id),
         };
 
-        console.log('Submitting to API:', process.env.ENQUIRY_FORM, params);
         const response = await post(process.env.ENQUIRY_FORM, params);
 
-        console.log('API Response:', response);
-
         if (response.status) {
-          console.log('Horizontal form submitted successfully');
           // Show thank you popup
           setIsThankYouOpen(true);
           
@@ -161,15 +151,11 @@ export default function HorizontalForm() {
           });
           setErrors({});
         } else {
-          console.error('Horizontal form submission failed:', response.message);
           showErrorToast(response.message || "Failed to submit enquiry. Please try again.");
         }
       } catch (error) {
-        console.error('HorizontalForm submission error:', error);
         showErrorToast("An unexpected error occurred. Please try again.");
       }
-    } else {
-      console.log('Form validation failed:', errors);
     }
   };
 

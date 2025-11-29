@@ -42,7 +42,6 @@ export default function InvestorPage() {
         setPropertyTypes(result._data.getPropertyTypes);
       }
     } catch (error) {
-      console.error("Error fetching property types:", error);
     }
   };
 
@@ -140,7 +139,6 @@ export default function InvestorPage() {
         toast.error(result._message || "Something went wrong. Please try again.");
       }
     } catch (error) {
-      console.error("Form submission error:", error);
       toast.error("Failed to submit form. Please try again.");
     } finally {
       setIsLoading(false);

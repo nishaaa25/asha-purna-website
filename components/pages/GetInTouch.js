@@ -121,7 +121,6 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
           showErrorToast(response.message || "Failed to submit form. Please try again.");
         }
       } catch (error) {
-        console.error('GetInTouch submission error:', error);
         showErrorToast("An unexpected error occurred. Please try again.");
       }
     }

@@ -125,8 +125,6 @@ const handleSubmit = async (e) => {
     onClose();
     onSuccess && onSuccess();
   } catch (err) {
-    console.error(err);
-
     // Even on failure, show brochure
     if (brochureUrl && tempTab) {
       tempTab.location.href = brochureUrl;
@@ -141,7 +139,6 @@ const handleSubmit = async (e) => {
 
 
   if (!isOpen) return null;
-  console.log("project name in brochure popup:", brochureUrl);
 
   return createPortal(
     <div
