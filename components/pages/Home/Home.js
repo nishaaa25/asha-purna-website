@@ -70,7 +70,7 @@ export default function Home({
               className="object-cover relative"
             />
             <div className="relative w-full h-full bg-black/40 flex items-center p-5 md:p-10 lg:p-15">
-              <p className="uppercase text-xl md:text-[34px] lg:text-[38px] leading-[110%] text-white w-1/2 lg:w-3/12">
+              <p className="uppercase text-2xl md:text-[34px] font-medium lg:text-[38px] leading-[110%] text-white w-1/2 lg:w-3/12">
                 Residential Projects
               </p>
             </div>
@@ -85,7 +85,7 @@ export default function Home({
               className="object-cover relative"
             />
             <div className="relative w-full h-full bg-black/40 flex items-center p-5 md:p-10 lg:p-15">
-              <p className="uppercase text-xl md:text-[34px] lg:text-[38px] leading-[110%] text-white w-1/2 lg:w-3/12">
+              <p className="uppercase text-2xl md:text-[34px] font-medium lg:text-[38px] leading-[110%] text-white w-1/2 lg:w-3/12">
                 Commercial Projects
               </p>
             </div>

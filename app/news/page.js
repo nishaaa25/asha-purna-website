@@ -107,19 +107,22 @@ export default function NewsPage() {
                     />
                   </div>
                   <div className="relative lg:w-full flex flex-col gap-2">
-                    <h3 className="text-sm md:text-lg lg:text-[28px] font-bold text-gray-600 leading-[130%] lg:mt-2">
+                    <h3 className="text-base md:text-lg lg:text-[28px] font-bold text-gray-600 leading-[130%] lg:mt-2">
                       {item?.title}
                     </h3>
 
                     <div className="relative w-2/12 bg-orange-600 h-[1.5px] rounded-full lg:my-2"></div>
 
                     <div className="relative flex-between text-gray-700">
-                      <p className="text-[10px] md:text-xs lg:text-lg font-bold">
+                      <p className="text-sm md:text-xs lg:text-lg font-bold">
                         {item?.date}
+                      </p>
+                      <p className="text-sm md:text-xs lg:text-lg font-bold uppercase">
+                        {item?.location}
                       </p>
                     </div>
 
-                    <p className="text-xs md:text-lg lg:text-[22px] leading-[140%] tracking-[-1.1%] text-gray-800">
+                    <p className="text-sm md:text-lg lg:text-[22px] leading-[140%] tracking-[-1.1%] text-gray-800">
                       {truncateText(item?.short_description, 130)}
                     </p>
                   </div>

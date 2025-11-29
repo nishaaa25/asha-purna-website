@@ -57,7 +57,7 @@ export default function CountersSection({ data }) {
 
   return (
     <div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto relative"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto relative px-3"
       ref={containerRef}
     >
       {data.map((counter, index) => (
@@ -68,13 +68,13 @@ export default function CountersSection({ data }) {
           <div className="flex items-center font-medium">
             <span
               ref={(el) => (countRefs.current[index] = el)}
-              className="text-[40px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
+              className="text-[45px] md:text-[60px] lg:text-[56px] leading-[100%] counter-title tracking-[-3%]"
               data-target={counter.value}
             >
               0
             </span>
             {counter.sign && (
-              <span className="text-[36px] md:text-[44px] lg:text-[50px] ml-1 leading-[100%]">
+              <span className="text-[45px] md:text-[44px] lg:text-[50px] ml-1 leading-[100%]">
                 {counter.sign}
               </span>
             )}
@@ -82,7 +82,7 @@ export default function CountersSection({ data }) {
               +
             </span>
           </div>
-          <h4 className="text-sm md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-10/12 text-center">
+          <h4 className="text-base md:text-lg lg:text-xl leading-8 tracking-[-0.5px] font-normal mt-1 text-gray-900 lg:w-10/12 text-center">
             {counter.title}
           </h4>
 

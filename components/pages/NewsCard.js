@@ -22,12 +22,12 @@ export default function NewsCard({ data, path }) {
         <h5 className="text-[15px] font-bold uppercase text-gray-700 ">
           {data?.media}
         </h5>
-        <h3 className="text-base md:text-[30px] lg:text-[28px] font-bold text-gray-600 leading-[130%] mb-5">
+        <h3 className="text-[18px] md:text-[30px] lg:text-[28px] font-bold text-gray-600 leading-[130%] mb-2 lg:mb-5">
           {data?.title}
         </h3>
-        <div className="h-[1px] lg:h-[2px] w-9 lg:w-1/12 bg-orange-600 line mb-5"></div>
+        <div className="h-[1px] lg:h-[2px] w-9 lg:w-1/12 bg-orange-600 line mb-3 lg:mb-5"></div>
         {data?.location && (
-          <div className="flex-between relative w-full text-gray-700 text-xs md:text-lg lg:text-lg font-bold  leading-[130%] mb-4">
+          <div className="flex-between relative w-full text-gray-700 text-base gap-20 md:text-lg lg:text-lg font-bold  leading-[130%] mb-4">
             <p>{data?.date}</p>
             <p>{data?.location}</p>
           </div>

@@ -43,7 +43,7 @@ export default function TabSection({ data, imagePath }) {
           />
         </div>
 
-        <h5 className="relative capitalize text-lg md:text-4xl lg:text-[40px] text-black-400 leading-[130%] font-bold mt-8 lg:hidden">
+        <h5 className="relative capitalize text-lg md:text-4xl lg:text-[40px] text-black-400 leading-[130%] font-bold mt-8 mb-10 lg:hidden">
           {activeTab}
         </h5>
       </div>
