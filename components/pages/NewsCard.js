@@ -5,7 +5,7 @@ export default function NewsCard({ data, path }) {
   const eventSlug = data?.slug || `event-${data?.id}`;
   
   return (
-    <Link href={`/news&events/${eventSlug}`}>
+    <Link href={`//${eventSlug}`}>
       <div
         key={data?.id}
         className="relative min-w-[270px] rounded-t-lg overflow-hidden pb-2 cursor-pointer transition-shadow duration-300"

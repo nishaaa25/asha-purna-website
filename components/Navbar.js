@@ -35,8 +35,10 @@ export default function Navbar() {
         { y: "-100%", opacity: 0 },
         { y: "0%", opacity: 1, duration: 0.45, ease: "power3.out" }
       );
+      document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
     } else {
+      document.documentElement.style.overflow = "unset";
       document.body.style.overflow = "unset";
     }
   }, [mobileOpen]);
@@ -125,6 +127,7 @@ export default function Navbar() {
                   ${isScrolled ? "bg-black" : "bg-black/80"}`}
               >
                 {[
+                  { href: "/news", label: "News" },
                   { href: "/news&events", label: "Events" },
                   { href: "/awards", label: "Awards" },
                   { href: "/blogs", label: "Blogs" },
@@ -198,7 +201,7 @@ export default function Navbar() {
         </div>
 
         {/* MOBILE LINKS */}
-        <nav className="p-6 mt-4">
+        <nav className="p-6">
           <ul className="space-y-12">
             {[
               { href: "/", label: "Home" },
@@ -235,6 +238,7 @@ export default function Navbar() {
               {mobileMediaOpen && (
                 <div className="mt-4 space-y-3">
                   {[
+                    { href: "/news", label: "News" },
                     { href: "/news&events", label: "Events" },
                     { href: "/blogs", label: "Blogs" },
                     { href: "/awards", label: "Awards" },

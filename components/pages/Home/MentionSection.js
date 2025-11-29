@@ -29,7 +29,7 @@ export default function MentionSection({events, utsavImagePath}) {
         ))}
       </div>
       <div className="w-full flex-center relative mb-15 md:mb-20 lg:mb-[100px]">
-        <Button text="Read more" link="/news&events" />
+        <Button text="Read more" link="/events" />
       </div>
     </div>
   );

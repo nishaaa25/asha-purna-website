@@ -62,7 +62,7 @@ export default function NewsEventspage() {
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
   };
 
-  const initialEventCount = isLargeScreen ? 4 : 5;
+  const initialEventCount = isLargeScreen ? 3 : 4;
   const eventsToShow = showAllEvents
     ? events
     : events?.slice(1, initialEventCount);
@@ -98,7 +98,7 @@ export default function NewsEventspage() {
           {eventsToShow.map((item) => {
             const eventSlug = item?.slug || `event-${item?.id}`;
             return (
-              <Link href={`/news&events/${eventSlug}`} key={item.id}>
+              <Link href={`/events/${eventSlug}`} key={item.id}>
                 <div className="flex items-start justify-start flex-col gap-4 h-full relative cursor-pointer  transition-shadow duration-300 p-2 rounded-lg overflow-hidden">
                   <div className="w-full relative img-cont aspect-[16/9] md:aspect-[2/1] lg:aspect-[3/2] rounded-lg overflow-hidden">
                     <Image

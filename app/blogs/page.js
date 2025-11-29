@@ -147,7 +147,7 @@ export default function Page() {
             </div>
 
             {/* Mobile Section */}
-            <div className="lg:hidden relative">
+            <div className="lg:hidden relative px-5 lg:p-0">
               {!showAll ? (
                 <ArticlesCarousel data={visibleBlogs} />
               ) : (
