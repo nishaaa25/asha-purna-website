@@ -8,60 +8,73 @@ import BlogsCard from "@/components/pages/Blogs/BlogsCard";
 
 export default function Page() {
   const [blogs, setBlogs] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(9);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNext, setHasNext] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await fetch(
-          "https://apiservices.ashapurna.com/api/web/media-events/blogs",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "api-version": "v1",
-            },
-            next: { revalidate: 3600 },
-          }
-        );
-
-        if (!response.ok)
-          throw new Error(`API returned status ${response.status}`);
-
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Invalid response format");
+  const fetchBlogs = async (page = 1) => {
+    try {
+      const response = await fetch(
+        `https://apiservices.ashapurna.com/api/web/media-events/blogs?page=${page}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "api-version": "v1",
+          },
+          next: { revalidate: 3600 },
         }
+      );
 
-        const result = await response.json();
-        if (result._status) {
-          const blogsData = result._data?.getblogs || [];
+      if (!response.ok)
+        throw new Error(`API returned status ${response.status}`);
+
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Invalid response format");
+      }
+
+      const result = await response.json();
+      if (result._status) {
+        const blogsData = result._data?.getblogs || [];
+        const pagination = result._data?.pagination || {};
+
+        if (page === 1) {
           setBlogs([...blogsData].reverse()); // latest first
         } else {
-          throw new Error(result._message );
+          setBlogs((prev) => [...prev, ...[...blogsData].reverse()]);
         }
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchBlogs();
+        setHasNext(pagination.has_next || false);
+        setCurrentPage(page);
+      } else {
+        throw new Error(result._message);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      if (page === 1) setLoading(false);
+      setIsLoadingMore(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlogs(1);
   }, []);
 
   const handleShowMore = () => {
-    setVisibleCount((prev) => prev + 9);
+    setIsLoadingMore(true);
+    fetchBlogs(currentPage + 1);
     setTimeout(() => window.scrollBy({ top: 400, behavior: "smooth" }), 200);
   };
 
-  // Separate first blog for “Today’s Article”
+  // Separate first blog for "Today's Article"
   const firstBlog = blogs[0];
   const otherBlogs = blogs.slice(1);
-  const visibleBlogs = otherBlogs.slice(0, visibleCount);
+  const visibleBlogs = otherBlogs;
 
   return (
     <div className="relative w-full pt-[5vh]">
@@ -69,12 +82,14 @@ export default function Page() {
       {/* <HeroComponentTwo imgUrl="/assets/investor.jpg" /> */}
 
       {/* Section Header */}
-      <SectionHeader
-        title="media & insights"
-        heading="Stories that"
-        spanText="shape our journey"
-        desc="Stay updated with the latest news, insights, and stories from Ashapurna Buildcon. Discover industry trends, company updates, and expert perspectives on real estate development."
-      />
+      <div className="w-full lg:w-8/12 mx-auto relative">
+        <SectionHeader
+          title="media & insights"
+          heading="Stories that"
+          spanText="shape our journey"
+          desc="Stay updated with the latest news, insights, and stories from Ashapurna Buildcon. Discover industry trends, company updates, and expert perspectives on real estate development."
+        />
+      </div>
 
       {/* Today's Article */}
       {firstBlog && (
@@ -149,25 +164,39 @@ export default function Page() {
               {!showAll ? (
                 <ArticlesCarousel data={visibleBlogs} />
               ) : (
-                <div className="grid grid-cols-1 gap-5 transition-all duration-300 px-5 mt-5">
-                  {otherBlogs.map(
-                    (item, index) =>
-                      item?.post_image && (
-                        <div key={item.id || index}>
-                          <BlogsCard
-                            data={{
-                              id: item.id,
-                              slug: item.slug,
-                              imgUrl: item.post_image,
-                              media: item.source_name,
-                              title: item.title,
-                              desc: item.content,
-                              date: item.published_at,
-                            }}
-                          />
-                        </div>
-                      )
+                <div className="relative">
+                  <div className="grid grid-cols-1 gap-5 transition-all duration-300 px-5 mt-5">
+                    {visibleBlogs.map(
+                      (item, index) =>
+                        item?.post_image && (
+                          <div key={item.id || index}>
+                            <BlogsCard
+                              data={{
+                                id: item.id,
+                                slug: item.slug,
+                                imgUrl: item.post_image,
+                                media: item.source_name,
+                                title: item.title,
+                                desc: item.content,
+                                date: item.published_at,
+                              }}
+                            />
+                          </div>
+                        )
+                    )}
+                  </div>
+
+                  {/* Mobile Load More / Show Less */}
+                  {hasNext && (
+                    <button
+                      onClick={handleShowMore}
+                      disabled={isLoadingMore}
+                      className="w-full text-sm text-orange-600 font-medium underline text-center mt-6 cursor-pointer disabled:opacity-60"
+                    >
+                      {isLoadingMore ? "Loading..." : "Load More"}
+                    </button>
                   )}
+
                   <p
                     onClick={() => setShowAll(false)}
                     className="text-sm text-orange-600 font-medium underline text-center mt-4 cursor-pointer"
@@ -180,13 +209,14 @@ export default function Page() {
           </>
         )}
 
-        {/* ✅ Show More Button (only if not showing all and not loading) */}
-        {!loading && !showAll && visibleCount < otherBlogs.length && (
+        {/* ✅ Show More Button (only if not showing all and has more pages) */}
+        {!loading && !showAll && hasNext && (
           <button
             onClick={handleShowMore}
-            className="border hidden lg:flex border-[#cccccc] mx-auto bg-black-400 text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-10 capitalize transition-all duration-300 hover:opacity-90 cursor-pointer"
+            disabled={isLoadingMore}
+            className="border hidden lg:flex border-[#cccccc] mx-auto bg-black-400 text-white font-medium text-xs md:text-base lg:text-xl py-[10px] lg:py-[15px] min-w-38 lg:min-w-44 px-5 lg:px-6 rounded-md mt-10 capitalize transition-all duration-300 hover:opacity-90 cursor-pointer disabled:opacity-60"
           >
-            Show More Articles
+            {isLoadingMore ? "Loading..." : "Show More Articles"}
           </button>
         )}
       </div>

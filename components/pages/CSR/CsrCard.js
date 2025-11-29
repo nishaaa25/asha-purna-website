@@ -61,7 +61,7 @@ export default function CsrCard({ data, imagesPath }) {
         </h3>
         {data?.media ||
           (data?.tagline && (
-            <h5 className="text-[15px] md:text-lg lg:text-lg font-bold uppercase text-gray-700">
+            <h5 className="text-[15px] md:text-lg lg:text-[28px] font-bold uppercase text-gray-600">
               {data?.tagline}
             </h5>
           ))}
@@ -74,14 +74,14 @@ export default function CsrCard({ data, imagesPath }) {
         {isHTML ? (
           <div
             ref={contentRef}
-            className="text-gray-700 text-sm"
+            className="text-gray-800 text-sm md:text-lg lg:text-[22px]"
             style={clampStyles}
             dangerouslySetInnerHTML={{ __html: data?.description }}
           />
         ) : (
           <p
             ref={contentRef}
-            className="text-gray-700 text-sm"
+            className="text-gray-800  text-sm md:text-lg lg:text-[22px]"
             style={clampStyles}
           >
             {data?.description}

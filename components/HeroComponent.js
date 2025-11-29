@@ -37,10 +37,10 @@ export default function HeroComponent() {
 
       {/* Hero Text */}
       <div className="w-[95%] mx-auto relative text-center text-white flex-center flex-col gap-[6px] z-20">
-        <h1 className="text-4xl md:text-[60px] lg:text-[56px] leading-[100%] whitespace-nowrap drop-shadow-lg font-medium tracking-[-1.4px]">
+        <h1 className="text-4xl md:text-[60px] lg:text-[80px] leading-[100%] whitespace-nowrap drop-shadow-lg font-medium tracking-[-1.4px]">
           Living Landscapes,
         </h1>
-        <span className="text-[28px] md:text-[48px] lg:text-[48px] leading-[100%] drop-shadow-lg font-[300] tracking-[-1.3px]">
+        <span className="text-[28px] md:text-[48px] lg:text-[70px] leading-[100%] drop-shadow-lg font-[300] tracking-[-1.3px]">
           that last generations
         </span>
       </div>

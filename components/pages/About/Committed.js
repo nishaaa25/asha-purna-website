@@ -70,11 +70,12 @@ export default async function Committed() {
   const imagePath = csrData?.data?.csr_social_updates_image_path || '';
   return (
     <div className="w-full relative pb-15 md:pb-20 lg:pb-[100px] flex-center flex-col">
-      <SectionHeader
+      <div className="w-full lg:w-8/12 mx-auto relative"><SectionHeader
         spanText="Giving back"
         heading="Committed to"
         desc="Through healthcare accessibility, education support, housing for all, women empowerment, and care for the specially-abled, our CSR initiatives touch lives and build stronger communities across Rajasthan."
       />
+        </div>
       <div className="committed relative -top-2 mb-2 w-full">
         <CommittedCarousel data={csrUpdates} imagePath={imagePath}/>
       </div>

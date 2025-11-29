@@ -29,9 +29,9 @@ export default function EventsCard({ data, imgPath }) {
         />
       </div> */}
 
-      <div className="blog-content flex flex-col place-items-start gap-1 pt-3 lg:pt-6">
+      <div className="blog-content flex flex-col place-items-start gap-2 pt-3 lg:pt-6">
         {data.media && (
-          <h5 className="text-[15px] md:text-lg lg:text-lg font-bold uppercase text-gray-700">
+          <h5 className="text-[15px] md:text-lg lg:text-[20px] font-bold uppercase text-gray-700">
             {data?.media}
           </h5>
         )}
@@ -43,7 +43,7 @@ export default function EventsCard({ data, imgPath }) {
         </h3>
 
         {data.location && (
-          <div className="flex-between relative w-full text-black-400/70 text-xs leading-[130%] mb-2">
+          <div className="flex-between relative w-full text-gray-600 text-sm lg:text-lg leading-[130%] mb-2">
             <p>{data?.date}</p>
             <p>{data?.location}</p>
           </div>
@@ -51,7 +51,7 @@ export default function EventsCard({ data, imgPath }) {
 
         <p
           className={
-            "text-sm md:text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2"
+            "text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2"
           }
           style={{
             display: "-webkit-box",
@@ -64,7 +64,7 @@ export default function EventsCard({ data, imgPath }) {
         </p>
 
         <Link
-          href={`/news&events/${eventSlug}`}
+          href={`/events/${eventSlug}`}
           className="mt-2 text-orange-600 text-sm font-semibold underline cursor-pointer "
           aria-label="Read more about this event"
         >

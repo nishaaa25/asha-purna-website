@@ -12,7 +12,7 @@ export default function InvestorPage() {
     email: "",
     phone: "",
     subject: "",
-    message: ""
+    message: "",
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -41,17 +41,16 @@ export default function InvestorPage() {
       if (result._status && result._data?.getPropertyTypes) {
         setPropertyTypes(result._data.getPropertyTypes);
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
@@ -99,24 +98,21 @@ export default function InvestorPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "/enquiries/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "api-version": "v1",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            message: formData.message,
-            enquiry_type: 4,
-            subject: formData.subject,
-          }),
-        }
-      );
+      const response = await fetch("/enquiries/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-version": "v1",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          enquiry_type: 4,
+          subject: formData.subject,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -132,11 +128,13 @@ export default function InvestorPage() {
           email: "",
           phone: "",
           subject: "",
-          message: ""
+          message: "",
         });
         setErrors({});
       } else {
-        toast.error(result._message || "Something went wrong. Please try again.");
+        toast.error(
+          result._message || "Something went wrong. Please try again."
+        );
       }
     } catch (error) {
       toast.error("Failed to submit form. Please try again.");
@@ -147,12 +145,14 @@ export default function InvestorPage() {
 
   return (
     <div className="w-full relative">
-      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/investor-bg.png"/>
-      <SectionHeader
-        spanText="Investor Club"
-        heading="Ashapurna"
-        desc="The Ashapurna Investors Club helps you make research-backed, tailored real estate investments. With a wide portfolio of residential and commercial projects, we guide investors across all segments to secure future-ready opportunities with confidence."
-      />
+      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/investor-bg.png" />
+      <div className="w-full lg:w-8/12 mx-auto relative">
+        <SectionHeader
+          spanText="Investor Club"
+          heading="Ashapurna"
+          desc="The Ashapurna Investors Club helps you make research-backed, tailored real estate investments. With a wide portfolio of residential and commercial projects, we guide investors across all segments to secure future-ready opportunities with confidence."
+        />
+      </div>
 
       <div className="relative py-15 md:px-20 lg:py-[100px] text-center bg-cream-600 px-[22px] w-full">
         <h2 className="text-[22px] md:text-3xl lg:text-5xl leading-[130%] tracking-[-1.1px] mb-5 lg:mb-7 text-black-400 lg:text-gray-600 font-medium">
@@ -162,7 +162,10 @@ export default function InvestorPage() {
           Please fill in the form and we would contact you at the earliest.
         </p>
         <div className="py-10 md:py-[70px] lg:py-[100px] px-8 md:px-20 lg:px-28 w-full lg:w-10/12 relative border-[0.65px]  border-black/50 rounded-xl lg:mx-auto">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 md:gap-8 lg:gap-10">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-6 md:gap-8 lg:gap-10"
+          >
             <div>
               <input
                 type="text"
@@ -173,10 +176,14 @@ export default function InvestorPage() {
                 onChange={handleChange}
                 disabled={isLoading}
                 className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
-                  errors.name ? 'border-red-500' : ''
+                  errors.name ? "border-red-500" : ""
                 }`}
               />
-              {errors.name && <p className="text-red-500 text-xs mt-1 text-left">{errors.name}</p>}
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1 text-left">
+                  {errors.name}
+                </p>
+              )}
             </div>
 
             <div>
@@ -190,10 +197,14 @@ export default function InvestorPage() {
                 maxLength={10}
                 disabled={isLoading}
                 className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
-                  errors.phone ? 'border-red-500' : ''
+                  errors.phone ? "border-red-500" : ""
                 }`}
               />
-              {errors.phone && <p className="text-red-500 text-xs mt-1 text-left">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1 text-left">
+                  {errors.phone}
+                </p>
+              )}
             </div>
 
             <div>
@@ -206,10 +217,14 @@ export default function InvestorPage() {
                 onChange={handleChange}
                 disabled={isLoading}
                 className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
-                  errors.email ? 'border-red-500' : ''
+                  errors.email ? "border-red-500" : ""
                 }`}
               />
-              {errors.email && <p className="text-red-500 text-xs mt-1 text-left">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1 text-left">
+                  {errors.email}
+                </p>
+              )}
             </div>
 
             <div>
@@ -221,7 +236,7 @@ export default function InvestorPage() {
                   onChange={handleChange}
                   disabled={isLoading}
                   className={`w-full bg-transparent outline-none lg:py-4 py-3 text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 appearance-none pr-8 pl-2 ${
-                    errors.subject ? 'border-red-500' : ''
+                    errors.subject ? "border-red-500" : ""
                   }`}
                 >
                   <option value="">Select your interest</option>
@@ -233,10 +248,14 @@ export default function InvestorPage() {
                 </select>
 
                 <div className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-orange-500 w-[10px] h-[5px] lg:w-5 lg:h-[10px]">
-                  <Image src="/assets/down.svg" alt="down" fill/>
+                  <Image src="/assets/down.svg" alt="down" fill />
                 </div>
               </div>
-              {errors.subject && <p className="text-red-500 text-xs mt-1 text-left">{errors.subject}</p>}
+              {errors.subject && (
+                <p className="text-red-500 text-xs mt-1 text-left">
+                  {errors.subject}
+                </p>
+              )}
             </div>
 
             <div>
@@ -249,10 +268,14 @@ export default function InvestorPage() {
                 onChange={handleChange}
                 disabled={isLoading}
                 className={`outline-none lg:py-4 py-3 px-1 lg:px-[10px] text-sm md:text-base lg:text-[22px] placeholder:text-black-400/50 border-b-[0.70px] bg-transparent border-black-400/30 lg:border-b-1 lg:border-gray-600/50 text-black-400 w-full ${
-                  errors.message ? 'border-red-500' : ''
+                  errors.message ? "border-red-500" : ""
                 }`}
               />
-              {errors.message && <p className="text-red-500 text-xs mt-1 text-left">{errors.message}</p>}
+              {errors.message && (
+                <p className="text-red-500 text-xs mt-1 text-left">
+                  {errors.message}
+                </p>
+              )}
             </div>
 
             <div className="w-full relative mt-14 lg:mt-6">
@@ -263,14 +286,30 @@ export default function InvestorPage() {
               >
                 {isLoading ? (
                   <>
-                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Submitting...
                   </>
                 ) : (
-                  'Submit'
+                  "Submit"
                 )}
               </button>
             </div>

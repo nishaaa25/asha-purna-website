@@ -48,15 +48,15 @@ export default function BlogsCard({ data, allBlogs }) {
         )}
         <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 bg-orange-600 line"></div>
         {formattedDate && (
-          <p className="text-[10px] md:text-xs lg:text-sm text-black-400/80 leading-[130%] mt-1">
+          <p className="text-[10px] md:text-xs lg:text-lg text-gray-600 leading-[140%] mt-1">
             {formattedDate}
           </p>
         )}
-        <h3 className="text-base md:text-[22px] lg:text-xl font-semibold text-black-400 leading-[130%] my-1">
+        <h3 className="text-base md:text-[22px] lg:text-[28px] font-bold text-gray-600 leading-[130%] my-1">
           {data.title}
         </h3>
 
-        <div className="custom-desc text-sm md:text-base lg:text-base text-gray-800 leading-[130%] w-full pr-2 line-clamp-3 tracking-[-1.1%]">
+        <div className="custom-desc text-sm md:text-base lg:text-[22px] text-gray-800 leading-[140%] w-full pr-2 line-clamp-3 tracking-[-1.1%]">
           {data?.desc?.replace(/<[^>]+>/g, "")}
         </div>
 

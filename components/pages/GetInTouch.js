@@ -129,12 +129,12 @@ export default function GetInTouch({heading, spanText, projectId, projectName}) 
   return (
     <div className="relative py-15 md:py-20 lg:py-[100px] text-center w-full">
        <div
-          className={`whitespace-nowrap text-gray-600 capitalize text-[22px] md:text-[44px] lg:text-[42px]  mb-6`}
+          className={`whitespace-nowrap text-gray-600 capitalize text-[24px] md:text-[50px] lg:text-[70px]  mb-6`}
         >
           {heading && (
             <h2 className="font-playfair font-medium leading-[130%] tracking-[-1.1px]">{heading}</h2>
           )}
-          {spanText && <h2 className="text-[20px] md:text-[38px] lg:text-[36px] leading-[130%] tracking-[-1.1%] font-light">{spanText}</h2>}
+          {spanText && <h2 className="text-[22px] md:text-[44px] lg:text-[64px]  leading-[130%] tracking-[-1.1%] font-light">{spanText}</h2>}
         </div>
       <div className="py-7 md:py-12 lg:py-16 px-7 md:px-13 lg:px-18 mt-5 md:mt-7 lg:mt-10 relative border-1  lg:border-[0.50px] w-10/12 md:w-9/12 lg:w-7/12 mx-auto border-black/50 rounded-xl">
         <form onSubmit={handleSubmit} className="flex flex-col gap-7">

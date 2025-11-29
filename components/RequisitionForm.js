@@ -88,7 +88,7 @@ export default function RequisitionForm() {
 
     try {
       const response = await fetch(
-        "https://apiservices.ashapurna.com/api/web/enquiries",
+        "https://apiservices.ashapurna.com/api/web/requist",
         {
           method: "POST",
           headers: {
@@ -224,7 +224,7 @@ export default function RequisitionForm() {
             disabled={isLoading}
             className={`${inputClass} ${errors.youAre ? "border-red-500" : ""}`}
           >
-            <option defaultValue="" >You are a</option>
+            <option value="">You are a</option>
             <option>Businessman</option>
             <option>Service Holder</option>
             <option>Self Employed</option>

@@ -127,7 +127,7 @@ export default function Navbar() {
               >
                 {[
                   { href: "/news", label: "News" },
-                  { href: "/news&events", label: "Events" },
+                  { href: "/events", label: "Events" },
                   { href: "/awards", label: "Awards" },
                   { href: "/blogs", label: "Blogs" },
                   { href: "/NRIcorner", label: "NRI Corner" },
@@ -237,7 +237,7 @@ export default function Navbar() {
                 <div className="mt-4 space-y-3 pr-2">
                   {[
                     { href: "/news", label: "News" },
-                    { href: "/news&events", label: "Events" },
+                    { href: "/events", label: "Events" },
                     { href: "/blogs", label: "Blogs" },
                     { href: "/awards", label: "Awards" },
                     { href: "/NRIcorner", label: "NRI Corner" },

@@ -43,27 +43,24 @@ export default function IndividualCard({ data }) {
       {/* Content */}
       <div className="blog-content flex flex-col place-items-start gap-1 pt-4 lg:pt-6">
         {data.media && (
-          <h5 className="text-[15px] md:text-lg lg:text-lg font-bold uppercase text-gray-700">
+          <h5 className="text-[15px] md:text-2xl lg:text-[36px] font-bold uppercase text-gray-700">
             {data.media}
           </h5>
         )}
         <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 mb-2 bg-orange-600 line"></div>
-
+        <h3 className="text-base md:text-3xl lg:text-[43px] font-bold text-gray-600 leading-[130%] my-1">
+          {data.title}
+        </h3>
+        {/* Description with HTML */}
+        <div
+          className="custom-desc text-sm md:text-2xl lg:text-[32px] text-gray-600 leading-[130%] w-full pr-2 line-clamp-2 tracking-[-1.1%]"
+          dangerouslySetInnerHTML={{ __html: safeHTML }}
+        ></div>{" "}
         {formattedDate && (
-          <p className="text-[10px] md:text-xs lg:text-base text-black-400/80 leading-[130%] mt-1">
+          <p className="text-[10px] md:text-xl lg:text-[30px] text-black-400/30 leading-[130%]">
             {formattedDate}
           </p>
         )}
-
-        <h3 className="text-base md:text-xl lg:text-4xl font-semibold text-black-400 leading-[130%] my-1">
-          {data.title}
-        </h3>
-
-        {/* Description with HTML */}
-        <div
-          className="custom-desc text-sm md:text-base lg:text-xl text-gray-800 leading-[130%] w-full pr-2 line-clamp-3 tracking-[-1.1%]"
-          dangerouslySetInnerHTML={{ __html: safeHTML }}
-        ></div>
       </div>
     </Link>
   );

@@ -54,12 +54,14 @@ export default function AwardSection() {
   }, []);
   return (
     <div className="w-full relative pb-10 md:pb-20 lg:pb-[100px]">
-      <SectionHeader
-        title="Awards & recognitions"
-        heading="Stories Beyond"
-        spanText="Structures"
-        desc="Our commitment to quality and innovation has been recognized by leading industry bodies and publications across the nation."
-      />
+      <div className="w-full lg:w-8/12 mx-auto relative">
+        <SectionHeader
+          title="Awards & recognitions"
+          heading="Stories Beyond"
+          spanText="Structures"
+          desc="Our commitment to quality and innovation has been recognized by leading industry bodies and publications across the nation."
+        />
+      </div>
       <div className="relative w-full -top-4 lg:hidden">
         <AwardCarousel awardsData={awards} imgPath={imgPath} />
         {error && (
@@ -73,7 +75,7 @@ export default function AwardSection() {
       >
         {displayedProjects.map((item, index) => (
           <div key={index}>
-            <CardTwo data={item} imgPath={imgPath}/>
+            <CardTwo data={item} imgPath={imgPath} />
           </div>
         ))}
       </div>

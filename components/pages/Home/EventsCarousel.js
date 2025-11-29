@@ -83,7 +83,7 @@ export default function EventsCarousel({ imagePath, events }) {
                     {event?.short_description}
                   </p>
                   <Link
-                    href={`/news&events/${eventSlug}`}
+                    href={`/events/${eventSlug}`}
                     className="mt-2 text-orange-600 text-sm font-semibold underline cursor-pointer "
                     aria-label="Read more about this event"
                   >

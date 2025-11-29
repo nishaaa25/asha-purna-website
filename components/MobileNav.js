@@ -131,7 +131,7 @@ export default function MobileNav({ isScrolled = false }) {
                 {mediaDropdownOpen && (
                   <div className="mt-4 space-y-3 transition-all duration-300">
                     <Link
-                      href="/news&events"
+                      href="/events"
                       onClick={closeNav}
                       className="block p-[10px] text-[15px] leading-[110%] text-black-400"
                     >
