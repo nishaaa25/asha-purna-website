@@ -66,7 +66,6 @@ export default function Navbar() {
       }`}
     >
       <div className="relative mx-auto flex justify-end items-center px-5 md:px-8 lg:px-12 py-3 lg:py-6">
-
         {/* LOGO */}
         <div
           className={`absolute left-5 md:left-8 lg:left-12 pt-6 -top-4 transition-all ${
@@ -180,12 +179,12 @@ export default function Navbar() {
       <div
         ref={mobileRef}
         style={{ display: mobileOpen ? "block" : "none" }}
-        className="fixed inset-0 z-[140] bg-white/30 backdrop-blur-2xl lg:hidden"
+        className="fixed inset-0 z-[140] bg-black/30 backdrop-blur-2xl lg:hidden overflow-x-hidden"
       >
         {/* HEADER */}
-        <div className="flex justify-between items-start p-6">
+        <div className="sticky top-0 z-10 flex justify-between items-start p-6 w-full">
           <Link href="/" onClick={closeMobile}>
-            <div className="w-28 h-24 relative">
+            <div className="w-25 h-22 relative">
               <Image
                 src="https://d3qnldyv492i08.cloudfront.net/ashapurna-new-logo.svg"
                 alt="main-logo"
@@ -199,9 +198,8 @@ export default function Navbar() {
             <Image src="/assets/cross.svg" alt="Close" fill className="object-contain" />
           </button>
         </div>
-
         {/* MOBILE LINKS */}
-        <nav className="p-6">
+        <nav className="px-6 overflow-y-auto max-h-[70vh]">
           <ul className="space-y-12">
             {[
               { href: "/", label: "Home" },
@@ -236,7 +234,7 @@ export default function Navbar() {
               </button>
 
               {mobileMediaOpen && (
-                <div className="mt-4 space-y-3">
+                <div className="mt-4 space-y-3 pr-2">
                   {[
                     { href: "/news", label: "News" },
                     { href: "/news&events", label: "Events" },
