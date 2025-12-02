@@ -94,14 +94,14 @@ export default function PlanCard({ data, imgPath, project }) {
         </div>
         <div className="bg-[#ffffff84] w-full h-full absolute top-0 left-0 z-10 backdrop-blur-[4px]"></div>
       </div>
-      <div className="flex flex-col items-start gap-[10px] md:gap-3 lg:gap-4 w-full relative">
-        <h5 className="text-lg md:text-3xl lg:text-[43px] capitalize font-semibold tracking-[-1.1%] text-black-400">
+      <div className="flex flex-col items-start gap-2 w-full relative">
+        <h3 className="text-base md:text-[22px] lg:text-xl capitalize font-bold leading-[130%] text-gray-600">
           {data?.title || data?.floor || "Floor Plan"}
-        </h5>
-        {data?.area || data?.size && <p className="text-sm  md:text-[22px] lg:text-[30px] leading-[21px] text-gray-600">
+        </h3>
+        {data?.area || data?.size && <p className="text-sm md:text-base lg:text-lg leading-[130%] text-gray-600">
           {data?.area || data?.size || ""}
         </p>}
-        {data?.desc || data?.description && <p className="text-sm  md:text-base lg:text-xl text-start leading-[140%]  text-gray-800 tracking-[-1.1%]">
+        {data?.desc || data?.description && <p className="text-sm md:text-base lg:text-lg text-start leading-[130%] text-gray-600">
           {data?.desc || data?.description || ""}
         </p>}
       </div>

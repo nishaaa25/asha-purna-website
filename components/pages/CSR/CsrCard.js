@@ -55,18 +55,18 @@ export default function CsrCard({ data, imagesPath }) {
           className="object-contain w-full h-full"
         />
       </div> */}
-      <div className="blog-content flex flex-col place-items-start gap-1 pt-3 lg:pt-6">
+      <div className="blog-content flex flex-col place-items-start gap-2 pt-3 lg:pt-6">
         <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
           {data?.title}
         </h3>
         {data?.media ||
           (data?.tagline && (
-            <h5 className="text-[15px] md:text-lg lg:text-[28px] font-bold uppercase text-gray-600">
+            <h5 className="text-[15px] md:text-lg lg:text-[20px] font-bold uppercase text-gray-600">
               {data?.tagline}
             </h5>
           ))}
         {data.location && (
-          <div className="flex-between relative w-full text-black-400/70 text-xs leading-[130%] mb-2">
+          <div className="flex-between relative w-full text-gray-600 text-sm lg:text-lg leading-[130%] mb-2">
             <p>{data?.date}</p>
             <p>{data?.location}</p>
           </div>
@@ -74,14 +74,14 @@ export default function CsrCard({ data, imagesPath }) {
         {isHTML ? (
           <div
             ref={contentRef}
-            className="text-gray-800 text-sm md:text-lg lg:text-[22px]"
+            className="text-gray-600 text-sm md:text-base lg:text-lg"
             style={clampStyles}
             dangerouslySetInnerHTML={{ __html: data?.description }}
           />
         ) : (
           <p
             ref={contentRef}
-            className="text-gray-800  text-sm md:text-lg lg:text-[22px]"
+            className="text-gray-600 text-sm md:text-base lg:text-lg"
             style={clampStyles}
           >
             {data?.description}

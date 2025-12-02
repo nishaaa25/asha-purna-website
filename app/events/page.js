@@ -107,23 +107,23 @@ export default function NewsEventspage() {
                       className="object-contain w-full h-full rounded-lg overflow-hidden"
                     />
                   </div>
-                  <div className="relative lg:w-full flex flex-col gap-3 lg:gap-2">
-                    <h3 className="text-base md:text-lg lg:text-[28px] font-bold text-gray-600 leading-[130%] lg:mt-2">
+                  <div className="relative lg:w-full flex flex-col gap-2">
+                    <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
                       {item?.title}
                     </h3>
 
-                    <div className="relative w-2/12 bg-orange-600 h-[1.5px] rounded-full lg:my-2"></div>
+                    <div className="relative h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 bg-orange-600 line"></div>
 
-                    <div className="relative flex-between text-gray-700">
-                      <p className="text-sm md:text-xs lg:text-lg font-bold">
+                    <div className="relative flex-between text-gray-600">
+                      <p className="text-sm lg:text-lg">
                         {item?.date}
                       </p>
-                      <p className="text-sm md:text-xs lg:text-lg font-bold uppercase">
+                      <p className="text-sm lg:text-lg">
                         {item?.location}
                       </p>
                     </div>
 
-                    <p className="text-sm md:text-lg lg:text-[22px] leading-[140%] text-gray-800 -tracking-[1.1%]">
+                    <p className="text-sm md:text-base lg:text-lg leading-[130%] text-gray-600">
                       {truncateText(item?.short_description, 130)}
                     </p>
                   </div>

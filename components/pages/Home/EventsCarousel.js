@@ -61,17 +61,17 @@ export default function EventsCarousel({ imagePath, events }) {
                     className="object-cover"
                   />
                 </div> */}
-                <div className="blog-content flex flex-col place-items-start gap-1 pt-5">
+                <div className="blog-content flex flex-col place-items-start gap-2 pt-3 lg:pt-6">
                   {/* <h5 className="text-[15px] font-bold uppercase text-gray-700">
                       {event.media}
                     </h5> */}
-                  <div className="h-[1px] w-9 bg-orange-600"></div>
-                  <h3 className="text-base font-bold text-gray-600 leading-[130%] my-1">
+                  <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 bg-orange-600 line"></div>
+                  <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
                     {event.title}
                   </h3>
                   <p
                     className={
-                      "text-base lg:text-base text-gray-600 leading-[130%] w-full pr-2"
+                      "text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2"
                     }
                     style={{
                       display: "-webkit-box",

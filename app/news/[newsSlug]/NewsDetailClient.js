@@ -82,7 +82,7 @@ export default function NewsDetailClient({
 
                 {/* Description */}
                 {news.description && (
-                  <div className="text-gray-700 text-sm md:text-base leading-relaxed mb-6">
+                  <div className="text-gray-600 text-sm md:text-base lg:text-lg leading-[130%] mb-6">
                     {/<\/?[a-z][\s\S]*>/i.test(news.description) ? (
                       <div
                         dangerouslySetInnerHTML={{ __html: news.description }}
@@ -155,7 +155,7 @@ export default function NewsDetailClient({
                       </svg>
                       <Link
                         href={`/news/${item.slug}`}
-                        className="text-sm md:text-base text-gray-700 hover:text-orange-600 transition-colors leading-relaxed"
+                        className="text-sm md:text-base lg:text-lg text-gray-600 hover:text-orange-600 transition-colors leading-[130%]"
                       >
                         {item.title}
                       </Link>
@@ -192,7 +192,7 @@ export default function NewsDetailClient({
                           item.slug ||
                           item.projectName?.toLowerCase().replace(/\s+/g, "-")
                         }`}
-                        className="text-sm md:text-base text-gray-700 hover:text-orange-600 transition-colors leading-relaxed"
+                        className="text-sm md:text-base lg:text-lg text-gray-600 hover:text-orange-600 transition-colors leading-[130%]"
                       >
                         {item.projectName || item.name}
                       </Link>

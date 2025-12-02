@@ -100,7 +100,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
           )}
           <div className="flex-1 pt-2">
             <div className="flex-between gap-8 relative">
-              <h3 className="text-base lg:text-xl font-semibold leading-[120%]">
+              <h3 className="text-base md:text-[22px] lg:text-xl font-bold leading-[120%]">
                 {data?.name}
               </h3>
               {(() => {
@@ -108,7 +108,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
                   data?.site_type || "plots"
 
                 return value ? (
-                  <p className="text-xs md:text-sm lg:text-sm leading-[140%] capitalize">
+                  <p className="text-sm md:text-base lg:text-lg leading-[140%] capitalize">
                     {value}
                   </p>
                 ) : null;
@@ -124,12 +124,12 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
                     height={12}
                     className="object-contain"
                   />
-                  <span className="text-xs leading-[140%]">
+                  <span className="text-sm md:text-base lg:text-lg leading-[140%]">
                     {data?.address || data?.location}
                   </span>
                 </div>
               )}
-              <p className="text-sm md:text-base lg:text-base font-bold">
+              <p className="text-sm md:text-base lg:text-lg font-bold">
                 {data?.size}
               </p>
             </div>
