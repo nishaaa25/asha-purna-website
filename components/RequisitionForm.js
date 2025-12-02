@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import ThankYouPopup from "./ThankYouPopup";
 
 export default function RequisitionForm() {
   const [formData, setFormData] = useState({
@@ -21,10 +22,55 @@ export default function RequisitionForm() {
     lookingFor: [],
     fundPlan: "",
     finalizeTimeline: "",
+    project_id: "",
   });
 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [projectOptions, setProjectOptions] = useState([]);
+
+  // Fetch projects from API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(
+          "https://apiservices.ashapurna.com/api/web/home/properties",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "api-version": "v1",
+            },
+            body: JSON.stringify({}),
+          }
+        );
+
+        const result = await response.json();
+
+        if (result._status && result._data?.getProperties) {
+          setProjectOptions(result._data.getProperties);
+        } else {
+          setProjectOptions([
+            { id: 1, name: "Plots" },
+            { id: 2, name: "Townships/Villas" },
+            { id: 3, name: "Commercial" },
+            { id: 4, name: "Residential" },
+            { id: 5, name: "Hospitality" },
+          ]);
+        }
+      } catch (error) {
+        setProjectOptions([
+          { id: 1, name: "Plots" },
+          { id: 2, name: "Townships/Villas" },
+          { id: 3, name: "Commercial" },
+          { id: 4, name: "Residential" },
+          { id: 5, name: "Hospitality" },
+        ]);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -63,6 +109,7 @@ export default function RequisitionForm() {
       newErrors.professionalType = "Please select professional type";
 
     if (!formData.propertyType) newErrors.propertyType = "Property type is required";
+    if (!formData.project_id) newErrors.project_id = "Please select a project";
     if (!formData.budget) newErrors.budget = "Please select your budget";
     if (!formData.finalizeTimeline)
       newErrors.finalizeTimeline = "Please select finalize timeline";
@@ -88,7 +135,7 @@ export default function RequisitionForm() {
 
     try {
       const response = await fetch(
-        "https://apiservices.ashapurna.com/api/web/requist",
+        "https://apiservices.ashapurna.com/api/web/enquiries/requist",
         {
           method: "POST",
           headers: {
@@ -101,7 +148,7 @@ export default function RequisitionForm() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Form submitted successfully!");
+        setShowThankYou(true);
         // Reset form
         setFormData({
           name: "",
@@ -121,6 +168,7 @@ export default function RequisitionForm() {
           lookingFor: [],
           fundPlan: "",
           finalizeTimeline: "",
+          project_id: "",
         });
       } else {
         toast.error(data.message || "Failed to submit form");
@@ -345,9 +393,31 @@ export default function RequisitionForm() {
           )}
         </div>
 
+        {/* Projects */}
+        <div>
+          <select
+            name="project_id"
+            value={formData.project_id}
+            onChange={handleChange}
+            disabled={isLoading}
+            className={`${inputClass} ${errors.project_id ? "border-red-500" : ""}`}
+          >
+            <option value="">{projectOptions.length === 0 ? "Loading projects..." : "Select Project"}</option>
+            {projectOptions.length > 0 &&
+              projectOptions.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+          </select>
+          {errors.project_id && (
+            <p className="text-red-500 text-xs mt-1 text-left">{errors.project_id}</p>
+          )}
+        </div>
+
         {/* Interested In */}
         <div>
-          <label className="block mb-1 font-medium">You are Interested In?</label>
+          <label className="block mb-2 font-semibold text-sm md:text-base lg:text-lg">You are Interested In?</label>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {[
               "2 BHK",
@@ -360,7 +430,7 @@ export default function RequisitionForm() {
               "Shop",
               "Office Space",
             ].map((item) => (
-              <label key={item} className="flex items-center gap-2">
+              <label key={item} className="flex items-center gap-2 text-sm md:text-base lg:text-lg">
                 <input
                   type="checkbox"
                   name="interestedIn"
@@ -490,6 +560,9 @@ export default function RequisitionForm() {
           {isLoading ? "Submitting..." : "Submit Now"}
         </button>
       </form>
+
+      {/* Thank You Popup */}
+      <ThankYouPopup isOpen={showThankYou} onClose={() => setShowThankYou(false)} />
     </div>
   );
 }
