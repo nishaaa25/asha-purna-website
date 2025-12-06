@@ -84,7 +84,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
         </div>
       </div>
 
-      <div className="content-card pt-4 text-black-400 flex flex-col flex-1">
+      <div className="content-card pt-4 text-black-400 flex flex-col justify-between flex-1">
         <div className="flex justify-center items-start gap-3 relative">
           {data?.project_logo_2 && (
             <div className="w-13 h-13 flex-shrink-0 mt-1 overflow-hidden relative flex-center">
@@ -108,13 +108,13 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
                   data?.site_type || "plots"
 
                 return value ? (
-                  <p className="text-sm md:text-base lg:text-lg leading-[140%] capitalize">
+                  <p className="text-sm md:text-base lg:text-lg leading-[140%] whitespace-nowrap capitalize">
                     {value}
                   </p>
                 ) : null;
               })()}
             </div>
-            <div className="flex-between mt-[2px] mb-3 relative">
+            <div className="flex-between mt-[2px] mb-3 relative w-10/12">
               {data?.address && (
                 <div className="flex items-start gap-1 leading-[140%] pt-1">
                   <Image

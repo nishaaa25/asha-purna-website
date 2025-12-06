@@ -89,7 +89,7 @@ export default function Gallery({
 
   return (
     <div className="relative w-full text-center pb-10">
-      <h5 className="text-orange-600 uppercase text-xs font-medium leading-[110%] pt-4">
+      <h5 className="text-orange-600 uppercase text-[30px] md:text-base lg:text-[20px] font-bold lg:font-medium   leading-[110%]">
         Project images
       </h5>
       {/* Only show dropdown if there are multiple tabs */}

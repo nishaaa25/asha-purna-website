@@ -58,8 +58,8 @@ export default function ProjectGalleryCarousel({ images }) {
           return (
             <SwiperSlide
               key={index}
-              className={`!h-auto relative pt-6 transition-transform duration-300 ease-in-out ${
-                isActive ? "z-[70] scale-[1]" : "z-[10] scale-[0.95]"
+              className={`!h-auto relative transition-transform duration-300 ease-in-out ${
+                isActive ? "z-[70] scale-[1.4] lg:scale-100" : "z-[10] scale-[1.0] lg:scale-[0.9]"
               }`}
             >
               <div

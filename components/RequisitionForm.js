@@ -22,7 +22,7 @@ export default function RequisitionForm() {
     lookingFor: [],
     fundPlan: "",
     finalizeTimeline: "",
-    project_id: "",
+    project: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -109,7 +109,7 @@ export default function RequisitionForm() {
       newErrors.professionalType = "Please select professional type";
 
     if (!formData.propertyType) newErrors.propertyType = "Property type is required";
-    if (!formData.project_id) newErrors.project_id = "Please select a project";
+    if (!formData.project) newErrors.project = "Please select a project";
     if (!formData.budget) newErrors.budget = "Please select your budget";
     if (!formData.finalizeTimeline)
       newErrors.finalizeTimeline = "Please select finalize timeline";
@@ -168,7 +168,7 @@ export default function RequisitionForm() {
           lookingFor: [],
           fundPlan: "",
           finalizeTimeline: "",
-          project_id: "",
+          project: "",
         });
       } else {
         toast.error(data.message || "Failed to submit form");
@@ -396,11 +396,11 @@ export default function RequisitionForm() {
         {/* Projects */}
         <div>
           <select
-            name="project_id"
-            value={formData.project_id}
+            name="project"
+            value={formData.project}
             onChange={handleChange}
             disabled={isLoading}
-            className={`${inputClass} ${errors.project_id ? "border-red-500" : ""}`}
+            className={`${inputClass} ${errors.project ? "border-red-500" : ""}`}
           >
             <option value="">{projectOptions.length === 0 ? "Loading projects..." : "Select Project"}</option>
             {projectOptions.length > 0 &&
@@ -410,8 +410,8 @@ export default function RequisitionForm() {
                 </option>
               ))}
           </select>
-          {errors.project_id && (
-            <p className="text-red-500 text-xs mt-1 text-left">{errors.project_id}</p>
+          {errors.project && (
+            <p className="text-red-500 text-xs mt-1 text-left">{errors.project}</p>
           )}
         </div>
 
