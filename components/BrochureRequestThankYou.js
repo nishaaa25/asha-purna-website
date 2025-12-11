@@ -42,7 +42,7 @@ export default function BrochureRequestThankYou({ isOpen, onClose, projectName }
   return createPortal(
     <div className="fixed inset-0 bg-black/50 lg:backdrop-blur-md z-[9999] flex items-center justify-center p-4" suppressHydrationWarning>
       <div
-        className={`fixed lg:relative top-0 left-0 w-full h-full lg:w-[80vw] lg:max-w-lg lg:h-auto bg-white transform transition-transform duration-500 ease-in-out lg:rounded-lg ${
+        className={`fixed lg:relative top-0 left-0 w-full h-full lg:w-[70vw] lg:h-[70vh] lg:max-w-lg  bg-white transform transition-transform duration-500 ease-in-out lg:rounded-lg ${
           isOpen ? "translate-y-0" : "-translate-y-full lg:translate-y-0 lg:scale-0"
         }`}
       >

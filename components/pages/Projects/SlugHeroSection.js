@@ -177,7 +177,7 @@ export default function SlugHeroSection({
       </div>
 
       {/* RERA Slide Out */}
-      <ReraSlideOut reraNo={reraNo} reranumImg={reranumImg} />
+      {reraNo && <ReraSlideOut reraNo={reraNo} reranumImg={reranumImg} />}
 
       {/* Bottom Buttons */}
       <div className="absolute bottom-9 w-full px-1 z-40">

@@ -32,7 +32,7 @@ export default function Location({
     ></iframe>`;
 
   return (
-    <section className="w-full bg-cream-600 py-12 md:py-16 lg:py-20">
+    <section className="w-full bg-cream-600 pb-16 md:pb-24 lg:pb-28">
       {/* Section Header */}
       <div className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto text-center mb-4 lg:mb-8">
         <SectionHeader

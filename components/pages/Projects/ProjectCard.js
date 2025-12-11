@@ -10,6 +10,8 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
   const [isEnquirePopupOpen, setIsEnquirePopupOpen] = useState(false);
   const [isThankYouPopupOpen, setIsThankYouPopupOpen] = useState(false);
 
+  console.log(data, "fuck")
+
   useEffect(() => {
     setIsMounted(true);
     setImagePath(imagePath);
@@ -105,7 +107,7 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
               </h3>
               {(() => {
                 const value =
-                  data?.site_type || "plots"
+                  data?.site_type || data?.category?.slug
 
                 return value ? (
                   <p className="text-sm md:text-base lg:text-lg leading-[140%] whitespace-nowrap capitalize">

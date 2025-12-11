@@ -30,7 +30,7 @@ export default function ProjectGalleryCarousel({ images }) {
 
   const galleryImages = [...images, ...images];
   return (
-    <div className="w-full relative top-10">
+    <div className="w-full relative top-10 px-[5vw] lg:px-0">
       {/* Swiper */}
       <Swiper
         modules={[Navigation, Pagination]}
@@ -59,7 +59,7 @@ export default function ProjectGalleryCarousel({ images }) {
             <SwiperSlide
               key={index}
               className={`!h-auto relative transition-transform duration-300 ease-in-out ${
-                isActive ? "z-[70] scale-[1.4] lg:scale-100" : "z-[10] scale-[1.0] lg:scale-[0.9]"
+                isActive ? "z-[70] scale-[1.2] lg:scale-100" : "z-[10] scale-[1.0] lg:scale-[0.9]"
               }`}
             >
               <div

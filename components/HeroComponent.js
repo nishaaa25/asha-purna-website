@@ -11,7 +11,7 @@ export default function HeroComponent() {
           <iframe
             id="bg-video-desktop"
             fetchPriority="high"
-            className="w-full h-full pointer-events-none object-cover hidden  scale-110  lg:flex"
+            className="w-full h-full pointer-events-none object-cover hidden  scale-120  lg:flex"
             src="https://player.vimeo.com/video/1141020580?autoplay=1&mute=1&controls=0&loop=1&playsinline=1"
             title="Background Video"
             frameBorder="0"
