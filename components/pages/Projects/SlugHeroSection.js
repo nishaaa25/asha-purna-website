@@ -65,11 +65,7 @@ export default function SlugHeroSection({
     })?.title ||
     "";
 
-  const reranumImg = project?.rera_image
-    ? projectImagePath + project.rera_image
-    : `https://api.qrserver.com/v1/create-qr-code/?size=20x20&data=${encodeURIComponent(
-        reraNo
-      )}`;
+  const reranumImg = projectImagePath + project?.rera_image;
 
   const renderVideo = (videoUrl) => {
     if (!videoUrl) return null;
@@ -177,7 +173,7 @@ export default function SlugHeroSection({
       </div>
 
       {/* RERA Slide Out */}
-      {reraNo && <ReraSlideOut reraNo={reraNo} reranumImg={reranumImg} />}
+      {reraNo && reranumImg && <ReraSlideOut reraNo={reraNo} reranumImg={reranumImg} />}
 
       {/* Bottom Buttons */}
       <div className="absolute bottom-9 w-full px-1 z-40">

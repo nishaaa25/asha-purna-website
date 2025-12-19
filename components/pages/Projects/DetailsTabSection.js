@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { csr } from "@/lib/content";
+import { extractPlainText } from "@/lib/helpers/htmlParser";
 import TabHeader from "../CSR/TabHeader";
 import Gallery from "./Gallery";
 import SectionHeader from "@/components/SectionHeader";
@@ -26,6 +27,8 @@ export default function DetailsTabSection({
   const availableTabs = [];
 
   if (project?.description || project?.overview) availableTabs.push("overview");
+
+  console.log(project?.overview, "description");
 
   const hasGalleryImages = () => {
     if (project360Data?.length > 0) return true;
@@ -123,12 +126,9 @@ export default function DetailsTabSection({
             Project Overview
           </h4>
 
-          <div
-            className="w-[90%] md:w-[80%] lg:w-8/12 relative text-gray-800 text-sm md:text-base lg:text-base leading-[140%]"
-            dangerouslySetInnerHTML={{
-              __html: project?.description || project?.overview || "",
-            }}
-          />
+          <p className="w-[90%] md:w-[80%] lg:w-8/12 relative text-gray-800 text-sm md:text-base lg:text-base leading-[140%]">
+            {extractPlainText(project?.description || project?.overview || "")}
+          </p>
 
           <div className="w-11/12 relative mb-10">
             <CounterThree data={data} />

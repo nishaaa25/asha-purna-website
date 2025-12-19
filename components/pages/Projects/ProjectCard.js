@@ -10,7 +10,6 @@ export default function ProjectCard({ data, hideActions = false, imagePath }) {
   const [isEnquirePopupOpen, setIsEnquirePopupOpen] = useState(false);
   const [isThankYouPopupOpen, setIsThankYouPopupOpen] = useState(false);
 
-  console.log(data, "fuck")
 
   useEffect(() => {
     setIsMounted(true);
