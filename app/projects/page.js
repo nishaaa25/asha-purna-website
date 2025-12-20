@@ -80,9 +80,15 @@ export default function ProjectsPage() {
           requestAnimationFrame(() => {
             requestIdleCallback
               ? requestIdleCallback(() =>
-                  window.scrollTo({ top: scrollPos.current, behavior: "instant" })
+                  window.scrollTo({
+                    top: scrollPos.current,
+                    behavior: "instant",
+                  })
                 )
-              : window.scrollTo({ top: scrollPos.current, behavior: "instant" });
+              : window.scrollTo({
+                  top: scrollPos.current,
+                  behavior: "instant",
+                });
           });
 
           setLoading(false);
@@ -103,8 +109,36 @@ export default function ProjectsPage() {
 
   return (
     <div className="w-full relative">
-      <HeroComponentTwo imgUrl="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/project-herobg.jpg" />
+      <div className="w-full relative h-[70vh] lg:h-[90vh] flex-center overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            {/* Desktop */}
+            <iframe
+              className="hidden lg:block pointer-events-none
+                 min-w-[120vw] min-h-[120vh]
+                 w-[120vw] h-[120vh]"
+              src="https://player.vimeo.com/video/1147984364?background=1&muted=1"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              playsInline
+            />
 
+            {/* Mobile */}
+            <iframe
+              className="block lg:hidden pointer-events-none
+                 min-w-[100vw] min-h-[100vh]
+                 w-[100vw] h-[100vh] md:w-[120vw] md:h-[120vh]"
+              src="https://player.vimeo.com/video/1147984502?background=1&muted=1"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              playsInline
+            />
+          </div>
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute top-0 left-0 w-full h-full gradient z-10"></div>
+      </div>
       <div className="w-full relative md:w-[90%] lg:w-[80%] mx-auto">
         <SectionHeader
           spanText="Building Communities"
@@ -120,7 +154,11 @@ export default function ProjectsPage() {
         </h3>
 
         <div className="w-full px-[22px] md:px-12 lg:px-20 relative mx-auto">
-          <TabHeader activeTab={activeTab} setActiveTab={handleTabChange} tabs={tabs} />
+          <TabHeader
+            activeTab={activeTab}
+            setActiveTab={handleTabChange}
+            tabs={tabs}
+          />
         </div>
 
         {loading && (

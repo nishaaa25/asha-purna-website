@@ -61,8 +61,8 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-[120] transition-all duration-200 ${
-        isScrolled ? "bg-white text-black shadow-md" : "bg-transparent text-white"
+      className={`fixed top-0 left-0 w-full z-[120] transition-all ${
+        isScrolled ? "bg-white text-white lg:text-black shadow-md" : "bg-transparent text-white"
       }`}
     >
       <div className="relative mx-auto flex justify-end items-center px-5 md:px-8 lg:px-12 py-3 lg:py-6">

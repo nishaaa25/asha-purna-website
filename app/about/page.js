@@ -34,10 +34,16 @@ const data = [
       <div className="relative w-full">
         <section className="w-full relative h-[40vh] md:h-[70vh] lg:h-[90vh] flex-center overflow-hidden ">
           <Image
-            src="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/webimages/about-bg.jpg"
+            src="/assets/about-bg.jpg"
             alt="land-img"
             fill
-            className="relative object-cover"
+            className="relative object-cover hidden lg:block"
+          />
+          <Image
+            src="/assets/about-bg-mobile.jpg"
+            alt="land-img"
+            fill
+            className="relative object-cover lg:hidden"
           />
           <div className="w-full h-full absolute top-0 left-0 about-gradient z-20"></div>
         </section>

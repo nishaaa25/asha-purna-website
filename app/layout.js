@@ -13,6 +13,10 @@ export const metadata = {
     "Ashapurna Buildcon is one of the leading real estate developers in Rajasthan, offering premium residential, commercial, and hospitality projects across Jodhpur and beyond.",
   keywords:
     "ashapurna, real estate rajasthan, property in jodhpur, flats in jodhpur, villas in jodhpur",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon-2.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
