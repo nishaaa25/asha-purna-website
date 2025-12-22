@@ -69,7 +69,7 @@ async function getProjectData(slug) {
     projectFloors,
     projectGallery,
   ] = await Promise.all([
-    fetchAPI("project/details/v2", params),
+    fetchAPI("project/details", params),
     fetchAPI("project/360-views", params),
     fetchAPI("project/amentity", params),
     fetchAPI("project/locations", params),
@@ -245,12 +245,20 @@ export default async function ProjectDetailPage({ params }) {
 
     const allData = await getProjectData(productSlug);
 
-    // if (!allData.projectDetails.status || !allData.projectDetails.data?.getDetails) {
-    //   notFound();
-    // }
+    if (!allData.projectDetails.status) {
+      console.error("Project details API failed:", allData.projectDetails.message);
+      notFound();
+    }
 
     // Extract all data with proper fallbacks
     const projectData = allData?.projectDetails?.data;
+
+    // Validate that we have the required project details
+    if (!projectData || !projectData.getDetails) {
+      console.error("Project details data missing or invalid structure");
+      notFound();
+    }
+
     const project360Data = allData?.project360?.data?.getDetails ?? [];
     const projectAmenityData = allData?.projectAmenity?.data?.getDetails ?? [];
     const projectLocationsData =
@@ -308,6 +316,7 @@ export default async function ProjectDetailPage({ params }) {
       />
     );
   } catch (error) {
+    console.error(`Error loading project ${productSlug}:`, error);
     notFound();
   }
 }
