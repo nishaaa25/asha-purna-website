@@ -108,7 +108,7 @@ export default function NewsEventspage() {
                     />
                   </div>
                   <div className="relative lg:w-full flex flex-col gap-2">
-                    <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
+                    <h3 className="text-base text-justify md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
                       {item?.title}
                     </h3>
 
@@ -123,7 +123,7 @@ export default function NewsEventspage() {
                       </p>
                     </div>
 
-                    <p className="text-sm md:text-base lg:text-lg leading-[130%] text-gray-600">
+                    <p className="text-sm md:text-base text-justify lg:text-lg leading-[130%] text-gray-600">
                       {truncateText(item?.short_description, 130)}
                     </p>
                   </div>

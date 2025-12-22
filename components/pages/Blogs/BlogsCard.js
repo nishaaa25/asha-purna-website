@@ -52,11 +52,11 @@ export default function BlogsCard({ data, allBlogs }) {
             {formattedDate}
           </p>
         )}
-        <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
+        <h3 className="text-base text-justify md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
           {data.title}
         </h3>
 
-        <div className="custom-desc text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2 line-clamp-4">
+        <div className="custom-desc text-justify text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2 line-clamp-4">
           {data?.desc?.replace(/<[^>]+>/g, "")}
         </div>
 

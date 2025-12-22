@@ -61,14 +61,14 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-[120] transition-all ${
+      className={`fixed top-0 left-0 w-full z-[120] ${
         isScrolled ? "bg-white text-white lg:text-black shadow-md" : "bg-transparent text-white"
       }`}
     >
       <div className="relative mx-auto flex justify-end items-center px-5 md:px-8 lg:px-12 py-3 lg:py-6">
         {/* LOGO */}
         <div
-          className={`absolute left-5 md:left-8 lg:left-12 pt-6 -top-4 transition-all ${
+          className={`absolute left-5 md:left-8 lg:left-12 pt-6 -top-4 ${
             isScrolled ? "bg-white scale-110 shadow-md" : "bg-transparent scale-100"
           }`}
         >
