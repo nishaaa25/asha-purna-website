@@ -25,7 +25,6 @@ export default function Page() {
             "Content-Type": "application/json",
             "api-version": "v1",
           },
-          next: { revalidate: 3600 },
         }
       );
 

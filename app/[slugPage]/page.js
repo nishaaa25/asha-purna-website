@@ -13,7 +13,6 @@ async function getData(slug) {
           "api-version": "v1",
         },
         body: JSON.stringify({ slug }),
-        next: { revalidate: 3600 }, // Revalidate every hour
       }
     );
 

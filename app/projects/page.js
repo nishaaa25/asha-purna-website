@@ -44,7 +44,6 @@ export default function ProjectsPage() {
               "api-version": "v2",
             },
             body: JSON.stringify({ slug: activeTab }),
-            next: { revalidate: 3600 },
           }
         );
 

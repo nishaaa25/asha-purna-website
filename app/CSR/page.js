@@ -16,8 +16,7 @@ async function getCSRData() {
           "Content-Type": "application/json",
           "api-version": "v1",
         },
-        body: JSON.stringify({}),
-        next: { revalidate: 3600 }, // Revalidate every hour
+        body: JSON.stringify({}),// Revalidate every hour
       }
     );
 

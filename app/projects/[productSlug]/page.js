@@ -13,7 +13,6 @@ async function fetchAPI(endpoint, params = {}) {
         "api-version": "v1",
       },
       body: JSON.stringify(params),
-      next: { revalidate: 3600 }, // Cache for 1 hour
     });
 
     if (!response.ok) {
@@ -203,7 +202,6 @@ export async function generateStaticParams() {
           "api-version": "v1",
         },
         body: JSON.stringify({}),
-        next: { revalidate: 86400 }, // Revalidate once a day
       }
     );
 

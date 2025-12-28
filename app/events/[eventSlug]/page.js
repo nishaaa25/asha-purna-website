@@ -12,7 +12,6 @@ async function fetchEventDetail(slug) {
           "api-version": "v1",
         },
         body: JSON.stringify({ slug }),
-        next: { revalidate: 3600 },
       }
     );
 
@@ -40,7 +39,6 @@ async function fetchAllEvents() {
           "Content-Type": "application/json",
           "api-version": "v1",
         },
-        next: { revalidate: 3600 },
       }
     );
 
@@ -66,7 +64,6 @@ async function fetchUpcomingProjects() {
           "api-version": "v1",
         },
         body: JSON.stringify({}),
-        next: { revalidate: 3600 },
       }
     );
 
