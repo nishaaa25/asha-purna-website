@@ -3,10 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
   const router = useRouter();
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Smooth scroll
   useEffect(() => {
@@ -30,6 +32,51 @@ export default function Footer() {
     { title: "education", slug: "education" },
   ];
 
+  // Generate slug from project name
+  const generateSlug = (name) => {
+    return name
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  };
+
+  // Fetch projects from API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://apiservices.ashapurna.com/api/web/home/properties",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "api-version": "v1",
+            },
+            body: JSON.stringify({}),
+          }
+        );
+
+        const result = await response.json();
+
+        if (result._status && result._data?.getProperties) {
+          setProjects(result._data.getProperties);
+        } else {
+          setProjects([]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+        setProjects([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   const handleLinkClick = (href, e) => {
     if (href.startsWith("http")) return;
     e.preventDefault();
@@ -52,7 +99,6 @@ export default function Footer() {
   return (
     <footer className="w-full relative pt-6 pb-3 md:py-8 lg:py-12 bg-black-500 text-white flex-center font-helvetica">
       <div className="w-full px-5 md:px-10 lg:px-16 flex flex-col gap-6">
-
         {/* Logo */}
         <div className="w-24 md:w-40 h-14 md:h-24 relative mb-4">
           <Image
@@ -65,23 +111,35 @@ export default function Footer() {
 
         {/* Main Section */}
         <div className="flex flex-col lg:flex-row gap-6">
-
           {/* Contact Info */}
           <div className="flex flex-col gap-3 w-full lg:w-5/12 text-xs md:text-sm lg:text-base">
             <Link href="tel:+919314041747" className="flex items-center gap-3">
-              <Image src="/assets/phone.svg" alt="phone" width={16} height={16} />
+              <Image
+                src="/assets/phone.svg"
+                alt="phone"
+                width={16}
+                height={16}
+              />
               <span>9314041747, 0291-2514747</span>
             </Link>
             <hr className="text-orange-800 w-2/12" />
 
-            <Link href="mailto:marketing@ashapurna.com" className="flex items-center gap-3">
+            <Link
+              href="mailto:marketing@ashapurna.com"
+              className="flex items-center gap-3"
+            >
               <Image src="/assets/mail.svg" alt="mail" width={18} height={16} />
               <span>marketing@ashapurna.com</span>
             </Link>
             <hr className="text-orange-800 w-2/12" />
 
             <div className="flex items-start gap-3 w-10/12">
-              <Image src="/assets/location-1.svg" alt="location" width={22} height={22} />
+              <Image
+                src="/assets/location-1.svg"
+                alt="location"
+                width={22}
+                height={22}
+              />
               <Link
                 href="https://maps.app.goo.gl/FeF5XZYqBRymEDMH9"
                 target="_blank"
@@ -95,10 +153,11 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex justify-between w-full lg:w-7/12">
-
             {/* Quick Links */}
             <ul className="text-xs md:text-sm lg:text-base flex flex-col gap-2">
-              <h6 className="text-orange-600 text-sm md:text-lg font-bold">Quick Links</h6>
+              <h6 className="text-orange-600 text-sm md:text-lg font-bold">
+                Quick Links
+              </h6>
 
               {[
                 ["/", "Home"],
@@ -109,7 +168,11 @@ export default function Footer() {
                 ["/#testimonials", "Testimonials"],
                 ["/contact/#faq", "FAQs"],
               ].map(([href, label]) => (
-                <Link key={label} href={href} onClick={(e) => handleLinkClick(href, e)}>
+                <Link
+                  key={label}
+                  href={href}
+                  onClick={(e) => handleLinkClick(href, e)}
+                >
                   <li>{label}</li>
                 </Link>
               ))}
@@ -117,7 +180,9 @@ export default function Footer() {
 
             {/* Investors */}
             <ul className="text-xs md:text-sm lg:text-base flex flex-col gap-2">
-              <h6 className="text-orange-600 text-sm md:text-lg font-bold">Investors</h6>
+              <h6 className="text-orange-600 text-sm md:text-lg font-bold">
+                Investors
+              </h6>
 
               <Link
                 href="https://d3qnldyv492i08.cloudfront.net/ashapurna/images/newsletter/Ashapurna+Corp+Profile+(Landscape).pdf"
@@ -132,7 +197,11 @@ export default function Footer() {
                 ["/rera-disclaimer", "RERA Disclaimer"],
                 ["/contact", "Contact Us"],
               ].map(([href, label]) => (
-                <Link key={label} href={href} onClick={(e) => handleLinkClick(href, e)}>
+                <Link
+                  key={label}
+                  href={href}
+                  onClick={(e) => handleLinkClick(href, e)}
+                >
                   <li>{label}</li>
                 </Link>
               ))}
@@ -142,7 +211,9 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
               {/* Projects */}
               <ul className="text-xs md:text-sm lg:text-base flex flex-col gap-2">
-                <h6 className="text-orange-600 text-sm md:text-lg font-bold">Projects</h6>
+                <h6 className="text-orange-600 text-sm md:text-lg font-bold">
+                  Projects
+                </h6>
 
                 {categories.map((cat) => (
                   <Link
@@ -155,10 +226,17 @@ export default function Footer() {
                 ))}
               </ul>
 
+              {/* All Projects */}
+
               {/* Others */}
               <ul className="text-xs md:text-sm lg:text-base flex flex-col gap-2">
-                <h6 className="text-orange-600 text-sm md:text-lg font-bold">Others</h6>
-                <Link href="/privacy-policy" onClick={(e) => handleLinkClick("/privacy-policy", e)}>
+                <h6 className="text-orange-600 text-sm md:text-lg font-bold">
+                  Others
+                </h6>
+                <Link
+                  href="/privacy-policy"
+                  onClick={(e) => handleLinkClick("/privacy-policy", e)}
+                >
                   <li>Privacy Policy</li>
                 </Link>
                 <Link
@@ -173,16 +251,56 @@ export default function Footer() {
         </div>
 
         {/* Social + Copyright */}
-        <div className="flex flex-col gap-3 mt-3 border-t border-white/20 pt-5">
+        <div className="flex flex-col gap-10 mt-5 border-t border-white/20 pt-8">
+          <div>
+            {!loading && projects.length > 0 && (
+              <>
+                <h6 className="text-orange-600 text-sm md:text-lg mb-4 font-bold">
+                  All Projects
+                </h6>
+                <ul className="text-xs md:text-sm lg:text-base gap-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                  {projects.map((project) => (
+                    <Link
+                      key={project.id}
+                      href={`/projects/${generateSlug(project.name)}`}
+                      onClick={(e) =>
+                        handleLinkClick(
+                          `/projects/${generateSlug(project.name)}`,
+                          e
+                        )
+                      }
+                    >
+                      <li className="hover:text-orange-600 transition-colors">
+                        {project.name}
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
           <div className="flex items-center gap-4">
-            {["fb", "yt", "ig", "linkedin", "pinterest", "twitter"].map((icon) => (
-              <Link key={icon} href="#" className="relative w-4 h-4 lg:w-5 lg:h-5">
-                <Image src={`/assets/${icon}.svg`} alt={icon} fill className="object-contain" />
-              </Link>
-            ))}
+            {["fb", "yt", "ig", "linkedin", "pinterest", "twitter"].map(
+              (icon) => (
+                <Link
+                  key={icon}
+                  href="#"
+                  className="relative w-4 h-4 lg:w-5 lg:h-5"
+                >
+                  <Image
+                    src={`/assets/${icon}.svg`}
+                    alt={icon}
+                    fill
+                    className="object-contain"
+                  />
+                </Link>
+              )
+            )}
           </div>
 
-          <p className="text-[10px] md:text-sm">© 2025 Ashapurna Buildcon Limited</p>
+          <p className="text-[10px] md:text-sm">
+            © 2025 Ashapurna Buildcon Limited
+          </p>
         </div>
       </div>
     </footer>
