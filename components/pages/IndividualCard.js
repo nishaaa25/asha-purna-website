@@ -43,7 +43,7 @@ export default function IndividualCard({ data }) {
       {/* Content */}
       <div className="blog-content flex flex-col place-items-start gap-2 lg:gap-1 pt-4 lg:pt-6">
         {data.media && (
-          <h5 className="text-[15px] md:text-2xl lg:text-[36px] font-bold uppercase text-gray-700">
+          <h5 className="text-[15px] md:text-lg lg:text-lg  font-bold uppercase text-gray-700">
             {data.media}
           </h5>
         )}
@@ -53,7 +53,7 @@ export default function IndividualCard({ data }) {
         </h3>
         {/* Description with HTML */}
         <div
-          className="custom-desc text-base md:text-2xl lg:text-[32px] text-gray-600 leading-[130%] w-full pr-2 line-clamp-2 tracking-[-1.1%]"
+          className="custom-desc text-sm md:text-base lg:text-xl  text-gray-600 leading-[130%] w-full pr-2 line-clamp-2 tracking-[-1.1%]"
           dangerouslySetInnerHTML={{ __html: safeHTML }}
         ></div>{" "}
         {formattedDate && (

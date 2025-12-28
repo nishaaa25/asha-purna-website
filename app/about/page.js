@@ -59,7 +59,7 @@ const data = [
           <CountersSection data={data} />
         </div>
         <div className="relative w-full mx-auto bg-cream-600 py-20 flex-center flex-col">
-          <h2 className="relative text-[24px] md:text-[50px] lg:text-[70px] leading-[130%] tracking-[-1.1px] font-medium text-center mb-8 text-gray-600">
+          <h2 className="relative text-[22px] md:text-[40px] lg:text-[48px]] leading-[130%] tracking-[-1.1px] font-medium text-center mb-8 text-gray-600">
             Our Leadership
           </h2>
           <div className="w-full relative mt-8 md:mt-10 lg:mt-13 font-mulish">

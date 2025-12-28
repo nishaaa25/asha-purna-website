@@ -149,7 +149,7 @@ export default function ProjectsPage() {
       </div>
 
       <div className="w-full pt-10 pb-20 bg-cream-600 flex-center flex-col">
-        <h3 className="text-[24px] md:text-[50px] lg:text-[70px] text-black-400 font-medium text-center mb-10">
+        <h3 className="text-[22px] md:text-[34px] lg:text-[42px] text-black-400 font-medium text-center mb-10">
           Our Projects
         </h3>
 

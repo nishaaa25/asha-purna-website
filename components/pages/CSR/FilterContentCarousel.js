@@ -60,15 +60,15 @@ export default function FilterContentCarousel({ events, imagePath }) {
                   />
                 </div>
                 <div className="blog-content flex flex-col place-items-start gap-1 pt-5">
-                  <h5 className="text-base md:text-2xl lg:text-3xl leading-[130%] font-semibold uppercase text-gray-600">
+                  <h5 className="text-[15px] md:text-lg lg:text-xl font-bold uppercase text-gray-700">
                     {data.title}
                   </h5>
                   <div className="h-[1px] lg:h-[2px] w-9 lg:w-1/12 bg-orange-600 line lg:mt-3"></div>
-                  <h3 className="text-lg md:text-2xl lg:text-[43px] font-medium lg:font-semibold text-black-400 leading-[130%] my-1">
+                  <h3 className="text-base md:text-2xl lg:text-3xl font-medium lg:font-semibold text-black-400 leading-[130%] my-1">
                     {data.tagline}
                   </h3>
                   <p
-                    className="text-sm  md:text-xl lg:text-[26px] text-gray-800  leading-[140%] w-full pr-2 tracking-[-1.1%]"
+                    className="text-sm  md:text-xl lg:text-lg  text-gray-800  leading-[140%] w-full pr-2 tracking-[-1.1%]"
                     dangerouslySetInnerHTML={{ __html: data.description }}
                   ></p>
                 </div>

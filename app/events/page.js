@@ -108,22 +108,22 @@ export default function NewsEventspage() {
                     />
                   </div>
                   <div className="relative lg:w-full flex flex-col gap-2">
-                    <h3 className="text-base text-justify md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
+                    <h3 className="text-sm md:text-lg lg:text-[22px] font-semibold text-gray-700 leading-[130%] my-1">
                       {item?.title}
                     </h3>
 
                     <div className="relative h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 bg-orange-600 line"></div>
 
                     <div className="relative flex-between text-gray-600">
-                      <p className="text-sm lg:text-lg">
+                      <p className="text-[10px] md:text-xs lg:text-sm font-medium">
                         {item?.date}
                       </p>
-                      <p className="text-sm lg:text-lg">
+                      <p className="text-[10px] md:text-xs lg:text-sm font-medium">
                         {item?.location}
                       </p>
                     </div>
 
-                    <p className="text-sm md:text-base text-justify lg:text-lg leading-[130%] text-gray-600">
+                    <p className="text-xs md:text-sm lg:text-base leading-[150%] text-gray-600 text-justify -tracking-[1.1%]">
                       {truncateText(item?.short_description, 130)}
                     </p>
                   </div>

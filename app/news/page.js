@@ -98,7 +98,7 @@ export default function NewsPage() {
                   />
                 </div>
                 <div className="relative lg:w-full flex flex-col gap-2">
-                  <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
+                  <h3 className="text-sm md:text-lg lg:text-[22px] font-semibold text-gray-700 leading-[130%] my-1">
                     {item?.title}
                   </h3>
                 </div>

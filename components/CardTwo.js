@@ -17,7 +17,7 @@ export default function CardTwo({ data, imgPath }) {
       </div>
       <div className="blog-content flex flex-col place-items-start gap-2 pt-3 lg:pt-6">
         {data.media && (
-          <h5 className="text-[15px] md:text-lg lg:text-[20px] font-bold uppercase text-gray-700">
+          <h5 className="text-[15px] md:text-lg lg:text-lg font-bold uppercase text-gray-700">
             {data.media}
           </h5>
         )}
@@ -26,12 +26,12 @@ export default function CardTwo({ data, imgPath }) {
           {data.title}
         </h3>
         {data.location && (
-          <div className="flex-between relative w-full text-gray-600 text-sm lg:text-lg leading-[130%] mb-2">
+          <div className="flex-between relative w-full text-gray-600 text-xs leading-[130%] mb-2">
             <p>{data.date || data?.publish_date}</p>
             <p>{data.location}</p>
           </div>
         )}
-        <p className="text-sm md:text-base lg:text-lg text-gray-600  leading-[130%] w-full pr-2 text-justify">
+        <p className="text-sm md:text-base lg:text-base text-gray-600  leading-[130%] w-full pr-2 text-justify">
           {data.desc || data.description}
         </p>
         {data.date && !data.location && (

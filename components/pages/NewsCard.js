@@ -22,7 +22,7 @@ export default function NewsCard({ data, path }) {
         <h5 className="text-[15px] font-bold uppercase text-gray-700 ">
           {data?.media}
         </h5>
-        <h3 className="text-[18px] md:text-[30px] lg:text-[28px] text-justify font-bold text-gray-600 leading-[130%] mb-2 lg:mb-5">
+        <h3 className="text-base md:text-[30px] lg:text-[32px] text-justify font-bold text-gray-600 leading-[130%] mb-2 lg:mb-5">
           {data?.title}
         </h3>
         <div className="h-[1px] lg:h-[2px] w-9 lg:w-1/12 bg-orange-600 line mb-3 lg:mb-5"></div>
@@ -32,11 +32,11 @@ export default function NewsCard({ data, path }) {
             <p>{data?.location}</p>
           </div>
         )}
-        <p className="text-sm lg:text-[22px] text-gray-800  leading-[130%] w-full text-justify">
+        <p className="text-sm lg:text-lg  text-gray-800  leading-[130%] w-full text-justify">
           {data?.short_description}
         </p>
         {data?.date && !data?.location && (
-          <p className="text-[10px] md:text-sm lg:text-lg text-black-400/30 leading-[130%]">
+          <p className="text-[10px] text-black-400/30 leading-[130%]">
             {data.date}
           </p>
         )}
