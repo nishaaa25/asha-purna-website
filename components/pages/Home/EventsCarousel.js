@@ -66,12 +66,12 @@ export default function EventsCarousel({ imagePath, events }) {
                       {event.media}
                     </h5> */}
                   <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 bg-orange-600 line"></div>
-                  <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
+                  <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1 text-justify">
                     {event.title}
                   </h3>
                   <p
                     className={
-                      "text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2"
+                      "text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2 text-justify"
                     }
                     style={{
                       display: "-webkit-box",

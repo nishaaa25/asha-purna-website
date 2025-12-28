@@ -17,7 +17,7 @@ export default function CounterThree({ data }) {
           return (
             <div
               key={index}
-              className="text-gray-900 min-w-2/4 lg:min-w-1/4 relative counter flex-center flex-col lg:gap-2"
+              className="text-gray-900 min-w-2/4 lg:min-w-[30%] relative counter flex-center flex-col lg:gap-2"
             >
               <div className="flex items-center font-medium">
                 {!isStatic ? (

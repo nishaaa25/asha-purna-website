@@ -38,12 +38,12 @@ export default function EventsCard({ data, imgPath }) {
 
         <div className="h-[1px] lg:h-[1.7px] w-9 lg:w-1/12 bg-orange-600 line "></div>
 
-        <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1">
+        <h3 className="text-base md:text-[22px] lg:text-xl font-bold text-gray-600 leading-[130%] my-1 text-justify">
           {data?.title}
         </h3>
 
         {data.location && (
-          <div className="flex-between relative w-full text-gray-600 text-sm lg:text-lg leading-[130%] mb-2">
+          <div className="flex-between relative w-full text-gray-600 text-sm lg:text-lg leading-[130%] mb-2 ">
             <p>{data?.date}</p>
             <p>{data?.location}</p>
           </div>
@@ -51,7 +51,7 @@ export default function EventsCard({ data, imgPath }) {
 
         <p
           className={
-            "text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2"
+            "text-sm md:text-base lg:text-lg text-gray-600 leading-[130%] w-full pr-2 text-justify"
           }
           style={{
             display: "-webkit-box",

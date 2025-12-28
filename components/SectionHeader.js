@@ -19,7 +19,7 @@ export default function SectionHeader({
         )}
         <div className={` text-gray-600 capitalize`}>
           {heading && (
-            <h2 className="font-playfair font-medium text-[25px] md:text-[50px] lg:text-[70px] leading-[130%] tracking-[-1.1px] ">
+            <h2 className="font-playfair font-medium text-[25px] md:text-[50px] lg:text-[70px] leading-[130%] tracking-[-1.1px]">
               {heading}
             </h2>
           )}

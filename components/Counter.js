@@ -57,7 +57,7 @@ export default function CountersSection({ data }) {
 
   return (
     <div
-      className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-9/12 mx-auto relative px-3"
+      className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-3 pt-10 w-[90%] lg:w-10/12 mx-auto relative px-3"
       ref={containerRef}
     >
       {data.map((counter, index) => (

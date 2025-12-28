@@ -60,12 +60,6 @@ export default function DetailsTabSection({
     { title: "Bighas of land", value: project?.bighas_of_land },
     { title: "Premium Plots", value: project?.premium_plots },
     { title: "Security & Access", value: "24x7" },
-    {
-      title: "Starting Price",
-      value: project?.price_range?.match(/\d+(\.\d+)?/)?.[0]
-        ? "₹" + project?.price_range?.match(/\d+(\.\d+)?/)?.[0] + "L"
-        : project?.price_range
-    },
   ];
 
   // ----------------------- Tab Change Handling -----------------------
