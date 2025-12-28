@@ -23,6 +23,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Vimeo preconnect for faster video loading */}
+        <link rel="preconnect" href="https://player.vimeo.com" />
+        <link rel="preconnect" href="https://i.vimeocdn.com" />
+        <link rel="preconnect" href="https://vimeo.com" />
+        <link rel="dns-prefetch" href="https://player.vimeo.com" />
+
+        {/* Vimeo player API - load early for faster initialization */}
+        <script src="https://player.vimeo.com/api/player.js" async defer></script>
+
+        {/* YouTube API */}
         <script src="https://www.youtube.com/iframe_api" async defer></script>
       </head>
       <body className={`antialiased w-full relative overflow-x-hidden`}>

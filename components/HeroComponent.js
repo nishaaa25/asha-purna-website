@@ -1,34 +1,95 @@
 "use client";
 import HorizontalForm from "./HorizontalForm";
+import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
 
 export default function HeroComponent() {
+  const [desktopLoaded, setDesktopLoaded] = useState(false);
+  const [mobileLoaded, setMobileLoaded] = useState(false);
+  const mobileVideoRef = useRef(null);
+
+  // Lazy load mobile video when it comes into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && mobileVideoRef.current && !mobileVideoRef.current.src) {
+            mobileVideoRef.current.src =
+              "https://player.vimeo.com/video/1141020698?autoplay=1&mute=1&controls=0&loop=1&playsinline=1";
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (mobileVideoRef.current) {
+      observer.observe(mobileVideoRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="w-full relative h-screen flex-center overflow-hidden">
       {/* Background Video */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <div className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2">
-          <iframe
-            id="bg-video-desktop"
-            fetchPriority="high"
-            className="w-full h-full pointer-events-none object-cover hidden  scale-120 xl:scale-140  lg:flex"
-            src="https://player.vimeo.com/video/1141020580?autoplay=1&mute=1&controls=0&loop=1&playsinline=1"
-            title="Background Video"
-            frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            playsInline
-          ></iframe>
-          <iframe
-            id="bg-video-mobile"
-            fetchPriority="high"
-            className="w-full h-full pointer-events-none object-cover scale-130 xl:scale-140 lg:hidden"
-            src="https://player.vimeo.com/video/1141020698?autoplay=1&mute=1&controls=0&loop=1&playsinline=1"
-            title="Background Video"
-            frameBorder="0"
-            allow="autoplay; fullscreen;  picture-in-picture"
-            playsInline
-          ></iframe>
+          {/* Desktop Video */}
+          <div className="hidden lg:flex w-full h-full relative">
+            {/* Desktop poster image - loads instantly */}
+            {!desktopLoaded && (
+              <Image
+                src="https://i.vimeocdn.com/video/1141020580?mw=1920&mh=1080"
+                alt="Video background"
+                fill
+                className="object-cover scale-120 xl:scale-140"
+                priority
+                unoptimized
+              />
+            )}
+            <iframe
+              id="bg-video-desktop"
+              fetchPriority="high"
+              loading="eager"
+              className={`w-full h-full pointer-events-none object-cover scale-120 xl:scale-140 transition-opacity duration-700 ${
+                desktopLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              src="https://player.vimeo.com/video/1141020580?autoplay=1&mute=1&controls=0&loop=1&playsinline=1&quality=auto"
+              title="Background Video"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              playsInline
+              onLoad={() => setDesktopLoaded(true)}
+            ></iframe>
+          </div>
+
+          {/* Mobile Video - Lazy loaded */}
+          <div className="lg:hidden w-full h-full relative">
+            {/* Mobile poster image - shows instantly */}
+            {!mobileLoaded && (
+              <Image
+                src="https://i.vimeocdn.com/video/1141020698?mw=720&mh=1280"
+                alt="Video background"
+                fill
+                className="object-cover scale-130 xl:scale-140"
+                priority
+                unoptimized
+              />
+            )}
+            <iframe
+              ref={mobileVideoRef}
+              id="bg-video-mobile"
+              fetchPriority="low"
+              loading="lazy"
+              className={`w-full h-full pointer-events-none object-cover scale-130 xl:scale-140 transition-opacity duration-700 ${
+                mobileLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              title="Background Video"
+              allow="autoplay; fullscreen; picture-in-picture"
+              playsInline
+              onLoad={() => setMobileLoaded(true)}
+            ></iframe>
+          </div>
         </div>
       </div>
 
