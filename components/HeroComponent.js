@@ -1,12 +1,21 @@
 "use client";
 import HorizontalForm from "./HorizontalForm";
-import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
 export default function HeroComponent() {
   const [desktopLoaded, setDesktopLoaded] = useState(false);
   const [mobileLoaded, setMobileLoaded] = useState(false);
   const mobileVideoRef = useRef(null);
+
+  // Desktop video with fallback timeout
+  useEffect(() => {
+    // Set a timeout fallback in case onLoad doesn't fire (common with iframes)
+    const timeoutId = setTimeout(() => {
+      setDesktopLoaded(true);
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   // Lazy load mobile video when it comes into view
   useEffect(() => {
@@ -36,17 +45,6 @@ export default function HeroComponent() {
         <div className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2">
           {/* Desktop Video */}
           <div className="hidden lg:flex w-full h-full relative">
-            {/* Desktop poster image - loads instantly */}
-            {!desktopLoaded && (
-              <Image
-                src="https://i.vimeocdn.com/video/1141020580?mw=1920&mh=1080"
-                alt="Video background"
-                fill
-                className="object-cover scale-120 xl:scale-140"
-                priority
-                unoptimized
-              />
-            )}
             <iframe
               id="bg-video-desktop"
               fetchPriority="high"
@@ -65,17 +63,6 @@ export default function HeroComponent() {
 
           {/* Mobile Video - Lazy loaded */}
           <div className="lg:hidden w-full h-full relative">
-            {/* Mobile poster image - shows instantly */}
-            {!mobileLoaded && (
-              <Image
-                src="https://i.vimeocdn.com/video/1141020698?mw=720&mh=1280"
-                alt="Video background"
-                fill
-                className="object-cover scale-130 xl:scale-140"
-                priority
-                unoptimized
-              />
-            )}
             <iframe
               ref={mobileVideoRef}
               id="bg-video-mobile"
